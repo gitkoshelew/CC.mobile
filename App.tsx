@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   StatusBar,
   useColorScheme,
 } from 'react-native';
-
+import SplashScreen from 'react-native-splash-screen'
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
@@ -18,6 +18,11 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  useEffect(()=>{
+
+    SplashScreen.hide();
+  }, [])
 
   return (
     <SafeAreaView style={backgroundStyle}>
