@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {
   Image,
   SafeAreaView,
-  StatusBar, StyleSheet,
+  StatusBar, StyleSheet, Text,
   useColorScheme,
 } from 'react-native';
 import {
@@ -10,6 +10,9 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import {Home} from "./src/screens/Home";
 import SplashScreen from "react-native-splash-screen";
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import Entypo from 'react-native-vector-icons/Entypo'
+
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -38,6 +41,10 @@ const App = () => {
                 uri: 'https://reactnative.dev/img/tiny_logo.png',
             }}
         />
+      <Text>
+        <AntDesign name='bars' style={{color: 'red', fontSize: 50}}/>
+        <Entypo name='box' style={{color: 'red', fontSize: 50}}/>
+      </Text>
     </SafeAreaView>
   );
 };
