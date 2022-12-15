@@ -1,49 +1,48 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 import {
   Image,
   SafeAreaView,
-  StatusBar, StyleSheet, Text,
+  StatusBar,
+  StyleSheet,
+  Text,
   useColorScheme,
-} from 'react-native';
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
-import {Home} from "./src/screens/Home";
+} from "react-native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Home } from "./src/screens/Home";
 import SplashScreen from "react-native-splash-screen";
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import Entypo from 'react-native-vector-icons/Entypo'
-
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Entypo from "react-native-vector-icons/Entypo";
+import GlobalStyle from "./src/utils/GlobalStyle";
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === "dark";
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  useEffect(()=>{
-
+  useEffect(() => {
     SplashScreen.hide();
-  }, [])
+  }, []);
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        barStyle={isDarkMode ? "light-content" : "dark-content"}
         backgroundColor={backgroundStyle.backgroundColor}
       />
 
-        <Home/>
-        <Image
-            testID='image'
-            style={styles.tinyLogo}
-            source={{
-                uri: 'https://reactnative.dev/img/tiny_logo.png',
-            }}
-        />
+      <Home />
+      <Image
+        testID="image"
+        style={styles.tinyLogo}
+        source={{
+          uri: "https://reactnative.dev/img/tiny_logo.png",
+        }}
+      />
       <Text>
-        <AntDesign name='bars' style={{color: 'red', fontSize: 50}}/>
-        <Entypo name='box' style={{color: 'red', fontSize: 50}}/>
+        <AntDesign name="bars" style={{ color: "red", fontSize: 50 }} />
+        <Entypo name="box" style={{ color: "red", fontSize: 50 }} />
       </Text>
     </SafeAreaView>
   );
@@ -55,6 +54,5 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
-
 
 export default App;
