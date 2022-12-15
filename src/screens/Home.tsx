@@ -1,10 +1,24 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {FC} from 'react';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import {NavigationType} from '../types/navigation-types';
+import {ScreenList} from '../navigation/navigation';
 
-export const Home = () => {
+interface IHomeScreen {
+  navigation: NavigationType;
+}
+export const Home: FC<IHomeScreen> = ({navigation}) => {
+  const goButtonText = 'Go to example page...';
+  const handlerNavigationExample = () => {
+    navigation.push(ScreenList.EXAMPLE);
+  };
   return (
     <View style={styles.box}>
       <Text>Hello world</Text>
+      <Button
+        accessibilityLabel={'navigationButton'}
+        title={goButtonText}
+        onPress={handlerNavigationExample}
+      />
     </View>
   );
 };

@@ -7,11 +7,12 @@ import {
   Text,
   useColorScheme,
 } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {Home} from './src/screens/Home';
 import SplashScreen from 'react-native-splash-screen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
+import Navigation from './src/navigation/navigation';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -25,25 +26,27 @@ const App = () => {
   }, []);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
+    <NavigationContainer>
+      <Navigation />
+      <SafeAreaView style={backgroundStyle}>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
 
-      <Home />
-      <Image
-        testID="image"
-        style={styles.tinyLogo}
-        source={{
-          uri: 'https://reactnative.dev/img/tiny_logo.png',
-        }}
-      />
-      <Text>
-        <AntDesign name="bars" style={{color: 'red', fontSize: 50}} />
-        <Entypo name="box" style={{color: 'red', fontSize: 50}} />
-      </Text>
-    </SafeAreaView>
+        <Image
+          testID="image"
+          style={styles.tinyLogo}
+          source={{
+            uri: 'https://reactnative.dev/img/tiny_logo.png',
+          }}
+        />
+        <Text>
+          <AntDesign name="bars" style={{color: 'red', fontSize: 50}} />
+          <Entypo name="box" style={{color: 'red', fontSize: 50}} />
+        </Text>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 };
 
