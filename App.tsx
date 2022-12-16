@@ -5,7 +5,9 @@ import {Home} from './src/screens/Home';
 import SplashScreen from 'react-native-splash-screen';
 import {Provider} from 'react-redux';
 import store from './src/bll/store/store';
-// import StorybookUIRoot from './.storybook/Storybook';
+import StorybookUIRoot from './.storybook/Storybook';
+
+const useStorybook = true;
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -30,6 +32,4 @@ const App = () => {
   );
 };
 
-// export { StorybookUIRoot as default };
-
-export default App;
+export default useStorybook ? StorybookUIRoot : App;
