@@ -1,8 +1,7 @@
-import { getStorybookUI } from '@storybook/react-native';
-
-import './storybook.requires';
 import React, {useEffect} from "react";
+import './storybook.requires';
 import SplashScreen from "react-native-splash-screen";
+import {getStorybookUI} from "@storybook/react-native";
 
 const StorybookUI = getStorybookUI({});
 
