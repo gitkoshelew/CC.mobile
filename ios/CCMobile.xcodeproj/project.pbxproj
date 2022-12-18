@@ -14,6 +14,7 @@
 		69635D2E2949C3BF00A5092F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69635D2D2949C3BF00A5092F /* Launch Screen.storyboard */; };
 		69635D322949C4CC00A5092F /* launch-screen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69635D312949C4CC00A5092F /* launch-screen@3x.png */; };
 		697FE8A52949E7C1003B8E3F /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 697FE8A42949E7C1003B8E3F /* Fonts */; };
+		69A143FC294F90C400686610 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69A143FB294F90C400686610 /* Images.xcassets */; };
 		69AB3F7B2949B81F00CAB64D /* react-native-splash-screen in Resources */ = {isa = PBXBuildFile; fileRef = 69AB3F7A2949B81F00CAB64D /* react-native-splash-screen */; };
 		7699B88040F8A987B510C191 /* libPods-CCMobile-CCMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-CCMobile-CCMobileTests.a */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		69635D2D2949C3BF00A5092F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		69635D312949C4CC00A5092F /* launch-screen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launch-screen@3x.png"; path = "CCMobile/launchScreen.xcassets/launch-screen.imageset/launch-screen@3x.png"; sourceTree = "<group>"; };
 		697FE8A42949E7C1003B8E3F /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
+		69A143FB294F90C400686610 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		69AB3F7A2949B81F00CAB64D /* react-native-splash-screen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-splash-screen"; path = "../node_modules/react-native-splash-screen"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-CCMobile-CCMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCMobile-CCMobileTests.release.xcconfig"; path = "Target Support Files/Pods-CCMobile-CCMobileTests/Pods-CCMobile-CCMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -97,6 +99,7 @@
 				69635D312949C4CC00A5092F /* launch-screen@3x.png */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				69635D2D2949C3BF00A5092F /* Launch Screen.storyboard */,
+				69A143FB294F90C400686610 /* Images.xcassets */,
 			);
 			name = CCMobile;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69635D2E2949C3BF00A5092F /* Launch Screen.storyboard in Resources */,
+				69A143FC294F90C400686610 /* Images.xcassets in Resources */,
 				69635D322949C4CC00A5092F /* launch-screen@3x.png in Resources */,
 				69AB3F7B2949B81F00CAB64D /* react-native-splash-screen in Resources */,
 				697FE8A52949E7C1003B8E3F /* Fonts in Resources */,
