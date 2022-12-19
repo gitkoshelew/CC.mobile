@@ -53,5 +53,4 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
-
 export default App;
