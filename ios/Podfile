@@ -10,6 +10,8 @@ target 'CCMobile' do
   # Flags change depending on the env values.
   flags = get_default_flags()
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   use_react_native!(
     :path => config[:reactNativePath],
     # Hermes is now enabled by default. Disable by setting this flag to false.
@@ -23,7 +25,8 @@ target 'CCMobile' do
     # you should disable the next line.
     :flipper_configuration => FlipperConfiguration.enabled,
     # An absolute path to your application root.
-    :app_path => "#{Pod::Config.instance.installation_root}/.."
+    :app_path => "#{Pod::Config.instance.installation_root}/..",
+
   )
 
   target 'CCMobileTests' do
