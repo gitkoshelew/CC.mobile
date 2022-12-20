@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import {NavigationType} from '../types/navigation-types';
 import {ScreenList} from '../navigation/navigation';
+import {Header} from '../components/Header';
 
 interface IHomeScreen {
   navigation: NavigationType;
@@ -13,6 +14,7 @@ export const Home: FC<IHomeScreen> = ({navigation}) => {
   };
   return (
     <View style={styles.box}>
+      <Header />
       <Text>Hello world</Text>
       <Button
         accessibilityLabel={'navigationButton'}
