@@ -45,21 +45,20 @@ const ButtonContainer = styled.View`
   flex-direction: row;
 `;
 
-// А что с черным/белым цветом не так? почему наоборот?
 const Button = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 7px 11px 8px;
+  background: ${Color.White};
   margin-right: 20px;
-  background: ${Color.Red};
   border-radius: 25px;
 `;
 
 const ButtonText = styled.Text`
   font-size: 12px;
   font-weight: 600;
-  color: ${Color.Black};
+  color: ${Color.White};
 `;
 
 const Badge = styled.View`

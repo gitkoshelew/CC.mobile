@@ -36,9 +36,9 @@ export const Header = () => (
           <Description>Users</Description>
         </Box>
       </InfoContainer>
-      {/* я не уверена выносить ли две эти кнопки в отдельный компонент, так как они не повторяются (пока что) у нас в проекте */}
+      {/* Do I put these two buttons in a different component?*/}
       <ButtonContainer>
-        {/* TODO: onPress срабатывает навигация */}
+        {/* TODO: onPress */}
         <Button onPress={() => {}}>
           <ButtonText>Create Test</ButtonText>
         </Button>
