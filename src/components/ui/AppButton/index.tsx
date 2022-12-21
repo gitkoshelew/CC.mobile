@@ -2,12 +2,13 @@ import {useMemo} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {IButtonProps} from '../type/AppButtun-types';
 import {styles} from './styles';
+import {Color} from '../../../ui/colors';
 
 export const AppButton = (props: IButtonProps) => {
   const containerStyles = useMemo(
     () => [
       styles.container,
-      {backgroundColor: props.type === 'primary' ? '#2D3E6B' : '#EAEAEA'},
+      {backgroundColor: props.type === 'primary' ? Color.Blue : Color.Gray},
     ],
     [props.type],
   );
@@ -15,7 +16,7 @@ export const AppButton = (props: IButtonProps) => {
   const containerText = useMemo(
     () => [
       styles.text,
-      {color: props.type === 'primary' ? '#FFFFFF' : '#000000'},
+      {color: props.type === 'primary' ? Color.White : Color.Black},
     ],
     [props.type],
   );
