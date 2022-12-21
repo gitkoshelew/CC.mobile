@@ -15,9 +15,9 @@
     "@react-navigation/native-stack": "^6.9.6",
     "@reduxjs/toolkit": "^1.9.1",
     "@types/styled-components": "^5.1.26",
-    "npm": "^9.2.0",
     "i18next": "^22.4.5",
     "i18next-browser-languagedetector": "^7.0.1",
+    "npm": "^9.2.0",
     "react": "18.1.0",
     "react-i18next": "^12.1.1",
     "react-native": "0.70.6",
@@ -55,7 +55,6 @@
     "typescript": "^4.8.3"
   },
   "jest": {
-
     "preset": "react-native",
     "setupFilesAfterEnv": [
       "@testing-library/jest-native/extend-expect"
