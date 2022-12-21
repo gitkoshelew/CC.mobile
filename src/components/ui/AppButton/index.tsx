@@ -1,19 +1,31 @@
-import React, {useCallback} from 'react';
+import {useMemo} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {IButtonProps} from '../type/AppButtun-types';
+import {styles} from './styles';
 
-import getStyles from './styles';
-const AppButton = (props: IButtonProps) => {
-  const styles = useCallback(() => getStyles(props), [props])();
+export const AppButton = (props: IButtonProps) => {
+  const containerStyles = useMemo(
+    () => [
+      styles.container,
+      {backgroundColor: props.type === 'primary' ? '#2D3E6B' : '#EAEAEA'},
+    ],
+    [props.type],
+  );
+
+  const containerText = useMemo(
+    () => [
+      styles.text,
+      {color: props.type === 'primary' ? '#FFFFFF' : '#000000'},
+    ],
+    [props.type],
+  );
 
   return (
     <TouchableOpacity
       {...props}
       onPress={props.onPress}
-      style={[styles.container, props.style && props.style]}>
-      <Text style={styles.text}>{props.title}</Text>
+      style={containerStyles}>
+      <Text style={containerText}>{props.title}</Text>
     </TouchableOpacity>
   );
 };
-
-export default AppButton;

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import {NavigationType} from '../types/navigation-types';
 import {ScreenList} from '../navigation/navigation';
-import TestCard from '../components/TestCard';
+import {TestCard} from '../components/TestCard';
 
 interface IHomeScreen {
   navigation: NavigationType;

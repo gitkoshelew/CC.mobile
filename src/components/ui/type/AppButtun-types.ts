@@ -4,6 +4,6 @@ export type ITouchableOpacityProps = DefaultTouchableOpacityProps;
 
 export interface IButtonProps extends ITouchableOpacityProps {
   onPress?: () => void;
-  title?: string;
-  type?: 'primary' | 'secondary';
+  title: string;
+  type: 'primary' | 'secondary';
 }
