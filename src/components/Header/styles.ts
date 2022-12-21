@@ -38,6 +38,7 @@ const Value = styled.Text`
 const Description = styled.Text`
   font-size: 12px;
   font-weight: 600;
+  color: ${Color.White};
 `;
 
 const ButtonContainer = styled.View`
@@ -58,7 +59,7 @@ const Button = styled.TouchableOpacity`
 const ButtonText = styled.Text`
   font-size: 12px;
   font-weight: 600;
-  color: ${Color.White};
+  color: ${Color.Black};
 `;
 
 const Badge = styled.View`
@@ -66,6 +67,11 @@ const Badge = styled.View`
   margin-left: 13px;
   background: ${Color.Blue};
   border-radius: 5px;
+  color: ${Color.White};
+`;
+
+const BadgeText = styled.Text`
+  color: ${Color.White};
 `;
 
 const StyledImage = styled.Image`
@@ -85,4 +91,5 @@ export {
   ButtonText,
   StyledImage,
   Badge,
+  BadgeText,
 };

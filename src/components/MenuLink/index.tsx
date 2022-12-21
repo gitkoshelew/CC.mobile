@@ -1,6 +1,5 @@
 import React, {ReactNode} from 'react';
-import {Text} from 'react-native';
-import {ListItem} from './styles';
+import {ItemText, ListItem} from './styles';
 
 interface IProps {
   onPress: () => void;
@@ -13,7 +12,7 @@ export const MenuLink = ({onPress, children}: IProps) => {
 
   return (
     <ListItem onPress={onPress} $isActive={isActive}>
-      <Text>{children}</Text>
+      <ItemText>{children}</ItemText>
     </ListItem>
   );
 };

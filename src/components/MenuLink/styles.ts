@@ -9,9 +9,11 @@ const ListItem = styled.TouchableOpacity<isActive>`
   border-bottom-width: 2px;
   border-bottom-color: ${({$isActive}) =>
     $isActive ? Color.BlueLight : 'none'};
-  color: ${Color.White};
   font-family: 'Montserrat-Regular';
   font-size: 12px;
 `;
 
-export {ListItem};
+const ItemText = styled.Text`
+  color: ${Color.White};
+`;
+export {ListItem, ItemText};

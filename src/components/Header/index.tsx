@@ -2,6 +2,7 @@ import React from 'react';
 import {MenuBar} from '../MenuBar';
 import {
   Badge,
+  BadgeText,
   Box,
   Button,
   ButtonContainer,
@@ -46,7 +47,7 @@ export const Header = () => (
           <StyledImage source={require('../../assets/images/tests-icon.png')} />
           <ButtonText>My tests</ButtonText>
           <Badge>
-            <ButtonText>99</ButtonText>
+            <BadgeText>99</BadgeText>
           </Badge>
         </Button>
       </ButtonContainer>
