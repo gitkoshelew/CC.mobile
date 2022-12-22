@@ -12,6 +12,9 @@ import SplashScreen from 'react-native-splash-screen';
 import Navigation from './src/navigation/navigation';
 import {Provider} from 'react-redux';
 import store from './src/bll/store/store';
+import StorybookUIRoot from './.storybook/Storybook';
+
+const useStorybook = false;
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -53,4 +56,5 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
-export default App;
+
+export default useStorybook ? StorybookUIRoot : App;
