@@ -3,6 +3,7 @@ import {Button, StyleSheet, Text, View} from 'react-native';
 import {NavigationType} from '../types/navigation-types';
 import {ScreenList} from '../navigation/navigation';
 import {TestCard} from '../components/TestCard';
+import {Sort} from '../components/Sort';
 
 interface IHomeScreen {
   navigation: NavigationType;
@@ -20,6 +21,7 @@ export const Home: FC<IHomeScreen> = ({navigation}) => {
         title={goButtonText}
         onPress={handlerNavigationExample}
       />
+      <Sort />
       <TestCard />
     </View>
   );
