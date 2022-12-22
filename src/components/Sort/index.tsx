@@ -5,6 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const Sort = () => {
   const data = ['Verify', 'Date', 'Popularity', 'Something else'];
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sorting</Text>
@@ -16,23 +17,17 @@ export const Sort = () => {
           console.log(selectedItem, index);
         }}
         defaultButtonText={'Select country'}
-        buttonTextAfterSelection={selectedItem => {
-          return selectedItem;
-        }}
-        rowTextForSelection={item => {
-          return item;
-        }}
+        buttonTextAfterSelection={selectedItem => selectedItem}
+        rowTextForSelection={item => item}
         buttonStyle={styles.select}
         buttonTextStyle={styles.selectSortText}
-        renderDropdownIcon={isOpened => {
-          return (
-            <FontAwesome
-              style={styles.selectAwesome}
-              name={isOpened ? 'chevron-up' : 'chevron-down'}
-              size={12}
-            />
-          );
-        }}
+        renderDropdownIcon={isOpened => (
+          <FontAwesome
+            style={styles.selectAwesome}
+            name={isOpened ? 'chevron-up' : 'chevron-down'}
+            size={12}
+          />
+        )}
         dropdownIconPosition={'right'}
         dropdownStyle={styles.selectContainer}
         rowStyle={styles.selectBox}
