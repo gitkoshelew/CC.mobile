@@ -7,7 +7,7 @@ interface IProps {
 }
 
 export const MenuLink = ({onPress, children}: IProps) => {
-  // TODO: isActive change я пока не знаю как работает навигация, нотеоритически могу определить этот путь сейчас активный или нет
+  // TODO: isActive change
   const isActive = true;
 
   return (
