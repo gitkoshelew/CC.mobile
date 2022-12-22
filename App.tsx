@@ -1,13 +1,24 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  useColorScheme,
+} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {Home} from './src/screens/Home';
 import SplashScreen from 'react-native-splash-screen';
+import Navigation from './src/navigation/navigation';
 import {Provider} from 'react-redux';
 import store from './src/bll/store/store';
+import StorybookUIRoot from './.storybook/Storybook';
+
+const useStorybook = false;
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -17,16 +28,33 @@ const App = () => {
   }, []);
 
   return (
-    <Provider store={store}>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        <Home />
-      </SafeAreaView>
-    </Provider>
+    <NavigationContainer>
+      <Provider store={store}>
+        <Navigation />
+        <SafeAreaView style={backgroundStyle}>
+          <StatusBar
+            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+            backgroundColor={backgroundStyle.backgroundColor}
+          />
+
+          <Image
+            testID="image"
+            style={styles.tinyLogo}
+            source={{
+              uri: 'https://reactnative.dev/img/tiny_logo.png',
+            }}
+          />
+        </SafeAreaView>
+      </Provider>
+    </NavigationContainer>
   );
 };
 
-export default App;
+const styles = StyleSheet.create({
+  tinyLogo: {
+    width: 50,
+    height: 50,
+  },
+});
+
+export default useStorybook ? StorybookUIRoot : App;
