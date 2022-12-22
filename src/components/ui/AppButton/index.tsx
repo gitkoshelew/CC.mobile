@@ -4,29 +4,26 @@ import {IButtonProps} from '../type/AppButtun-types';
 import {styles} from './styles';
 import {Color} from '../../../ui/colors';
 
-export const AppButton = (props: IButtonProps) => {
+export const AppButton = ({title, type, onPress, ...props}: IButtonProps) => {
   const containerStyles = useMemo(
     () => [
       styles.container,
-      {backgroundColor: props.type === 'primary' ? Color.Blue : Color.Gray},
+      {backgroundColor: type === 'primary' ? Color.Blue : Color.Gray},
     ],
-    [props.type],
+    [type],
   );
 
   const containerText = useMemo(
     () => [
       styles.text,
-      {color: props.type === 'primary' ? Color.White : Color.Black},
+      {color: type === 'primary' ? Color.White : Color.Black},
     ],
-    [props.type],
+    [type],
   );
 
   return (
-    <TouchableOpacity
-      {...props}
-      onPress={props.onPress}
-      style={containerStyles}>
-      <Text style={containerText}>{props.title}</Text>
+    <TouchableOpacity {...props} onPress={onPress} style={containerStyles}>
+      <Text style={containerText}>{title}</Text>
     </TouchableOpacity>
   );
 };
