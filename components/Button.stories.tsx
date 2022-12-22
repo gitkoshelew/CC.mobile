@@ -1,5 +1,6 @@
 import {Button} from 'react-native';
 import React from 'react';
+import {ComponentStory} from '@storybook/react-native';
 
 export default {
   title: 'React Native Button',
@@ -9,4 +10,6 @@ export default {
   },
 };
 
-export const Basic = (args: any) => <Button {...args} />;
+export const Basic: ComponentStory<typeof Button> = args => (
+  <Button {...args} />
+);
