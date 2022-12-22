@@ -16,6 +16,7 @@
 		699EA1A1295098ED00F49F3C /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 699EA1A0295098ED00F49F3C /* Fonts */; };
 		69AB3F7B2949B81F00CAB64D /* react-native-splash-screen in Resources */ = {isa = PBXBuildFile; fileRef = 69AB3F7A2949B81F00CAB64D /* react-native-splash-screen */; };
 		7699B88040F8A987B510C191 /* libPods-CCMobile-CCMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-CCMobile-CCMobileTests.a */; };
+		346B71AFECCA432B8FA3D713 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7199D380BAF45F892FD9A0E /* Montserrat-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		69AB3F7A2949B81F00CAB64D /* react-native-splash-screen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-splash-screen"; path = "../node_modules/react-native-splash-screen"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-CCMobile-CCMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCMobile-CCMobileTests.release.xcconfig"; path = "Target Support Files/Pods-CCMobile-CCMobileTests/Pods-CCMobile-CCMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		E7199D380BAF45F892FD9A0E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +92,7 @@
 		13B07FAE1A68108700A75B9A /* CCMobile */ = {
 			isa = PBXGroup;
 			children = (
-				699EA1A0295098ED00F49F3C /* Fonts */,
+				697FE8A42949E7C1003B8E3F /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -128,6 +130,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				DA7DBEA4E3A84782B2E65ABE /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -153,6 +156,15 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		DA7DBEA4E3A84782B2E65ABE /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				E7199D380BAF45F892FD9A0E /* Montserrat-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -251,7 +263,8 @@
 				69635D2E2949C3BF00A5092F /* Launch Screen.storyboard in Resources */,
 				69635D322949C4CC00A5092F /* launch-screen@3x.png in Resources */,
 				69AB3F7B2949B81F00CAB64D /* react-native-splash-screen in Resources */,
-				699EA1A1295098ED00F49F3C /* Fonts in Resources */,
+				697FE8A52949E7C1003B8E3F /* Fonts in Resources */,
+				346B71AFECCA432B8FA3D713 /* Montserrat-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
