@@ -2,12 +2,12 @@ import styled, {css} from 'styled-components/native';
 import {Color} from '../../../../ui/colors';
 
 export const TitleTab = styled.Text`
-  font-size: 18px;
+  font-size: 14px;
   color: ${Color.Black};
 `;
 
 export const ButtonTab = styled.TouchableOpacity<{isActive: boolean}>`
-  padding: 5px 10px;
+  padding: 5px;
   margin: 0 5px 10px;
   ${props =>
     props.isActive &&

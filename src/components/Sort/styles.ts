@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     color: Color.Black,
     fontWeight: '500',
     opacity: 0.4,
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     width: 125,
   },
   selectSortText: {
-    fontSize: 12,
+    fontSize: 14,
     color: Color.Black,
     fontWeight: '500',
     textAlign: 'left',

@@ -25,7 +25,7 @@ export const Sort = () => {
           <FontAwesome
             style={styles.selectAwesome}
             name={isOpened ? 'chevron-up' : 'chevron-down'}
-            size={12}
+            size={14}
           />
         )}
         dropdownIconPosition={'right'}

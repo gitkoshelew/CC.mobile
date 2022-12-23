@@ -12,12 +12,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     color: Color.Black,
     fontWeight: '600',
   },
   description: {
-    fontSize: 12,
+    fontSize: 14,
     color: Color.Black,
     fontWeight: '500',
   },
