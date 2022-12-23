@@ -1,4 +1,4 @@
-export enum Color {
+enum Color {
   Blue = '#2D3E6B',
   BlueLight = '#6B9DE9',
   Black = '#000000',
@@ -8,3 +8,4 @@ export enum Color {
   GrayLight = '#F0F0F0',
   GrayDark = '#6C6C6C',
 }
+export {Color};
