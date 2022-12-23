@@ -4,6 +4,7 @@ import {
   configure,
   addDecorator,
   addParameters,
+  addArgsEnhancer,
   clearDecorators,
 } from "@storybook/react-native";
 
