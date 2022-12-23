@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {IButtonProps} from '../type/AppButtun-types';
 import {styles} from './styles';
-import {Color} from '../../../ui/colors';
+import {Color} from 'theme/colors';
 
 export const AppButton = ({title, type, onPress, ...props}: IButtonProps) => {
   const containerStyles = useMemo(

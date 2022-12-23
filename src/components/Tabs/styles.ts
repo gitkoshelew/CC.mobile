@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Color} from '../../../ui/colors';
+import {Color} from 'theme/colors';
 
 export const TabsBox = styled.View`
   flex-direction: row;
