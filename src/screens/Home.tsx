@@ -2,6 +2,8 @@ import React, {FC} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import {NavigationType} from '../types/navigation-types';
 import {ScreenList} from '../navigation/navigation';
+import {TestCard} from '../components/TestCard';
+import {Sort} from '../components/Sort';
 import {Tabs} from '../components/Tabs';
 
 interface IHomeScreen {
@@ -21,6 +23,8 @@ export const Home: FC<IHomeScreen> = ({navigation}) => {
         onPress={handlerNavigationExample}
       />
       <Tabs />
+      <Sort />
+      <TestCard />
     </View>
   );
 };
