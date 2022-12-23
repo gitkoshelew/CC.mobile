@@ -3,7 +3,7 @@ import {Color} from '../../../../ui/colors';
 
 export const TitleTab = styled.Text`
   font-size: 18px;
-  color: black;
+  color: ${Color.Black};
 `;
 
 export const ButtonTab = styled.TouchableOpacity<{isActive: boolean}>`
