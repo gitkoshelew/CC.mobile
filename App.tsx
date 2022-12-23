@@ -36,7 +36,6 @@ const App = () => {
             barStyle={isDarkMode ? 'light-content' : 'dark-content'}
             backgroundColor={backgroundStyle.backgroundColor}
           />
-
           <Image
             testID="image"
             style={styles.tinyLogo}
