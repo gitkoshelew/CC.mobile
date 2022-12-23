@@ -1,5 +1,5 @@
-import {Color} from '@theme/colors';
 import styled from 'styled-components/native';
+import {Color} from 'theme/colors';
 
 type isActive = {$isActive: true | false | null};
 

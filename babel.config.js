@@ -5,7 +5,7 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          theme: './src/components/theme',
+          theme: './src/theme',
         },
       },
     ],
