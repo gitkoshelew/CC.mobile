@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Color} from '@theme/colors';
+import {Color} from 'theme/colors';
 
 const Wrapper = styled.View`
   padding: 15px 10px 16px 13px;

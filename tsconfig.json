@@ -13,7 +13,7 @@
       "@types/styled-components-react-native",
       "@types/jest",
     ], 
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
       "@theme/*": ["src/theme/*"]
   },
