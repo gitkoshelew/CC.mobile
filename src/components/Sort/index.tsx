@@ -32,6 +32,7 @@ export const Sort = () => {
         dropdownStyle={styles.selectContainer}
         rowStyle={styles.selectBox}
         rowTextStyle={styles.selectText}
+        selectedRowStyle={styles.selectRow}
       />
     </View>
   );

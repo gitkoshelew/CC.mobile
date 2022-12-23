@@ -37,6 +37,9 @@ export const styles = StyleSheet.create({
   selectBox: {
     height: 29,
   },
+  selectRow: {
+    backgroundColor: Color.Gray,
+  },
   selectContainer: {
     backgroundColor: Color.White,
     borderRadius: 10,
