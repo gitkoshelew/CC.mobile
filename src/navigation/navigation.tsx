@@ -18,8 +18,14 @@ export type RootStackParamList = {
 const Navigation = () => {
   return (
     <Navigator initialRouteName={'home'}>
-      <Screen name={ScreenList.HOME} component={Home} />
-      <Screen name={ScreenList.EXAMPLE} component={Example} />
+      <>
+        <Screen
+          name={ScreenList.HOME}
+          component={Home}
+          options={{headerShown: false}}
+        />
+        <Screen name={ScreenList.EXAMPLE} component={Example} />
+      </>
     </Navigator>
   );
 };
