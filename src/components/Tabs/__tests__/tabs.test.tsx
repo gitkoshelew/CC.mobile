@@ -1,0 +1,11 @@
+import {render, screen} from '@testing-library/react-native';
+import {Tabs} from '../index';
+
+test('Tabs component', async () => {
+  render(<Tabs />);
+  const flatListPropsTabs = screen.getByTestId('FlatList').props;
+
+  expect(flatListPropsTabs.data[0]).toEqual('All');
+  expect(flatListPropsTabs.horizontal).toBeTruthy();
+  expect(flatListPropsTabs.showsHorizontalScrollIndicator).toBeFalsy();
+});

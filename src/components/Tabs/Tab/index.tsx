@@ -1,7 +1,6 @@
-import {View} from 'react-native';
 import {ButtonTab, TitleTab} from './styles';
 
-type TabPropsT = {
+export type TabPropsT = {
   item: string;
   index: number;
   isActive: boolean;
@@ -14,10 +13,8 @@ export const Tab = ({item, index, isActive, ...props}: TabPropsT) => {
   };
 
   return (
-    <ButtonTab onPress={addTabHandler} isActive={isActive}>
-      <View>
-        <TitleTab>{item}</TitleTab>
-      </View>
+    <ButtonTab onPress={addTabHandler} isActive={isActive} testID="button">
+      <TitleTab>{item}</TitleTab>
     </ButtonTab>
   );
 };

@@ -18,7 +18,6 @@ export const Tabs = () => {
     'Category 5',
   ];
   const [currentTab, setCurrentTab] = useState<number>(0);
-
   const renderTabs = ({item, index}: renderTabsT) => (
     <Tab
       key={index}
@@ -36,6 +35,7 @@ export const Tabs = () => {
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         renderItem={renderTabs}
+        testID="FlatList"
       />
     </TabsBox>
   );
