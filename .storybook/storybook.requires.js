@@ -4,7 +4,6 @@ import {
   configure,
   addDecorator,
   addParameters,
-  addArgsEnhancer,
   clearDecorators,
 } from "@storybook/react-native";
 
@@ -27,7 +26,9 @@ if (parameters) {
 }
 
 const getStories = () => {
-  return [require("../components/Button.stories.tsx")];
+  return [
+    require('../components/Button.stories.tsx'),
+    require('../src/components/Tabs/story/Tabs.stories')];
 };
 
-configure(getStories, module, false);
+configure(getStories, module);
