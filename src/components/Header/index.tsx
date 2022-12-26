@@ -15,7 +15,7 @@ import {
   UserName,
   Wrapper,
 } from './styles';
-// import UserIcon from '../../assets/images/user-icon.svg';
+import UserIcon from './assets/images/user-icon.svg';
 
 export const Header = () => (
   <Container
@@ -24,7 +24,7 @@ export const Header = () => (
     <Wrapper>
       <UserInfo>
         <UserIconContainer>
-          {/* <UserIcon width={70} height={70} /> */}
+          <UserIcon width={70} height={70} />
         </UserIconContainer>
         <UserName>User Name</UserName>
       </UserInfo>
