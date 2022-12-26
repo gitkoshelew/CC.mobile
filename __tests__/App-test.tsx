@@ -16,6 +16,8 @@ it('renders correctly', () => {
   render(<App />);
 });
 
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+
 jest.mock('react-native-splash-screen', () => {
   return {
     hide: jest.fn(),
