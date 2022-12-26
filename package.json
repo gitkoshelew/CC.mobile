@@ -78,9 +78,6 @@
       "jsx",
       "json",
       "node"
-    ],
-    "setupFiles": [
-      "./mock.js"
     ]
   }
 }
