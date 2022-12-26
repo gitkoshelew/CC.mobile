@@ -18,6 +18,9 @@ const UserInfo = styled.View`
 `;
 
 const UserIconContainer = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 70px;
   height: 70px;
   border-radius: 35px;
