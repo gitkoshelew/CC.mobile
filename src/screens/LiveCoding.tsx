@@ -1,17 +1,19 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
+
 import {SafeAreaView} from 'react-native-safe-area-context';
-export const Example = () => {
+
+export const LiveCoding = () => {
   return (
     <SafeAreaView style={styles.box}>
-      <Text>Example screen</Text>
+      <Text>Live coding</Text>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   box: {
-    paddingTop: 30,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
