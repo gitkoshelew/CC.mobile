@@ -7,10 +7,33 @@ const Wrapper = styled.View`
 
 const Container = styled.ImageBackground`
   width: 100%;
+  margin-bottom: 12px;
+`;
+
+const UserInfo = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0px 0px;
+`;
+
+const UserIconContainer = styled.View`
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  overflow: hidden;
+  background: ${Color.White};
+`;
+
+const UserName = styled.Text`
+  margin-top: 15px;
+  font-family: 'Montserrat-Regular';
+  color: ${Color.White};
+  font-size: 16px;
 `;
 
 const Title = styled.Text`
-  margin: 30px 0 45px;
+  margin: 30px 0 30px;
   color: ${Color.White};
   font-family: 'Montserrat-Regular';
   font-size: 20px;
@@ -20,23 +43,13 @@ const Title = styled.Text`
 const InfoContainer = styled.View`
   display: flex;
   flex-direction: row;
-  margin-bottom: 26px;
-`;
-
-const Box = styled.View`
-  color: ${Color.White};
-  margin-right: 53px;
-`;
-
-const Value = styled.Text`
-  margin-bottom: 7px;
-  font-size: 20px;
-  font-weight: 600;
-  color: ${Color.White};
+  justify-content: space-around;
+  width: 100%;
+  padding: 10px 0px;
 `;
 
 const Description = styled.Text`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: ${Color.White};
 `;
@@ -50,7 +63,7 @@ const Button = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 7px 11px 8px;
+  padding: 7px 15px 8px;
   background: ${Color.White};
   margin-right: 20px;
   border-radius: 25px;
@@ -80,11 +93,12 @@ const StyledImage = styled.Image`
 
 export {
   Container,
+  UserInfo,
+  UserName,
+  UserIconContainer,
   Title,
   Wrapper,
   InfoContainer,
-  Box,
-  Value,
   Description,
   ButtonContainer,
   Button,
