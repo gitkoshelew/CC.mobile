@@ -1,19 +1,18 @@
 import {fireEvent, render, screen} from '@testing-library/react-native';
-import {Tab, TabPropsT} from '../index';
+import {Tab, TabPropsType} from '../index';
 
 const onPressMock = jest.fn();
-const createTestProps = (): TabPropsT => ({
+const createTestProps = {
   item: 'test title',
   index: 1,
   isActive: true,
   setCurrentTab: onPressMock,
-});
+} as TabPropsType;
 
-describe('Tab component', () => {
-  const props = createTestProps();
-  render(<Tab {...props} />);
+describe('Tab component functionality', () => {
+  render(<Tab {...createTestProps} />);
 
-  test('click Tab', async () => {
+  test('Should call method on press', async () => {
     fireEvent.press(screen.getByText('test title'));
     expect(onPressMock).toHaveBeenCalled();
   });

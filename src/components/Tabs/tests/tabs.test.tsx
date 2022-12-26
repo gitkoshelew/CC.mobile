@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/react-native';
 import {Tabs} from '../index';
 
-test('Tabs component', async () => {
+test('Should render tabs list', async () => {
   render(<Tabs />);
   const flatListPropsTabs = screen.getByTestId('FlatList').props;
 
