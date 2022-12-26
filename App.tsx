@@ -1,11 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  Image,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-} from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import SplashScreen from 'react-native-splash-screen';
@@ -36,25 +30,10 @@ const App = () => {
             barStyle={isDarkMode ? 'light-content' : 'dark-content'}
             backgroundColor={backgroundStyle.backgroundColor}
           />
-
-          <Image
-            testID="image"
-            style={styles.tinyLogo}
-            source={{
-              uri: 'https://reactnative.dev/img/tiny_logo.png',
-            }}
-          />
         </SafeAreaView>
       </Provider>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  tinyLogo: {
-    width: 50,
-    height: 50,
-  },
-});
 
 export default useStorybook ? StorybookUIRoot : App;
