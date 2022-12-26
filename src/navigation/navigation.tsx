@@ -22,7 +22,7 @@ export type RootStackParamList = {
   [ScreenList.LIVE_CODING]: undefined;
 };
 
-const screenOptionsIcons = (routeName: string, color: string, size: number) => {
+const getIcon = (routeName: string, focused: boolean, size: number) => {
   let iconName = '';
 
   switch (routeName) {
@@ -42,18 +42,23 @@ const screenOptionsIcons = (routeName: string, color: string, size: number) => {
       break;
   }
 
-  return <MaterialIcons name={iconName} color={color} size={size} />;
+  return (
+    <MaterialIcons
+      name={iconName}
+      color={focused ? Color.BlueLight : Color.GrayDark}
+      size={size}
+    />
+  );
 };
 
 const Navigation = () => {
   const screenOptions = {
     unmountOnBlur: false,
-    headerShown: false,
 
     tabBarStyle: {
-      height: 80,
-      paddingTop: 5,
-      paddingBottom: 18,
+      height: 85,
+      paddingTop: 7,
+      paddingBottom: 25,
     },
     tabBarLabelStyle: {fontSize: 14},
   };
@@ -62,12 +67,7 @@ const Navigation = () => {
     <Tab.Navigator
       initialRouteName={'home'}
       screenOptions={({route}) => ({
-        tabBarIcon: ({size, focused}) =>
-          screenOptionsIcons(
-            route.name,
-            focused ? Color.BlueLight : Color.GrayDark,
-            size,
-          ),
+        tabBarIcon: ({size, focused}) => getIcon(route.name, focused, size),
         ...screenOptions,
       })}>
       <Tab.Screen name={ScreenList.HOME} component={Home} />
