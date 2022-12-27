@@ -1,4 +1,4 @@
-import {ButtomCenter, styleWithSheet} from '../styles';
+import {ButtonCenter, styleWithSheet} from '../styles';
 import {getIcon} from '../../utils/getIconNavigate';
 import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
 import Animated, {
@@ -8,7 +8,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import {GestureResponderEvent, Text, View} from 'react-native';
+import {GestureResponderEvent, View} from 'react-native';
 
 export type TabButtonPropsType = BottomTabBarButtonProps & {
   name: string;
@@ -40,11 +40,10 @@ export const TabButton = (props: TabButtonPropsType) => {
   return (
     <View style={styleWithSheet.ViewCenter}>
       <Animated.View style={[animatedStyle]}>
-        <ButtomCenter onPress={onPressHandler}>
+        <ButtonCenter onPress={onPressHandler}>
           {getIcon(name, focused, size)}
-        </ButtomCenter>
+        </ButtonCenter>
       </Animated.View>
-      <Text>{name}</Text>
     </View>
   );
 };

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {StyleSheet} from 'react-native';
 
-export const ButtomCenter = styled.TouchableOpacity`
+export const ButtonCenter = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;
