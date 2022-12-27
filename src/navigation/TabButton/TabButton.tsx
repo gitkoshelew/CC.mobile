@@ -1,8 +1,15 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import {ButtomCenter, styleWithSheet} from '../styles';
-import * as Animatable from 'react-native-animatable';
 import {getIcon} from '../../utils/getIconNavigate';
 import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
+import {GestureResponderEvent, Text, View} from 'react-native';
 
 export type TabButtonPropsType = BottomTabBarButtonProps & {
   name: string;
@@ -11,35 +18,34 @@ export type TabButtonPropsType = BottomTabBarButtonProps & {
 
 export const TabButton = (props: TabButtonPropsType) => {
   const {name, onPress, accessibilityState, size} = props;
-  console.log(props);
-  const viewRef = useRef<null>(null);
   const focused = accessibilityState?.selected;
+  const rotation = useSharedValue(0);
 
-  useEffect(() => {
-    if (focused) {
-      // @ts-ignore
-      viewRef.current.animate({
-        0: {scale: 0.5, rotate: '0deg'},
-        1: {scale: 1.5, rotate: '360deg'},
-      });
-    } else {
-      // @ts-ignore
-      viewRef.current.animate({
-        0: {scale: 1.5, rotate: '360deg'},
-        1: {scale: 1, rotate: '0deg'},
-      });
+  const onPressHandler = (e: GestureResponderEvent) => {
+    if (onPress) {
+      onPress(e);
     }
-  }, [focused]);
+    rotation.value = withSequence(
+      withTiming(-10, {duration: 50}),
+      withRepeat(withTiming(5, {duration: 100}), 6, true),
+      withTiming(0, {duration: 50}),
+    );
+  };
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{rotateZ: `${rotation.value}deg`}],
+    };
+  });
 
   return (
-    <ButtomCenter onPress={onPress} activeOpacity={1}>
-      <Animatable.View
-        style={styleWithSheet.ViewCenter}
-        ref={viewRef}
-        animation="zoomIn"
-        duration={1000}>
-        {getIcon(name, focused, size)}
-      </Animatable.View>
-    </ButtomCenter>
+    <View style={styleWithSheet.ViewCenter}>
+      <Animated.View style={[animatedStyle]}>
+        <ButtomCenter onPress={onPressHandler}>
+          {getIcon(name, focused, size)}
+        </ButtomCenter>
+      </Animated.View>
+      <Text>{name}</Text>
+    </View>
   );
 };
