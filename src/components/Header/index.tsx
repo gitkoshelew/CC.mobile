@@ -25,7 +25,6 @@ export const Header = () => (
       <UserInfo>
         <UserIconContainer>
           <FontAwesome name={'user'} size={80} />
-          {/* <UserIcon width={70} height={70} /> */}
         </UserIconContainer>
         <UserName>User Name</UserName>
       </UserInfo>
