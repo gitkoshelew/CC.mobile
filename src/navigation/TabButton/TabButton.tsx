@@ -6,10 +6,12 @@ import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
 
 export type TabButtonPropsType = BottomTabBarButtonProps & {
   name: string;
+  size?: number;
 };
 
 export const TabButton = (props: TabButtonPropsType) => {
-  const {name, onPress, accessibilityState} = props;
+  const {name, onPress, accessibilityState, size} = props;
+  console.log(props);
   const viewRef = useRef<null>(null);
   const focused = accessibilityState?.selected;
 
@@ -36,7 +38,7 @@ export const TabButton = (props: TabButtonPropsType) => {
         ref={viewRef}
         animation="zoomIn"
         duration={1000}>
-        {getIcon(name, focused)}
+        {getIcon(name, focused, size)}
       </Animatable.View>
     </ButtomCenter>
   );

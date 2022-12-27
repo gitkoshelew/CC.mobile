@@ -1,6 +1,7 @@
 import React from 'react';
-import {Icon, Icons} from '../components/ui/Icon/Icon';
 import {Color} from 'theme/colors';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const getIcon = (
   routeName: string,
@@ -8,24 +9,22 @@ export const getIcon = (
   size?: number,
 ) => {
   let iconName = '';
-  let type: React.ElementType = Icon; // it's plug
+  let Icon = MaterialIcons;
 
   switch (routeName) {
     case 'Home':
-      type = Icons.FontAwesome;
+      Icon = FontAwesome;
       iconName = 'user-circle-o';
       break;
     case 'Create test':
       iconName = 'post-add';
-      type = Icons.MaterialIcons;
       break;
     case 'Tests list':
       iconName = 'format-list-bulleted';
-      type = Icons.MaterialIcons;
       break;
     case 'Live coding':
+      Icon = FontAwesome;
       iconName = 'file-code-o';
-      type = Icons.FontAwesome;
       break;
     default:
       break;
@@ -33,7 +32,6 @@ export const getIcon = (
 
   return (
     <Icon
-      type={type}
       name={iconName}
       color={focused ? Color.BlueLight : Color.GrayDark}
       size={size}

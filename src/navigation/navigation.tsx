@@ -41,7 +41,7 @@ const Navigation = () => {
       screenOptions={({route}) => ({
         tabBarIcon: ({size, focused}) => getIcon(route.name, focused, size),
         tabBarButton: (props: BottomTabBarButtonProps) => (
-          <TabButton {...props} name={route.name} />
+          <TabButton {...props} name={route.name} size={24} />
         ),
         tabBarShowLabel: true,
         ...screenOptions,
