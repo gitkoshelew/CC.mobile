@@ -16,7 +16,8 @@
     ], 
     "baseUrl": ".",
     "paths": {
-      "theme/*": ["src/theme/*"]
+      "theme/*": ["src/theme/*"],
+      "types/*": ["src/types/*"]
   },
 },
 }
