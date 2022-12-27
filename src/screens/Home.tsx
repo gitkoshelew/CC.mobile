@@ -7,6 +7,7 @@ import {TestCard} from '../components/TestCard';
 import {Sort} from '../components/Sort';
 import {Tabs} from '../components/Tabs';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {Timer} from '../components/Timer';
 
 interface IHomeScreen {
   navigation: NavigationType;
@@ -21,6 +22,7 @@ export const Home: FC<IHomeScreen> = ({navigation}) => {
       <Tabs />
       <Sort />
       <TestCard onPress={handlerNavigationExample} />
+      <Timer time={12} />
     </SafeAreaView>
   );
 };
