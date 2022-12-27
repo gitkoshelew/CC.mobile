@@ -1,10 +1,13 @@
 import {Home} from '../screens/Home';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  BottomTabBarButtonProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 import {CreateTest} from '../screens/CreateTest';
 import {TestsList} from '../screens/TestsList';
 import {LiveCoding} from '../screens/LiveCoding';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {Color} from 'theme/colors';
+import {getIcon} from '../utils/getIconNavigate';
+import {TabButton} from './TabButton/TabButton';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,45 +25,14 @@ export type RootStackParamList = {
   [ScreenList.LIVE_CODING]: undefined;
 };
 
-const getIcon = (routeName: string, focused: boolean, size: number) => {
-  let iconName = '';
-
-  switch (routeName) {
-    case 'Home':
-      iconName = 'home-filled';
-      break;
-    case 'Create test':
-      iconName = 'post-add';
-      break;
-    case 'Tests list':
-      iconName = 'format-list-bulleted';
-      break;
-    case 'Live coding':
-      iconName = 'code';
-      break;
-    default:
-      break;
-  }
-
-  return (
-    <MaterialIcons
-      name={iconName}
-      color={focused ? Color.BlueLight : Color.GrayDark}
-      size={size}
-    />
-  );
-};
-
 const Navigation = () => {
   const screenOptions = {
     unmountOnBlur: false,
-
     tabBarStyle: {
       height: 85,
       paddingTop: 7,
       paddingBottom: 25,
     },
-    tabBarLabelStyle: {fontSize: 14},
   };
 
   return (
@@ -68,6 +40,10 @@ const Navigation = () => {
       initialRouteName={'home'}
       screenOptions={({route}) => ({
         tabBarIcon: ({size, focused}) => getIcon(route.name, focused, size),
+        tabBarButton: (props: BottomTabBarButtonProps) => (
+          <TabButton {...props} name={route.name} />
+        ),
+        tabBarShowLabel: true,
         ...screenOptions,
       })}>
       <Tab.Screen name={ScreenList.HOME} component={Home} />
