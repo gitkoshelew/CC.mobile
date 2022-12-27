@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 import {Color} from 'theme/colors';
-import {SuperTextInputPropsType} from './index';
+import {CustomTextInputPropsType} from './index';
 
-export const SuperInput = styled.TextInput<SuperTextInputPropsType>`
+export const CustomInput = styled.TextInput<CustomTextInputPropsType>`
   background: ${props => props.color || Color.White};
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 15px;
