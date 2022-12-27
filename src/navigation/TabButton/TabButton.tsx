@@ -1,4 +1,3 @@
-import React from 'react';
 import {ButtomCenter, styleWithSheet} from '../styles';
 import {getIcon} from '../../utils/getIconNavigate';
 import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
