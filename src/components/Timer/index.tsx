@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {Container, StyledText} from './styles';
 
@@ -16,18 +16,18 @@ export const Timer = ({time}: IProps) => {
   const minutes = formatTime(Math.floor(timePeriod / 60));
   const seconds = formatTime(timePeriod - +minutes * 60);
 
-  const handleStart = () => {
+  const handleStart = useCallback(() => {
     setIsCouting(true);
-  };
+  }, []);
 
-  const handleStop = () => {
+  const handleStop = useCallback(() => {
     setIsCouting(false);
-  };
+  }, []);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setIsCouting(false);
     setTimePeriod(time);
-  };
+  }, [time]);
 
   useEffect(() => {
     const interval = setInterval(() => {
