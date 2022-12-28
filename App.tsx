@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import SplashScreen from 'react-native-splash-screen';
@@ -25,12 +25,10 @@ const App = () => {
     <NavigationContainer>
       <Provider store={store}>
         <Navigation />
-        <SafeAreaView style={backgroundStyle}>
-          <StatusBar
-            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-            backgroundColor={backgroundStyle.backgroundColor}
-          />
-        </SafeAreaView>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
       </Provider>
     </NavigationContainer>
   );

@@ -5,12 +5,16 @@ import {render} from '@testing-library/react-native';
 
 // Note: test renderer must be required after react-native.
 
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper'); // fix warning "Animated useNativeDriver" do not delete
 jest.mock('@storybook/react-native', () => ({
   getStorybookUI: jest.fn(),
   configure: jest.fn(),
   clearDecorators: jest.fn(),
   addParameters: jest.fn(),
 }));
+jest.mock('react-native-reanimated', () =>
+  require('react-native-reanimated/mock'),
+);
 
 it('renders correctly', () => {
   render(<App />);
