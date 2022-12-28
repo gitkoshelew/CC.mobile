@@ -1,14 +1,11 @@
 import {Platform} from 'react-native';
 import {CustomTextInput} from '../components/ui/CustomTextInput';
-import {
-  ViewBox,
-  TextBox,
-  BlockBox,
-} from '../components/ui/ReadyStyles/Boxes/Boxes';
+import {TextBox, BlockBox} from '../components/ui/ReadyStyles/Boxes';
+import {ViewContainer} from '../components/ui/ReadyStyles/Containers';
 
 export const CreateTest = () => {
   return (
-    <ViewBox>
+    <ViewContainer>
       <TextBox>Test title</TextBox>
       <BlockBox>
         <CustomTextInput onChangeText={() => {}} />
@@ -23,6 +20,6 @@ export const CreateTest = () => {
           height={Platform.OS === 'ios' ? '100px' : undefined}
         />
       </>
-    </ViewBox>
+    </ViewContainer>
   );
 };

@@ -9,8 +9,4 @@ const TextBox = styled.Text`
   font-size: 16px;
 `;
 
-const ViewBox = styled.View`
-  padding: 30px 21px;
-`;
-
-export {BlockBox, TextBox, ViewBox};
+export {BlockBox, TextBox};
