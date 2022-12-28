@@ -3,6 +3,7 @@ import {TextInputProps} from 'react-native';
 import {Color} from 'theme/colors';
 
 export type CustomTextInputPropsType = {
+  height?: string | undefined;
   color?: Color;
   onChangeText: (value: string) => void;
 };
