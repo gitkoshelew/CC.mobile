@@ -6,7 +6,6 @@ import {
 import {CreateTest} from '../screens/CreateTest/CreateTest';
 import {TestsList} from '../screens/TestsList';
 import {LiveCoding} from '../screens/LiveCoding';
-import {getIcon} from '../utils/getIconNavigate';
 import {TabButton} from './TabButton/TabButton';
 
 const Tab = createBottomTabNavigator();
@@ -24,9 +23,10 @@ const Navigation = () => {
   const screenOptions = {
     unmountOnBlur: false,
     tabBarStyle: {
-      height: 85,
-      paddingTop: 7,
+      height: 90,
+      paddingTop: 17,
       paddingBottom: 25,
+      paddingHorizontal: 10,
     },
   };
 
@@ -34,7 +34,6 @@ const Navigation = () => {
     <Tab.Navigator
       initialRouteName={'home'}
       screenOptions={({route}) => ({
-        tabBarIcon: ({size, focused}) => getIcon(route.name, focused, size),
         tabBarButton: (props: BottomTabBarButtonProps) => (
           <TabButton {...props} name={route.name} size={30} />
         ),

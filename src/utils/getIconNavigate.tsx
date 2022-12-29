@@ -3,11 +3,7 @@ import {Color} from 'theme/colors';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-export const getIcon = (
-  routeName: string,
-  focused?: boolean,
-  size?: number,
-) => {
+export const getIcon = (routeName: string, color?: Color, size?: number) => {
   let iconName = '';
   let Icon = MaterialIcons;
 
@@ -30,11 +26,5 @@ export const getIcon = (
       break;
   }
 
-  return (
-    <Icon
-      name={iconName}
-      color={focused ? Color.BlueLight : Color.GrayDark}
-      size={size}
-    />
-  );
+  return <Icon name={iconName} color={color} size={size} />;
 };
