@@ -5,7 +5,7 @@ import {Sort} from '../components/Sort';
 import {Tabs} from '../components/Tabs';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {CustomTextInput} from '../components/ui/CustomTextInput';
-import {SwitchSelectors} from '../components/SwitchSelector';
+import {SwitchSelectors} from '../components/SwitchSelectors';
 
 export const Home = () => {
   return (
