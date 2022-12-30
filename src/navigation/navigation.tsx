@@ -24,8 +24,8 @@ const Navigation = () => {
     unmountOnBlur: false,
     tabBarStyle: {
       height: 90,
-      paddingTop: 17,
-      paddingBottom: 25,
+      paddingTop: 10,
+      paddingBottom: 35,
       paddingHorizontal: 10,
     },
   };
