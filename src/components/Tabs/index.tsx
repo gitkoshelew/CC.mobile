@@ -2,11 +2,7 @@ import {FlatList} from 'react-native';
 import {Tab} from './Tab';
 import {useState} from 'react';
 import {TabsBox} from './styles';
-
-type renderTabsType = {
-  item: string;
-  index: number;
-};
+import {renderItemType} from 'types/common-types';
 
 export const Tabs = () => {
   const tabsData = [
@@ -18,7 +14,7 @@ export const Tabs = () => {
     'Category 5',
   ];
   const [currentTab, setCurrentTab] = useState<number>(0);
-  const renderTabs = ({item, index}: renderTabsType) => (
+  const renderTabs = ({item, index}: renderItemType) => (
     <Tab
       key={index}
       item={item}

@@ -4,4 +4,13 @@ const ViewContainer = styled.View`
   padding: 30px 21px;
 `;
 
-export {ViewContainer};
+const ViewCenter = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
+const ViewFlex = styled.View`
+  flex: 1;
+`;
+
+export {ViewContainer, ViewCenter, ViewFlex};
