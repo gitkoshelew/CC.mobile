@@ -5,7 +5,6 @@ import {Sort} from '../components/Sort';
 import {Tabs} from '../components/Tabs';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {CustomTextInput} from '../components/ui/CustomTextInput';
-import {SwitchSelectors} from '../components/SwitchSelector';
 
 export const Home = () => {
   return (
@@ -17,8 +16,6 @@ export const Home = () => {
       <View style={styles.inputBox}>
         <CustomTextInput onChangeText={() => {}} value={'Hello world'} />
       </View>
-      <SwitchSelectors type="level" />
-      <SwitchSelectors type="number" />
     </SafeAreaView>
   );
 };

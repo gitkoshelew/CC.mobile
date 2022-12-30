@@ -5,3 +5,11 @@ const ViewContainer = styled.View`
 `;
 
 export {ViewContainer};
+
+const CreateTestButtonContainer = styled.View`
+  box-sizing: border-box;
+  padding: 35px 60px 0 45px;
+  //align-items: center;
+`;
+
+export {CreateTestButtonContainer};
