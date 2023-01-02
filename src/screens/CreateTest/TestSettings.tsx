@@ -1,16 +1,19 @@
 import {Platform} from 'react-native';
-import {CustomTextInput} from '../components/ui/CustomTextInput';
-import {TextBox, BlockBox} from '../components/ui/ReadyStyles/Boxes';
+import {CustomTextInput} from '../../components/ui/CustomTextInput';
+import {TextBox, BlockBox} from '../../components/ui/ReadyStyles/Boxes';
 import {
-  CreateTestButtonContainer,
   ViewContainer,
-} from '../components/ui/ReadyStyles/Containers';
-import {AppSelect} from '../components/ui/AppSelect';
-import {SwitchSelectors} from '../components/SwitchSelector';
-import {AppButton} from '../components/ui/AppButton';
+  ViewCenter,
+} from '../../components/ui/ReadyStyles/Containers';
+import {AppButton} from '../../components/ui/AppButton';
+import {useAppNavigate} from '../../hooks/hooks';
+import {ScreenList} from '../../navigation/navigation';
+import {AppSelect} from '../../components/ui/AppSelect';
+import {SwitchSelectors} from '../../components/SwitchSelector';
 
-export const CreateTest = () => {
+export const TestSettings = () => {
   const data = ['Verify', 'Date', 'Popularity', 'Something else'];
+  const {navigate} = useAppNavigate();
   return (
     <ViewContainer>
       <TextBox>Test title</TextBox>
@@ -39,9 +42,15 @@ export const CreateTest = () => {
       <BlockBox>
         <SwitchSelectors type="number" />
       </BlockBox>
-      <CreateTestButtonContainer>
-        <AppButton title="Questions settings" type="primary" />
-      </CreateTestButtonContainer>
+      <ViewCenter>
+        <AppButton
+          title="Questions settings"
+          type="primary"
+          onPress={() =>
+            navigate(ScreenList.CREATE_TEST, {screen: ScreenList.QUESTIONS_SET})
+          }
+        />
+      </ViewCenter>
     </ViewContainer>
   );
 };
