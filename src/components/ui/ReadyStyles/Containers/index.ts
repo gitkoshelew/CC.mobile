@@ -7,6 +7,7 @@ const ViewContainer = styled.View`
 const ViewCenter = styled.View`
   align-items: center;
   justify-content: center;
+  padding-top: 30px;
 `;
 
 const ViewFlex = styled.View`

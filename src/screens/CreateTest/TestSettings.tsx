@@ -8,8 +8,11 @@ import {
 import {AppButton} from '../../components/ui/AppButton';
 import {useAppNavigate} from '../../hooks/hooks';
 import {ScreenList} from '../../navigation/navigation';
+import {AppSelect} from '../../components/ui/AppSelect';
+import {SwitchSelectors} from '../../components/SwitchSelector';
 
 export const TestSettings = () => {
+  const data = ['Verify', 'Date', 'Popularity', 'Something else'];
   const {navigate} = useAppNavigate();
   return (
     <ViewContainer>
@@ -27,7 +30,18 @@ export const TestSettings = () => {
           height={Platform.OS === 'ios' ? '100px' : undefined}
         />
       </BlockBox>
-
+      <TextBox>Theme</TextBox>
+      <BlockBox>
+        <AppSelect size="m" data={data} type="primary" />
+      </BlockBox>
+      <TextBox>Test level</TextBox>
+      <BlockBox>
+        <SwitchSelectors type="level" />
+      </BlockBox>
+      <TextBox>Number of questions</TextBox>
+      <BlockBox>
+        <SwitchSelectors type="number" />
+      </BlockBox>
       <ViewCenter>
         <AppButton
           title="Questions settings"

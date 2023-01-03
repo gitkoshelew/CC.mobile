@@ -11,7 +11,7 @@ export const AppSelect = ({size, type, data, ...props}: ISelectProps) => {
       backgroundColor: type === 'primary' ? Color.Blue : Color.White,
       borderRadius: size === 'm' ? 15 : 5,
       height: size === 'm' ? 36 : 26,
-      width: size === 'm' ? 332 : 125,
+      width: size === 'm' ? '100%' : 125,
     }),
     [type, size],
   );
