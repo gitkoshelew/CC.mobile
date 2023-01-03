@@ -1,4 +1,3 @@
-import React from 'react';
 import {TimerInputElement} from '../TimerInputElement';
 import {Colon, Container, StyledText} from './styles';
 
