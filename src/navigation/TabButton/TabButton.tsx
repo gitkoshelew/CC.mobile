@@ -8,7 +8,8 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import {GestureResponderEvent, View} from 'react-native';
+import {GestureResponderEvent, Text, View} from 'react-native';
+import {Color} from 'theme/colors';
 
 export type TabButtonPropsType = BottomTabBarButtonProps & {
   name: string;
@@ -31,6 +32,8 @@ export const TabButton = (props: TabButtonPropsType) => {
     );
   };
 
+  const activeColor = focused ? Color.BlueLight : Color.GrayDark;
+
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{rotateZ: `${rotation.value}deg`}],
@@ -41,9 +44,10 @@ export const TabButton = (props: TabButtonPropsType) => {
     <View style={styleWithSheet.ViewCenter}>
       <Animated.View style={[animatedStyle]}>
         <ButtonCenter onPress={onPressHandler}>
-          {getIcon(name, focused, size)}
+          {getIcon(name, activeColor, size)}
         </ButtonCenter>
       </Animated.View>
+      <Text style={{color: activeColor}}>{name}</Text>
     </View>
   );
 };

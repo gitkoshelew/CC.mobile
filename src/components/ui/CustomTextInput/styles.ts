@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled, {css} from 'styled-components/native';
 import {Color} from 'theme/colors';
 import {CustomTextInputPropsType} from './index';
 
@@ -8,4 +8,9 @@ export const CustomInput = styled.TextInput<CustomTextInputPropsType>`
   border-radius: 15px;
   padding: 9px 16px;
   width: 100%;
+  ${props =>
+    props.height &&
+    css`
+      height: ${props.height};
+    `}
 `;

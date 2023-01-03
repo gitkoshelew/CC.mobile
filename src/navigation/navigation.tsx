@@ -3,10 +3,9 @@ import {
   BottomTabBarButtonProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {CreateTest} from '../screens/CreateTest';
+import {CreateTest} from '../screens/CreateTest/CreateTest';
 import {TestsList} from '../screens/TestsList';
 import {LiveCoding} from '../screens/LiveCoding';
-import {getIcon} from '../utils/getIconNavigate';
 import {TabButton} from './TabButton/TabButton';
 
 const Tab = createBottomTabNavigator();
@@ -16,22 +15,18 @@ export enum ScreenList {
   CREATE_TEST = 'Create test',
   TESTS_LIST = 'Tests list',
   LIVE_CODING = 'Live coding',
+  QUESTIONS_SET = 'Questions settings',
+  TEST_SET = 'Test settings',
 }
-
-export type RootStackParamList = {
-  [ScreenList.HOME]: undefined; // undefined because you aren't passing any params to the home screen
-  [ScreenList.CREATE_TEST]: undefined;
-  [ScreenList.TESTS_LIST]: undefined;
-  [ScreenList.LIVE_CODING]: undefined;
-};
 
 const Navigation = () => {
   const screenOptions = {
     unmountOnBlur: false,
     tabBarStyle: {
-      height: 85,
-      paddingTop: 7,
-      paddingBottom: 25,
+      height: 90,
+      paddingTop: 10,
+      paddingBottom: 35,
+      paddingHorizontal: 10,
     },
   };
 
@@ -39,15 +34,22 @@ const Navigation = () => {
     <Tab.Navigator
       initialRouteName={'home'}
       screenOptions={({route}) => ({
-        tabBarIcon: ({size, focused}) => getIcon(route.name, focused, size),
         tabBarButton: (props: BottomTabBarButtonProps) => (
           <TabButton {...props} name={route.name} size={30} />
         ),
         tabBarShowLabel: true,
         ...screenOptions,
       })}>
-      <Tab.Screen name={ScreenList.HOME} component={Home} />
-      <Tab.Screen name={ScreenList.CREATE_TEST} component={CreateTest} />
+      <Tab.Screen
+        name={ScreenList.HOME}
+        component={Home}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name={ScreenList.CREATE_TEST}
+        component={CreateTest}
+        options={{headerShown: false}}
+      />
       <Tab.Screen name={ScreenList.TESTS_LIST} component={TestsList} />
       <Tab.Screen name={ScreenList.LIVE_CODING} component={LiveCoding} />
     </Tab.Navigator>
