@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {Container, StyledText} from './styles';
 
-interface IProps {
+export interface IProps {
   timeInMinutes: string;
   timeInSeconds: string;
 }
