@@ -4,6 +4,11 @@ const BlockBox = styled.View`
   margin-bottom: 15px;
 `;
 
+const BlockBoxMarginLeft = styled.View`
+  margin-bottom: 15px;
+  margin-left: 15px;
+`;
+
 const TextBox = styled.Text`
   margin-bottom: 8px;
   margin-left: 8px;
@@ -11,4 +16,4 @@ const TextBox = styled.Text`
   font-family: 'Montserrat-Regular';
 `;
 
-export {BlockBox, TextBox};
+export {BlockBox, TextBox, BlockBoxMarginLeft};
