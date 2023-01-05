@@ -3,28 +3,18 @@ import {
   ViewCenter,
   ViewContainer,
 } from '../../components/ui/ReadyStyles/Containers/index';
-import {
-  BlockAnswerBox,
-  ButtonAnswerBox,
-  TextBox,
-} from '../../components/ui/ReadyStyles/Boxes';
-import {CustomTextInput} from '../../components/ui/CustomTextInput';
-import {CheckBox} from '../../components/ui/CheckBox';
-import {StyleSheet, View} from 'react-native';
+import {ButtonAnswerBox, TextBox} from '../../components/ui/ReadyStyles/Boxes';
 import {AddButton} from '../../components/ui/AddButton';
 import {AppButton} from '../../components/ui/AppButton';
+import {AddingAnswer} from '../../components/AddingAnswer';
 
 export const QuestionsSettings = () => {
   return (
     <ViewContainer>
       <ListQuestionsBtn />
       <TextBox>Answer choice</TextBox>
-      <BlockAnswerBox>
-        <View style={styles.inputBox}>
-          <CustomTextInput onChangeText={() => {}} />
-        </View>
-        <CheckBox />
-      </BlockAnswerBox>
+      <AddingAnswer />
+      <AddingAnswer />
       <ButtonAnswerBox>
         <AddButton />
         <TextBox>Add answer</TextBox>
@@ -35,8 +25,3 @@ export const QuestionsSettings = () => {
     </ViewContainer>
   );
 };
-const styles = StyleSheet.create({
-  inputBox: {
-    width: 290,
-  },
-});
