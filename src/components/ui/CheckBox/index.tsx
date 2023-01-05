@@ -6,7 +6,6 @@ export const CheckBox = () => {
   return (
     <View>
       <BouncyCheckbox
-        isChecked
         disableText
         fillColor="#4287f5"
         size={30}
