@@ -5,19 +5,19 @@ export type questionType = {
   questionStatus: boolean;
 };
 
-export type ButtonQuestionPropsType = {
+export type QuestionTabPropsType = {
   item: questionType;
   isActive: boolean;
   index: number;
   onPress: (value: number) => void;
 };
 
-export const ButtonQuestion = ({
+export const QuestionTab = ({
   item,
   isActive,
   index,
   onPress,
-}: ButtonQuestionPropsType) => {
+}: QuestionTabPropsType) => {
   const onPressHandler = () => {
     onPress(index);
   };

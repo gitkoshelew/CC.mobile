@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {FlatList, View} from 'react-native';
-import {ButtonQuestion, questionType} from './ButtonQuestion/index';
+import {QuestionTab, questionType} from './QuestionTab/index';
 import {ScrollViewBlock} from './styles';
 import {renderItemType} from 'types/common-types';
 
@@ -9,13 +9,13 @@ const data = [...Array(25)].map((_, index) => ({
   questionStatus: Boolean(Math.round(Math.random())),
 })); // fake data for flat list
 
-export const ListQuestionsBtn = () => {
+export const QuestionsTabs = () => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const numColumns = Math.ceil(data.length / 2);
 
   const renderItem = ({item, index}: renderItemType<questionType>) => {
     return (
-      <ButtonQuestion
+      <QuestionTab
         item={item}
         isActive={index === currentQuestion}
         index={index}
@@ -29,8 +29,14 @@ export const ListQuestionsBtn = () => {
       <ScrollViewBlock
         horizontal
         showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={true}>
-        <FlatList data={data} numColumns={numColumns} renderItem={renderItem} />
+        showsHorizontalScrollIndicator={true}
+        testID={'ScrollViewBlock'}>
+        <FlatList
+          data={data}
+          numColumns={numColumns}
+          renderItem={renderItem}
+          testID={'FlatList'}
+        />
       </ScrollViewBlock>
     </View>
   );
