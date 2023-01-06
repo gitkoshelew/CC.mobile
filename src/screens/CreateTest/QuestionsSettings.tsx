@@ -4,7 +4,7 @@ import {
   BlockBoxMarginLeft,
   ButtonAnswerBox,
 } from '../../components/ui/ReadyStyles/Boxes';
-import {ListQuestionsBtn} from '../../components/ListQuestionsBtn/index';
+import {QuestionsTabs} from '../../components/QuestionsTabs/index';
 import {
   ViewCenter,
   ViewContainer,
@@ -23,7 +23,7 @@ export const QuestionsSettings = () => {
 
   return (
     <ViewContainer>
-      <ListQuestionsBtn />
+      <QuestionsTabs />
       <TextBox>Question</TextBox>
       <BlockBox>
         <CustomTextInput
