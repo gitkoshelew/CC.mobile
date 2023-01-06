@@ -14,4 +14,10 @@ const ViewFlex = styled.View`
   flex: 1;
 `;
 
-export {ViewContainer, ViewCenter, ViewFlex};
+const ViewFlexForTwoElements = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+`;
+
+export {ViewContainer, ViewCenter, ViewFlex, ViewFlexForTwoElements};
