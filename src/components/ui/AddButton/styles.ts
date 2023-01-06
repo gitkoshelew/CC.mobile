@@ -1,19 +1,24 @@
 import {StyleSheet} from 'react-native';
+import {Color} from 'theme/colors';
 
 export const styles = StyleSheet.create({
-  boxView: {
+  box: {
+    marginRight: 10,
+    marginBottom: 7,
     justifyContent: 'center',
     alignItems: 'center',
   },
   container: {
+    backgroundColor: Color.GrayMedium,
     borderRadius: 20,
-    paddingHorizontal: 14,
-    height: 38,
+    paddingHorizontal: 3,
+    height: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    fontSize: 14,
-    fontWeight: '500',
+    fontSize: 40,
+    color: Color.White,
+    marginTop: -11,
   },
 });

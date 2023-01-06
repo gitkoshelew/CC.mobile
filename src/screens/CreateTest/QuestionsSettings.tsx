@@ -2,9 +2,11 @@ import {
   BlockBox,
   TextBox,
   BlockBoxMarginLeft,
+  ButtonAnswerBox,
 } from '../../components/ui/ReadyStyles/Boxes';
 import {ListQuestionsBtn} from '../../components/ListQuestionsBtn/index';
 import {
+  ViewCenter,
   ViewContainer,
   ViewFlexForTwoElements,
 } from '../../components/ui/ReadyStyles/Containers/index';
@@ -12,6 +14,9 @@ import {CustomTextInput} from '../../components/ui/CustomTextInput';
 import {Platform} from 'react-native';
 import {AppSelect} from '../../components/ui/AppSelect';
 import {TimerInput} from '../../components/TimerInput';
+import {AddButton} from '../../components/ui/AddButton';
+import {AppButton} from '../../components/ui/AppButton';
+import {AddingAnswer} from '../../components/AddingAnswer';
 
 export const QuestionsSettings = () => {
   const data = ['Single-choice', 'Multiple-choice'];
@@ -39,6 +44,16 @@ export const QuestionsSettings = () => {
           <TimerInput />
         </BlockBoxMarginLeft>
       </ViewFlexForTwoElements>
+      <TextBox>Answer choice</TextBox>
+      <AddingAnswer />
+      <AddingAnswer />
+      <ButtonAnswerBox>
+        <AddButton />
+        <TextBox>Add answer</TextBox>
+      </ButtonAnswerBox>
+      <ViewCenter>
+        <AppButton title="Save test" type="primary" onPress={() => {}} />
+      </ViewCenter>
     </ViewContainer>
   );
 };
