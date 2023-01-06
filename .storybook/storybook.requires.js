@@ -30,10 +30,14 @@ const getStories = () => {
     require("../components/Button.stories.tsx"),
     require("../src/components/Sort/story/Sort.stories.tsx"),
     require("../src/components/SwitchSelectors/story/SwitchSelector.stories.tsx"),
+    require("../src/components/AddingAnswer/story/AddingAnswer.stories.tsx"),
     require("../src/components/Tabs/story/Tabs.stories.tsx"),
     require("../src/components/TestCard/story/TesrCard.stories.tsx"),
     require("../src/components/ui/AppButton/story/AppButton.stories.tsx"),
     require("../src/components/ui/AppSelect/story/AppSelect.stories.tsx"),
+    require("../src/components/ui/CustomTextInput/story/CustomTextInput.stories.tsx"),
+    require("../src/components/ui/AddButton/story/AddButton.stories.tsx"),
+    require("../src/components/ui/CheckBox/story/CheckBox.stories.tsx"),
   ];
 };
 

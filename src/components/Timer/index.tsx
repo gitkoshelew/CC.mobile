@@ -2,12 +2,14 @@ import {useCallback, useEffect, useState} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {Container, StyledText} from './styles';
 
-interface IProps {
-  time: number;
+export interface IProps {
+  timeInMinutes: string;
+  timeInSeconds: string;
 }
 
-export const Timer = ({time}: IProps) => {
-  const [timePeriod, setTimePeriod] = useState<number>(time);
+export const Timer = ({timeInMinutes, timeInSeconds}: IProps) => {
+  const AllTimeInSeconds: number = +timeInMinutes * 60 + +timeInSeconds;
+  const [timePeriod, setTimePeriod] = useState<number>(AllTimeInSeconds);
   const [isCouting, setIsCouting] = useState<boolean>(false);
 
   const formatTime = (value: number): string =>
@@ -26,8 +28,8 @@ export const Timer = ({time}: IProps) => {
 
   const handleReset = useCallback(() => {
     setIsCouting(false);
-    setTimePeriod(time);
-  }, [time]);
+    setTimePeriod(AllTimeInSeconds);
+  }, [AllTimeInSeconds]);
 
   useEffect(() => {
     const interval = setInterval(() => {

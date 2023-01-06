@@ -3,6 +3,18 @@ import styled from 'styled-components/native';
 const BlockBox = styled.View`
   margin-bottom: 15px;
 `;
+const BlockAnswerBox = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+`;
+
+const BlockBoxMarginLeft = styled.View`
+  margin-bottom: 15px;
+  margin-left: 15px;
+`;
 
 const TextBox = styled.Text`
   margin-bottom: 8px;
@@ -11,4 +23,12 @@ const TextBox = styled.Text`
   font-family: 'Montserrat-Regular';
 `;
 
-export {BlockBox, TextBox};
+const ButtonAnswerBox = styled.View`
+  padding-left: 15px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+export {BlockBox, TextBox, BlockBoxMarginLeft, BlockAnswerBox, ButtonAnswerBox};

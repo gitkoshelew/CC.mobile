@@ -8,7 +8,7 @@ export const AppButton = ({title, type, onPress, ...props}: IButtonProps) => {
   const containerStyles = useMemo(
     () => [
       styles.container,
-      {backgroundColor: type === 'primary' ? Color.Blue : Color.Gray},
+      {backgroundColor: type === 'primary' ? Color.Blue : Color.GrayLight},
     ],
     [type],
   );
