@@ -4,6 +4,7 @@ import {
   configure,
   addDecorator,
   addParameters,
+  addArgsEnhancer,
   clearDecorators,
 } from "@storybook/react-native";
 
@@ -29,6 +30,7 @@ const getStories = () => {
   return [
     require("../components/Button.stories.tsx"),
     require("../src/components/Tabs/story/Tabs.stories.tsx"),
+    require("../src/components/ui/CustomTextInput/story/CustomTextInput.stories.tsx"),
   ];
 };
 

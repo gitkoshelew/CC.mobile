@@ -6,13 +6,6 @@ const Container = styled.View`
   flex-direction: row;
 `;
 
-const StyledText = styled.Text`
-  margin: 0px 0px 10px 5px;
-  color: ${Color.Black};
-  font-family: 'Montserrat-Regular';
-  font-weight: 600;
-`;
-
 const Colon = styled.Text`
   margin: 0px 6px;
   font-size: 24px;
@@ -20,4 +13,4 @@ const Colon = styled.Text`
   color: ${Color.GrayDark};
 `;
 
-export {StyledText, Colon, Container};
+export {Colon, Container};

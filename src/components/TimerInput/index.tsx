@@ -1,15 +1,12 @@
 import {TimerInputElement} from '../TimerInputElement';
-import {Colon, Container, StyledText} from './styles';
+import {Colon, Container} from './styles';
 
 export const TimerInput = () => {
   return (
-    <>
-      <StyledText>Timer</StyledText>
-      <Container>
-        <TimerInputElement />
-        <Colon>:</Colon>
-        <TimerInputElement />
-      </Container>
-    </>
+    <Container>
+      <TimerInputElement />
+      <Colon>:</Colon>
+      <TimerInputElement />
+    </Container>
   );
 };
