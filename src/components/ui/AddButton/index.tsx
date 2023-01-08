@@ -1,6 +1,8 @@
-import {Text, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {IAddButtonProps} from 'types/AddButton-types';
 import {styles} from './styles';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Color} from 'theme/colors';
 
 export const AddButton = ({onPress, disabled, ...props}: IAddButtonProps) => {
   return (
@@ -8,9 +10,9 @@ export const AddButton = ({onPress, disabled, ...props}: IAddButtonProps) => {
       <TouchableOpacity
         {...props}
         onPress={onPress}
-        style={{...styles.container, ...(disabled && styles.disabled)}}
+        style={disabled && styles.disabled}
         disabled={disabled}>
-        <Text style={styles.text}>+</Text>
+        <Ionicons name="add-circle" color={Color.GrayMedium} size={40} />
       </TouchableOpacity>
     </View>
   );

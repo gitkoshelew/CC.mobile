@@ -8,14 +8,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  container: {
-    backgroundColor: Color.GrayMedium,
-    borderRadius: 20,
-    paddingHorizontal: 3,
-    height: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   disabled: {
     opacity: 0.4,
   },
