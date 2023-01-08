@@ -8,8 +8,13 @@ export type RootCreateTestParamsList = {
   [ScreenList.TEST_SET]: undefined;
 };
 
+export type RootHomeScreenParamsList = {
+  [ScreenList.MAIN]: undefined;
+  [ScreenList.SIGN_IN]: undefined;
+};
+
 export type RootStackParamList = {
-  [ScreenList.HOME]: undefined; // undefined because you aren't passing any params to the home screen
+  [ScreenList.HOME]: NavigatorScreenParams<RootHomeScreenParamsList>;
   [ScreenList.CREATE_TEST]: NavigatorScreenParams<RootCreateTestParamsList>;
   [ScreenList.TESTS_LIST]: undefined;
   [ScreenList.LIVE_CODING]: undefined;

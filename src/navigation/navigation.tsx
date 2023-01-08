@@ -1,4 +1,3 @@
-import {Home} from '../screens/Home';
 import {
   BottomTabBarButtonProps,
   createBottomTabNavigator,
@@ -7,6 +6,7 @@ import {CreateTest} from '../screens/CreateTest/CreateTest';
 import {TestsList} from '../screens/TestsList/TestsList';
 import {LiveCoding} from '../screens/LiveCoding';
 import {TabButton} from './TabButton/TabButton';
+import {Home} from '../screens/Main/Home';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,6 +17,8 @@ export enum ScreenList {
   LIVE_CODING = 'Live coding',
   QUESTIONS_SET = 'Questions settings',
   TEST_SET = 'Test settings',
+  MAIN = 'Main',
+  SIGN_IN = 'Sign in',
 }
 
 const Navigation = () => {

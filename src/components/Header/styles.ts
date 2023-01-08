@@ -28,13 +28,6 @@ const UserIconContainer = styled.View`
   background: ${Color.White};
 `;
 
-const UserName = styled.Text`
-  margin-top: 15px;
-  font-family: 'Montserrat-Regular';
-  color: ${Color.White};
-  font-size: 16px;
-`;
-
 const Title = styled.Text`
   margin: 30px 0 30px;
   color: ${Color.White};
@@ -97,7 +90,6 @@ const StyledImage = styled.Image`
 export {
   Container,
   UserInfo,
-  UserName,
   UserIconContainer,
   Title,
   Wrapper,
