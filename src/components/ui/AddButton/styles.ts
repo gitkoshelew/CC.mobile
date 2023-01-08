@@ -16,6 +16,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  disabled: {
+    opacity: 0.4,
+  },
   text: {
     fontSize: 40,
     color: Color.White,

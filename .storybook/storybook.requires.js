@@ -4,6 +4,7 @@ import {
   configure,
   addDecorator,
   addParameters,
+  addArgsEnhancer,
   clearDecorators,
 } from "@storybook/react-native";
 
@@ -30,9 +31,9 @@ const getStories = () => {
     require("../components/Button.stories.tsx"),
     require("../src/components/AddingAnswer/story/AddingAnswer.stories.tsx"),
     require("../src/components/Tabs/story/Tabs.stories.tsx"),
-    require("../src/components/ui/CustomTextInput/story/CustomTextInput.stories.tsx"),
     require("../src/components/ui/AddButton/story/AddButton.stories.tsx"),
     require("../src/components/ui/CheckBox/story/CheckBox.stories.tsx"),
+    require("../src/components/ui/CustomTextInput/story/CustomTextInput.stories.tsx"),
   ];
 };
 
