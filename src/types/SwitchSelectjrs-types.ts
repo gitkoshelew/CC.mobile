@@ -1,4 +1,4 @@
 export interface ISwitchSelectProps {
   onPress?: () => void;
-  type: 'level' | 'number';
+  type: 'level' | 'number' | 'filter';
 }

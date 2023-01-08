@@ -31,4 +31,18 @@ const ButtonAnswerBox = styled.View`
   align-items: center;
 `;
 
-export {BlockBox, TextBox, BlockBoxMarginLeft, BlockAnswerBox, ButtonAnswerBox};
+const RightBlockBox = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export {
+  BlockBox,
+  TextBox,
+  BlockBoxMarginLeft,
+  BlockAnswerBox,
+  ButtonAnswerBox,
+  RightBlockBox,
+};

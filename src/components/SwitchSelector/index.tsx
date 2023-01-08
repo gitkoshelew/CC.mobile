@@ -15,12 +15,17 @@ export const SwitchSelectors = ({onPress, type}: ISwitchSelectProps) => {
             {label: 'Medium', value: 'medium'},
             {label: 'Hard', value: 'hard'},
           ]
-        : [
+        : type === 'number'
+        ? [
             {label: '10', value: '10'},
             {label: '15', value: '15'},
             {label: '20', value: '20'},
             {label: '15', value: '15'},
             {label: '20', value: '20'},
+          ]
+        : [
+            {label: 'My', value: 'My'},
+            {label: 'All', value: 'All'},
           ],
     [type],
   );
