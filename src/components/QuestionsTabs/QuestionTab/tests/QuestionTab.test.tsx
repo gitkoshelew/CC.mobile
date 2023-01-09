@@ -3,7 +3,8 @@ import {QuestionTab, QuestionTabPropsType} from '../index';
 
 const onPressMock = jest.fn();
 const createTestProps = {
-  item: {id: '1', questionStatus: true},
+  questionStatus: true,
+  id: 1,
   index: 1,
   isActive: true,
   onPress: onPressMock,
@@ -11,9 +12,9 @@ const createTestProps = {
 
 describe('Tab component functionality', () => {
   render(<QuestionTab {...createTestProps} />);
-
+  console.log();
   test('Should call method on press', async () => {
-    fireEvent.press(screen.getByText('1'));
+    fireEvent.press(screen.getByTestId('textButton'));
     expect(onPressMock).toHaveBeenCalled();
   });
 });

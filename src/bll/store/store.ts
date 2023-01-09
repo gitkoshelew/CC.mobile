@@ -1,12 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
 import thunkMiddleware from 'redux-thunk';
 import {appReducer} from '../appReducer';
-import {createTestReducer} from '../createTestReducer';
+import {testReducer} from '../testReducer';
 
 export const store = configureStore({
   reducer: {
     app: appReducer,
-    createTest: createTestReducer,
+    createTest: testReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().prepend(thunkMiddleware),

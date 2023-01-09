@@ -1,24 +1,32 @@
-import {useState} from 'react';
-import {QuestionTab, questionType} from './QuestionTab/index';
+import {QuestionTab} from './QuestionTab/index';
 import {ScrollViewBlock, TabsBlock} from './styles';
-import {renderItemType} from 'types/common-types';
+import {useAppSelector} from '../../hooks/hooks';
 
-const data = [...Array(15)].map((_, index) => ({
-  id: String(index + 1),
-  questionStatus: Boolean(Math.round(Math.random())),
-})); // fake data for flat list
+export type QuestionsTabsPropsType = {
+  onPressCurrentQuestion: (idQuestion: number) => void;
+};
 
-export const QuestionsTabs = () => {
-  const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+type renderTabsType = {
+  id: number;
+  index: number;
+  questionStatus: boolean;
+};
 
-  const renderItem = ({item, index}: renderItemType<questionType>) => {
+export const QuestionsTabs = (props: QuestionsTabsPropsType) => {
+  const questions = useAppSelector(state => state.createTest.test.questions);
+  const currentQuestion = useAppSelector(
+    state => state.createTest.currentQuestion,
+  );
+
+  const renderItem = ({id, questionStatus, index}: renderTabsType) => {
     return (
       <QuestionTab
-        key={index}
-        item={item}
-        isActive={index === currentQuestion}
+        key={id}
+        id={id}
+        questionStatus={questionStatus}
+        isActive={id === currentQuestion}
         index={index}
-        onPress={setCurrentQuestion}
+        onPress={props.onPressCurrentQuestion}
       />
     );
   };
@@ -29,8 +37,14 @@ export const QuestionsTabs = () => {
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={true}
       testID={'ScrollViewBlock'}>
-      <TabsBlock flexDirection={data.length > 10 ? 'column' : 'row'}>
-        {data.map((item, index) => renderItem({item, index}))}
+      <TabsBlock flexDirection={questions.length > 10 ? 'column' : 'row'}>
+        {questions.map((item, index) =>
+          renderItem({
+            id: item.id,
+            questionStatus: item.content.length > 2,
+            index,
+          }),
+        )}
       </TabsBlock>
     </ScrollViewBlock>
   );

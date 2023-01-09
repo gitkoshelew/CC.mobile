@@ -1,33 +1,32 @@
 import {Button, TextButton} from './styles';
 
-export type questionType = {
-  id: string;
-  questionStatus: boolean;
-};
-
 export type QuestionTabPropsType = {
-  item: questionType;
+  questionStatus: boolean;
   isActive: boolean;
   index: number;
-  onPress: (value: number) => void;
+  id: number;
+  onPress: (idQuestion: number) => void;
 };
 
 export const QuestionTab = ({
-  item,
+  id,
+  questionStatus,
   isActive,
   index,
   onPress,
 }: QuestionTabPropsType) => {
   const onPressHandler = () => {
-    onPress(index);
+    onPress(id);
   };
 
   return (
     <Button
       onPress={onPressHandler}
       isActive={isActive}
-      questionStatus={item.questionStatus}>
-      <TextButton isActive={isActive}>{item.id}</TextButton>
+      questionStatus={questionStatus}>
+      <TextButton isActive={isActive} testID={'textButton'}>
+        {index + 1}
+      </TextButton>
     </Button>
   );
 };

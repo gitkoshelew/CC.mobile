@@ -5,7 +5,14 @@ import {ISelectProps} from 'types/AppSelect-types';
 import {useMemo} from 'react';
 import {Color} from 'theme/colors';
 
-export const AppSelect = ({size, type, data, ...props}: ISelectProps) => {
+export const AppSelect = ({
+  size,
+  type,
+  data,
+  onSelect,
+  value,
+  ...props
+}: ISelectProps) => {
   const containerButtonStyle = useMemo(
     () => ({
       backgroundColor: type === 'primary' ? Color.Blue : Color.White,
@@ -50,9 +57,8 @@ export const AppSelect = ({size, type, data, ...props}: ISelectProps) => {
       {...props}
       data={data}
       defaultValueByIndex={1}
-      onSelect={(selectedItem, index) => {
-        console.log(selectedItem, index);
-      }}
+      onSelect={onSelect}
+      defaultValue={value}
       defaultButtonText={'Select country'}
       buttonTextAfterSelection={selectedItem => selectedItem}
       rowTextForSelection={item => item}
