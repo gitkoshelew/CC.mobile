@@ -19,6 +19,7 @@ export enum ScreenList {
   TEST_SET = 'Test settings',
   MAIN = 'Main',
   SIGN_IN = 'Sign in',
+  SIGN_UP = 'Sign up',
 }
 
 const Navigation = () => {

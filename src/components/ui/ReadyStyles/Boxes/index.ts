@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {Color} from 'theme/colors';
 
 const BlockBox = styled.View`
   margin-bottom: 15px;
@@ -23,6 +24,31 @@ const TextBox = styled.Text`
   font-family: 'Montserrat-Regular';
 `;
 
+const SmallTextBox = styled.Text`
+  font-size: 14px;
+  font-family: 'Montserrat-Regular';
+  color: ${Color.GrayMedium};
+`;
+
+const TextDescription = styled.Text`
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-family: 'Montserrat-Regular';
+  color: ${Color.GrayMedium};
+`;
+
+const Title = styled.Text`
+  margin-bottom: 30px;
+  font-size: 25px;
+  font-family: 'Montserrat-Regular';
+  color: ${Color.White};
+  font-weight: 600;
+`;
+
+const SmallBox = styled.View`
+  margin-bottom: 8px;
+`;
+
 const ButtonAnswerBox = styled.View`
   padding-left: 15px;
   width: 100%;
@@ -45,4 +71,8 @@ export {
   BlockAnswerBox,
   ButtonAnswerBox,
   RightBlockBox,
+  Title,
+  TextDescription,
+  SmallTextBox,
+  SmallBox,
 };

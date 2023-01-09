@@ -10,6 +10,14 @@ const ViewCenter = styled.View`
   padding-top: 20px;
 `;
 
+const ViewFlexCenter = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+`;
+
 const ViewFlex = styled.View`
   flex: 1;
 `;
@@ -20,4 +28,10 @@ const ViewFlexForTwoElements = styled.View`
   width: 40%;
 `;
 
-export {ViewContainer, ViewCenter, ViewFlex, ViewFlexForTwoElements};
+export {
+  ViewContainer,
+  ViewCenter,
+  ViewFlex,
+  ViewFlexForTwoElements,
+  ViewFlexCenter,
+};

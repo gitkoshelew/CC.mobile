@@ -4,6 +4,7 @@ import {RootHomeScreenParamsList} from 'types/navigation-types';
 import {ScreenList} from '../../navigation/navigation';
 import {Main} from './Main';
 import {SignIn} from './SignIn';
+import {SignUp} from './SignUp';
 
 const {Navigator, Screen} =
   createNativeStackNavigator<RootHomeScreenParamsList>();
@@ -18,6 +19,7 @@ export const Home = () => {
           options={{headerShown: false}}
         />
         <Screen name={ScreenList.SIGN_IN} component={SignIn} />
+        <Screen name={ScreenList.SIGN_UP} component={SignUp} />
       </Navigator>
     </ViewFlex>
   );

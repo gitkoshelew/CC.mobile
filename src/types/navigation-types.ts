@@ -11,6 +11,7 @@ export type RootCreateTestParamsList = {
 export type RootHomeScreenParamsList = {
   [ScreenList.MAIN]: undefined;
   [ScreenList.SIGN_IN]: undefined;
+  [ScreenList.SIGN_UP]: undefined;
 };
 
 export type RootStackParamList = {
