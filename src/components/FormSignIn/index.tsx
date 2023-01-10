@@ -1,5 +1,4 @@
 import {Formik} from 'formik';
-import {AppButton} from '../ui/AppButton';
 import {FormInput} from '../ui/FormInput';
 import {ViewCenter, ViewContainer} from '../ui/ReadyStyles/Containers';
 import {
@@ -10,9 +9,9 @@ import {
   Title,
 } from '../ui/ReadyStyles/Boxes';
 import {Container} from './styles';
-import {LinkButton} from '../ui/LinkButton';
 import {useAppNavigate} from '../../hooks/hooks';
 import {ScreenList} from '../../navigation/navigation';
+import {LoginButton} from '../ui/LoginButton';
 
 export interface ISignInValues {
   email: string;
@@ -48,26 +47,26 @@ export const FormSignIn = () => {
                 onChangeText={handleChange('password')}
                 value={values.password}
                 secureTextEntry={true}
-                // textContentType="password"
               />
             </BlockBox>
             <ViewCenter>
               <SmallBox>
-                <AppButton
+                <LoginButton
                   onPress={handleSubmit}
-                  title="Sign In"
-                  type="secondary"
+                  title="Sign in"
+                  type="primary"
                 />
               </SmallBox>
               <SmallBox>
                 <SmallTextBox>or</SmallTextBox>
               </SmallBox>
-              <LinkButton
+              <LoginButton
                 onPress={() =>
                   navigate(ScreenList.HOME, {screen: ScreenList.SIGN_UP})
-                }>
-                Sign up
-              </LinkButton>
+                }
+                title="Sign up"
+                type="secondary"
+              />
             </ViewCenter>
           </ViewContainer>
         </Container>
