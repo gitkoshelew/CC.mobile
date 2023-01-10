@@ -4,10 +4,7 @@ import {Color} from 'theme/colors';
 export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingHorizontal: 14,
     height: 77,
-    width: '100%',
-    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   title: {

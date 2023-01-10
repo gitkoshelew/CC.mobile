@@ -4,7 +4,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {CreateTest} from '../screens/CreateTest/CreateTest';
-import {TestsList} from '../screens/TestsList';
+import {TestsList} from '../screens/TestsList/TestsList';
 import {LiveCoding} from '../screens/LiveCoding';
 import {TabButton} from './TabButton/TabButton';
 
