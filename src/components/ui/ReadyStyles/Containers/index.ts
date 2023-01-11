@@ -1,6 +1,10 @@
 import styled from 'styled-components/native';
 
 const ViewContainer = styled.View`
+  padding: 30px 21px 3px 21px;
+`;
+
+const ScrollViewContainer = styled.ScrollView`
   padding: 30px 21px;
 `;
 
@@ -20,4 +24,10 @@ const ViewFlexForTwoElements = styled.View`
   width: 40%;
 `;
 
-export {ViewContainer, ViewCenter, ViewFlex, ViewFlexForTwoElements};
+export {
+  ViewContainer,
+  ViewCenter,
+  ViewFlex,
+  ViewFlexForTwoElements,
+  ScrollViewContainer,
+};
