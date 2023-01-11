@@ -35,7 +35,7 @@ export const TestSettings = () => {
   const {navigate} = useAppNavigate();
 
   const selectNumberQuestionsHandler = useCallback(
-    (value: numberQuestionsType) => {
+    (value: string) => {
       setTestSettingData({...testSettingData, numberQuestions: value});
     },
     [testSettingData],
