@@ -12,14 +12,14 @@ import {AppSelect} from '../../components/ui/AppSelect';
 import {SwitchSelectors} from '../../components/SwitchSelector';
 import {useCallback, useState} from 'react';
 import {addTestSettings} from '../../bll/testReducer';
-import {difficultyType, numberQuestionsType} from 'types/test-types';
+import {difficultyType} from 'types/test-types';
 
 export type testSettingData = {
   title: string;
   description: string;
   theme: string;
   difficulty: difficultyType;
-  numberQuestions: numberQuestionsType;
+  numberQuestions: number;
 };
 
 export const TestSettings = () => {
@@ -34,9 +34,9 @@ export const TestSettings = () => {
   });
   const {navigate} = useAppNavigate();
 
-  const selectNumberQuestionsHandler = useCallback(
+  const selectsNumberQuestionsHandler = useCallback(
     (value: string) => {
-      setTestSettingData({...testSettingData, numberQuestions: value});
+      setTestSettingData({...testSettingData, numberQuestions: Number(value)});
     },
     [testSettingData],
   );
@@ -72,7 +72,10 @@ export const TestSettings = () => {
       </BlockBox>
       <TextBox>Number of questions</TextBox>
       <BlockBox>
-        <SwitchSelectors type="number" onPress={selectNumberQuestionsHandler} />
+        <SwitchSelectors
+          type="number"
+          onPress={selectsNumberQuestionsHandler}
+        />
       </BlockBox>
       <ViewCenter>
         <AppButton

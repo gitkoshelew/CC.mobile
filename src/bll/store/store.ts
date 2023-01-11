@@ -5,7 +5,7 @@ import {testReducer} from '../testReducer';
 export const store = configureStore({
   reducer: {
     app: appReducer,
-    createTest: testReducer,
+    testReducer,
   },
 });
 

@@ -22,11 +22,13 @@ type CreateQuestionPropsType = {
   id: number;
 };
 
+const numberOfLines = Platform.OS === 'ios' ? undefined : 2;
+
 export const CreateQuestion = ({id}: CreateQuestionPropsType) => {
   const data = ['Single-choice', 'Multiple-choice'];
   const dispatch = useAppDispatch();
   const currentQuestion = useAppSelector(
-    state => state.createTest.test.questions.find(el => el.id === id)!,
+    state => state.testReducer.test.questions.find(el => el.id === id)!,
   );
   const [question, setQuestion] = useState<questionType>(currentQuestion);
   const onPressSaveQuestionHandler = () => {
@@ -52,7 +54,7 @@ export const CreateQuestion = ({id}: CreateQuestionPropsType) => {
           value={question.textQuestion}
           multiline
           textAlignVertical={'top'}
-          numberOfLines={Platform.OS === 'ios' ? undefined : 2}
+          numberOfLines={numberOfLines}
           height={Platform.OS === 'ios' ? '100px' : undefined}
         />
       </BlockBox>

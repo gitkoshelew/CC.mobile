@@ -13,9 +13,9 @@ type renderTabsType = {
 };
 
 export const QuestionsTabs = (props: QuestionsTabsPropsType) => {
-  const questions = useAppSelector(state => state.createTest.test.questions);
+  const questions = useAppSelector(state => state.testReducer.test.questions);
   const currentQuestion = useAppSelector(
-    state => state.createTest.currentQuestion,
+    state => state.testReducer.currentQuestion,
   );
 
   const renderItem = ({id, questionStatus, index}: renderTabsType) => {

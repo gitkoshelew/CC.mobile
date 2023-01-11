@@ -12,7 +12,6 @@ const createTestProps = {
 
 describe('Tab component functionality', () => {
   render(<QuestionTab {...createTestProps} />);
-  console.log();
   test('Should call method on press', async () => {
     fireEvent.press(screen.getByTestId('textButton'));
     expect(onPressMock).toHaveBeenCalled();

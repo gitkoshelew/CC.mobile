@@ -1,6 +1,5 @@
 import {QuestionsTabs} from '../../../components/QuestionsTabs/index';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
-
 import {CreateQuestion} from '../CreateQuestion/index';
 import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
 import {selectCurrentQuestion} from '../../../bll/testReducer';
@@ -9,7 +8,7 @@ import {styles} from './styles';
 
 export const QuestionsSettings = () => {
   const idCurrentQuestion = useAppSelector(
-    state => state.createTest.test.questions[0].id,
+    state => state.testReducer.test.questions[0].id,
   );
   const [idQuestion, setIdQuestion] = useState<number>(idCurrentQuestion);
   const dispatch = useAppDispatch();
@@ -26,6 +25,7 @@ export const QuestionsSettings = () => {
   useEffect(() => {
     dispatch(selectCurrentQuestion({id: idCurrentQuestion}));
   }, [dispatch, idCurrentQuestion]);
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
