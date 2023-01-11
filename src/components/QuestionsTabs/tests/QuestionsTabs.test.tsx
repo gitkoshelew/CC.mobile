@@ -11,7 +11,7 @@ const testReducerMok = () => ({
 
 const initialState = {
   reducer: {
-    createTest: testReducerMok,
+    testReducer: testReducerMok,
   },
 };
 const mockStore = configureStore(initialState);
