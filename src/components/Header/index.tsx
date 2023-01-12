@@ -17,11 +17,12 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {ViewCenter} from '../ui/ReadyStyles/Containers';
 import * as AppButton from '../ui/AppButton';
-import {ScreenList} from '../../navigation/navigation';
-import {useAppNavigate} from 'hooks/hooks';
+import {useAppNavigate} from '@hooks/hooks';
+import {ScreenList} from '@src/navigation/navigation';
 
 export const Header = () => {
   const {navigate} = useAppNavigate();
+
   return (
     <Container
       source={require('../../assets/images/background-image.png')}

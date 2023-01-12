@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {TextInputProps} from 'react-native';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 import {CustomFormInput} from './styles';
 
 export type CustomFormInputPropsType = {

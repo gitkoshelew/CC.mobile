@@ -4,9 +4,12 @@ module.exports = {
     [
       'module-resolver',
       {
+        root: ['./'],
         alias: {
-          theme: './src/theme',
-          hooks: './src/hooks',
+          '@theme': './src/theme',
+          '@types': './src/types',
+          '@hooks': './src/hooks',
+          '@src': './src',
         },
       },
     ],

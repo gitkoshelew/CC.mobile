@@ -9,9 +9,10 @@ import {
   Title,
 } from '../ui/ReadyStyles/Boxes';
 import {Container} from './styles';
-import {useAppNavigate} from '../../hooks/hooks';
-import {ScreenList} from '../../navigation/navigation';
 import {LoginButton} from '../ui/LoginButton';
+import {useAppNavigate} from '@hooks/hooks';
+
+import {ScreenList} from '@src/navigation/navigation';
 
 export interface ISignInValues {
   email: string;
