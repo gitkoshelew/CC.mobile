@@ -9,7 +9,6 @@ const Container = styled.View`
 
 const StyledText = styled.Text`
   font-size: 30px;
-  font-weight: 500;
   color: ${Color.Black};
   font-family: 'Montserrat-Regular';
 `;
