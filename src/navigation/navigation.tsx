@@ -3,9 +3,9 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {CreateTest} from '../screens/CreateTest/CreateTest';
-import {TestsList} from '../screens/TestsList/TestsList';
 import {LiveCoding} from '../screens/LiveCoding';
 import {TabButton} from './TabButton/TabButton';
+import Tests from '../screens/Testing/Tests';
 import {Home} from '../screens/Main/Home';
 
 const Tab = createBottomTabNavigator();
@@ -13,10 +13,12 @@ const Tab = createBottomTabNavigator();
 export enum ScreenList {
   HOME = 'Home',
   CREATE_TEST = 'Create test',
+  TESTS = 'Tests',
   TESTS_LIST = 'Tests list',
   LIVE_CODING = 'Live coding',
   QUESTIONS_SET = 'Questions settings',
   TEST_SET = 'Test settings',
+  TEST_PROCESS = 'Test process',
   MAIN = 'Main',
   SIGN_IN = 'Sign in',
   SIGN_UP = 'Sign up',
@@ -53,7 +55,11 @@ const Navigation = () => {
         component={CreateTest}
         options={{headerShown: false}}
       />
-      <Tab.Screen name={ScreenList.TESTS_LIST} component={TestsList} />
+      <Tab.Screen
+        name={ScreenList.TESTS}
+        component={Tests}
+        options={{headerShown: false}}
+      />
       <Tab.Screen name={ScreenList.LIVE_CODING} component={LiveCoding} />
     </Tab.Navigator>
   );

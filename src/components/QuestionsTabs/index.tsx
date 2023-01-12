@@ -1,43 +1,51 @@
-import {useState} from 'react';
-import {FlatList, View} from 'react-native';
-import {QuestionTab, questionType} from './QuestionTab/index';
-import {ScrollViewBlock} from './styles';
-import {renderItemType} from 'types/common-types';
+import {QuestionTab} from './QuestionTab/index';
+import {ScrollViewBlock, TabsBlock} from './styles';
+import {useAppSelector} from '../../hooks/hooks';
 
-const data = [...Array(25)].map((_, index) => ({
-  id: String(index + 1),
-  questionStatus: Boolean(Math.round(Math.random())),
-})); // fake data for flat list
+export type QuestionsTabsPropsType = {
+  onPressCurrentQuestion: (idQuestion: number) => void;
+};
 
-export const QuestionsTabs = () => {
-  const [currentQuestion, setCurrentQuestion] = useState<number>(0);
-  const numColumns = Math.ceil(data.length / 2);
+type renderTabsType = {
+  id: number;
+  index: number;
+  questionStatus: boolean;
+};
 
-  const renderItem = ({item, index}: renderItemType<questionType>) => {
+export const QuestionsTabs = (props: QuestionsTabsPropsType) => {
+  const questions = useAppSelector(state => state.testReducer.test.questions);
+  const currentQuestion = useAppSelector(
+    state => state.testReducer.currentQuestion,
+  );
+
+  const renderItem = ({id, questionStatus, index}: renderTabsType) => {
     return (
       <QuestionTab
-        item={item}
-        isActive={index === currentQuestion}
+        key={id}
+        id={id}
+        questionStatus={questionStatus}
+        isActive={id === currentQuestion}
         index={index}
-        onPress={setCurrentQuestion}
+        onPress={props.onPressCurrentQuestion}
       />
     );
   };
 
   return (
-    <View>
-      <ScrollViewBlock
-        horizontal
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={true}
-        testID={'ScrollViewBlock'}>
-        <FlatList
-          data={data}
-          numColumns={numColumns}
-          renderItem={renderItem}
-          testID={'FlatList'}
-        />
-      </ScrollViewBlock>
-    </View>
+    <ScrollViewBlock
+      horizontal
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={true}
+      testID={'ScrollViewBlock'}>
+      <TabsBlock flexDirection={questions.length > 10 ? 'column' : 'row'}>
+        {questions.map((item, index) =>
+          renderItem({
+            id: item.id,
+            questionStatus: item.content.length > 2,
+            index,
+          }),
+        )}
+      </TabsBlock>
+    </ScrollViewBlock>
   );
 };

@@ -12,6 +12,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		346B71AFECCA432B8FA3D713 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7199D380BAF45F892FD9A0E /* Montserrat-Regular.ttf */; };
+		6934C453297008E4006D992D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6934C452297008E3006D992D /* Montserrat-Bold.ttf */; };
 		69635D2E2949C3BF00A5092F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69635D2D2949C3BF00A5092F /* Launch Screen.storyboard */; };
 		69635D322949C4CC00A5092F /* launch-screen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69635D312949C4CC00A5092F /* launch-screen@3x.png */; };
 		69A143FC294F90C400686610 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69A143FB294F90C400686610 /* Images.xcassets */; };
@@ -43,12 +44,13 @@
 		5709B34CF0A7D63546082F79 /* Pods-CCMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCMobile.release.xcconfig"; path = "Target Support Files/Pods-CCMobile/Pods-CCMobile.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-CCMobile-CCMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCMobile-CCMobileTests.debug.xcconfig"; path = "Target Support Files/Pods-CCMobile-CCMobileTests/Pods-CCMobile-CCMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-CCMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CCMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6934C452297008E3006D992D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		69635D2D2949C3BF00A5092F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		69635D312949C4CC00A5092F /* launch-screen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launch-screen@3x.png"; path = "CCMobile/launchScreen.xcassets/launch-screen.imageset/launch-screen@3x.png"; sourceTree = "<group>"; };
 		69A143FB294F90C400686610 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		69AB3F7A2949B81F00CAB64D /* react-native-splash-screen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-splash-screen"; path = "../node_modules/react-native-splash-screen"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-CCMobile-CCMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCMobile-CCMobileTests.release.xcconfig"; path = "Target Support Files/Pods-CCMobile-CCMobileTests/Pods-CCMobile-CCMobileTests.release.xcconfig"; sourceTree = "<group>"; };
-		E7199D380BAF45F892FD9A0E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		E7199D380BAF45F892FD9A0E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -160,10 +162,10 @@
 		DA7DBEA4E3A84782B2E65ABE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6934C452297008E3006D992D /* Montserrat-Bold.ttf */,
 				E7199D380BAF45F892FD9A0E /* Montserrat-Regular.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +264,7 @@
 			files = (
 				69635D2E2949C3BF00A5092F /* Launch Screen.storyboard in Resources */,
 				69A143FC294F90C400686610 /* Images.xcassets in Resources */,
+				6934C453297008E4006D992D /* Montserrat-Bold.ttf in Resources */,
 				69635D322949C4CC00A5092F /* launch-screen@3x.png in Resources */,
 				69AB3F7B2949B81F00CAB64D /* react-native-splash-screen in Resources */,
 				346B71AFECCA432B8FA3D713 /* Montserrat-Regular.ttf in Resources */,

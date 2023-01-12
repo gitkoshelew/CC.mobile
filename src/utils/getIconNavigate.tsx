@@ -15,7 +15,7 @@ export const getIcon = (routeName: string, color?: Color, size?: number) => {
     case 'Create test':
       iconName = 'post-add';
       break;
-    case 'Tests list':
+    case 'Tests':
       iconName = 'format-list-bulleted';
       break;
     case 'Live coding':

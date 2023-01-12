@@ -8,6 +8,11 @@ export type RootCreateTestParamsList = {
   [ScreenList.TEST_SET]: undefined;
 };
 
+export type RootTestingParamsList = {
+  [ScreenList.TESTS_LIST]: undefined;
+  [ScreenList.TEST_PROCESS]: undefined;
+};
+
 export type RootHomeScreenParamsList = {
   [ScreenList.MAIN]: undefined;
   [ScreenList.SIGN_IN]: undefined;
@@ -17,7 +22,7 @@ export type RootHomeScreenParamsList = {
 export type RootStackParamList = {
   [ScreenList.HOME]: NavigatorScreenParams<RootHomeScreenParamsList>;
   [ScreenList.CREATE_TEST]: NavigatorScreenParams<RootCreateTestParamsList>;
-  [ScreenList.TESTS_LIST]: undefined;
+  [ScreenList.TESTS]: NavigatorScreenParams<RootTestingParamsList>;
   [ScreenList.LIVE_CODING]: undefined;
 };
 

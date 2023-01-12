@@ -12,8 +12,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  disabled: {
+    opacity: 0.5,
+  },
   text: {
     fontSize: 14,
-    fontWeight: '500',
+    fontFamily: 'Montserrat-Regular',
   },
 });
