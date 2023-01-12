@@ -5,40 +5,52 @@ import {CustomTextInput} from '../ui/CustomTextInput';
 import {CheckBox} from '../ui/CheckBox';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from 'theme/colors';
-import {answerType} from 'types/test-types';
 import {useCallback} from 'react';
+import {correctAnswerType} from 'types/test-types';
 
 type AddingAnswerPropsType = {
-  item: answerType;
+  item: string;
+  index: number;
+  correctAnswer: correctAnswerType;
   disabledDeleteBtn: boolean;
-  onPressDelete: (id: number) => void;
-  onPressCorrectAnswer: (id: number, checked: boolean) => void;
+  onPressDelete: (index: number) => void;
+  onPressCorrectAnswer: (
+    index: number,
+    answer: string,
+    checked: boolean,
+  ) => void;
 };
 
 export const AddingAnswer = ({
   item,
+  index,
   onPressDelete,
   onPressCorrectAnswer,
   disabledDeleteBtn,
+  ...props
 }: AddingAnswerPropsType) => {
   const onPressDeleteHandler = () => {
-    onPressDelete(item.id);
+    onPressDelete(index);
   };
   const onPressCorrectAnswerHandler = useCallback(
     (checked: boolean) => {
-      onPressCorrectAnswer(item.id, checked);
+      onPressCorrectAnswer(index, item, checked);
     },
-    [item.id, onPressCorrectAnswer],
+    [index, item, onPressCorrectAnswer],
   );
+  console.log(props.correctAnswer);
+  const checkCorrectAnswer = Array.isArray(props.correctAnswer)
+    ? props.correctAnswer.includes(item)
+    : props.correctAnswer === item;
 
   return (
     <BlockAnswerBox>
       <View style={styles.inputBox}>
-        <CustomTextInput onChangeText={() => {}} value={item.answer} />
+        <CustomTextInput onChangeText={() => {}} value={item} />
       </View>
       <CheckBox
         onPress={onPressCorrectAnswerHandler}
-        checked={item.isCorrect}
+        checked={checkCorrectAnswer}
       />
       <TouchableOpacity
         style={disabledDeleteBtn && styles.disabled}

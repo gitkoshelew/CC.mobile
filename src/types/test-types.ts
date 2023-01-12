@@ -1,31 +1,33 @@
-export type answerType = {
-  id: number;
-  answer: string;
-  isCorrect: boolean;
+export type answersType = {
+  options: string[];
 };
 export type difficultyType = 'Easy' | 'Medium' | 'Hard';
 export type numberQuestionsType = 10 | 15 | 20 | 25 | 30;
+export type correctAnswerType = string | string[];
 export type questionType = {
   id: number;
   title: string;
-  content: answerType[];
+  content: answersType;
+  correctAnswer: string | string[];
   type: string;
   timer: string;
   textQuestion: string;
 };
 
-export type TestsType = {
-  test: {
-    id: number;
-    title: string;
-    description: string;
-    theme: string;
-    difficulty: difficultyType;
-    numberQuestions: numberQuestionsType;
-    author: string;
-    created: Date | null;
-    updated: Date | null;
-    questions: questionType[];
-  };
+export type testType = {
+  id: number;
+  title: string;
+  description: string;
+  theme: string;
+  difficulty: difficultyType;
+  author: string;
+  created: Date | null;
+  updated: Date | null;
+  questions: questionType[];
+};
+
+export type initialStateTestType = {
+  test: testType;
   currentQuestion: number;
+  numberQuestions: number;
 };

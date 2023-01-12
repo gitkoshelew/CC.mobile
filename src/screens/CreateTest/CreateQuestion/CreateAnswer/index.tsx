@@ -9,16 +9,20 @@ import {useAppDispatch} from '../../../../hooks/hooks';
 import {
   addAnswer,
   deleteAnswer,
-  correctAnswer,
+  setCorrectAnswer,
 } from '../../../../bll/testReducer';
-import {answerType} from 'types/test-types';
 import {useCallback} from 'react';
+import {correctAnswerType} from 'types/test-types';
 
 type CreateAnswerPropsType = {
-  answers: answerType[];
+  answers: string[];
+  correctAnswer: correctAnswerType;
 };
 
-export const CreateAnswer = ({answers}: CreateAnswerPropsType) => {
+export const CreateAnswer = ({
+  answers,
+  correctAnswer,
+}: CreateAnswerPropsType) => {
   const dispatch = useAppDispatch();
 
   const addNewAnswerHandler = useCallback(() => {
@@ -26,15 +30,15 @@ export const CreateAnswer = ({answers}: CreateAnswerPropsType) => {
   }, [dispatch]);
 
   const deleteAnswerHandler = useCallback(
-    (id: number) => {
-      dispatch(deleteAnswer({id}));
+    (index: number) => {
+      dispatch(deleteAnswer({index}));
     },
     [dispatch],
   );
 
   const checkedCorrectAnswer = useCallback(
-    (id: number, isCorrect: boolean) => {
-      dispatch(correctAnswer({id, isCorrect}));
+    (index: number, answer: string, checked: boolean) => {
+      dispatch(setCorrectAnswer({index, answer, checked}));
     },
     [dispatch],
   );
@@ -43,10 +47,12 @@ export const CreateAnswer = ({answers}: CreateAnswerPropsType) => {
   return (
     <View>
       <TextBox>Answer choice</TextBox>
-      {answers.map(item => (
+      {answers.map((item, index) => (
         <AddingAnswer
-          key={item.id}
+          key={index}
+          index={index}
           item={item}
+          correctAnswer={correctAnswer}
           disabledDeleteBtn={disabledDeleteBtn}
           onPressDelete={deleteAnswerHandler}
           onPressCorrectAnswer={checkedCorrectAnswer}

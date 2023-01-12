@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {testSettingData} from '../screens/CreateTest/TestSettings';
-import {questionType, TestsType} from 'types/test-types';
+import {initialStateTestType, questionType} from 'types/test-types';
 
 const initialState = {
   test: {
@@ -9,7 +9,6 @@ const initialState = {
     description: '',
     theme: '',
     difficulty: 'Easy',
-    numberQuestions: 10,
     author: 'I am',
     created: null,
     updated: null,
@@ -17,39 +16,32 @@ const initialState = {
       {
         id: 1,
         title: '',
-        content: [
-          {
-            id: 1,
-            answer: '',
-            isCorrect: false,
-          },
-        ],
+        type: 'Single-choice',
         textQuestion: '',
         timer: '',
-        type: 'Single-choice',
+        correctAnswer: '',
+        content: {
+          options: ['', ''],
+        },
       },
     ],
   },
   currentQuestion: 1,
-} as TestsType;
+  numberQuestions: 10,
+} as initialStateTestType;
 
 const testSlice = createSlice({
-  name: 'createTest',
+  name: 'test',
   initialState: initialState,
   reducers: {
     addAnswer(state) {
-      const newAnswer = {
-        id: Math.random(),
-        answer: '',
-        isCorrect: false,
-      };
       return {
         ...state,
         test: {
           ...state.test,
           questions: state.test.questions.map(el =>
             el.id === state.currentQuestion
-              ? {...el, content: [...el.content, newAnswer]}
+              ? {...el, content: {...el, options: [...el.content.options, '']}}
               : el,
           ),
         },
@@ -63,19 +55,9 @@ const testSlice = createSlice({
       const createQuestions = [...Array(numberQuestions)].map(_ => ({
         id: Math.random(),
         title: '',
-        content: [
-          {
-            id: Math.random(),
-            answer: '',
-            isCorrect: false,
-          },
-          {
-            id: Math.random(),
-            answer: '',
-            isCorrect: true,
-          },
-        ],
+        content: {options: ['qwe', 'qwe']},
         textQuestion: '',
+        correctAnswer: ['qwe'],
         timer: '',
         type: 'Single-choice',
       }));
@@ -85,7 +67,7 @@ const testSlice = createSlice({
         questions: createQuestions,
       };
     },
-    deleteAnswer(state, action: PayloadAction<{id: number}>) {
+    deleteAnswer(state, action: PayloadAction<{index: number}>) {
       return {
         ...state,
         test: {
@@ -94,37 +76,49 @@ const testSlice = createSlice({
             el.id === state.currentQuestion
               ? {
                   ...el,
-                  content: el.content.filter(
-                    answ => answ.id !== action.payload.id,
-                  ),
+                  content: {
+                    ...el.content,
+                    options: el.content.options.filter(
+                      (_, index) => index !== action.payload.index,
+                    ),
+                  },
                 }
               : el,
           ),
         },
       };
     },
-    correctAnswer(
+    setCorrectAnswer(
       state,
-      action: PayloadAction<{id: number; isCorrect: boolean}>,
+      action: PayloadAction<{index: number; answer: string; checked: boolean}>,
     ) {
-      return {
-        ...state,
-        test: {
-          ...state.test,
-          questions: state.test.questions.map(el =>
-            el.id === state.currentQuestion
-              ? {
-                  ...el,
-                  content: el.content.map(answ =>
-                    answ.id === action.payload.id
-                      ? {...answ, isCorrect: action.payload.isCorrect}
-                      : answ,
-                  ),
-                }
-              : el,
-          ),
-        },
-      };
+      const question = state.test.questions.find(
+        el => el.id === state.currentQuestion,
+      )!;
+      if (action.payload.checked) {
+        if (Array.isArray(question.correctAnswer)) {
+          question.correctAnswer.push(
+            action.payload.checked ? action.payload.answer : '',
+          );
+        } else {
+          question.correctAnswer = action.payload.checked
+            ? action.payload.answer
+            : '';
+        } // ??????
+      }
+      // return {
+      //   ...state,
+      //   test: {
+      //     ...state.test,
+      //     questions: state.test.questions.map(el =>
+      //       el.id === state.currentQuestion
+      //         ? {
+      //            correctAnswer: (action.payload.checked ?  :)
+      //           }
+      //         : el,
+      //     ),
+      //   },
+      // };
     },
     saveQuestion(state, action: PayloadAction<questionType>) {
       return {
@@ -145,7 +139,7 @@ export const testReducer = testSlice.reducer;
 export const {
   addAnswer,
   deleteAnswer,
-  correctAnswer,
+  setCorrectAnswer,
   selectCurrentQuestion,
   addTestSettings,
   saveQuestion,

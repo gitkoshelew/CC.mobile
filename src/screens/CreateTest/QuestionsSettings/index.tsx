@@ -32,7 +32,9 @@ export const QuestionsSettings = () => {
       keyboardVerticalOffset={keyboardVerticalOffset}
       style={styles.container}>
       <View style={styles.ViewContainer}>
-        <ScrollView style={styles.container}>
+        <ScrollView
+          style={styles.container}
+          showsVerticalScrollIndicator={false}>
           <View style={styles.inner}>
             <QuestionsTabs
               onPressCurrentQuestion={onPressCurrentQuestionHandler}
