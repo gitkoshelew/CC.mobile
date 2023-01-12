@@ -6,7 +6,7 @@ const createTestProps = {
   questionStatus: 'default',
 } as ProgressType;
 
-describe('ProgressView component ui', () => {
+describe(' Should render ProgressView component ', () => {
   it('ProgressView renders', () => {
     render(<ProgressView {...createTestProps} />);
   });

@@ -17,22 +17,8 @@ export const Timer = ({timeInMinutes, timeInSeconds}: IProps) => {
   const minutes = formatTime(Math.floor(timePeriod / 60));
   const seconds = formatTime(timePeriod - +minutes * 60);
 
-  // const handleStart = useCallback(() => {
-  //   setIsCouting(true);
-  // }, []);
-  //
-  // const handleStop = useCallback(() => {
-  //   setIsCouting(false);
-  // }, []);
-  //
-  // const handleReset = useCallback(() => {
-  //   setIsCouting(false);
-  //   setTimePeriod(AllTimeInSeconds);
-  // }, [AllTimeInSeconds]);
-
   useEffect(() => {
     const interval = setInterval(() => {
-      //isCouting && setTimePeriod(() => (timePeriod >= 1 ? timePeriod - 1 : 0));
       setTimePeriod(() => (timePeriod >= 1 ? timePeriod - 1 : 0));
     }, 1000);
 
