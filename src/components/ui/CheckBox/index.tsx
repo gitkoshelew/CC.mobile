@@ -1,17 +1,23 @@
 import {View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import {styles} from './styles';
 
-export const CheckBox = () => {
+type CheckBoxPropsType = {
+  onPress: (value: boolean) => void;
+  checked: boolean;
+};
+
+export const CheckBox = ({onPress, checked}: CheckBoxPropsType) => {
+  const onPressHandler = (isChecked: boolean) => {
+    onPress(isChecked);
+  };
   return (
     <View>
       <BouncyCheckbox
         disableText
         fillColor="#4287f5"
         size={30}
-        iconImageStyle={styles.iconImageStyle}
-        iconStyle={styles.iconStyle}
-        onPress={() => {}}
+        isChecked={checked}
+        onPress={onPressHandler}
       />
     </View>
   );

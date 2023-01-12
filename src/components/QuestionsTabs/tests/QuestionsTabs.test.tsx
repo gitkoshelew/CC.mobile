@@ -1,14 +1,28 @@
 import {render, screen} from '@testing-library/react-native';
 import {QuestionsTabs} from '../index';
+import {Provider} from 'react-redux';
+import {configureStore} from '@reduxjs/toolkit';
 
-test('Should render questions tabs list', async () => {
-  render(<QuestionsTabs />);
-  const flatListPropsTabs = screen.getByTestId('FlatList').props;
-  expect(flatListPropsTabs.data[0].id).toEqual('1');
+const testReducerMok = () => ({
+  test: {
+    questions: [],
+  },
 });
 
+const initialState = {
+  reducer: {
+    testReducer: testReducerMok,
+  },
+};
+const mockStore = configureStore(initialState);
+let store = mockStore;
+
 test('Should render view block', async () => {
-  render(<QuestionsTabs />);
+  render(
+    <Provider store={store}>
+      <QuestionsTabs onPressCurrentQuestion={() => {}} />
+    </Provider>,
+  );
   const scrollViewBlock = screen.getByTestId('ScrollViewBlock').props;
 
   expect(scrollViewBlock.horizontal).toBeTruthy();
