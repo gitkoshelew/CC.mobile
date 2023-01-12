@@ -4,7 +4,12 @@ import {Color} from 'theme/colors';
 type ViewBoxPropsType = {
   questionStatus: 'default' | 'active' | 'right' | 'error';
 };
-
+const statusColor = {
+  active: Color.Blue,
+  right: Color.BlueLight,
+  error: Color.Red,
+  default: Color.GrayMedium,
+};
 export const ViewCheck = styled.View<ViewBoxPropsType>`
   align-items: center;
   justify-content: center;
@@ -13,12 +18,5 @@ export const ViewCheck = styled.View<ViewBoxPropsType>`
   width: 15px;
   height: 15px;
   margin: 4px;
-  background-color: ${props =>
-    props.questionStatus === 'active'
-      ? Color.Blue
-      : props.questionStatus === 'right'
-      ? Color.BlueLight
-      : props.questionStatus === 'error'
-      ? Color.Red
-      : Color.GrayMedium};
+  background-color: ${props => statusColor[props.questionStatus]};
 `;

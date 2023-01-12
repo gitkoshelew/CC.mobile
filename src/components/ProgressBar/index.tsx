@@ -18,7 +18,7 @@ export const ProgressBar = () => {
         data={data}
         numColumns={15}
         renderItem={renderItem}
-        testID={'FlatList'}
+        testID={'FlatListStatusColor'}
       />
     </ViewBlock>
   );
