@@ -1,6 +1,6 @@
 //@ts-ignore
 import SwitchSelector from 'react-native-switch-selector';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 import {View} from 'react-native';
 import {ISwitchSelectProps} from 'types/SwitchSelectjrs-types';
 import {useMemo} from 'react';

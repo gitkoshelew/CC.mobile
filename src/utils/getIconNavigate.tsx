@@ -1,5 +1,5 @@
 import React from 'react';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 

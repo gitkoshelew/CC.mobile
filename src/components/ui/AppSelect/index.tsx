@@ -3,7 +3,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SelectDropdown from 'react-native-select-dropdown';
 import {ISelectProps} from 'types/AppSelect-types';
 import {useMemo} from 'react';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 
 export const AppSelect = ({size, type, data, ...props}: ISelectProps) => {
   const containerButtonStyle = useMemo(

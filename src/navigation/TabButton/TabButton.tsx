@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {GestureResponderEvent, Text, View} from 'react-native';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 
 export type TabButtonPropsType = BottomTabBarButtonProps & {
   name: string;
