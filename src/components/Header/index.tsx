@@ -18,7 +18,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {ViewCenter} from '../ui/ReadyStyles/Containers';
 import * as AppButton from '../ui/AppButton';
 import {ScreenList} from '../../navigation/navigation';
-import {useAppNavigate} from '../../hooks/hooks';
+import {useAppNavigate} from 'hooks/hooks';
 
 export const Header = () => {
   const {navigate} = useAppNavigate();

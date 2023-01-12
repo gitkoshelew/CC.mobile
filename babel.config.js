@@ -6,6 +6,7 @@ module.exports = {
       {
         alias: {
           theme: './src/theme',
+          hooks: './src/hooks',
         },
       },
     ],
