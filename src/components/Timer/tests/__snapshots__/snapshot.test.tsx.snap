@@ -1,123 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`timer snapshot 1`] = `
-[
-  <View
+<View
+  style={
+    [
+      {
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+    ]
+  }
+>
+  <Text
     style={
       [
         {
-          "display": "flex",
-          "flexDirection": "row",
-          "justifyContent": "center",
+          "color": "#000000",
+          "fontFamily": "Montserrat-Regular",
+          "fontSize": 30,
         },
       ]
     }
   >
-    <Text
-      style={
-        [
-          {
-            "color": "#000000",
-            "fontFamily": "Montserrat-Regular",
-            "fontSize": 30,
-            "fontWeight": "500",
-          },
-        ]
-      }
-    >
-      10
-    </Text>
-    <Text
-      style={
-        [
-          {
-            "color": "#000000",
-            "fontFamily": "Montserrat-Regular",
-            "fontSize": 30,
-            "fontWeight": "500",
-          },
-        ]
-      }
-    >
-       : 
-    </Text>
-    <Text
-      style={
-        [
-          {
-            "color": "#000000",
-            "fontFamily": "Montserrat-Regular",
-            "fontSize": 30,
-            "fontWeight": "500",
-          },
-        ]
-      }
-    >
-      00
-    </Text>
-  </View>,
-  <View
-    accessible={true}
-    collapsable={false}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+    10
+  </Text>
+  <Text
     style={
-      {
-        "opacity": 1,
-      }
+      [
+        {
+          "color": "#000000",
+          "fontFamily": "Montserrat-Regular",
+          "fontSize": 30,
+        },
+      ]
     }
   >
-    <Text>
-      Start
-    </Text>
-  </View>,
-  <View
-    accessible={true}
-    collapsable={false}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+     : 
+  </Text>
+  <Text
     style={
-      {
-        "opacity": 1,
-      }
+      [
+        {
+          "color": "#000000",
+          "fontFamily": "Montserrat-Regular",
+          "fontSize": 30,
+        },
+      ]
     }
   >
-    <Text>
-      Stop
-    </Text>
-  </View>,
-  <View
-    accessible={true}
-    collapsable={false}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      {
-        "opacity": 1,
-      }
-    }
-  >
-    <Text>
-      Reset
-    </Text>
-  </View>,
-]
+    00
+  </Text>
+</View>
 `;
