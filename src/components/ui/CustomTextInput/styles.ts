@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components/native';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 import {CustomTextInputPropsType} from './index';
 
 export const CustomInput = styled.TextInput<CustomTextInputPropsType>`

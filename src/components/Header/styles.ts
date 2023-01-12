@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 
 const Wrapper = styled.View`
   padding: 15px 10px 16px 13px;
@@ -26,13 +26,6 @@ const UserIconContainer = styled.View`
   border-radius: 35px;
   overflow: hidden;
   background: ${Color.White};
-`;
-
-const UserName = styled.Text`
-  margin-top: 15px;
-  font-family: 'Montserrat-Regular';
-  color: ${Color.White};
-  font-size: 16px;
 `;
 
 const Title = styled.Text`
@@ -97,7 +90,6 @@ const StyledImage = styled.Image`
 export {
   Container,
   UserInfo,
-  UserName,
   UserIconContainer,
   Title,
   Wrapper,

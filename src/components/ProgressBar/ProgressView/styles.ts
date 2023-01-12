@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 
 type ViewBoxPropsType = {
   questionStatus: 'default' | 'active' | 'right' | 'error';

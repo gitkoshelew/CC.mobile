@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components/native';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 
 export const TitleTab = styled.Text`
   font-size: 14px;

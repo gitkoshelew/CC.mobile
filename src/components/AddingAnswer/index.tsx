@@ -4,7 +4,7 @@ import {BlockAnswerBox} from '../ui/ReadyStyles/Boxes';
 import {CustomTextInput} from '../ui/CustomTextInput';
 import {CheckBox} from '../ui/CheckBox';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 import {answerType} from 'types/test-types';
 import {useCallback} from 'react';
 
