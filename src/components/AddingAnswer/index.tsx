@@ -32,14 +32,15 @@ export const AddingAnswer = ({
   const onPressDeleteHandler = () => {
     onPressDelete(index);
   };
+
   const onPressCorrectAnswerHandler = useCallback(
     (checked: boolean) => {
       onPressCorrectAnswer(index, item, checked);
     },
     [index, item, onPressCorrectAnswer],
   );
-  console.log(props.correctAnswer);
-  const checkCorrectAnswer = Array.isArray(props.correctAnswer)
+
+  const isCorrectAnswer = Array.isArray(props.correctAnswer)
     ? props.correctAnswer.includes(item)
     : props.correctAnswer === item;
 
@@ -50,7 +51,7 @@ export const AddingAnswer = ({
       </View>
       <CheckBox
         onPress={onPressCorrectAnswerHandler}
-        checked={checkCorrectAnswer}
+        checked={isCorrectAnswer}
       />
       <TouchableOpacity
         style={disabledDeleteBtn && styles.disabled}

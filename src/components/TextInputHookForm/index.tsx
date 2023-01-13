@@ -23,9 +23,9 @@ export const TextInputHookForm = <T extends FieldValues>({
       rules={rules}
       render={({field: {onChange, value, onBlur}, fieldState: {error}}) => (
         <CustomTextInput
+          {...props}
           onChangeText={onChange}
           value={value}
-          {...props}
           onBlur={onBlur}
           error={error}
         />

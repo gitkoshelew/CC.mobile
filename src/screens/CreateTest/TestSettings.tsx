@@ -57,8 +57,7 @@ export const TestSettings = () => {
     [selectorsData],
   );
   const onPressQuestionsSettings = (values: inputsFieldType) => {
-    console.log({...values, ...selectorsData});
-    dispatch(addTestSettings(selectorsData));
+    dispatch(addTestSettings({...values, ...selectorsData}));
     navigate(ScreenList.CREATE_TEST, {screen: ScreenList.QUESTIONS_SET});
   };
 
