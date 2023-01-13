@@ -19,7 +19,7 @@ export type testType = {
   title: string;
   description: string;
   theme: string;
-  difficulty: difficultyType;
+  difficulty: string;
   author: string;
   created: Date | null;
   updated: Date | null;
@@ -29,5 +29,13 @@ export type testType = {
 export type initialStateTestType = {
   test: testType;
   currentQuestion: number;
+  numberQuestions: number;
+};
+
+export type testSettingData = {
+  title: string;
+  description: string;
+  theme: string;
+  difficulty: string;
   numberQuestions: number;
 };

@@ -14,7 +14,7 @@ export const QuestionsSettings = () => {
   const dispatch = useAppDispatch();
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 100 : 0;
 
-  const onPressCurrentQuestionHandler = useCallback(
+  const onPressCurrentQuestionPressed = useCallback(
     (id: number) => {
       setIdQuestion(id);
       dispatch(selectCurrentQuestion({id}));
@@ -37,7 +37,7 @@ export const QuestionsSettings = () => {
           showsVerticalScrollIndicator={false}>
           <View style={styles.inner}>
             <QuestionsTabs
-              onPressCurrentQuestion={onPressCurrentQuestionHandler}
+              onPressCurrentQuestion={onPressCurrentQuestionPressed}
             />
             <CreateQuestion id={idQuestion} />
           </View>

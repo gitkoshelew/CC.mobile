@@ -35,6 +35,7 @@ export const TabButton = (props: TabButtonPropsType) => {
   const activeColor = focused ? Color.BlueLight : Color.GrayDark;
 
   const animatedStyle = useAnimatedStyle(() => {
+    'worklet';
     return {
       transform: [{rotateZ: `${rotation.value}deg`}],
     };

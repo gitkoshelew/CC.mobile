@@ -1,6 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {testSettingData} from '../screens/CreateTest/TestSettings';
-import {initialStateTestType, questionType} from 'types/test-types';
+import {
+  initialStateTestType,
+  questionType,
+  testSettingData,
+} from 'types/test-types';
 
 const initialState = {
   test: {
@@ -55,9 +58,9 @@ const testSlice = createSlice({
       const createQuestions = [...Array(numberQuestions)].map(_ => ({
         id: Math.random(),
         title: '',
-        content: {options: ['qwe', 'qwe']},
+        content: {options: ['', '']},
         textQuestion: '',
-        correctAnswer: ['qwe'],
+        correctAnswer: ['q'],
         timer: '',
         type: 'Single-choice',
       }));
@@ -88,37 +91,13 @@ const testSlice = createSlice({
         },
       };
     },
-    setCorrectAnswer(
-      state,
-      action: PayloadAction<{index: number; answer: string; checked: boolean}>,
-    ) {
-      const question = state.test.questions.find(
-        el => el.id === state.currentQuestion,
-      )!;
-      if (action.payload.checked) {
-        if (Array.isArray(question.correctAnswer)) {
-          question.correctAnswer.push(
-            action.payload.checked ? action.payload.answer : '',
-          );
-        } else {
-          question.correctAnswer = action.payload.checked
-            ? action.payload.answer
-            : '';
-        } // ??????
-      }
-      // return {
-      //   ...state,
-      //   test: {
-      //     ...state.test,
-      //     questions: state.test.questions.map(el =>
-      //       el.id === state.currentQuestion
-      //         ? {
-      //            correctAnswer: (action.payload.checked ?  :)
-      //           }
-      //         : el,
-      //     ),
-      //   },
-      // };
+    setCorrectAnswer() // state,
+    // action: PayloadAction<{index: number; answer: string; checked: boolean}>,
+    {
+      // const question = state.test.questions.find(
+      //   el => el.id === state.currentQuestion,
+      // )!;
+      // in progress
     },
     saveQuestion(state, action: PayloadAction<questionType>) {
       return {
