@@ -1,5 +1,5 @@
 import {TouchableOpacity, View} from 'react-native';
-import {IAddButtonProps} from 'types/AddButton-types';
+import {IAddButtonProps} from 'src/customTypes/AddButton-types';
 import {styles} from './styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Color} from '@theme/colors';

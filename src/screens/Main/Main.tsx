@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
-import {Header} from '../components/Header';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {CustomTextInput} from '../components/ui/CustomTextInput';
+import {Header} from '@src/components/Header/index';
+import {CustomTextInput} from '@src/components/ui/CustomTextInput/index';
 
 export const Main = () => {
   return (
