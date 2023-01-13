@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 
 const ViewContainer = styled.View`
   padding: 30px 21px 3px 21px;
@@ -15,6 +15,14 @@ const ViewFlexRight = styled.View`
 `;
 
 const ViewCenter = styled.View`
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+`;
+
+const ViewFlexCenter = styled.View`
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   padding-top: 20px;
@@ -46,4 +54,5 @@ export {
   ScrollViewContainer,
   MainTestingContainer,
   ViewFlexRight,
+  ViewFlexCenter,
 };
