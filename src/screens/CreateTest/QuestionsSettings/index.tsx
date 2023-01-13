@@ -5,6 +5,8 @@ import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
 import {selectCurrentQuestion} from '../../../bll/testReducer';
 import {useCallback, useEffect, useState} from 'react';
 import {styles} from './styles';
+import {DraggableBottomSheet} from '../../../components/DraggableBottomSheet/index';
+import {ContentContainer} from '../../../components/ui/ReadyStyles/Containers';
 
 export const QuestionsSettings = () => {
   const idCurrentQuestion = useAppSelector(
@@ -31,16 +33,19 @@ export const QuestionsSettings = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={keyboardVerticalOffset}
       style={styles.container}>
-      <View style={styles.ViewContainer}>
-        <ScrollView style={styles.container}>
-          <View style={styles.inner}>
-            <QuestionsTabs
-              onPressCurrentQuestion={onPressCurrentQuestionHandler}
-            />
-            <CreateQuestion id={idQuestion} />
-          </View>
-        </ScrollView>
-      </View>
+      <ContentContainer>
+        <View style={styles.ViewContainer}>
+          <ScrollView style={styles.container}>
+            <View style={styles.inner}>
+              <QuestionsTabs
+                onPressCurrentQuestion={onPressCurrentQuestionHandler}
+              />
+              <CreateQuestion id={idQuestion} />
+            </View>
+          </ScrollView>
+        </View>
+      </ContentContainer>
+      <DraggableBottomSheet />
     </KeyboardAvoidingView>
   );
 };

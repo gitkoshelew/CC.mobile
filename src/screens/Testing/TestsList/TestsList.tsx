@@ -8,6 +8,8 @@ import {FilterBlock} from './styles';
 import {useCallback} from 'react';
 import {useAppNavigate} from '../../../hooks/hooks';
 import {ScreenList} from '../../../navigation/navigation';
+import {DraggableBottomSheet} from '../../../components/DraggableBottomSheet/index';
+import {ContentContainer} from '../../../components/ui/ReadyStyles/Containers';
 
 const data = [...Array(10)].map((_, index) => ({
   id: String(index + 1),
@@ -23,23 +25,28 @@ export const TestsList = () => {
   }, [navigate]);
 
   return (
-    <View>
-      <Tabs />
-      <FilterBlock>
-        <View style={styles.container}>
-          <SwitchSelectors type="filter" onPress={() => {}} />
-        </View>
-        <Sort />
-      </FilterBlock>
-      <FlatList
-        data={data}
-        renderItem={() => (
-          <BlockBox>
-            <TestCard onPress={onPressStartTestingHandler} />
-          </BlockBox>
-        )}
-      />
-    </View>
+    <>
+      <View>
+        <ContentContainer>
+          <Tabs />
+          <FilterBlock>
+            <View style={styles.container}>
+              <SwitchSelectors type="filter" onPress={() => {}} />
+            </View>
+            <Sort />
+          </FilterBlock>
+          <FlatList
+            data={data}
+            renderItem={() => (
+              <BlockBox>
+                <TestCard onPress={onPressStartTestingHandler} />
+              </BlockBox>
+            )}
+          />
+        </ContentContainer>
+      </View>
+      <DraggableBottomSheet />
+    </>
   );
 };
 

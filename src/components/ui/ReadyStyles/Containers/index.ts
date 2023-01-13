@@ -38,6 +38,16 @@ const MainTestingContainer = styled.View`
   background-color: ${Color.White};
 `;
 
+const ContentContainer = styled.View`
+  width: 100%;
+  height: 96.5%;
+`;
+
+const ContentContainerMax = styled.View`
+  width: 100%;
+  height: 100%;
+`;
+
 export {
   ViewContainer,
   ViewCenter,
@@ -46,4 +56,6 @@ export {
   ScrollViewContainer,
   MainTestingContainer,
   ViewFlexRight,
+  ContentContainer,
+  ContentContainerMax,
 };
