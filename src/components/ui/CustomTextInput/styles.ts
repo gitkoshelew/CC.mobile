@@ -4,7 +4,7 @@ import {CustomTextInputPropsType} from './index';
 
 export const CustomInput = styled.TextInput<CustomTextInputPropsType>`
   background: ${props => props.color || Color.White};
-  border: 1px solid ${props => (props.error ? Color.Red : Color.GrayDark)};
+  border: 1px solid ${props => (props.error ? Color.Red : Color.GrayMedium)};
   border-radius: 15px;
   padding: 9px 16px;
   width: 100%;
