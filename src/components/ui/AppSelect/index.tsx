@@ -1,7 +1,7 @@
 import {styles} from './styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SelectDropdown from 'react-native-select-dropdown';
-import {ISelectProps} from '@customTypes/AppSelect-types';
+import {ISelectProps} from 'src/customTypes/AppSelect-types';
 import {useMemo} from 'react';
 import {Color} from '@theme/colors';
 

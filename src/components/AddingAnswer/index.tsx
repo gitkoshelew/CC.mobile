@@ -6,7 +6,7 @@ import {CheckBox} from '../ui/CheckBox';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
 import {useCallback} from 'react';
-import {correctAnswerType} from '@customTypes/test-types';
+import {correctAnswerType} from 'src/customTypes/test-types';
 
 type AddingAnswerPropsType = {
   item: string;

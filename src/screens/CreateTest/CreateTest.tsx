@@ -1,9 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootCreateTestParamsList} from '@customTypes/navigation-types';
 import {TestSettings} from './TestSettings';
 import {QuestionsSettings} from './QuestionsSettings/index';
-import {ScreenList} from '../../navigation/navigation';
+import {ScreenList} from '@src/navigation/navigation';
 import {ViewFlex} from '../../components/ui/ReadyStyles/Containers';
+import {RootCreateTestParamsList} from '@customTypes/navigation-types';
 
 const Stack = createNativeStackNavigator<RootCreateTestParamsList>();
 

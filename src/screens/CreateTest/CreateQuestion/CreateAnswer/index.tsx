@@ -2,17 +2,13 @@ import {View} from 'react-native';
 import {
   ButtonAnswerBox,
   TextBox,
-} from '../../../../components/ui/ReadyStyles/Boxes/index';
-import {AddingAnswer} from '../../../../components/AddingAnswer/index';
-import {AddButton} from '../../../../components/ui/AddButton/index';
-import {useAppDispatch} from '../../../../hooks/hooks';
-import {
-  addAnswer,
-  deleteAnswer,
-  setCorrectAnswer,
-} from '../../../../bll/testReducer';
+} from '@src/components/ui/ReadyStyles/Boxes/index';
+import {AddingAnswer} from '@src/components/AddingAnswer/index';
+import {AddButton} from '@src/components/ui/AddButton/index';
+import {useAppDispatch} from '@hooks/hooks';
+import {addAnswer, deleteAnswer, setCorrectAnswer} from '@src/bll/testReducer';
 import {useCallback} from 'react';
-import {correctAnswerType} from '@customTypes/test-types';
+import {correctAnswerType} from 'src/customTypes/test-types';
 
 type CreateAnswerPropsType = {
   answers: string[];

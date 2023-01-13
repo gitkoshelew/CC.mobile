@@ -41,7 +41,7 @@ export const QuestionsTabs = (props: QuestionsTabsPropsType) => {
         {questions.map((item, index) =>
           renderItem({
             id: item.id,
-            questionStatus: item.content.length > 2,
+            questionStatus: item.content.options.length > 2,
             index,
           }),
         )}

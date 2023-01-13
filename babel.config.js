@@ -7,7 +7,7 @@ module.exports = {
         root: ['./'],
         alias: {
           '@theme': './src/theme',
-          '@customTypes': './src/types',
+          '@customTypes': './src/customTypes',
           '@hooks': './src/hooks',
           '@src': './src',
         },

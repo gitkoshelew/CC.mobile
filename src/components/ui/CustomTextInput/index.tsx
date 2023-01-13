@@ -3,7 +3,7 @@ import {TextInputProps, View} from 'react-native';
 import {Color} from '@theme/colors';
 import {FieldError} from 'react-hook-form';
 
-type CustomTextInputPropsType = {
+export type CustomTextInputPropsType = {
   height?: string | undefined;
   color?: Color;
   onChangeText?: (value: string) => void;

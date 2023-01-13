@@ -12,7 +12,7 @@ export const QuestionsSettings = () => {
   );
   const [idQuestion, setIdQuestion] = useState<number>(idCurrentQuestion);
   const dispatch = useAppDispatch();
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 100 : 0;
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
   const onPressCurrentQuestionPressed = useCallback(
     (id: number) => {
