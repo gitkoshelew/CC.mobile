@@ -15,7 +15,7 @@ import {TimerInput} from '../../../components/TimerInput/index';
 import {CreateAnswer} from './CreateAnswer/index';
 import {AppButton} from '../../../components/ui/AppButton/index';
 import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
-import {questionType} from 'types/test-types';
+import {questionType} from '@customTypes/test-types';
 import {saveQuestion} from '../../../bll/testReducer';
 
 type CreateQuestionPropsType = {

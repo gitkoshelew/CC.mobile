@@ -1,6 +1,6 @@
 import {FlatList} from 'react-native';
 import {ProgressView, ProgressType} from './ProgressView';
-import {renderItemType} from 'types/common-types';
+import {renderItemType} from '@customTypes/common-types';
 import {ViewBlock} from './styles';
 
 const data: ProgressType[] = [...Array(25)].map((_, index) => ({

@@ -12,7 +12,7 @@ import {
   setCorrectAnswer,
 } from '../../../../bll/testReducer';
 import {useCallback} from 'react';
-import {correctAnswerType} from 'types/test-types';
+import {correctAnswerType} from '@customTypes/test-types';
 
 type CreateAnswerPropsType = {
   answers: string[];

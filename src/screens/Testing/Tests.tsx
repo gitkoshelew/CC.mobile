@@ -2,7 +2,7 @@ import React from 'react';
 import {ViewFlex} from '../../components/ui/ReadyStyles/Containers/index';
 import {ScreenList} from '../../navigation/navigation';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootTestingParamsList} from 'types/navigation-types';
+import {RootTestingParamsList} from '@customTypes/navigation-types';
 import {TestProcess} from './TestProcess/index';
 import {TestsList} from './TestsList/TestsList';
 

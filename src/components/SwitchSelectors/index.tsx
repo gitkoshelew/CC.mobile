@@ -2,7 +2,7 @@
 import SwitchSelector from 'react-native-switch-selector';
 import {Color} from '@theme/colors';
 import {View} from 'react-native';
-import {ISwitchSelectProps} from '@types/SwitchSelectjrs-types';
+import {ISwitchSelectProps} from '@customTypes/SwitchSelectjrs-types';
 import {useMemo} from 'react';
 import {styles} from './styles';
 
