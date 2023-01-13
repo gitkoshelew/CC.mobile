@@ -1,5 +1,4 @@
 import {useCallback, useEffect, useState} from 'react';
-import {Text, TouchableOpacity} from 'react-native';
 import {Container, StyledText} from './styles';
 
 export interface IProps {
@@ -35,11 +34,19 @@ export const Timer = ({timeInMinutes, timeInSeconds}: IProps) => {
     const interval = setInterval(() => {
       isCouting && setTimePeriod(() => (timePeriod >= 1 ? timePeriod - 1 : 0));
     }, 1000);
-
     return () => {
       clearInterval(interval);
     };
   }, [isCouting, timePeriod]);
+
+  useEffect(() => {
+    handleStart();
+
+    return () => {
+      handleStop(); // It's temporary
+      handleReset(); // It's temporary
+    };
+  }, [handleReset, handleStart, handleStop]);
 
   return (
     <>
@@ -48,15 +55,6 @@ export const Timer = ({timeInMinutes, timeInSeconds}: IProps) => {
         <StyledText> : </StyledText>
         <StyledText>{seconds}</StyledText>
       </Container>
-      <TouchableOpacity onPress={handleStart}>
-        <Text>Start</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleStop}>
-        <Text>Stop</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={handleReset}>
-        <Text>Reset</Text>
-      </TouchableOpacity>
     </>
   );
 };
