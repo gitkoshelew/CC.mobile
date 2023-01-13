@@ -5,7 +5,7 @@ import RadioForm, {
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import {AnswerRadioContainer, styles, ViewMarginRight} from './styles';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 
 type AnswersOptionsPropsType = {
   onPress: (value: number) => void;

@@ -1,42 +1,33 @@
 import {useMemo} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {IButtonProps} from '@types/AppButtun-types';
 import {styles} from './styles';
 import {Color} from '@theme/colors';
+import {IButtonProps} from '@types/LoginButtun-types';
 
-export const AppButton = ({
-  title,
-  type,
-  onPress,
-  disabled,
-  ...props
-}: IButtonProps) => {
+export const LoginButton = ({title, type, onPress, ...props}: IButtonProps) => {
   const containerStyles = useMemo(
     () => [
       styles.container,
       {
-        backgroundColor: type === 'primary' ? Color.Blue : Color.GrayLight,
-        opacity: disabled ? 0.5 : 1,
+        backgroundColor: type === 'primary' ? Color.BlueLight : 'transparent',
+        borderWidth: type === 'primary' ? 0 : 2,
+        borderColor: Color.BlueLight,
       },
     ],
-    [disabled, type],
+    [type],
   );
 
   const containerText = useMemo(
     () => [
       styles.text,
-      {color: type === 'primary' ? Color.White : Color.Black},
+      {color: type === 'primary' ? Color.White : Color.BlueLight},
     ],
     [type],
   );
 
   return (
     <View style={styles.boxView}>
-      <TouchableOpacity
-        {...props}
-        onPress={onPress}
-        style={containerStyles}
-        disabled={disabled}>
+      <TouchableOpacity {...props} onPress={onPress} style={containerStyles}>
         <Text style={containerText}>{title}</Text>
       </TouchableOpacity>
     </View>

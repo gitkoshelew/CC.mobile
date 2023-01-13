@@ -1,9 +1,9 @@
 import {StyleSheet, View} from 'react-native';
-import {Header} from '../components/Header';
+import {Header} from '../../components/Header';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {CustomTextInput} from '../components/ui/CustomTextInput';
+import {CustomTextInput} from '../../components/ui/CustomTextInput';
 
-export const Home = () => {
+export const Main = () => {
   return (
     <SafeAreaView style={styles.box}>
       <Header />

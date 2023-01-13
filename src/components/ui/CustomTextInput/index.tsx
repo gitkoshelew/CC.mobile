@@ -1,6 +1,6 @@
 import {CustomInput, TextError} from './styles';
 import {TextInputProps, View} from 'react-native';
-import {Color} from 'theme/colors';
+import {Color} from '@theme/colors';
 import {FieldError} from 'react-hook-form';
 
 type CustomTextInputPropsType = {
