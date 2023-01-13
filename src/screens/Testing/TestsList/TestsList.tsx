@@ -1,8 +1,8 @@
-import {Tabs} from '../../../components/Tabs/index';
-import {Sort} from '../../../components/Sort/index';
-import {TestCard} from '../../../components/TestCard/index';
-import {BlockBox} from '../../../components/ui/ReadyStyles/Boxes/index';
-import {SwitchSelectors} from '../../../components/SwitchSelector/index';
+import {Tabs} from '../../../components/Tabs';
+import {Sort} from '../../../components/Sort';
+import {TestCard} from '../../../components/TestCard';
+import {BlockBox} from '../../../components/ui/ReadyStyles/Boxes';
+import {SwitchSelectors} from '../../../components/SwitchSelectors';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {FilterBlock} from './styles';
 import {useCallback} from 'react';
