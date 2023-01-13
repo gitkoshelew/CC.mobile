@@ -1,25 +1,34 @@
-import {CustomInput} from './styles';
-import {TextInputProps} from 'react-native';
+import {CustomInput, TextError} from './styles';
+import {TextInputProps, View} from 'react-native';
 import {Color} from '@theme/colors';
+import {FieldError} from 'react-hook-form';
 
-export type CustomTextInputPropsType = {
+type CustomTextInputPropsType = {
   height?: string | undefined;
   color?: Color;
-  onChangeText: (value: string) => void;
+  onChangeText?: (value: string) => void;
+  error?: FieldError;
 };
-
-export type CustomTextInputCombinePropsType = TextInputProps &
+type CustomTextInputCombinePropsType = TextInputProps &
   CustomTextInputPropsType;
 
-export const CustomTextInput = (props: CustomTextInputCombinePropsType) => {
-  const onChangeTextHandler = (value: string) => {
-    props.onChangeText(value);
+export const CustomTextInput = ({
+  onChangeText,
+  value,
+  ...props
+}: CustomTextInputCombinePropsType) => {
+  const onChangeTextHandler = (text: string) => {
+    onChangeText && onChangeText(text);
   };
+
   return (
-    <CustomInput
-      {...props}
-      onChangeText={onChangeTextHandler}
-      value={props.value}
-    />
+    <View>
+      <CustomInput
+        {...props}
+        onChangeText={onChangeTextHandler}
+        value={value}
+      />
+      {props.error && <TextError>{props.error?.message || 'Error'}</TextError>}
+    </View>
   );
 };

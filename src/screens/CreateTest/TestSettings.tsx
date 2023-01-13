@@ -1,5 +1,4 @@
 import {Platform} from 'react-native';
-import {CustomTextInput} from '../../components/ui/CustomTextInput';
 import {TextBox, BlockBox} from '../../components/ui/ReadyStyles/Boxes';
 import {
   ViewContainer,
@@ -9,40 +8,56 @@ import {AppButton} from '../../components/ui/AppButton';
 import {useAppDispatch, useAppNavigate} from '../../hooks/hooks';
 import {ScreenList} from '../../navigation/navigation';
 import {AppSelect} from '../../components/ui/AppSelect';
-import {SwitchSelectors} from '../../components/SwitchSelector';
+import {SwitchSelectors} from '../../components/SwitchSelectors';
 import {useCallback, useState} from 'react';
 import {addTestSettings} from '../../bll/testReducer';
-import {difficultyType} from 'types/test-types';
+import {useForm} from 'react-hook-form';
+import {TextInputHookForm} from '../../components/TextInputHookForm/index';
 
-export type testSettingData = {
+export type SelectorsType = {
+  theme: string;
+  difficulty: string;
+  numberQuestions: number;
+};
+
+type inputsFieldType = {
   title: string;
   description: string;
-  theme: string;
-  difficulty: difficultyType;
-  numberQuestions: number;
 };
 
 export const TestSettings = () => {
   const data = ['Verify', 'Date', 'Popularity', 'Something else'];
   const dispatch = useAppDispatch();
-  const [testSettingData, setTestSettingData] = useState<testSettingData>({
-    title: '',
-    description: '',
-    theme: '',
+  const [selectorsData, setSelectorsData] = useState<SelectorsType>({
+    theme: 'Verify',
     difficulty: 'Easy',
     numberQuestions: 10,
   });
   const {navigate} = useAppNavigate();
+  const {control, handleSubmit} = useForm<inputsFieldType>();
 
-  const selectsNumberQuestionsHandler = useCallback(
+  const selectsThemePressed = useCallback(
     (value: string) => {
-      setTestSettingData({...testSettingData, numberQuestions: Number(value)});
+      setSelectorsData({...selectorsData, theme: value});
     },
-    [testSettingData],
+    [selectorsData],
   );
 
-  const onPressQuestionsSettings = () => {
-    dispatch(addTestSettings(testSettingData));
+  const selectsDifficultyPressed = useCallback(
+    (value: string) => {
+      setSelectorsData({...selectorsData, difficulty: value});
+    },
+    [selectorsData],
+  );
+
+  const selectsNumberQuestionsPressed = useCallback(
+    (value: string) => {
+      setSelectorsData({...selectorsData, numberQuestions: Number(value)});
+    },
+    [selectorsData],
+  );
+  const onPressQuestionsSettings = (values: inputsFieldType) => {
+    dispatch(addTestSettings({...values, ...selectorsData}));
     navigate(ScreenList.CREATE_TEST, {screen: ScreenList.QUESTIONS_SET});
   };
 
@@ -50,12 +65,34 @@ export const TestSettings = () => {
     <ViewContainer>
       <TextBox>Test title</TextBox>
       <BlockBox>
-        <CustomTextInput onChangeText={() => {}} />
+        <TextInputHookForm
+          name="title"
+          control={control}
+          rules={{
+            required: 'Title is required',
+            minLength: {
+              value: 3,
+              message: 'Title should be minimum 3 characters long',
+            },
+            maxLength: {
+              value: 20,
+              message: 'Title should be maximum 50 characters long',
+            },
+          }}
+        />
       </BlockBox>
       <TextBox>Description</TextBox>
       <BlockBox>
-        <CustomTextInput
-          onChangeText={() => {}}
+        <TextInputHookForm
+          name="description"
+          control={control}
+          rules={{
+            required: 'Description is required',
+            maxLength: {
+              value: 50,
+              message: 'Description should be maximum 50 characters long',
+            },
+          }}
           multiline
           textAlignVertical={'top'}
           numberOfLines={Platform.OS === 'ios' ? undefined : 4}
@@ -64,24 +101,29 @@ export const TestSettings = () => {
       </BlockBox>
       <TextBox>Theme</TextBox>
       <BlockBox>
-        <AppSelect size="m" data={data} type="primary" onSelect={() => {}} />
+        <AppSelect
+          size="m"
+          data={data}
+          type="primary"
+          onSelect={selectsThemePressed}
+        />
       </BlockBox>
       <TextBox>Test level</TextBox>
       <BlockBox>
-        <SwitchSelectors type="level" />
+        <SwitchSelectors type="level" onPress={selectsDifficultyPressed} />
       </BlockBox>
       <TextBox>Number of questions</TextBox>
       <BlockBox>
         <SwitchSelectors
           type="number"
-          onPress={selectsNumberQuestionsHandler}
+          onPress={selectsNumberQuestionsPressed}
         />
       </BlockBox>
       <ViewCenter>
         <AppButton
           title="Questions settings"
           type="primary"
-          onPress={onPressQuestionsSettings}
+          onPress={handleSubmit(onPressQuestionsSettings)}
         />
       </ViewCenter>
     </ViewContainer>
