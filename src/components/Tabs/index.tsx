@@ -2,7 +2,7 @@ import {FlatList} from 'react-native';
 import {Tab} from './Tab';
 import {useState} from 'react';
 import {TabsBox} from './styles';
-import {renderItemType} from 'types/common-types';
+import {renderItemType} from '@customTypes/common-types';
 
 export const Tabs = () => {
   const tabsData = [

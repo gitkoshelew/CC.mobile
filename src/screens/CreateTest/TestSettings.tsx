@@ -34,7 +34,11 @@ export const TestSettings = () => {
     numberQuestions: 10,
   });
   const {navigate} = useAppNavigate();
-  const {control, handleSubmit} = useForm<inputsFieldType>();
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm<inputsFieldType>();
 
   const selectsThemePressed = useCallback(
     (value: string) => {
@@ -50,6 +54,7 @@ export const TestSettings = () => {
     [selectorsData],
   );
 
+  const disabledQuestionsSettings = Object.keys(errors).length === 0;
   const selectsNumberQuestionsPressed = useCallback(
     (value: string) => {
       setSelectorsData({...selectorsData, numberQuestions: Number(value)});
@@ -124,6 +129,7 @@ export const TestSettings = () => {
           title="Questions settings"
           type="primary"
           onPress={handleSubmit(onPressQuestionsSettings)}
+          disabled={!disabledQuestionsSettings}
         />
       </ViewCenter>
     </ViewContainer>

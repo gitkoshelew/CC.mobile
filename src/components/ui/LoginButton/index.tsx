@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {styles} from './styles';
 import {Color} from '@theme/colors';
-import {IButtonProps} from '@types/LoginButtun-types';
+import {IButtonProps} from '@types/LoginButtun-customTypes';
 
 export const LoginButton = ({title, type, onPress, ...props}: IButtonProps) => {
   const containerStyles = useMemo(

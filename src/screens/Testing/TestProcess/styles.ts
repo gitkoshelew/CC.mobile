@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 const TimerBox = styled.View`
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 `;
 
 const TextBox = styled.Text<{fontWeight?: boolean}>`
@@ -29,4 +29,18 @@ const ButtonsBox = styled.View`
   align-items: center;
 `;
 
-export {TimerBox, TextBox, ButtonsBox, ViewFlexCenter, CountQuestionBox};
+const ViewBlock = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+`;
+
+export {
+  TimerBox,
+  TextBox,
+  ButtonsBox,
+  ViewFlexCenter,
+  CountQuestionBox,
+  ViewBlock,
+};

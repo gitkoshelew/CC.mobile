@@ -4,19 +4,19 @@ import {
   BlockBox,
   BlockBoxMarginLeft,
   TextBox,
-} from '../../../components/ui/ReadyStyles/Boxes/index';
-import {CustomTextInput} from '../../../components/ui/CustomTextInput/index';
+} from '@src/components/ui/ReadyStyles/Boxes/index';
+import {CustomTextInput} from '@src/components/ui/CustomTextInput/index';
 import {
   ViewCenter,
   ViewFlexForTwoElements,
-} from '../../../components/ui/ReadyStyles/Containers/index';
-import {AppSelect} from '../../../components/ui/AppSelect/index';
-import {TimerInput} from '../../../components/TimerInput/index';
+} from '@src/components/ui/ReadyStyles/Containers/index';
+import {AppSelect} from '@src/components/ui/AppSelect/index';
+import {TimerInput} from '@src/components/TimerInput/index';
 import {CreateAnswer} from './CreateAnswer/index';
-import {AppButton} from '../../../components/ui/AppButton/index';
-import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
-import {questionType} from 'types/test-types';
-import {saveQuestion} from '../../../bll/testReducer';
+import {AppButton} from '@src/components/ui/AppButton/index';
+import {useAppDispatch, useAppSelector} from '@hooks/hooks';
+import {questionType} from 'src/customTypes/test-types';
+import {saveQuestion} from '@src/bll/testReducer';
 
 type CreateQuestionPropsType = {
   id: number;

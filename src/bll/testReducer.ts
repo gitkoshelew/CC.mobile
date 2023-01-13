@@ -3,7 +3,7 @@ import {
   initialStateTestType,
   questionType,
   testSettingData,
-} from 'types/test-types';
+} from '@customTypes/test-types';
 
 const initialState = {
   test: {

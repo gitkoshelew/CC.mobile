@@ -9,7 +9,8 @@ import {MainTestingContainer} from '../../../components/ui/ReadyStyles/Container
 import {AnswersOptions} from '../../../components/AnswersOptions/index';
 import {TestOptionsMoc} from '../../../Mocs/Testing';
 import {AppButton} from '../../../components/ui/AppButton/index';
-import {ViewFlexCenter, CountQuestionBox} from './styles';
+import {ViewFlexCenter, CountQuestionBox, ViewBlock} from './styles';
+import {ProgressBar} from '../../../components/ProgressBar/index';
 
 export const TestProcess = () => {
   const onPressRadioHandler = useCallback((value: number) => {
@@ -21,6 +22,9 @@ export const TestProcess = () => {
       <TimerBox>
         <Timer timeInMinutes="60" timeInSeconds="60" />
       </TimerBox>
+      <ViewBlock>
+        <ProgressBar />
+      </ViewBlock>
       <MainTestingContainer>
         <ViewFlexRight>
           <CountQuestionBox>5/10</CountQuestionBox>
