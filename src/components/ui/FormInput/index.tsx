@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {TextInputProps} from 'react-native';
 import {Color} from '@theme/colors';
 import {CustomFormInput} from './styles';
@@ -18,9 +18,13 @@ export const FormInput = (props: CustomFormInputCombinePropsType) => {
     borderColor: isFocused ? Color.BlueLight : Color.White,
   };
 
-  const onChangeTextHandler = (value: string) => {
-    props.onChangeText(value);
-  };
+  const onChangeTextHandler = useCallback(
+    (value: string) => {
+      props.onChangeText(value);
+    },
+    [props],
+  );
+
   return (
     <CustomFormInput
       {...props}
