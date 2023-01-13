@@ -74,7 +74,10 @@ export const CreateQuestion = ({id}: CreateQuestionPropsType) => {
           <TimerInput />
         </BlockBoxMarginLeft>
       </ViewFlexForTwoElements>
-      <CreateAnswer answers={currentQuestion.content} />
+      <CreateAnswer
+        answers={currentQuestion.content.options}
+        correctAnswer={currentQuestion.correctAnswer}
+      />
       <ViewCenter>
         <AppButton
           title="Save question"

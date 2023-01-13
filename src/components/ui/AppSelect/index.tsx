@@ -56,10 +56,8 @@ export const AppSelect = ({
     <SelectDropdown
       {...props}
       data={data}
-      defaultValueByIndex={1}
       onSelect={onSelect}
-      defaultValue={value}
-      defaultButtonText={'Select country'}
+      defaultValue={value || data[0]}
       buttonTextAfterSelection={selectedItem => selectedItem}
       rowTextForSelection={item => item}
       buttonStyle={containerButtonStyle}
