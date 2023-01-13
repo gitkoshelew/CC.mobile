@@ -8,7 +8,7 @@ import {AppButton} from '../../components/ui/AppButton';
 import {useAppDispatch, useAppNavigate} from '../../hooks/hooks';
 import {ScreenList} from '../../navigation/navigation';
 import {AppSelect} from '../../components/ui/AppSelect';
-import {SwitchSelectors} from '../../components/SwitchSelector';
+import {SwitchSelectors} from '../../components/SwitchSelectors';
 import {useCallback, useState} from 'react';
 import {addTestSettings} from '../../bll/testReducer';
 import {useForm} from 'react-hook-form';
