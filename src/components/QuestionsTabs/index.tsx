@@ -1,6 +1,6 @@
 import {QuestionTab} from './QuestionTab/index';
 import {ScrollViewBlock, TabsBlock} from './styles';
-import {useAppSelector} from '../../hooks/hooks';
+import {useAppSelector} from '@hooks/hooks';
 
 export type QuestionsTabsPropsType = {
   onPressCurrentQuestion: (idQuestion: number) => void;
@@ -36,7 +36,7 @@ export const QuestionsTabs = (props: QuestionsTabsPropsType) => {
       horizontal
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={true}
-      testID={'ScrollViewBlock'}>
+      testID="ScrollViewBlock">
       <TabsBlock flexDirection={questions.length > 10 ? 'column' : 'row'}>
         {questions.map((item, index) =>
           renderItem({
