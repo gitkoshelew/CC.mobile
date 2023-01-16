@@ -1,6 +1,7 @@
 export type IAllTestOptionsMoc = Array<ITestOptionsMoc>;
 export interface ITestOptionsMoc {
   id: number;
+  timer: number;
   title: string;
   content: {
     question: string;

@@ -2,7 +2,7 @@ import {render} from '@testing-library/react-native';
 import {ProgressView, ProgressType} from '../index';
 
 const createTestProps = {
-  id: '1',
+  id: 1,
   questionStatus: 'default',
 } as ProgressType;
 

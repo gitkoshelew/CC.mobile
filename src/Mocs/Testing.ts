@@ -1,3 +1,5 @@
+import {IAllTestOptionsMoc} from '@src/Mocs/TestingType';
+
 export const TestMoc = {
   id: 1,
   title: 'test',
@@ -29,7 +31,7 @@ export const TestOptionsMoc = [
   'React',
 ];
 
-export const AllTestOptionsMoc = [
+export const AllTestOptionsMoc: IAllTestOptionsMoc = [
   {
     id: 1,
     timer: 200,
@@ -53,11 +55,11 @@ export const AllTestOptionsMoc = [
     content: {
       question: 'what is 2 plus 2 ?',
       answers: {
-        wrong: 'two//three//five',
-        correct: 'four',
+        wrong: 'three//five',
+        correct: 'four//eight minus four',
       },
     },
-    type: 'oneChoice',
+    type: 'multiChoice',
     difficulty: 'easy',
     description: 'easy',
     topicId: 1,
@@ -73,7 +75,7 @@ export const AllTestOptionsMoc = [
         correct: 'string',
       },
     },
-    type: 'multiChoice',
+    type: 'oneChoice',
     difficulty: 'normal',
     description: 'normal',
     topicId: 1,

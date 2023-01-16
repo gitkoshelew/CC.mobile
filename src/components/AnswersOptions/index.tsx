@@ -11,13 +11,13 @@ import {CheckBox} from '@src/components/ui/CheckBox';
 type AnswersOptionsPropsType = {
   onPress: (value: number) => void;
   data: string[];
-  ansswerType: string;
+  answerType: string;
 };
 
 export const AnswersOptions = ({
   onPress,
   data,
-  ansswerType,
+  answerType,
 }: AnswersOptionsPropsType) => {
   const transformData = data.map((el, i) => ({label: el, value: i}));
   const [isActiveRadio, setIsActiveRadio] = useState<number>();
@@ -32,7 +32,7 @@ export const AnswersOptions = ({
         {transformData.map((obj, i) => (
           <AnswerRadioContainer key={i}>
             <ViewMarginRight>
-              {ansswerType === 'oneChoice' ? (
+              {answerType === 'oneChoice' ? (
                 <RadioButtonInput
                   obj={obj}
                   index={i}

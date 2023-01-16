@@ -14,11 +14,11 @@ import {ProgressBar} from '@src/components/ProgressBar';
 import {ProgressType} from '@src/components/ProgressBar/ProgressView';
 
 export const TestProcess = () => {
+  const [numAnswer, setNumAnswer] = useState<number>(1);
+  const CurrentTest = AllTestOptionsMoc.filter(e => e.id === numAnswer);
   const onPressRadioHandler = useCallback((value: number) => {
     console.log(value); // It's temporary
   }, []);
-  const [numAnswer, setNumAnswer] = useState<number>(1);
-  const CurrentTest = AllTestOptionsMoc.filter(e => e.id === numAnswer);
   const onPressNextAnswer = () => {
     if (numAnswer < AllTestOptionsMoc.length) {
       setNumAnswer(numAnswer + 1);
@@ -46,20 +46,20 @@ export const TestProcess = () => {
           questionStatus: 'default',
         },
   );
-  const timeSeconds = CurrentTest[0].timer % 60;
-  const timeMinutes = CurrentTest[0].timer / 60;
+  const timeSeconds = (CurrentTest[0].timer % 60).toString();
+  const timeMinutes = Math.floor(CurrentTest[0].timer / 60).toString();
   const strCorrect = CurrentTest[0].content.answers.correct.split('//');
   const strWrong = CurrentTest[0].content.answers.wrong.split('//');
   const arrAnswers = strCorrect.concat(strWrong);
   const randomAnswers = arrAnswers.sort(() => Math.random() - 0.5);
+  const answerType = CurrentTest[0].type;
+  const Question = CurrentTest[0].content.question;
+  const TitleQuestions = CurrentTest[0].title;
 
   return (
     <ViewContainer>
       <TimerBox>
-        <Timer
-          timeInMinutes={Math.floor(timeMinutes).toString()}
-          timeInSeconds={timeSeconds.toString()}
-        />
+        <Timer timeInMinutes={timeMinutes} timeInSeconds={timeSeconds} />
       </TimerBox>
       <ViewBlock>
         <ProgressBar data={data} />
@@ -71,12 +71,12 @@ export const TestProcess = () => {
           </CountQuestionBox>
         </ViewFlexRight>
         <ViewFlexCenter>
-          <TextBox>{CurrentTest[0].title}</TextBox>
-          <TextBox fontWeight={true}>{CurrentTest[0].content.question}</TextBox>
+          <TextBox>{TitleQuestions}</TextBox>
+          <TextBox fontWeight={true}>{Question}</TextBox>
           <AnswersOptions
             data={randomAnswers}
             onPress={onPressRadioHandler}
-            ansswerType={CurrentTest[0].type}
+            answerType={answerType}
           />
         </ViewFlexCenter>
         <ButtonsBox>
