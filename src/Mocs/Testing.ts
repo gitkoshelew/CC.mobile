@@ -31,7 +31,7 @@ export const TestOptionsMoc = [
   'React',
 ];
 
-export const AllTestOptionsMoc: IAllTestOptionsMoc = [
+export const allTestOptionsMoc: IAllTestOptionsMoc = [
   {
     id: 1,
     timer: 200,
