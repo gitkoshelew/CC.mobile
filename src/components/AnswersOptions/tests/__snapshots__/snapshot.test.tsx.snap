@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`answers options snapshot 1`] = `
+exports[`Should render AnswersOptions and selected radio button 1`] = `
 <View>
   <View
     style={
@@ -363,7 +363,7 @@ exports[`answers options snapshot 1`] = `
 </View>
 `;
 
-exports[`answers options snapshot 2`] = `
+exports[`Should render AnswersOptions and selected radio button 2`] = `
 <View>
   <View
     style={
