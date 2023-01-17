@@ -14,7 +14,7 @@ test('Should be displayed elements', () => {
   expect(screen.getByText('three')).toBeVisible();
 });
 
-test('Should call method on press, correct operation of btn', () => {
+test('Should call method on press', () => {
   render(<AnswersOptions {...AnswersOptionsProps} />);
 
   fireEvent.press(screen.getByText('two'));
