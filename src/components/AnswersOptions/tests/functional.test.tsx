@@ -2,15 +2,22 @@ import {fireEvent, render, screen} from '@testing-library/react-native';
 import {AnswersOptions} from '@src/components/AnswersOptions/index';
 
 const onPressMock = jest.fn();
-const AnswersOptionsProps = {
+export const AnswersOptionsProps = {
   onPress: onPressMock,
-  data: ['one', 'two', 'thee'],
+  data: ['one', 'two', 'three'],
 };
 
-test('Should render view block, correct operation of btn', async () => {
+test('Should be displayed elements', () => {
+  render(<AnswersOptions {...AnswersOptionsProps} />);
+
+  expect(screen.getByText('one')).toBeVisible();
+  expect(screen.getByText('three')).toBeVisible();
+});
+
+test('Should call method on press, correct operation of btn', () => {
   render(<AnswersOptions {...AnswersOptionsProps} />);
 
   fireEvent.press(screen.getByText('two'));
+
   expect(onPressMock).toHaveBeenCalledTimes(1);
-  expect(screen.getByText('one')).toBeVisible();
 });
