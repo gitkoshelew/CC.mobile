@@ -10,11 +10,16 @@ import {Color} from '@theme/colors';
 type AnswersOptionsPropsType = {
   onPress: (value: number) => void;
   data: string[];
+  selected?: number;
 };
 
-export const AnswersOptions = ({onPress, data}: AnswersOptionsPropsType) => {
+export const AnswersOptions = ({
+  onPress,
+  data,
+  selected,
+}: AnswersOptionsPropsType) => {
   const transformData = data.map((el, i) => ({label: el, value: i}));
-  const [isActiveRadio, setIsActiveRadio] = useState<number>();
+  const [isActiveRadio, setIsActiveRadio] = useState<number>(selected!);
 
   const onPressRadio = (value: number) => {
     setIsActiveRadio(value);
