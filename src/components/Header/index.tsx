@@ -1,38 +1,48 @@
-import React from 'react';
-import {
-  Badge,
-  BadgeText,
-  Button,
-  ButtonContainer,
-  ButtonText,
-  Container,
-  Description,
-  InfoContainer,
-  StyledImage,
-  Title,
-  UserIconContainer,
-  UserInfo,
-  Wrapper,
-} from './styles';
+import {UserIconContainer, Wrapper} from './styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {ViewCenter} from '../ui/ReadyStyles/Containers';
 import * as AppButton from '../ui/AppButton';
 import {useAppNavigate} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import {Title} from '../ui/ReadyStyles/Boxes';
 
-export const Header = () => {
+interface IProps {
+  isOpen: boolean;
+}
+
+export const Header = ({isOpen}: IProps) => {
   const {navigate} = useAppNavigate();
 
+  const opacityValue = useSharedValue(0);
+
+  const opacity = useAnimatedStyle(() => {
+    return {
+      opacity: opacityValue.value,
+    };
+  });
+
+  const changeOpacity = () => {
+    isOpen
+      ? (opacityValue.value = withTiming(1, {duration: 1500}))
+      : (opacityValue.value = withTiming(0, {duration: 300}));
+  };
+
+  isOpen ? changeOpacity() : changeOpacity();
+
   return (
-    <Container
-      source={require('../../assets/images/background-image.png')}
-      resizeMode="stretch">
-      <Wrapper>
-        <UserInfo>
+    <Wrapper>
+      <Animated.View style={opacity}>
+        <ViewCenter>
           <UserIconContainer>
             <FontAwesome name={'user'} size={80} />
           </UserIconContainer>
           <ViewCenter>
+            <Title>User Name</Title>
             <AppButton.AppButton
               title="Log In"
               type="primary"
@@ -41,28 +51,8 @@ export const Header = () => {
               }
             />
           </ViewCenter>
-        </UserInfo>
-        <Title>Some text</Title>
-        <ButtonContainer>
-          <Button onPress={() => {}}>
-            <StyledImage
-              source={require('../../assets/images/tests-icon.png')}
-            />
-            <ButtonText>My tests</ButtonText>
-            <Badge>
-              <BadgeText>99</BadgeText>
-            </Badge>
-          </Button>
-          <Button onPress={() => {}}>
-            <ButtonText>Users</ButtonText>
-          </Button>
-        </ButtonContainer>
-      </Wrapper>
-      <InfoContainer>
-        <Description>999 Tests</Description>
-        <Description>999 Materials</Description>
-        <Description>999 Users</Description>
-      </InfoContainer>
-    </Container>
+        </ViewCenter>
+      </Animated.View>
+    </Wrapper>
   );
 };
