@@ -7,7 +7,7 @@ import {
 import {TimerBox, TextBox, ButtonsBox} from './styles';
 import {MainTestingContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {AnswersOptions} from '@src/components/AnswersOptions';
-import {allTestOptionsMoc} from '@src/Mocs/Testing';
+import {quizIdMoc} from '@src/Mocs/Testing';
 import {AppButton} from '@src/components/ui/AppButton';
 import {ViewFlexCenter, CountQuestionBox, ViewBlock} from './styles';
 import {ProgressBar} from '@src/components/ProgressBar';
@@ -15,26 +15,26 @@ import {ProgressType} from '@src/components/ProgressBar/ProgressView';
 
 export const TestProcess = () => {
   const [numAnswer, setNumAnswer] = useState<number>(1);
-  const currentTest = allTestOptionsMoc.filter(e => e.id === numAnswer);
+  const currentTest = quizIdMoc.questions.filter(e => e.id === numAnswer);
   const onPressRadioHandler = useCallback((value: number) => {
     console.log(value); // It's temporary
   }, []);
   const onPressNextAnswer = () => {
-    if (numAnswer < allTestOptionsMoc.length) {
+    if (numAnswer < quizIdMoc.questions.length) {
       setNumAnswer(numAnswer + 1);
     }
   };
   const onPressSkipAnswer = () => {
-    if (numAnswer < allTestOptionsMoc.length) {
+    if (numAnswer < quizIdMoc.questions.length) {
       setNumAnswer(numAnswer + 1);
     }
   };
-  const progressData: ProgressType[] = [...Array(allTestOptionsMoc.length)].map(
-    (_, index) => ({
-      id: index + 1,
-      questionStatus: 'default',
-    }),
-  );
+  const progressData: ProgressType[] = [
+    ...Array(quizIdMoc.questions.length),
+  ].map((_, index) => ({
+    id: index + 1,
+    questionStatus: 'default',
+  }));
   const data: ProgressType[] = progressData.map(e =>
     numAnswer >= e.id
       ? {
@@ -48,13 +48,11 @@ export const TestProcess = () => {
   );
   const timeSeconds = (currentTest[0].timer % 60).toString();
   const timeMinutes = Math.floor(currentTest[0].timer / 60).toString();
-  const strCorrect = currentTest[0].content.answers.correct.split('//');
-  const strWrong = currentTest[0].content.answers.wrong.split('//');
-  const arrAnswers = strCorrect.concat(strWrong);
+  const arrAnswers = currentTest[0].content.options;
   const randomAnswers = arrAnswers.sort(() => Math.random() - 0.5);
   const answerType = currentTest[0].type;
-  const question = currentTest[0].content.question;
-  const titleQuestions = currentTest[0].title;
+  const question = currentTest[0].title;
+  const titleQuiz = quizIdMoc.title;
 
   return (
     <ViewContainer>
@@ -67,11 +65,11 @@ export const TestProcess = () => {
       <MainTestingContainer>
         <ViewFlexRight>
           <CountQuestionBox>
-            {numAnswer}/{allTestOptionsMoc.length}
+            {numAnswer}/{quizIdMoc.questions.length}
           </CountQuestionBox>
         </ViewFlexRight>
         <ViewFlexCenter>
-          <TextBox>{titleQuestions}</TextBox>
+          <TextBox>{titleQuiz}</TextBox>
           <TextBox fontWeight={true}>{question}</TextBox>
           <AnswersOptions
             data={randomAnswers}

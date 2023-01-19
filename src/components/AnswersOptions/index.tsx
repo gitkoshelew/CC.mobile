@@ -32,7 +32,7 @@ export const AnswersOptions = ({
         {transformData.map((obj, i) => (
           <AnswerRadioContainer key={i}>
             <ViewMarginRight>
-              {answerType === 'oneChoice' ? (
+              {answerType === 'single' ? (
                 <RadioButtonInput
                   obj={obj}
                   index={i}

@@ -1,5 +1,3 @@
-import {IAllTestOptionsMoc} from '@src/Mocs/TestingType';
-
 export const TestMoc = {
   id: 1,
   title: 'test',
@@ -31,53 +29,62 @@ export const TestOptionsMoc = [
   'React',
 ];
 
-export const allTestOptionsMoc: IAllTestOptionsMoc = [
-  {
+export const quizIdMoc = {
+  id: 1,
+  title: 'NodeJS',
+  description: 'General questions about Node.js',
+  authorId: 1,
+  author: {
     id: 1,
-    timer: 200,
-    title: 'NodeJS question #13',
-    content: {
-      question: 'Which core module in Node can you use for testing?',
-      answers: {
-        wrong: 'Type Script//Java Script//React',
-        correct: 'Node,js',
-      },
-    },
-    type: 'oneChoice',
-    difficulty: 'easy',
-    description: 'easy',
-    topicId: 1,
+    name: 'Mary',
+    surname: null,
+    email: 'mary.bogdanova88@gmail.com',
+    nickname: 'MaryBog',
+    password: 'mary123qwePass',
+    status: null,
   },
-  {
-    id: 2,
-    timer: 220,
-    title: 'NodeJS question #13',
-    content: {
-      question: 'what is 2 plus 2 ?',
-      answers: {
-        wrong: 'three//five',
-        correct: 'four//eight minus four',
+  questions: [
+    {
+      id: 1,
+      title: 'Which of the following is a core module in Node?',
+      content: {
+        options: ['webpack', 'crypto', 'request', 'chalk'],
+        correctAnswer: ['crypto'],
       },
+      type: 'single',
+      difficulty: 'medium',
+      description: 'that test will show us ur power in Node js',
+      timer: 600,
+      topicId: 1,
+      moderationId: 1,
     },
-    type: 'multiChoice',
-    difficulty: 'easy',
-    description: 'easy',
-    topicId: 1,
-  },
-  {
-    id: 3,
-    timer: 250,
-    title: 'NodeJS question #13',
-    content: {
-      question: '"true" - What data type is it ?',
-      answers: {
-        wrong: 'number//boolean//null',
-        correct: 'string',
+    {
+      id: 2,
+      title: 'what is 2 plus 2 ?',
+      content: {
+        options: ['eight minus four', 'three', 'five', 'four'],
+        correctAnswer: ['four', 'eight minus four'],
       },
+      type: 'multi',
+      difficulty: 'light',
+      description: 'that test will show us ur power in Node js',
+      timer: 600,
+      topicId: 1,
+      moderationId: 1,
     },
-    type: 'oneChoice',
-    difficulty: 'normal',
-    description: 'normal',
-    topicId: 1,
-  },
-];
+    {
+      id: 3,
+      title: '"true" - What data type is it ?',
+      content: {
+        options: ['number', 'boolean', 'null', 'string'],
+        correctAnswer: ['string'],
+      },
+      type: 'single',
+      difficulty: 'light',
+      description: 'that test will show us ur power in Node js',
+      timer: 600,
+      topicId: 1,
+      moderationId: 1,
+    },
+  ],
+};
