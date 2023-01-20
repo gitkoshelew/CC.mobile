@@ -8,8 +8,7 @@ export const getTests = createAsyncThunk(
   'test/getTests',
   async (_, {rejectWithValue}) => {
     try {
-      const res = await testsAPI.getTests();
-      console.log(res.data);
+      await testsAPI.getTests();
     } catch (e) {
       return rejectWithValue({});
     } finally {
@@ -35,7 +34,6 @@ export const createQuestion = createAsyncThunk(
   async (param: questionType, {rejectWithValue}) => {
     try {
       const res = await questionsAPI.createQuestion(param);
-      console.log(res.data);
       return res.data;
     } catch (e) {
       return rejectWithValue({});
