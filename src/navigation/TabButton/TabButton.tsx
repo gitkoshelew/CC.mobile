@@ -32,7 +32,7 @@ export const TabButton = (props: TabButtonPropsType) => {
     );
   };
 
-  const activeColor = focused ? Color.BlueLight : Color.GrayDark;
+  const activeColor = focused ? Color.BlueLight : Color.White;
 
   const animatedStyle = useAnimatedStyle(() => {
     'worklet';
@@ -48,7 +48,7 @@ export const TabButton = (props: TabButtonPropsType) => {
           {getIcon(name, activeColor, size)}
         </ButtonCenter>
       </Animated.View>
-      <Text style={{color: activeColor}}>{name}</Text>
+      <Text style={{color: Color.GrayMedium}}>{name}</Text>
     </View>
   );
 };
