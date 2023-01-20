@@ -23,6 +23,7 @@ export const CreateAnswer = ({
   ...props
 }: CreateAnswerPropsType) => {
   const disabledDeleteBtn = fields.length <= 2;
+
   return (
     <View>
       <TextBox>Answer choice</TextBox>
