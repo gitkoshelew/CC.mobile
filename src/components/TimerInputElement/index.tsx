@@ -1,11 +1,21 @@
 import {useState} from 'react';
 import {StyledInput} from './styles';
 
-export const TimerInputElement = () => {
-  const [time, setTime] = useState<string>('00');
+type TimerInputElementPropsType = {
+  onChange: (value: string) => void;
+};
+
+export const TimerInputElement = ({onChange}: TimerInputElementPropsType) => {
+  const [time, setTime] = useState<string>('01');
 
   const onTimeChangeHandler = (value: string): void => {
-    +value > 59 ? setTime('59') : setTime(value);
+    if (+value > 59) {
+      setTime('59');
+      onChange('59');
+      return;
+    }
+    setTime(value);
+    onChange(value);
   };
 
   return (
@@ -14,6 +24,7 @@ export const TimerInputElement = () => {
       value={time}
       keyboardType={'numeric'}
       maxLength={2}
+      placeholder="00"
     />
   );
 };
