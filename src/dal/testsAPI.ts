@@ -6,6 +6,6 @@ export const testsAPI = {
     return instance.get('/quiz');
   },
   createTest(params: createTestRequestType) {
-    return instance.post('/quiz', {params});
+    return instance.post('/quiz', params);
   },
 };

@@ -29,7 +29,7 @@ export const TestSettings = () => {
   const data = ['Verify', 'Date', 'Popularity', 'Something else'];
   const dispatch = useAppDispatch();
   const {navigate} = useAppNavigate();
-  const [selectorsData, setSelectorsData] = useState({
+  const [selectorsData, setSelectorsData] = useState<SelectorsType>({
     theme: 'Verify',
     difficulty: 'easy',
     numberQuestions: 10,
@@ -65,15 +65,16 @@ export const TestSettings = () => {
     dispatch(
       createTest({
         ...values,
-        author: 3,
+        authorId: 1,
         difficulty: 'light',
         topicId: 1,
       }),
-    ).then(() => {
-      navigate(ScreenList.CREATE_TEST, {
-        screen: ScreenList.QUESTIONS_SET,
-        params: {numberQuestions: selectorsData.numberQuestions},
-      });
+    ).then(res => {
+      res.payload &&
+        navigate(ScreenList.CREATE_TEST, {
+          screen: ScreenList.QUESTIONS_SET,
+          params: {numberQuestions: selectorsData.numberQuestions},
+        });
     });
   };
 

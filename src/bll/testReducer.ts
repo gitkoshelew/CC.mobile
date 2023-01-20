@@ -18,12 +18,12 @@ export const getTests = createAsyncThunk(
 
 export const createTest = createAsyncThunk(
   'test/createTest',
-  async (param: createTestRequestType, {rejectWithValue}) => {
+  async (param: createTestRequestType) => {
     try {
-      const res = await testsAPI.createTest(param);
-      return res.data;
+      await testsAPI.createTest(param);
+      return true;
     } catch (e) {
-      return rejectWithValue({});
+      return false;
     } finally {
     }
   },

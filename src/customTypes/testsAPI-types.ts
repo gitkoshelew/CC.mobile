@@ -3,5 +3,5 @@ export type createTestRequestType = {
   description: string;
   topicId: 1;
   difficulty: string;
-  author: number;
+  authorId: number;
 };
