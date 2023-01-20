@@ -1,12 +1,17 @@
 import {QuestionsTabs} from '@src/components/QuestionsTabs/index';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import {CreateQuestion} from '../CreateQuestion/index';
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {styles} from './styles';
 import {RouteProp} from '@react-navigation/native';
+import {useAppDispatch} from '@hooks/hooks';
+import {getQuestions} from '@src/bll/testReducer';
 
 type QuestionsSettingsPropsType = {
-  route: RouteProp<{params: {numberQuestions: number}}, 'params'>;
+  route: RouteProp<
+    {params: {numberQuestions: number; idNewTest: number}},
+    'params'
+  >;
 };
 
 export const QuestionsSettings = ({route}: QuestionsSettingsPropsType) => {
@@ -16,9 +21,9 @@ export const QuestionsSettings = ({route}: QuestionsSettingsPropsType) => {
     }),
   );
 
-  const [questions] = useState(createQuestionsTabs);
+  const dispatch = useAppDispatch();
+  const [questions, setQuestions] = useState([{id: 1}]);
   const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
-
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
   const onPressCurrentQuestionPressed = useCallback(
     (id: number) => {
@@ -26,6 +31,14 @@ export const QuestionsSettings = ({route}: QuestionsSettingsPropsType) => {
     },
     [questions],
   );
+
+  useEffect(() => {
+    dispatch(getQuestions(route.params.idNewTest))
+      .unwrap()
+      .then(res => {
+        setQuestions(res.question);
+      });
+  }, [dispatch, route.params.idNewTest]);
 
   return (
     <KeyboardAvoidingView
@@ -39,7 +52,7 @@ export const QuestionsSettings = ({route}: QuestionsSettingsPropsType) => {
           <View style={styles.inner}>
             <QuestionsTabs
               onPressCurrentQuestion={onPressCurrentQuestionPressed}
-              questions={questions}
+              questions={createQuestionsTabs}
               currentQuestionsId={currentQuestion.id}
             />
             <CreateQuestion />

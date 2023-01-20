@@ -61,21 +61,26 @@ export const TestSettings = () => {
     },
     [selectorsData],
   );
-  const onPressQuestionsSettings = (values: inputsFieldType) => {
-    dispatch(
-      createTest({
-        ...values,
-        authorId: 1,
-        difficulty: 'light',
-        topicId: 1,
-      }),
-    ).then(res => {
-      res.payload &&
-        navigate(ScreenList.CREATE_TEST, {
-          screen: ScreenList.QUESTIONS_SET,
-          params: {numberQuestions: selectorsData.numberQuestions},
-        });
-    });
+  const onPressQuestionsSettings = async (values: inputsFieldType) => {
+    try {
+      await dispatch(
+        createTest({
+          ...values,
+          authorId: 1,
+          difficulty: 'light',
+          topicId: 1,
+        }),
+      ).unwrap();
+      navigate(ScreenList.CREATE_TEST, {
+        screen: ScreenList.QUESTIONS_SET,
+        params: {
+          numberQuestions: selectorsData.numberQuestions,
+          idNewTest: 42,
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const disabledQuestionsSettings = Object.keys(errors).length === 0;

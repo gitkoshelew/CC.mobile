@@ -3,6 +3,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {createTestRequestType} from '@customTypes/testsAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
 import {questionType} from '@customTypes/test-types';
+import {AxiosError} from 'axios';
 
 export const getTests = createAsyncThunk(
   'test/getTests',
@@ -10,7 +11,8 @@ export const getTests = createAsyncThunk(
     try {
       await testsAPI.getTests();
     } catch (e) {
-      return rejectWithValue({});
+      const err = e as Error | AxiosError;
+      return rejectWithValue(err.message);
     } finally {
     }
   },
@@ -18,13 +20,13 @@ export const getTests = createAsyncThunk(
 
 export const createTest = createAsyncThunk(
   'test/createTest',
-  async (param: createTestRequestType) => {
+  async (param: createTestRequestType, {rejectWithValue}) => {
     try {
-      await testsAPI.createTest(param);
-      return true;
+      const res = await testsAPI.createTest(param);
+      return res.data;
     } catch (e) {
-      return false;
-    } finally {
+      const err = e as Error | AxiosError;
+      return rejectWithValue(err.message);
     }
   },
 );
@@ -36,8 +38,21 @@ export const createQuestion = createAsyncThunk(
       const res = await questionsAPI.createQuestion(param);
       return res.data;
     } catch (e) {
-      return rejectWithValue({});
-    } finally {
+      const err = e as Error | AxiosError;
+      return rejectWithValue(err.message);
+    }
+  },
+);
+
+export const getQuestions = createAsyncThunk(
+  'test/createQuestion',
+  async (id: number, {rejectWithValue}) => {
+    try {
+      const res = await questionsAPI.getQuestions(id);
+      return res.data;
+    } catch (e: AxiosError) {
+      const err = e as Error | AxiosError;
+      return rejectWithValue(err.message);
     }
   },
 );

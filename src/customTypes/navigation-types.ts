@@ -6,6 +6,7 @@ import {ScreenList} from '../navigation/navigation';
 export type RootCreateTestParamsList = {
   [ScreenList.QUESTIONS_SET]: {
     numberQuestions: number;
+    idNewTest: number;
   };
   [ScreenList.TEST_SET]: undefined;
 };
