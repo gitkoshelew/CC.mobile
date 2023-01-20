@@ -9,7 +9,7 @@ export type CustomTextInputPropsType = {
   color?: Color;
   onChangeText?: (value: string) => void;
   error?: FieldError;
-  typeInput?: 'timer' | undefined;
+  typeInput?: 'timer';
 };
 type CustomTextInputCombinePropsType = TextInputProps &
   CustomTextInputPropsType;

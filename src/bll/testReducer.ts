@@ -13,7 +13,6 @@ export const getTests = createAsyncThunk(
     } catch (e) {
       const err = e as Error | AxiosError;
       return rejectWithValue(err.message);
-    } finally {
     }
   },
 );

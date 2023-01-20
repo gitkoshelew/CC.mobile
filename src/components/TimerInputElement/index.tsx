@@ -7,9 +7,10 @@ type TimerInputElementPropsType = {
 
 export const TimerInputElement = ({onChange}: TimerInputElementPropsType) => {
   const [time, setTime] = useState<string>('01');
+  const timeLimit = 59;
 
   const onTimeChangeHandler = (value: string): void => {
-    if (+value > 59) {
+    if (+value > timeLimit) {
       setTime('59');
       onChange('59');
       return;

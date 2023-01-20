@@ -3,18 +3,18 @@ import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import {CreateQuestion} from '../CreateQuestion/index';
 import {useCallback, useEffect, useState} from 'react';
 import {styles} from './styles';
-import {RouteProp} from '@react-navigation/native';
 import {useAppDispatch} from '@hooks/hooks';
 import {getQuestions} from '@src/bll/testReducer';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootCreateTestParamsList} from '@customTypes/navigation-types';
+import {ScreenList} from '@src/navigation/navigation';
 
-type QuestionsSettingsPropsType = {
-  route: RouteProp<
-    {params: {numberQuestions: number; idNewTest: number}},
-    'params'
-  >;
-};
-
-export const QuestionsSettings = ({route}: QuestionsSettingsPropsType) => {
+export const QuestionsSettings = ({
+  route,
+}: NativeStackScreenProps<
+  RootCreateTestParamsList,
+  ScreenList.QUESTIONS_SET
+>) => {
   const createQuestionsTabs = [...Array(route.params.numberQuestions)].map(
     (_, index) => ({
       id: index + 1,
