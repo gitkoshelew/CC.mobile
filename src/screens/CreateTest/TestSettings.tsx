@@ -70,14 +70,17 @@ export const TestSettings = () => {
           difficulty: 'light',
           topicId: 1,
         }),
-      ).unwrap();
-      navigate(ScreenList.CREATE_TEST, {
-        screen: ScreenList.QUESTIONS_SET,
-        params: {
-          numberQuestions: selectorsData.numberQuestions,
-          idNewTest: 42,
-        },
-      });
+      )
+        .unwrap()
+        .then(res => {
+          navigate(ScreenList.CREATE_TEST, {
+            screen: ScreenList.QUESTIONS_SET,
+            params: {
+              numberQuestions: selectorsData.numberQuestions,
+              idNewTest: res.id,
+            },
+          });
+        });
     } catch (e) {
       console.error(e);
     }

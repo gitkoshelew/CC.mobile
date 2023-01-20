@@ -49,7 +49,7 @@ export const getQuestions = createAsyncThunk(
     try {
       const res = await questionsAPI.getQuestions(id);
       return res.data;
-    } catch (e: AxiosError) {
+    } catch (e) {
       const err = e as Error | AxiosError;
       return rejectWithValue(err.message);
     }
