@@ -40,5 +40,5 @@ export type testSettingData = {
   description: string;
   theme: string;
   difficulty: string;
-  numberQuestions: numberQuestionsType; // ?
+  numberQuestions: numberQuestionsType;
 };

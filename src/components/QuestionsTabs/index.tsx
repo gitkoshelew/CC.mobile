@@ -28,7 +28,7 @@ export const QuestionsTabs = ({
       />
     );
   };
-  
+
   return (
     <ScrollViewBlock
       horizontal
