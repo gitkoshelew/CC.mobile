@@ -1,30 +1,31 @@
-import {QuestionsTabs} from '../../../components/QuestionsTabs/index';
+import {QuestionsTabs} from '@src/components/QuestionsTabs/index';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import {CreateQuestion} from '../CreateQuestion/index';
-import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
-import {selectCurrentQuestion} from '../../../bll/testReducer';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {styles} from './styles';
+import {RouteProp} from '@react-navigation/native';
 
-export const QuestionsSettings = () => {
-  const idCurrentQuestion = useAppSelector(
-    state => state.testReducer.test.questions[0].id,
+type QuestionsSettingsPropsType = {
+  route: RouteProp<{params: {numberQuestions: number}}, 'params'>;
+};
+
+export const QuestionsSettings = ({route}: QuestionsSettingsPropsType) => {
+  const createQuestionsTabs = [...Array(route.params.numberQuestions)].map(
+    (_, index) => ({
+      id: index + 1,
+    }),
   );
-  const [idQuestion, setIdQuestion] = useState<number>(idCurrentQuestion);
-  const dispatch = useAppDispatch();
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
+  const [questions] = useState(createQuestionsTabs);
+  const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
+
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
   const onPressCurrentQuestionPressed = useCallback(
     (id: number) => {
-      setIdQuestion(id);
-      dispatch(selectCurrentQuestion({id}));
+      setCurrentQuestion(questions.find(el => el.id === id)!);
     },
-    [dispatch],
+    [questions],
   );
-
-  useEffect(() => {
-    dispatch(selectCurrentQuestion({id: idCurrentQuestion}));
-  }, [dispatch, idCurrentQuestion]);
 
   return (
     <KeyboardAvoidingView
@@ -38,8 +39,10 @@ export const QuestionsSettings = () => {
           <View style={styles.inner}>
             <QuestionsTabs
               onPressCurrentQuestion={onPressCurrentQuestionPressed}
+              questions={questions}
+              currentQuestionsId={currentQuestion.id}
             />
-            <CreateQuestion id={idQuestion} />
+            <CreateQuestion />
           </View>
         </ScrollView>
       </View>

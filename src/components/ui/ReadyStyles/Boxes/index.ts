@@ -8,7 +8,7 @@ const BlockAnswerBox = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 15px;
 `;
 

@@ -1,27 +1,13 @@
 import {render, screen} from '@testing-library/react-native';
 import {QuestionsTabs} from '../index';
-import {Provider} from 'react-redux';
-import {configureStore} from '@reduxjs/toolkit';
-
-const testReducerMok = () => ({
-  test: {
-    questions: [],
-  },
-});
-
-const initialState = {
-  reducer: {
-    testReducer: testReducerMok,
-  },
-};
-const mockStore = configureStore(initialState);
-let store = mockStore;
 
 test('Should render view block', async () => {
   render(
-    <Provider store={store}>
-      <QuestionsTabs onPressCurrentQuestion={() => {}} />
-    </Provider>,
+    <QuestionsTabs
+      onPressCurrentQuestion={() => {}}
+      questions={[]}
+      currentQuestionsId={1}
+    />,
   );
   const scrollViewBlock = screen.getByTestId('ScrollViewBlock').props;
 

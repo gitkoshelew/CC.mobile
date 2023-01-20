@@ -1,16 +1,16 @@
 import React, {useCallback} from 'react';
-import {Timer} from '../../../components/Timer/index';
+import {Timer} from '@src/components/Timer/index';
 import {
   ViewContainer,
   ViewFlexRight,
-} from '../../../components/ui/ReadyStyles/Containers/index';
+} from '@src/components/ui/ReadyStyles/Containers/index';
 import {TimerBox, TextBox, ButtonsBox} from './styles';
 import {MainTestingContainer} from '../../../components/ui/ReadyStyles/Containers';
-import {AnswersOptions} from '../../../components/AnswersOptions/index';
-import {TestOptionsMoc} from '../../../Mocs/Testing';
-import {AppButton} from '../../../components/ui/AppButton/index';
+import {AnswersOptions} from '@src/components/AnswersOptions/index';
+import {TestOptionsMoc} from '@src/Mocs/Testing';
+import {AppButton} from '@src/components/ui/AppButton/index';
 import {ViewFlexCenter, CountQuestionBox, ViewBlock} from './styles';
-import {ProgressBar} from '../../../components/ProgressBar/index';
+import {ProgressBar} from '@src/components/ProgressBar/index';
 
 export const TestProcess = () => {
   const onPressRadioHandler = useCallback((value: number) => {

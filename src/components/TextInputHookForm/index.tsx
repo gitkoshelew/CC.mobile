@@ -8,6 +8,7 @@ type TextInputHookFormPropsType<T extends FieldValues> = TextInputProps & {
   name: FieldPath<T>;
   rules?: Object;
   height?: string | undefined;
+  typeInput?: 'timer' | undefined;
 };
 
 export const TextInputHookForm = <T extends FieldValues>({

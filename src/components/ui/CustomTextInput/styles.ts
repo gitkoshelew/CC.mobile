@@ -6,18 +6,22 @@ export const CustomInput = styled.TextInput<CustomTextInputPropsType>`
   background: ${props => props.color || Color.White};
   border: 1px solid ${props => (props.error ? Color.Red : Color.GrayMedium)};
   border-radius: 15px;
-  padding: 9px 16px;
-  width: 100%;
+  font-family: 'Montserrat-Regular';
+  ${props =>
+    props.typeInput === 'timer'
+      ? css`
+          text-align: center;
+          font-size: 16px;
+          width: 42px;
+          height: 38px;
+        `
+      : css`
+          padding: 9px 16px;
+          width: 100%;
+        `}
   ${props =>
     props.height &&
     css`
       height: ${props.height};
     `}
-`;
-
-export const TextError = styled.Text`
-  color: ${Color.Red};
-  font-size: 16px;
-  text-align: center;
-  font-family: 'Montserrat-Regular';
 `;

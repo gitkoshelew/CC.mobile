@@ -7,4 +7,11 @@ export const styles = StyleSheet.create({
   disabled: {
     opacity: 0.4,
   },
+  inner: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'flex-start',
+    paddingTop: 4,
+  },
 });
