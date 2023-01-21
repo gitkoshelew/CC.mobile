@@ -5,14 +5,14 @@ import {
   ViewCenter,
 } from '../../components/ui/ReadyStyles/Containers';
 import {AppButton} from '../../components/ui/AppButton';
-import {useAppDispatch, useAppNavigate} from '../../hooks/hooks';
-import {ScreenList} from '../../navigation/navigation';
+import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
+import {ScreenList} from '@src/navigation/navigation';
 import {AppSelect} from '../../components/ui/AppSelect';
 import {SwitchSelectors} from '../../components/SwitchSelectors';
 import {useCallback, useState} from 'react';
-import {addTestSettings} from '../../bll/testReducer';
 import {useForm} from 'react-hook-form';
-import {TextInputHookForm} from '../../components/TextInputHookForm/index';
+import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
+import {createTest} from '@src/bll/testReducer';
 
 export type SelectorsType = {
   theme: string;
@@ -28,12 +28,13 @@ type inputsFieldType = {
 export const TestSettings = () => {
   const data = ['Verify', 'Date', 'Popularity', 'Something else'];
   const dispatch = useAppDispatch();
+  const {navigate} = useAppNavigate();
   const [selectorsData, setSelectorsData] = useState<SelectorsType>({
     theme: 'Verify',
-    difficulty: 'Easy',
+    difficulty: 'easy',
     numberQuestions: 10,
   });
-  const {navigate} = useAppNavigate();
+
   const {
     control,
     handleSubmit,
@@ -54,17 +55,38 @@ export const TestSettings = () => {
     [selectorsData],
   );
 
-  const disabledQuestionsSettings = Object.keys(errors).length === 0;
   const selectsNumberQuestionsPressed = useCallback(
     (value: string) => {
       setSelectorsData({...selectorsData, numberQuestions: Number(value)});
     },
     [selectorsData],
   );
-  const onPressQuestionsSettings = (values: inputsFieldType) => {
-    dispatch(addTestSettings({...values, ...selectorsData}));
-    navigate(ScreenList.CREATE_TEST, {screen: ScreenList.QUESTIONS_SET});
+  const onPressQuestionsSettings = async (values: inputsFieldType) => {
+    try {
+      await dispatch(
+        createTest({
+          ...values,
+          authorId: 1,
+          difficulty: 'light',
+          topicId: 1,
+        }),
+      )
+        .unwrap()
+        .then(res => {
+          navigate(ScreenList.CREATE_TEST, {
+            screen: ScreenList.QUESTIONS_SET,
+            params: {
+              numberQuestions: selectorsData.numberQuestions,
+              idNewTest: res.id,
+            },
+          });
+        });
+    } catch (e) {
+      console.error(e);
+    }
   };
+
+  const disabledQuestionsSettings = Object.keys(errors).length === 0;
 
   return (
     <ViewContainer>

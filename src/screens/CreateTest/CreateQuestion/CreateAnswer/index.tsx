@@ -5,59 +5,44 @@ import {
 } from '@src/components/ui/ReadyStyles/Boxes/index';
 import {AddingAnswer} from '@src/components/AddingAnswer/index';
 import {AddButton} from '@src/components/ui/AddButton/index';
-import {useAppDispatch} from '@hooks/hooks';
-import {addAnswer, deleteAnswer, setCorrectAnswer} from '@src/bll/testReducer';
-import {useCallback} from 'react';
-import {correctAnswerType} from 'src/customTypes/test-types';
+import {Control} from 'react-hook-form';
+import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
 
 type CreateAnswerPropsType = {
-  answers: string[];
-  correctAnswer: correctAnswerType;
+  control: Control<inputsFieldType>;
+  fields: {id: string; option: string}[];
+  correctAnswer: string[];
+  addNewOptionPressed: () => void;
+  deleteOptionPressed: (index: number) => void;
+  checkedCorrectOption: (option: string, checked: boolean) => void;
 };
 
 export const CreateAnswer = ({
-  answers,
+  fields,
   correctAnswer,
+  ...props
 }: CreateAnswerPropsType) => {
-  const dispatch = useAppDispatch();
+  const disabledDeleteBtn = fields.length <= 2;
 
-  const addNewAnswerHandler = useCallback(() => {
-    dispatch(addAnswer());
-  }, [dispatch]);
-
-  const deleteAnswerHandler = useCallback(
-    (index: number) => {
-      dispatch(deleteAnswer({index}));
-    },
-    [dispatch],
-  );
-
-  const checkedCorrectAnswer = useCallback(
-    (index: number, answer: string, checked: boolean) => {
-      dispatch(setCorrectAnswer({index, answer, checked}));
-    },
-    [dispatch],
-  );
-
-  const disabledDeleteBtn = answers.length <= 2;
   return (
     <View>
       <TextBox>Answer choice</TextBox>
-      {answers.map((item, index) => (
+      {fields.map((item, index) => (
         <AddingAnswer
           key={index}
           index={index}
           item={item}
+          control={props.control}
           correctAnswer={correctAnswer}
           disabledDeleteBtn={disabledDeleteBtn}
-          onPressDelete={deleteAnswerHandler}
-          onPressCorrectAnswer={checkedCorrectAnswer}
+          onPressDelete={props.deleteOptionPressed}
+          onPressCorrectAnswer={props.checkedCorrectOption}
         />
       ))}
       <ButtonAnswerBox>
         <AddButton
-          onPress={addNewAnswerHandler}
-          disabled={answers.length > 6}
+          onPress={props.addNewOptionPressed}
+          disabled={fields.length > 6}
         />
         <TextBox>Add answer</TextBox>
       </ButtonAnswerBox>

@@ -1,30 +1,44 @@
-import {QuestionsTabs} from '../../../components/QuestionsTabs/index';
+import {QuestionsTabs} from '@src/components/QuestionsTabs/index';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import {CreateQuestion} from '../CreateQuestion/index';
-import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
-import {selectCurrentQuestion} from '../../../bll/testReducer';
 import {useCallback, useEffect, useState} from 'react';
 import {styles} from './styles';
+import {useAppDispatch} from '@hooks/hooks';
+import {getQuestions} from '@src/bll/testReducer';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootCreateTestParamsList} from '@customTypes/navigation-types';
+import {ScreenList} from '@src/navigation/navigation';
 
-export const QuestionsSettings = () => {
-  const idCurrentQuestion = useAppSelector(
-    state => state.testReducer.test.questions[0].id,
+export const QuestionsSettings = ({
+  route,
+}: NativeStackScreenProps<
+  RootCreateTestParamsList,
+  ScreenList.QUESTIONS_SET
+>) => {
+  const createQuestionsTabs = [...Array(route.params.numberQuestions)].map(
+    (_, index) => ({
+      id: index + 1,
+    }),
   );
-  const [idQuestion, setIdQuestion] = useState<number>(idCurrentQuestion);
-  const dispatch = useAppDispatch();
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
+  const dispatch = useAppDispatch();
+  const [questions, setQuestions] = useState([{id: 1}]);
+  const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
   const onPressCurrentQuestionPressed = useCallback(
     (id: number) => {
-      setIdQuestion(id);
-      dispatch(selectCurrentQuestion({id}));
+      setCurrentQuestion(questions.find(el => el.id === id)!);
     },
-    [dispatch],
+    [questions],
   );
 
   useEffect(() => {
-    dispatch(selectCurrentQuestion({id: idCurrentQuestion}));
-  }, [dispatch, idCurrentQuestion]);
+    dispatch(getQuestions(route.params.idNewTest))
+      .unwrap()
+      .then(res => {
+        setQuestions(res.question);
+      });
+  }, [dispatch, route.params.idNewTest]);
 
   return (
     <KeyboardAvoidingView
@@ -38,8 +52,10 @@ export const QuestionsSettings = () => {
           <View style={styles.inner}>
             <QuestionsTabs
               onPressCurrentQuestion={onPressCurrentQuestionPressed}
+              questions={createQuestionsTabs}
+              currentQuestionsId={currentQuestion.id}
             />
-            <CreateQuestion id={idQuestion} />
+            <CreateQuestion />
           </View>
         </ScrollView>
       </View>

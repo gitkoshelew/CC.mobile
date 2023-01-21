@@ -1,24 +1,27 @@
 export type answersType = {
   options: string[];
+  answers: string[];
 };
-export type difficultyType = 'Easy' | 'Medium' | 'Hard';
 export type numberQuestionsType = 10 | 15 | 20 | 25 | 30;
-export type correctAnswerType = string | string[];
+
 export type questionType = {
   id: number;
   title: string;
+  description: string;
   content: answersType;
-  correctAnswer: string | string[];
+  difficulty: string;
+  timer: number;
   type: string;
-  timer: string;
-  textQuestion: string;
+  // topic: number; // need explain
+  moderation: null;
+  quiz: number[]; // need explain
 };
 
 export type testType = {
   id: number;
   title: string;
   description: string;
-  theme: string;
+  theme: string; // topicId
   difficulty: string;
   author: string;
   created: Date | null;
@@ -37,5 +40,5 @@ export type testSettingData = {
   description: string;
   theme: string;
   difficulty: string;
-  numberQuestions: number;
+  numberQuestions: numberQuestionsType;
 };
