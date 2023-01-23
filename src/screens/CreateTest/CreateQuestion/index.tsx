@@ -3,22 +3,22 @@ import {
   BlockBox,
   BlockBoxMarginLeft,
   TextBox,
-} from '@src/components/ui/ReadyStyles/Boxes/index';
+} from '@src/components/ui/ReadyStyles/Boxes';
 import {
   ViewCenter,
   ViewFlexForTwoElements,
-} from '@src/components/ui/ReadyStyles/Containers/index';
-import {AppSelect} from '@src/components/ui/AppSelect/index';
-import {TimerInput} from '@src/components/TimerInput/index';
+} from '@src/components/ui/ReadyStyles/Containers';
+import {AppSelect} from '@src/components/ui/AppSelect';
+import {TimerInput} from '@src/components/TimerInput';
 import {CreateAnswer} from './CreateAnswer/index';
-import {AppButton} from '@src/components/ui/AppButton/index';
-import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
+import {AppButton} from '@src/components/ui/AppButton';
+import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {useFieldArray, useForm} from 'react-hook-form';
 import {useCallback, useState} from 'react';
 import {getOptionsObjectToString} from '@src/utils/getOptionsObjectToString';
 import {useAppDispatch} from '@hooks/hooks';
 import {createQuestion} from '@src/bll/testReducer';
-import {SwitchSelectors} from '@src/components/SwitchSelectors/index';
+import {SwitchSelectors} from '@src/components/SwitchSelectors';
 
 export type inputsFieldType = {
   title: string;

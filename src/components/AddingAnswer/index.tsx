@@ -7,7 +7,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
 import {useCallback} from 'react';
 import {Control, Controller} from 'react-hook-form';
-import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
+import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 
 type AddingAnswerPropsType = {
   item: {

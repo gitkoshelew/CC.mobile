@@ -5,7 +5,7 @@ const Container = styled.View`
   margin: 19px 17px;
   padding: 12px 21px 31px;
   border-radius: 15px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
   background-color: ${Color.White};
 `;
 
@@ -14,7 +14,7 @@ const Group = styled.View`
   flex-direction: row;
   width: 100%;
   padding: 7px 14px 10px;
-  margin: 31px 0px 21px;
+  margin: 31px 0 21px;
   border-radius: 15px;
   background-color: ${Color.Blue};
 `;

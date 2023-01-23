@@ -1,17 +1,17 @@
 import {Platform} from 'react-native';
-import {TextBox, BlockBox} from '../../components/ui/ReadyStyles/Boxes';
+import {TextBox, BlockBox} from '@src/components/ui/ReadyStyles/Boxes';
 import {
   ViewContainer,
   ViewCenter,
-} from '../../components/ui/ReadyStyles/Containers';
-import {AppButton} from '../../components/ui/AppButton';
+} from '@src/components/ui/ReadyStyles/Containers';
+import {AppButton} from '@src/components/ui/AppButton';
 import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
-import {AppSelect} from '../../components/ui/AppSelect';
-import {SwitchSelectors} from '../../components/SwitchSelectors';
+import {AppSelect} from '@src/components/ui/AppSelect';
+import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {useCallback, useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
+import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {createTest} from '@src/bll/testReducer';
 
 export type SelectorsType = {

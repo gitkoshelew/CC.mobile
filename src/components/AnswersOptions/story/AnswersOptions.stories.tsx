@@ -2,7 +2,14 @@ import {storiesOf} from '@storybook/react-native';
 import {AnswersOptions} from '@src/components/AnswersOptions/index';
 
 storiesOf('Answers options', module)
-  .add('default', () => <AnswersOptions onPress={() => {}} data={['one']} />)
+  .add('default', () => (
+    <AnswersOptions onPress={() => {}} data={['one']} answerType="single" />
+  ))
   .add('active', () => (
-    <AnswersOptions onPress={() => {}} selected={0} data={['one']} />
+    <AnswersOptions
+      onPress={() => {}}
+      selected={0}
+      data={['one']}
+      answerType="single"
+    />
   ));

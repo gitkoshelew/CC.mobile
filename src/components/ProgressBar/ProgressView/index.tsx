@@ -1,7 +1,7 @@
 import {ViewCheck} from './styles';
 
 export type ProgressType = {
-  id: string;
+  id: number;
   questionStatus: 'default' | 'active' | 'right' | 'error';
 };
 

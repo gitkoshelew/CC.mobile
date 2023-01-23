@@ -1,4 +1,4 @@
-import {QuestionsTabs} from '@src/components/QuestionsTabs/index';
+import {QuestionsTabs} from '@src/components/QuestionsTabs';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import {CreateQuestion} from '../CreateQuestion/index';
 import {useCallback, useEffect, useState} from 'react';
