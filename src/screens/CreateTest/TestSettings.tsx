@@ -16,7 +16,6 @@ import {createTest} from '@src/bll/testReducer';
 
 export type SelectorsType = {
   theme: string;
-  difficulty: string;
   numberQuestions: number;
 };
 
@@ -31,7 +30,6 @@ export const TestSettings = () => {
   const {navigate} = useAppNavigate();
   const [selectorsData, setSelectorsData] = useState<SelectorsType>({
     theme: 'Verify',
-    difficulty: 'easy',
     numberQuestions: 10,
   });
 
@@ -48,13 +46,6 @@ export const TestSettings = () => {
     [selectorsData],
   );
 
-  const selectsDifficultyPressed = useCallback(
-    (value: string) => {
-      setSelectorsData({...selectorsData, difficulty: value});
-    },
-    [selectorsData],
-  );
-
   const selectsNumberQuestionsPressed = useCallback(
     (value: string) => {
       setSelectorsData({...selectorsData, numberQuestions: Number(value)});
@@ -67,17 +58,16 @@ export const TestSettings = () => {
         createTest({
           ...values,
           authorId: 1,
-          difficulty: 'light',
           topicId: 1,
         }),
       )
         .unwrap()
-        .then(res => {
+        .then(() => {
           navigate(ScreenList.CREATE_TEST, {
             screen: ScreenList.QUESTIONS_SET,
             params: {
               numberQuestions: selectorsData.numberQuestions,
-              idNewTest: res.id,
+              idNewTest: 25,
             },
           });
         });
@@ -134,10 +124,6 @@ export const TestSettings = () => {
           type="primary"
           onSelect={selectsThemePressed}
         />
-      </BlockBox>
-      <TextBox>Test level</TextBox>
-      <BlockBox>
-        <SwitchSelectors type="level" onPress={selectsDifficultyPressed} />
       </BlockBox>
       <TextBox>Number of questions</TextBox>
       <BlockBox>

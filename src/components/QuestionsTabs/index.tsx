@@ -1,15 +1,15 @@
 import {QuestionTab} from './QuestionTab/index';
 import {ScrollViewBlock, TabsBlock} from './styles';
+import {questionType} from '@customTypes/test-types';
 
 export type QuestionsTabsPropsType = {
-  onPressCurrentQuestion: (idQuestion: number) => void;
-  questions: {id: number}[];
+  onPressCurrentQuestion: (id: number) => void;
+  questions: questionType[];
   currentQuestionsId: number;
 };
 
 type renderTabsType = {
   id: number;
-  index: number;
 };
 
 export const QuestionsTabs = ({
@@ -17,13 +17,12 @@ export const QuestionsTabs = ({
   currentQuestionsId,
   ...props
 }: QuestionsTabsPropsType) => {
-  const renderItem = ({id, index}: renderTabsType) => {
+  const renderItem = ({id}: renderTabsType) => {
     return (
       <QuestionTab
         key={id}
         id={id}
         isActive={id === currentQuestionsId}
-        index={index}
         onPress={props.onPressCurrentQuestion}
       />
     );
@@ -36,10 +35,9 @@ export const QuestionsTabs = ({
       showsHorizontalScrollIndicator={true}
       testID="ScrollViewBlock">
       <TabsBlock flexDirection={questions.length > 10 ? 'column' : 'row'}>
-        {questions.map((item, index) =>
+        {questions.map(item =>
           renderItem({
             id: item.id,
-            index,
           }),
         )}
       </TabsBlock>

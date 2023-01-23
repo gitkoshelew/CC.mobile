@@ -2,17 +2,11 @@ import {Button, TextButton} from './styles';
 
 export type QuestionTabPropsType = {
   isActive: boolean;
-  index: number;
   id: number;
-  onPress: (idQuestion: number) => void;
+  onPress: (id: number) => void;
 };
 
-export const QuestionTab = ({
-  id,
-  isActive,
-  index,
-  onPress,
-}: QuestionTabPropsType) => {
+export const QuestionTab = ({id, isActive, onPress}: QuestionTabPropsType) => {
   const onPressHandler = () => {
     onPress(id);
   };
@@ -20,7 +14,7 @@ export const QuestionTab = ({
   return (
     <Button onPress={onPressHandler} isActive={isActive} questionStatus={false}>
       <TextButton isActive={isActive} testID={'textButton'}>
-        {index + 1}
+        {id}
       </TextButton>
     </Button>
   );

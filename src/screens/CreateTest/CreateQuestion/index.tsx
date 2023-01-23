@@ -14,54 +14,91 @@ import {CreateAnswer} from './CreateAnswer/index';
 import {AppButton} from '@src/components/ui/AppButton/index';
 import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
 import {useFieldArray, useForm} from 'react-hook-form';
-import {useCallback, useState} from 'react';
-import {getOptionsObjectToString} from '@src/utils/getOptionsObjectToString';
+import {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch} from '@hooks/hooks';
-import {createQuestion} from '@src/bll/testReducer';
 import {SwitchSelectors} from '@src/components/SwitchSelectors/index';
+import {Difficulty, questionType, TypeOptions} from '@customTypes/test-types';
+import {transformTime} from '@src/utils/transformTime';
+import {createQuestion} from '@src/bll/testReducer';
 
 export type inputsFieldType = {
   title: string;
   descriptions: string;
-  minutes: number;
-  seconds: number;
+  minutes: string;
+  seconds: string;
   options: {option: string}[];
+};
+export type CreateQuestionPropsType = {
+  currentQuestion: questionType;
+  setQuestions: (value: questionType[]) => void;
+  questions: questionType[];
 };
 
 const numberOfLines = Platform.OS === 'ios' ? undefined : 2;
 
-export const CreateQuestion = () => {
-  const data = ['single', 'multiple'];
+export const CreateQuestion = ({
+  currentQuestion,
+  setQuestions,
+  questions,
+}: CreateQuestionPropsType) => {
+  const data = ['Single', 'Multiple'];
   const dispatch = useAppDispatch();
-  const {control, handleSubmit} = useForm<inputsFieldType>({
+  const {control, handleSubmit, reset} = useForm<inputsFieldType>({
     defaultValues: {
       title: '',
       descriptions: '',
-      options: [{option: ''}, {option: ''}],
+      options: currentQuestion.content.options,
     },
   });
 
   const {fields, append, remove} = useFieldArray({name: 'options', control});
-  const [selectorsData, setSelectorsData] = useState({
-    difficulty: 'easy',
-    type: 'single',
+  const [selectorsData, setSelectorsData] = useState<{
+    difficulty: string;
+    type: string;
+  }>({
+    difficulty: 'Easy',
+    type: 'Single',
   });
+
   const onPressSaveQuestionHandler = (values: inputsFieldType) => {
-    const isTime = +values.minutes * 60 + +values.seconds;
-    const isOptions = getOptionsObjectToString(values.options);
+    const isTime = transformTime({
+      format: 'onlySeconds',
+      isMinutes: values.minutes,
+      isSeconds: values.seconds,
+    });
+    // const isOptions = getOptionsObjectToString(values.options);
+    const collectedDataQuestion: questionType = {
+      id: currentQuestion.id,
+      title: values.title,
+      description: values.descriptions,
+      timer: isTime as number,
+      content: {options: values.options, correctAnswer: []},
+      difficulty: selectorsData.difficulty as Difficulty,
+      type: selectorsData.type as TypeOptions,
+      topicId: 1,
+      moderationId: null,
+    };
+    setQuestions(
+      questions.map(el =>
+        el.id === currentQuestion.id ? {...collectedDataQuestion} : el,
+      ),
+    );
     dispatch(
       createQuestion({
         id: 1,
         title: values.title,
         description: values.descriptions,
-        timer: isTime,
-        content: {options: isOptions, answers: []},
-        difficulty: selectorsData.difficulty,
-        type: selectorsData.type,
-        moderation: null,
-        quiz: [3],
+        timer: isTime as number,
+        content: {options: values.options, correctAnswer: []},
+        difficulty:
+          Difficulty[selectorsData.difficulty as keyof typeof Difficulty],
+        type: TypeOptions[selectorsData.type as keyof typeof TypeOptions],
+        topicId: 1,
+        moderationId: null,
       }),
-    );
+    ).then(res => {
+      console.log(res);
+    });
   };
 
   const addNewOptionPressed = useCallback(() => {
@@ -90,6 +127,18 @@ export const CreateQuestion = () => {
     },
     [selectorsData],
   );
+
+  useEffect(() => {
+    reset({
+      title: currentQuestion.title,
+      descriptions: currentQuestion.description,
+      options: currentQuestion.content.options,
+      ...(transformTime({
+        format: 'default',
+        totalSeconds: currentQuestion.timer,
+      }) as object),
+    });
+  }, [currentQuestion, reset]);
 
   return (
     <View>

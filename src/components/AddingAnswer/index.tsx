@@ -42,7 +42,8 @@ export const AddingAnswer = ({
   };
 
   const isCorrectAnswer = props.correctAnswer.includes(item.option);
-
+  const disabled = item.option === props.correctAnswer[0];
+  console.log(item.option);
   return (
     <BlockAnswerBox>
       <View style={styles.inputBox}>
@@ -70,6 +71,7 @@ export const AddingAnswer = ({
         <CheckBox
           onPress={onPressCorrectAnswerHandler}
           checked={isCorrectAnswer}
+          disabled={!disabled}
         />
         <TouchableOpacity
           style={disabledDeleteBtn && styles.disabled}
