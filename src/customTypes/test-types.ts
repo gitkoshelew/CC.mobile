@@ -1,6 +1,17 @@
+export enum TypeOptions {
+  Single = 'single',
+  Multiple = 'multi',
+}
+
+export enum Difficulty {
+  Easy = 'light',
+  Medium = 'medium',
+  Hard = 'hard',
+}
+
 export type answersType = {
-  options: string[];
-  answers: string[];
+  options: {option: string}[];
+  correctAnswer: string[];
 };
 export type numberQuestionsType = 10 | 15 | 20 | 25 | 30;
 
@@ -9,12 +20,17 @@ export type questionType = {
   title: string;
   description: string;
   content: answersType;
-  difficulty: string;
+  difficulty: Difficulty;
   timer: number;
-  type: string;
-  // topic: number; // need explain
-  moderation: null;
-  quiz: number[]; // need explain
+  type: TypeOptions;
+  topicId: number;
+  moderationId: null;
+  // Quiz_Question: {
+  //   id: 1;
+  //   quizId: 25;
+  //   questionId: 2;
+  // };
+  // quiz: number[]; // need explain
 };
 
 export type testType = {
