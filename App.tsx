@@ -3,9 +3,9 @@ import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import SplashScreen from 'react-native-splash-screen';
-import Navigation from './src/navigation/navigation';
+import Navigation from '@src/navigation/navigation';
 import {Provider} from 'react-redux';
-import store from './src/bll/store/store';
+import store from '@src/bll/store/store';
 import StorybookUIRoot from './.storybook/Storybook';
 
 const useStorybook = false;

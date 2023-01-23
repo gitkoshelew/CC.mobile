@@ -3,12 +3,12 @@ import {TextBox, BlockBox} from '@src/components/ui/ReadyStyles/Boxes';
 import {
   ViewContainer,
   ViewCenter,
-} from 'src/components/ui/ReadyStyles/Containers';
-import {AppButton} from 'src/components/ui/AppButton';
+} from '@src/components/ui/ReadyStyles/Containers';
+import {AppButton} from '@src/components/ui/AppButton';
 import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
-import {AppSelect} from 'src/components/ui/AppSelect';
-import {SwitchSelectors} from 'src/components/SwitchSelectors';
+import {AppSelect} from '@src/components/ui/AppSelect';
+import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {useCallback, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
