@@ -11,12 +11,12 @@ export const TestMoc = {
     {
       id: 1,
       title: '',
+      description: '',
       type: 'Single-choice',
-      textQuestion: '',
-      timer: '',
-      correctAnswer: '',
+      timer: 0,
       content: {
         options: ['Node,js', 'Type Script', 'Java Script', 'React'],
+        correctAnswer: [''],
       },
     },
   ],

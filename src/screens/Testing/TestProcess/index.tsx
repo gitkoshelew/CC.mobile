@@ -7,30 +7,31 @@ import {
 import {TimerBox, TextBox, ButtonsBox} from './styles';
 import {MainTestingContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {AnswersOptions} from '@src/components/AnswersOptions';
-import {quizIdMoc} from '@src/Mocs/Testing';
 import {AppButton} from '@src/components/ui/AppButton';
 import {ViewFlexCenter, CountQuestionBox, ViewBlock} from './styles';
 import {ProgressBar} from '@src/components/ProgressBar';
 import {ProgressType} from '@src/components/ProgressBar/ProgressView';
+import {useAppSelector} from '@hooks/hooks';
 
 export const TestProcess = () => {
+  const quizIdMocState = useAppSelector(state => state.processReducer);
   const [numAnswer, setNumAnswer] = useState<number>(1);
-  const currentTest = quizIdMoc.questions.filter(e => e.id === numAnswer);
+  const currentTest = quizIdMocState.questions.filter(e => e.id === numAnswer);
   const onPressRadioHandler = useCallback((value: number) => {
     console.log(value); // It's temporary
   }, []);
   const onPressNextAnswer = () => {
-    if (numAnswer < quizIdMoc.questions.length) {
+    if (numAnswer < quizIdMocState.questions.length) {
       setNumAnswer(numAnswer + 1);
     }
   };
   const onPressSkipAnswer = () => {
-    if (numAnswer < quizIdMoc.questions.length) {
+    if (numAnswer < quizIdMocState.questions.length) {
       setNumAnswer(numAnswer + 1);
     }
   };
   const progressData: ProgressType[] = [
-    ...Array(quizIdMoc.questions.length),
+    ...Array(quizIdMocState.questions.length),
   ].map((_, index) => ({
     id: index + 1,
     questionStatus: 'default',
@@ -49,10 +50,10 @@ export const TestProcess = () => {
   const timeSeconds = (currentTest[0].timer % 60).toString();
   const timeMinutes = Math.floor(currentTest[0].timer / 60).toString();
   const arrAnswers = currentTest[0].content.options;
-  const randomAnswers = arrAnswers.sort(() => Math.random() - 0.5);
+  const randomAnswers = [...arrAnswers].sort(() => Math.random() - 0.5);
   const answerType = currentTest[0].type;
   const question = currentTest[0].title;
-  const titleQuiz = quizIdMoc.title;
+  const titleQuiz = quizIdMocState.title;
 
   return (
     <ViewContainer>
@@ -65,7 +66,7 @@ export const TestProcess = () => {
       <MainTestingContainer>
         <ViewFlexRight>
           <CountQuestionBox>
-            {numAnswer}/{quizIdMoc.questions.length}
+            {numAnswer}/{quizIdMocState.questions.length}
           </CountQuestionBox>
         </ViewFlexRight>
         <ViewFlexCenter>

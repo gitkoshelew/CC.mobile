@@ -4,7 +4,10 @@ import {NavigationProp, NavigatorScreenParams} from '@react-navigation/native';
 import {ScreenList} from '../navigation/navigation';
 
 export type RootCreateTestParamsList = {
-  [ScreenList.QUESTIONS_SET]: undefined;
+  [ScreenList.QUESTIONS_SET]: {
+    numberQuestions: number;
+    idNewTest: number;
+  };
   [ScreenList.TEST_SET]: undefined;
 };
 

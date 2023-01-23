@@ -8,13 +8,17 @@ const BlockAnswerBox = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 15px;
 `;
 
 const BlockBoxMarginLeft = styled.View`
   margin-bottom: 15px;
   margin-left: 15px;
+`;
+
+const BlockBoxMarginRight = styled.View`
+  margin-right: 8px;
 `;
 
 const TextBox = styled.Text`
@@ -43,6 +47,19 @@ const Title = styled.Text`
   font-family: 'Montserrat-Regular';
   color: ${Color.White};
   font-weight: 600;
+`;
+
+const SmallTitleBlack = styled.Text`
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-family: 'Montserrat-Bold';
+  color: ${Color.Black};
+`;
+
+const SmallTextBlack = styled.Text`
+  font-size: 14px;
+  font-family: 'Montserrat-Medium';
+  color: ${Color.Black};
 `;
 
 const SmallBox = styled.View`
@@ -75,4 +92,7 @@ export {
   TextDescription,
   SmallTextBox,
   SmallBox,
+  SmallTitleBlack,
+  SmallTextBlack,
+  BlockBoxMarginRight,
 };

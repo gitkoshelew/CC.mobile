@@ -1,13 +1,15 @@
-import {CustomInput, TextError} from './styles';
+import {CustomInput} from './styles';
 import {TextInputProps, View} from 'react-native';
 import {Color} from '@theme/colors';
 import {FieldError} from 'react-hook-form';
+import {TextError} from '../ReadyStyles/TextError';
 
 export type CustomTextInputPropsType = {
   height?: string | undefined;
   color?: Color;
   onChangeText?: (value: string) => void;
   error?: FieldError;
+  typeInput?: 'timer';
 };
 type CustomTextInputCombinePropsType = TextInputProps &
   CustomTextInputPropsType;
@@ -28,7 +30,7 @@ export const CustomTextInput = ({
         onChangeText={onChangeTextHandler}
         value={value}
       />
-      {props.error && <TextError>{props.error?.message || 'Error'}</TextError>}
+      {props.error && <TextError>{props.error?.message || ''}</TextError>}
     </View>
   );
 };

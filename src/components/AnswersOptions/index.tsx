@@ -12,15 +12,18 @@ type AnswersOptionsPropsType = {
   onPress: (value: number) => void;
   data: string[];
   answerType: string;
+  selected?: number;
 };
 
 export const AnswersOptions = ({
   onPress,
   data,
+  selected,
   answerType,
 }: AnswersOptionsPropsType) => {
   const transformData = data.map((el, i) => ({label: el, value: i}));
-  const [isActiveRadio, setIsActiveRadio] = useState<number>();
+  const [isActiveRadio, setIsActiveRadio] = useState<number>(selected!);
+
   const onPressRadio = (value: number) => {
     setIsActiveRadio(value);
     onPress(value);

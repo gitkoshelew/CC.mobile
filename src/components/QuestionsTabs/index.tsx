@@ -1,30 +1,28 @@
 import {QuestionTab} from './QuestionTab/index';
 import {ScrollViewBlock, TabsBlock} from './styles';
-import {useAppSelector} from '@hooks/hooks';
 
 export type QuestionsTabsPropsType = {
   onPressCurrentQuestion: (idQuestion: number) => void;
+  questions: {id: number}[];
+  currentQuestionsId: number;
 };
 
 type renderTabsType = {
   id: number;
   index: number;
-  questionStatus: boolean;
 };
 
-export const QuestionsTabs = (props: QuestionsTabsPropsType) => {
-  const questions = useAppSelector(state => state.testReducer.test.questions);
-  const currentQuestion = useAppSelector(
-    state => state.testReducer.currentQuestion,
-  );
-
-  const renderItem = ({id, questionStatus, index}: renderTabsType) => {
+export const QuestionsTabs = ({
+  questions,
+  currentQuestionsId,
+  ...props
+}: QuestionsTabsPropsType) => {
+  const renderItem = ({id, index}: renderTabsType) => {
     return (
       <QuestionTab
         key={id}
         id={id}
-        questionStatus={questionStatus}
-        isActive={id === currentQuestion}
+        isActive={id === currentQuestionsId}
         index={index}
         onPress={props.onPressCurrentQuestion}
       />
@@ -41,7 +39,6 @@ export const QuestionsTabs = (props: QuestionsTabsPropsType) => {
         {questions.map((item, index) =>
           renderItem({
             id: item.id,
-            questionStatus: item.content.options.length > 2,
             index,
           }),
         )}

@@ -7,7 +7,7 @@ const Container = styled.View`
 `;
 
 const Colon = styled.Text`
-  margin: 0 6px;
+  margin: 0 5px;
   font-size: 24px;
   font-weight: 500;
   color: ${Color.GrayDark};

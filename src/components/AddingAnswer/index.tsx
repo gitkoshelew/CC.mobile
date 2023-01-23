@@ -6,19 +6,20 @@ import {CheckBox} from '../ui/CheckBox';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
 import {useCallback} from 'react';
-import {correctAnswerType} from 'src/customTypes/test-types';
+import {Control, Controller} from 'react-hook-form';
+import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 
 type AddingAnswerPropsType = {
-  item: string;
+  item: {
+    id: string;
+    option: string;
+  };
   index: number;
-  correctAnswer: correctAnswerType;
+  control: Control<inputsFieldType>;
+  correctAnswer: string[];
   disabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
-  onPressCorrectAnswer: (
-    index: number,
-    answer: string,
-    checked: boolean,
-  ) => void;
+  onPressCorrectAnswer: (answer: string, checked: boolean) => void;
 };
 
 export const AddingAnswer = ({
@@ -29,36 +30,54 @@ export const AddingAnswer = ({
   disabledDeleteBtn,
   ...props
 }: AddingAnswerPropsType) => {
-  const onPressDeleteHandler = () => {
+  const onPressCorrectAnswerHandler = useCallback(
+    (checked: boolean) => {
+      onPressCorrectAnswer(item.option, checked);
+    },
+    [item.option, onPressCorrectAnswer],
+  );
+
+  const onPressDeletePressed = () => {
     onPressDelete(index);
   };
 
-  const onPressCorrectAnswerHandler = useCallback(
-    (checked: boolean) => {
-      onPressCorrectAnswer(index, item, checked);
-    },
-    [index, item, onPressCorrectAnswer],
-  );
-
-  const isCorrectAnswer = Array.isArray(props.correctAnswer)
-    ? props.correctAnswer.includes(item)
-    : props.correctAnswer === item;
+  const isCorrectAnswer = props.correctAnswer.includes(item.option);
 
   return (
     <BlockAnswerBox>
       <View style={styles.inputBox}>
-        <CustomTextInput onChangeText={() => {}} value={item} />
+        <Controller
+          render={({field: {onChange, value, onBlur}, fieldState: {error}}) => (
+            <CustomTextInput
+              onChangeText={onChange}
+              value={value}
+              onBlur={onBlur}
+              error={error}
+            />
+          )}
+          rules={{
+            required: 'option is required',
+            maxLength: {
+              value: 50,
+              message: 'option should be maximum 50 characters long',
+            },
+          }}
+          name={`options.${index}.option`}
+          control={props.control}
+        />
       </View>
-      <CheckBox
-        onPress={onPressCorrectAnswerHandler}
-        checked={isCorrectAnswer}
-      />
-      <TouchableOpacity
-        style={disabledDeleteBtn && styles.disabled}
-        onPress={onPressDeleteHandler}
-        disabled={disabledDeleteBtn}>
-        <AntDesign name="minuscircleo" size={30} color={Color.Red} />
-      </TouchableOpacity>
+      <View style={styles.inner}>
+        <CheckBox
+          onPress={onPressCorrectAnswerHandler}
+          checked={isCorrectAnswer}
+        />
+        <TouchableOpacity
+          style={disabledDeleteBtn && styles.disabled}
+          onPress={onPressDeletePressed}
+          disabled={disabledDeleteBtn}>
+          <AntDesign name="minuscircleo" size={30} color={Color.Red} />
+        </TouchableOpacity>
+      </View>
     </BlockAnswerBox>
   );
 };
