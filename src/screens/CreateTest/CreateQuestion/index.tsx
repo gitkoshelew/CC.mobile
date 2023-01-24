@@ -3,26 +3,27 @@ import {
   BlockBox,
   BlockBoxMarginLeft,
   TextBox,
-} from '@src/components/ui/ReadyStyles/Boxes';
+  ContainerDynamicWidth,
+} from '@src/components/ui/ReadyStyles/Boxes/index';
 import {
   ViewCenter,
   ViewFlexForTwoElements,
-} from '@src/components/ui/ReadyStyles/Containers';
-import {AppSelect} from '@src/components/ui/AppSelect';
-import {TimerInput} from '@src/components/TimerInput';
+} from '@src/components/ui/ReadyStyles/Containers/index';
+import {AppSelect} from '@src/components/ui/AppSelect/index';
+import {TimerInput} from '@src/components/TimerInput/index';
 import {CreateAnswer} from './CreateAnswer/index';
-import {AppButton} from '@src/components/ui/AppButton';
-import {TextInputHookForm} from '@src/components/TextInputHookForm';
+import {AppButton} from '@src/components/ui/AppButton/index';
+import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
 import {useFieldArray, useForm} from 'react-hook-form';
 import {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch} from '@hooks/hooks';
 import {SwitchSelectors} from '@src/components/SwitchSelectors/index';
 import {Difficulty, questionType, TypeOptions} from '@customTypes/test-types';
 import {transformTime} from '@src/utils/transformTime';
-import {createQuestion, getQuestions} from '@src/bll/testReducer';
+import {createQuestion, getQuizQuestions} from '@src/bll/testReducer';
 import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
 
-export type inputsFieldType = {
+export type InputsFieldType = {
   title: string;
   descriptions: string;
   minutes: string;
@@ -38,9 +39,10 @@ export type CreateQuestionPropsType = {
 const numberOfLines = Platform.OS === 'ios' ? undefined : 2;
 
 export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPropsType) => {
-  const data = ['Single', 'Multiple'];
+  const dataAnswerType = [TypeOptions.single, TypeOptions.multi];
+
   const dispatch = useAppDispatch();
-  const {control, handleSubmit, reset, getValues} = useForm<inputsFieldType>({
+  const {control, handleSubmit, reset, getValues} = useForm<InputsFieldType>({
     defaultValues: {
       title: '',
       descriptions: '',
@@ -52,15 +54,15 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
   const [selectorsData, setSelectorsData] = useState<{
     difficulty: string;
     type: string;
-    correctAnswer: string[];
+    correctAnswers: string[];
   }>({
     difficulty: 'Easy',
-    type: 'Single',
-    correctAnswer: [],
+    type: 'single',
+    correctAnswers: [],
   });
-  console.log(currentQuestion);
+  // console.log(findMe);
 
-  const onPressSaveQuestionHandler = (values: inputsFieldType) => {
+  const onPressSaveQuestionHandler = (values: InputsFieldType) => {
     const isTime = transformTime({
       format: 'onlySeconds',
       isMinutes: values.minutes,
@@ -78,7 +80,7 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
         topicId: 1,
       }),
     ).then(() => {
-      dispatch(getQuestions(25))
+      dispatch(getQuizQuestions(25))
         .unwrap()
         .then(res => {
           setQuestions(res.question);
@@ -103,12 +105,12 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
       if (currentInput !== '' && checked) {
         setSelectorsData({
           ...selectorsData,
-          correctAnswer: [...selectorsData.correctAnswer, currentInput],
+          correctAnswers: [...selectorsData.correctAnswers, currentInput],
         });
       } else {
         setSelectorsData({
           ...selectorsData,
-          correctAnswer: selectorsData.correctAnswer.filter(el => el !== currentInput),
+          correctAnswers: selectorsData.correctAnswers.filter(el => el !== currentInput),
         });
       }
     },
@@ -124,7 +126,7 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
 
   const selectQuestionType = useCallback(
     (value: string) => {
-      setSelectorsData({...selectorsData, type: value, correctAnswer: []});
+      setSelectorsData({...selectorsData, type: value, correctAnswers: []});
     },
     [selectorsData],
   );
@@ -180,14 +182,16 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
       </BlockBox>
       <ViewFlexForTwoElements>
         <BlockBox>
-          <TextBox>Question type</TextBox>
-          <AppSelect
-            value={selectorsData.type}
-            size="m"
-            data={data}
-            type="primary"
-            onSelect={selectQuestionType}
-          />
+          <TextBox>Answer type</TextBox>
+          <ContainerDynamicWidth width="117px">
+            <AppSelect
+              value={selectorsData.type}
+              size="m"
+              data={dataAnswerType}
+              type="primary"
+              onSelect={selectQuestionType}
+            />
+          </ContainerDynamicWidth>
         </BlockBox>
         <BlockBoxMarginLeft>
           <TextBox>Timer</TextBox>
@@ -198,7 +202,7 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
         fields={fields}
         control={control}
         type={selectorsData.type}
-        correctAnswer={selectorsData.correctAnswer}
+        correctAnswer={selectorsData.correctAnswers}
         addNewOptionPressed={addNewOptionPressed}
         deleteOptionPressed={deleteOptionPressed}
         checkedCorrectOption={checkedCorrectOption}

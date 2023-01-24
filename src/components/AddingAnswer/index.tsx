@@ -7,13 +7,13 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
 import {useCallback} from 'react';
 import {Control, Controller, useWatch} from 'react-hook-form';
-import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
+import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
 
 type AddingAnswerPropsType = {
   index: number;
   correctAnswer: string[];
   type: string;
-  control: Control<inputsFieldType>;
+  control: Control<InputsFieldType>;
   disabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
   onPressCorrectAnswer: (index: number, checked: boolean) => void;

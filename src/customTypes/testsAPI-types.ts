@@ -1,11 +1,11 @@
-export type createTestRequestType = {
+export type createTestRequestQuiz = {
   title: string;
   description: string;
   topicId: 1;
   authorId: number;
 };
 
-export type getTestResponseType = {
+export type getQuizResponseType = {
   id: number;
   title: string;
   authorId: number;
@@ -20,7 +20,7 @@ export type getTestResponseType = {
   };
   question: [];
 };
-export type addQuestionToTest = {
+export type addQuestionToQuiz = {
   quizId: number;
   questionId: number;
 };

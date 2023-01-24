@@ -1,6 +1,6 @@
 export enum TypeOptions {
-  Single = 'single',
-  Multiple = 'multi',
+  single = 'single',
+  multi = 'multi',
 }
 
 export enum Difficulty {
@@ -43,7 +43,7 @@ export type questionType = {
   // quiz: number[]; // need explain
 };
 
-export type testType = {
+export type quizType = {
   id: number;
   title: string;
   description: string;
@@ -56,7 +56,7 @@ export type testType = {
 };
 
 export type initialStateTestType = {
-  test: testType;
+  test: quizType;
   currentQuestion: number;
   numberQuestions: number;
 };

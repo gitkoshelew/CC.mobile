@@ -1,24 +1,24 @@
-import {testsAPI} from '@src/dal/testsAPI';
+import {quizzesAPI} from '@src/dal/quizzesAPI';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {createTestRequestType} from '@customTypes/testsAPI-types';
+import {createTestRequestQuiz} from '@customTypes/testsAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
 import {newQuestionType} from '@customTypes/test-types';
 import {AxiosError} from 'axios';
 
-export const getTests = createAsyncThunk('test/getTests', async (_, {rejectWithValue}) => {
+export const getQuizzes = createAsyncThunk('test/getTests', async (_, {rejectWithValue}) => {
   try {
-    await testsAPI.getTests();
+    await quizzesAPI.getQuiz();
   } catch (e) {
     const err = e as Error | AxiosError;
     return rejectWithValue(err.message);
   }
 });
 
-export const createTest = createAsyncThunk(
+export const createQuiz = createAsyncThunk(
   'test/createTest',
-  async (param: createTestRequestType, {rejectWithValue}) => {
+  async (param: createTestRequestQuiz, {rejectWithValue}) => {
     try {
-      const res = await testsAPI.createTest(param);
+      const res = await quizzesAPI.createQuiz(param);
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
@@ -31,12 +31,11 @@ export const createQuestion = createAsyncThunk(
   'test/createQuestion',
   async (param: newQuestionType, {rejectWithValue}) => {
     try {
-      const resCreateQuest = await questionsAPI.createQuestion(param);
-      const res = await questionsAPI.addQuestionToTest({
+      const responseCreateQuest = await questionsAPI.createQuestion(param);
+      await quizzesAPI.addQuestionToQuiz({
         quizId: 25,
-        questionId: resCreateQuest.data.id,
+        questionId: responseCreateQuest.data.id,
       }); // It's temporary, backend have to field than would immediately indicate quiz
-      return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
       console.error(err.message);
@@ -45,11 +44,11 @@ export const createQuestion = createAsyncThunk(
   },
 );
 
-export const getQuestions = createAsyncThunk(
+export const getQuizQuestions = createAsyncThunk(
   'test/createQuestion',
   async (id: number, {rejectWithValue}) => {
     try {
-      const res = await questionsAPI.getQuestions(id);
+      const res = await quizzesAPI.getQuizQuestions(id);
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;

@@ -9,7 +9,7 @@ import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {useCallback, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
-import {createTest} from '@src/bll/testReducer';
+import {createQuiz} from '@src/bll/testReducer';
 
 export type SelectorsType = {
   theme: string;
@@ -52,7 +52,7 @@ export const TestSettings = () => {
   const onPressQuestionsSettings = async (values: inputsFieldType) => {
     try {
       await dispatch(
-        createTest({
+        createQuiz({
           ...values,
           authorId: 1,
           topicId: 1,
