@@ -22,9 +22,4 @@ export const TestMoc = {
   ],
 };
 
-export const TestOptionsMoc = [
-  'Node.js',
-  'Type Script',
-  'Java Script',
-  'React',
-];
+export const TestOptionsMoc = ['Node.js', 'Type Script', 'Java Script', 'React'];

@@ -10,10 +10,20 @@ export enum Difficulty {
 }
 
 export type answersType = {
-  options: {option: string}[];
+  options: string[];
   correctAnswer: string[];
 };
 export type numberQuestionsType = 10 | 15 | 20 | 25 | 30;
+
+export type newQuestionType = {
+  title: string;
+  description: string;
+  content: answersType;
+  difficulty: Difficulty;
+  timer: number;
+  type: TypeOptions;
+  topicId: number;
+};
 
 export type questionType = {
   id: number;
@@ -29,7 +39,7 @@ export type questionType = {
   //   id: 1;
   //   quizId: 25;
   //   questionId: 2;
-  // };
+  // }; // need explain
   // quiz: number[]; // need explain
 };
 

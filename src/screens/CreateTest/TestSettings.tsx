@@ -1,9 +1,6 @@
 import {Platform} from 'react-native';
 import {TextBox, BlockBox} from '../../components/ui/ReadyStyles/Boxes';
-import {
-  ViewContainer,
-  ViewCenter,
-} from '../../components/ui/ReadyStyles/Containers';
+import {ViewContainer, ViewCenter} from '../../components/ui/ReadyStyles/Containers';
 import {AppButton} from '../../components/ui/AppButton';
 import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
@@ -118,19 +115,11 @@ export const TestSettings = () => {
       </BlockBox>
       <TextBox>Theme</TextBox>
       <BlockBox>
-        <AppSelect
-          size="m"
-          data={data}
-          type="primary"
-          onSelect={selectsThemePressed}
-        />
+        <AppSelect size="m" data={data} type="primary" onSelect={selectsThemePressed} />
       </BlockBox>
       <TextBox>Number of questions</TextBox>
       <BlockBox>
-        <SwitchSelectors
-          type="number"
-          onPress={selectsNumberQuestionsPressed}
-        />
+        <SwitchSelectors type="number" onPress={selectsNumberQuestionsPressed} />
       </BlockBox>
       <ViewCenter>
         <AppButton

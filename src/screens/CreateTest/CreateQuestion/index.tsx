@@ -19,7 +19,8 @@ import {useAppDispatch} from '@hooks/hooks';
 import {SwitchSelectors} from '@src/components/SwitchSelectors/index';
 import {Difficulty, questionType, TypeOptions} from '@customTypes/test-types';
 import {transformTime} from '@src/utils/transformTime';
-import {createQuestion} from '@src/bll/testReducer';
+import {createQuestion, getQuestions} from '@src/bll/testReducer';
+import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
 
 export type inputsFieldType = {
   title: string;
@@ -36,29 +37,28 @@ export type CreateQuestionPropsType = {
 
 const numberOfLines = Platform.OS === 'ios' ? undefined : 2;
 
-export const CreateQuestion = ({
-  currentQuestion,
-  setQuestions,
-  questions,
-}: CreateQuestionPropsType) => {
+export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPropsType) => {
   const data = ['Single', 'Multiple'];
   const dispatch = useAppDispatch();
-  const {control, handleSubmit, reset} = useForm<inputsFieldType>({
+  const {control, handleSubmit, reset, getValues} = useForm<inputsFieldType>({
     defaultValues: {
       title: '',
       descriptions: '',
-      options: currentQuestion.content.options,
     },
   });
 
   const {fields, append, remove} = useFieldArray({name: 'options', control});
+
   const [selectorsData, setSelectorsData] = useState<{
     difficulty: string;
     type: string;
+    correctAnswer: string[];
   }>({
     difficulty: 'Easy',
     type: 'Single',
+    correctAnswer: [],
   });
+  console.log(currentQuestion);
 
   const onPressSaveQuestionHandler = (values: inputsFieldType) => {
     const isTime = transformTime({
@@ -66,38 +66,23 @@ export const CreateQuestion = ({
       isMinutes: values.minutes,
       isSeconds: values.seconds,
     });
-    // const isOptions = getOptionsObjectToString(values.options);
-    const collectedDataQuestion: questionType = {
-      id: currentQuestion.id,
-      title: values.title,
-      description: values.descriptions,
-      timer: isTime as number,
-      content: {options: values.options, correctAnswer: []},
-      difficulty: selectorsData.difficulty as Difficulty,
-      type: selectorsData.type as TypeOptions,
-      topicId: 1,
-      moderationId: null,
-    };
-    setQuestions(
-      questions.map(el =>
-        el.id === currentQuestion.id ? {...collectedDataQuestion} : el,
-      ),
-    );
+    const isOptions = transformFormatOptions(values.options);
     dispatch(
       createQuestion({
-        id: 1,
         title: values.title,
         description: values.descriptions,
         timer: isTime as number,
-        content: {options: values.options, correctAnswer: []},
-        difficulty:
-          Difficulty[selectorsData.difficulty as keyof typeof Difficulty],
+        content: {options: isOptions as string[], correctAnswer: ['']},
+        difficulty: Difficulty[selectorsData.difficulty as keyof typeof Difficulty],
         type: TypeOptions[selectorsData.type as keyof typeof TypeOptions],
         topicId: 1,
-        moderationId: null,
       }),
-    ).then(res => {
-      console.log(res);
+    ).then(() => {
+      dispatch(getQuestions(25))
+        .unwrap()
+        .then(res => {
+          setQuestions(res.question);
+        });
     });
   };
 
@@ -105,14 +90,24 @@ export const CreateQuestion = ({
     append([{option: ''}]);
   }, [append]);
 
-  const deleteOptionPressed = useCallback(
-    (index: number) => {
-      remove(index);
-    },
-    [remove],
-  );
+  const deleteOptionPressed = (index: number) => {
+    remove(index);
+  };
 
-  const checkedCorrectOption = useCallback(() => {}, []);
+  const checkedCorrectOption = (index: number, checked: boolean) => {
+    let currentInput = getValues('options')[index].option;
+    if (currentInput !== '' && checked) {
+      setSelectorsData({
+        ...selectorsData,
+        correctAnswer: [...selectorsData.correctAnswer, currentInput],
+      });
+    } else {
+      setSelectorsData({
+        ...selectorsData,
+        correctAnswer: selectorsData.correctAnswer.filter(el => el !== currentInput),
+      });
+    }
+  };
 
   const selectQuestionDifficult = useCallback(
     (value: string) => {
@@ -123,7 +118,7 @@ export const CreateQuestion = ({
 
   const selectQuestionType = useCallback(
     (value: string) => {
-      setSelectorsData({...selectorsData, type: value});
+      setSelectorsData({...selectorsData, type: value, correctAnswer: []});
     },
     [selectorsData],
   );
@@ -132,7 +127,7 @@ export const CreateQuestion = ({
     reset({
       title: currentQuestion.title,
       descriptions: currentQuestion.description,
-      options: currentQuestion.content.options,
+      options: transformFormatOptions(currentQuestion.content.options) as optionsType,
       ...(transformTime({
         format: 'default',
         totalSeconds: currentQuestion.timer,
@@ -196,7 +191,8 @@ export const CreateQuestion = ({
       <CreateAnswer
         fields={fields}
         control={control}
-        correctAnswer={['']}
+        type={selectorsData.type}
+        correctAnswer={selectorsData.correctAnswer}
         addNewOptionPressed={addNewOptionPressed}
         deleteOptionPressed={deleteOptionPressed}
         checkedCorrectOption={checkedCorrectOption}
@@ -209,12 +205,7 @@ export const CreateQuestion = ({
         />
       </ViewCenter>
       <ViewCenter>
-        <AppButton
-          title="Save test"
-          type="primary"
-          onPress={() => {}}
-          disabled={true}
-        />
+        <AppButton title="Save test" type="primary" onPress={() => {}} disabled={true} />
       </ViewCenter>
     </View>
   );

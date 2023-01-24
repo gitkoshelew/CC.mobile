@@ -1,29 +1,27 @@
 import {QuestionTab} from './QuestionTab/index';
 import {ScrollViewBlock, TabsBlock} from './styles';
-import {questionType} from '@customTypes/test-types';
+import {useState} from 'react';
 
 export type QuestionsTabsPropsType = {
   onPressCurrentQuestion: (id: number) => void;
-  questions: questionType[];
-  currentQuestionsId: number;
+  listQuestionsTabs: number[];
 };
 
 type renderTabsType = {
   id: number;
 };
 
-export const QuestionsTabs = ({
-  questions,
-  currentQuestionsId,
-  ...props
-}: QuestionsTabsPropsType) => {
+export const QuestionsTabs = ({listQuestionsTabs, ...props}: QuestionsTabsPropsType) => {
+  const [isActiveTab, setIsActiveTab] = useState(0);
+
   const renderItem = ({id}: renderTabsType) => {
     return (
       <QuestionTab
         key={id}
         id={id}
-        isActive={id === currentQuestionsId}
+        isActive={id === isActiveTab}
         onPress={props.onPressCurrentQuestion}
+        setIsActiveTab={setIsActiveTab}
       />
     );
   };
@@ -34,10 +32,10 @@ export const QuestionsTabs = ({
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={true}
       testID="ScrollViewBlock">
-      <TabsBlock flexDirection={questions.length > 10 ? 'column' : 'row'}>
-        {questions.map(item =>
+      <TabsBlock flexDirection={listQuestionsTabs.length > 10 ? 'column' : 'row'}>
+        {listQuestionsTabs.map(item =>
           renderItem({
-            id: item.id,
+            id: item,
           }),
         )}
       </TabsBlock>

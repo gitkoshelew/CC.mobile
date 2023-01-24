@@ -3,11 +3,7 @@ import {QuestionsTabs} from '../index';
 
 test('Should render view block', async () => {
   render(
-    <QuestionsTabs
-      onPressCurrentQuestion={() => {}}
-      questions={[]}
-      currentQuestionsId={1}
-    />,
+    <QuestionsTabs onPressCurrentQuestion={() => {}} listQuestionsTabs={[1, 2, 3, 4, 5]} />,
   );
   const scrollViewBlock = screen.getByTestId('ScrollViewBlock').props;
 

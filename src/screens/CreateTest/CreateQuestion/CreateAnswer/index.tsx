@@ -1,8 +1,5 @@
 import {View} from 'react-native';
-import {
-  ButtonAnswerBox,
-  TextBox,
-} from '@src/components/ui/ReadyStyles/Boxes/index';
+import {ButtonAnswerBox, TextBox} from '@src/components/ui/ReadyStyles/Boxes/index';
 import {AddingAnswer} from '@src/components/AddingAnswer/index';
 import {AddButton} from '@src/components/ui/AddButton/index';
 import {Control} from 'react-hook-form';
@@ -11,26 +8,23 @@ import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
 type CreateAnswerPropsType = {
   control: Control<inputsFieldType>;
   fields: {id: string; option: string}[];
+  type: string;
   correctAnswer: string[];
   addNewOptionPressed: () => void;
   deleteOptionPressed: (index: number) => void;
-  checkedCorrectOption: (option: string, checked: boolean) => void;
+  checkedCorrectOption: (index: number, checked: boolean) => void;
 };
 
-export const CreateAnswer = ({
-  fields,
-  correctAnswer,
-  ...props
-}: CreateAnswerPropsType) => {
+export const CreateAnswer = ({fields, correctAnswer, ...props}: CreateAnswerPropsType) => {
   const disabledDeleteBtn = fields.length <= 2;
   return (
     <View>
       <TextBox>Answer choice</TextBox>
       {fields.map((item, index) => (
         <AddingAnswer
-          key={index}
+          key={item.id}
           index={index}
-          item={item}
+          type={props.type}
           control={props.control}
           correctAnswer={correctAnswer}
           disabledDeleteBtn={disabledDeleteBtn}
@@ -39,10 +33,7 @@ export const CreateAnswer = ({
         />
       ))}
       <ButtonAnswerBox>
-        <AddButton
-          onPress={props.addNewOptionPressed}
-          disabled={fields.length > 6}
-        />
+        <AddButton onPress={props.addNewOptionPressed} disabled={fields.length > 6} />
         <TextBox>Add answer</TextBox>
       </ButtonAnswerBox>
     </View>

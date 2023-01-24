@@ -2,20 +2,17 @@ import {testsAPI} from '@src/dal/testsAPI';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {createTestRequestType} from '@customTypes/testsAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
-import {questionType} from '@customTypes/test-types';
+import {newQuestionType} from '@customTypes/test-types';
 import {AxiosError} from 'axios';
 
-export const getTests = createAsyncThunk(
-  'test/getTests',
-  async (_, {rejectWithValue}) => {
-    try {
-      await testsAPI.getTests();
-    } catch (e) {
-      const err = e as Error | AxiosError;
-      return rejectWithValue(err.message);
-    }
-  },
-);
+export const getTests = createAsyncThunk('test/getTests', async (_, {rejectWithValue}) => {
+  try {
+    await testsAPI.getTests();
+  } catch (e) {
+    const err = e as Error | AxiosError;
+    return rejectWithValue(err.message);
+  }
+});
 
 export const createTest = createAsyncThunk(
   'test/createTest',
@@ -32,12 +29,17 @@ export const createTest = createAsyncThunk(
 
 export const createQuestion = createAsyncThunk(
   'test/createQuestion',
-  async (param: questionType, {rejectWithValue}) => {
+  async (param: newQuestionType, {rejectWithValue}) => {
     try {
-      const res = await questionsAPI.createQuestion(param);
+      const resCreateQuest = await questionsAPI.createQuestion(param);
+      const res = await questionsAPI.addQuestionToTest({
+        quizId: 25,
+        questionId: resCreateQuest.data.id,
+      }); // It's temporary, backend have to field than would immediately indicate quiz
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
+      console.error(err.message);
       return rejectWithValue(err.message);
     }
   },

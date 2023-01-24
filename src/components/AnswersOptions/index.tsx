@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import RadioForm, {
-  RadioButtonInput,
-  RadioButtonLabel,
-} from 'react-native-simple-radio-button';
+import RadioForm, {RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {AnswerRadioContainer, styles, ViewMarginRight} from './styles';
 import {Color} from '@theme/colors';
 
@@ -13,11 +10,7 @@ type AnswersOptionsPropsType = {
   selected?: number;
 };
 
-export const AnswersOptions = ({
-  onPress,
-  data,
-  selected,
-}: AnswersOptionsPropsType) => {
+export const AnswersOptions = ({onPress, data, selected}: AnswersOptionsPropsType) => {
   const transformData = data.map((el, i) => ({label: el, value: i}));
   const [isActiveRadio, setIsActiveRadio] = useState<number>(selected!);
 
@@ -37,9 +30,7 @@ export const AnswersOptions = ({
                 index={i}
                 isSelected={isActiveRadio === i}
                 onPress={onPressRadio}
-                buttonOuterColor={
-                  isActiveRadio === i ? Color.BlueLight : Color.GrayStrongDark
-                }
+                buttonOuterColor={isActiveRadio === i ? Color.BlueLight : Color.GrayStrongDark}
                 buttonSize={15}
                 buttonOuterSize={25}
               />
