@@ -1,23 +1,19 @@
 import {UserIconContainer, Wrapper} from './styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {ViewCenter} from '../ui/ReadyStyles/Containers';
-import * as AppButton from '../ui/AppButton';
-import {useAppNavigate} from '@hooks/hooks';
-import {ScreenList} from '@src/navigation/navigation';
+import {ViewCenter, ViewRightBotton} from '../ui/ReadyStyles/Containers';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {Title} from '../ui/ReadyStyles/Boxes';
+import {BlockBoxMarginRight, Title} from '../ui/ReadyStyles/Boxes';
+import {SmallButton} from '../ui/SmallButton';
 
 interface IProps {
   isOpen: boolean;
 }
 
 export const Header = ({isOpen}: IProps) => {
-  const {navigate} = useAppNavigate();
-
   const opacityValue = useSharedValue(0);
 
   const opacity = useAnimatedStyle(() => {
@@ -37,19 +33,20 @@ export const Header = ({isOpen}: IProps) => {
   return (
     <Wrapper>
       <Animated.View style={opacity}>
+        <ViewRightBotton>
+          <BlockBoxMarginRight>
+            <SmallButton type="theme" onPress={() => {}} />
+          </BlockBoxMarginRight>
+          <BlockBoxMarginRight>
+            <SmallButton type="exit" onPress={() => {}} />
+          </BlockBoxMarginRight>
+        </ViewRightBotton>
         <ViewCenter>
           <UserIconContainer>
             <FontAwesome name={'user'} size={80} />
           </UserIconContainer>
           <ViewCenter>
             <Title>User Name</Title>
-            <AppButton.AppButton
-              title="Log In"
-              type="primary"
-              onPress={() =>
-                navigate(ScreenList.HOME, {screen: ScreenList.SIGN_IN})
-              }
-            />
           </ViewCenter>
         </ViewCenter>
       </Animated.View>

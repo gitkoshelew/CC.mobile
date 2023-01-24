@@ -49,6 +49,14 @@ const Title = styled.Text`
   font-weight: 600;
 `;
 
+const SmallTitle = styled.Text`
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 16px;
+  font-family: 'Montserrat-Regular';
+  color: ${Color.White};
+`;
+
 const SmallTitleBlack = styled.Text`
   margin-bottom: 10px;
   font-size: 16px;
@@ -95,4 +103,5 @@ export {
   SmallTitleBlack,
   SmallTextBlack,
   BlockBoxMarginRight,
+  SmallTitle,
 };

@@ -1,25 +1,40 @@
 import {Formik} from 'formik';
 import {FormInput} from '../ui/FormInput';
-import {ViewCenter, ViewContainer} from '../ui/ReadyStyles/Containers';
-import {
-  BlockBox,
-  SmallBox,
-  SmallTextBox,
-  TextDescription,
-  Title,
-} from '../ui/ReadyStyles/Boxes';
-import {Container} from './styles';
+import {ViewCenter} from '../ui/ReadyStyles/Containers';
+import {BlockBox, SmallBox, SmallTitle} from '../ui/ReadyStyles/Boxes';
 import {LoginButton} from '../ui/LoginButton';
-import {useAppNavigate} from '@hooks/hooks';
-
-import {ScreenList} from '@src/navigation/navigation';
+import {Wrapper} from '../Header/styles';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 export interface ISignInValues {
   email: string;
   password: string;
 }
-export const FormSignIn = () => {
-  const {navigate} = useAppNavigate();
+
+interface IProps {
+  isOpen: boolean;
+}
+
+export const FormSignIn = ({isOpen}: IProps) => {
+  const opacityValue = useSharedValue(0);
+
+  const opacity = useAnimatedStyle(() => {
+    return {
+      opacity: opacityValue.value,
+    };
+  });
+
+  const changeOpacity = () => {
+    isOpen
+      ? (opacityValue.value = withTiming(1, {duration: 1500}))
+      : (opacityValue.value = withTiming(0, {duration: 300}));
+  };
+
+  isOpen ? changeOpacity() : changeOpacity();
 
   const signInValues: ISignInValues = {
     email: '',
@@ -29,12 +44,11 @@ export const FormSignIn = () => {
   return (
     <Formik initialValues={signInValues} onSubmit={(): void => {}}>
       {({handleChange, handleSubmit, values}) => (
-        <Container
-          source={require('../../assets/images/background-second.png')}
-          resizeMode="stretch">
-          <ViewContainer>
-            <Title>Sign In</Title>
-            <TextDescription>Please sign in to continue</TextDescription>
+        <Wrapper>
+          <Animated.View style={opacity}>
+            <ViewCenter>
+              <SmallTitle>Please sign in to continue</SmallTitle>
+            </ViewCenter>
             <BlockBox>
               <FormInput
                 placeholder="Enter email"
@@ -58,19 +72,9 @@ export const FormSignIn = () => {
                   type="primary"
                 />
               </SmallBox>
-              <SmallBox>
-                <SmallTextBox>or</SmallTextBox>
-              </SmallBox>
-              <LoginButton
-                onPress={() =>
-                  navigate(ScreenList.HOME, {screen: ScreenList.SIGN_UP})
-                }
-                title="Sign up"
-                type="secondary"
-              />
             </ViewCenter>
-          </ViewContainer>
-        </Container>
+          </Animated.View>
+        </Wrapper>
       )}
     </Formik>
   );
