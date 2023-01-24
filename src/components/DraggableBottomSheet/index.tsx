@@ -16,7 +16,7 @@ export const {width: WINDOW_WIDTH, height: WINDOW_HEIGHT}: ScaledSize =
   Dimensions.get('window');
 const BOTTOM_SHEET_MAX_HEIGHT = isAuth
   ? WINDOW_HEIGHT * 0.3
-  : WINDOW_HEIGHT * 0.4;
+  : WINDOW_HEIGHT * 0.47;
 
 const BOTTOM_SHEET_MIN_HEIGHT = WINDOW_HEIGHT * 0.03;
 const MAX_UPWARD_TRANSLATE_Y =

@@ -1,7 +1,7 @@
 import {Formik} from 'formik';
 import {FormInput} from '../ui/FormInput';
 import {ViewCenter} from '../ui/ReadyStyles/Containers';
-import {BlockBox, SmallBox, SmallTitle} from '../ui/ReadyStyles/Boxes';
+import {BlockBox, SmallTitle} from '../ui/ReadyStyles/Boxes';
 import {LoginButton} from '../ui/LoginButton';
 import {Wrapper} from '../Header/styles';
 import Animated, {
@@ -9,6 +9,9 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import * as Yup from 'yup';
+import {TextError} from '../ui/ReadyStyles/TextError';
+import {Container} from './styles';
 
 export interface ISignInValues {
   email: string;
@@ -41,9 +44,22 @@ export const FormSignIn = ({isOpen}: IProps) => {
     password: '',
   };
 
+  const SigninSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Email is equired'),
+    password: Yup.string()
+      .min(2, 'Too Short!')
+      .max(10, 'Too Long!')
+      .required('Password is equired'),
+  });
+
   return (
-    <Formik initialValues={signInValues} onSubmit={(): void => {}}>
-      {({handleChange, handleSubmit, values}) => (
+    <Formik
+      initialValues={signInValues}
+      onSubmit={(values: ISignInValues): void => {
+        console.log(values);
+      }}
+      validationSchema={SigninSchema}>
+      {({handleChange, handleSubmit, values, errors}) => (
         <Wrapper>
           <Animated.View style={opacity}>
             <ViewCenter>
@@ -55,6 +71,7 @@ export const FormSignIn = ({isOpen}: IProps) => {
                 onChangeText={handleChange('email')}
                 value={values.email}
               />
+              <TextError>{errors.email}</TextError>
             </BlockBox>
             <BlockBox>
               <FormInput
@@ -63,16 +80,15 @@ export const FormSignIn = ({isOpen}: IProps) => {
                 value={values.password}
                 secureTextEntry={true}
               />
+              <TextError>{errors.password}</TextError>
             </BlockBox>
-            <ViewCenter>
-              <SmallBox>
-                <LoginButton
-                  onPress={handleSubmit}
-                  title="Sign in"
-                  type="primary"
-                />
-              </SmallBox>
-            </ViewCenter>
+            <Container>
+              <LoginButton
+                onPress={handleSubmit}
+                title="Sign in"
+                type="primary"
+              />
+            </Container>
           </Animated.View>
         </Wrapper>
       )}
