@@ -6,18 +6,13 @@ import {SignUp} from './SignUp';
 import {FormSignIn} from '@src/components/FormSignIn';
 import {RootHomeScreenParamsList} from '@src/customTypes/navigation-types';
 
-const {Navigator, Screen} =
-  createNativeStackNavigator<RootHomeScreenParamsList>();
+const {Navigator, Screen} = createNativeStackNavigator<RootHomeScreenParamsList>();
 
 export const Home = () => {
   return (
     <ViewFlex>
       <Navigator>
-        <Screen
-          name={ScreenList.MAIN}
-          component={Main}
-          options={{headerShown: false}}
-        />
+        <Screen name={ScreenList.MAIN} component={Main} options={{headerShown: false}} />
         <Screen name={ScreenList.SIGN_IN} component={FormSignIn} />
         <Screen name={ScreenList.SIGN_UP} component={SignUp} />
       </Navigator>

@@ -1,9 +1,6 @@
 import React, {useCallback} from 'react';
 import {Timer} from '@src/components/Timer/index';
-import {
-  ViewContainer,
-  ViewFlexRight,
-} from '@src/components/ui/ReadyStyles/Containers/index';
+import {ViewContainer, ViewFlexRight} from '@src/components/ui/ReadyStyles/Containers/index';
 import {TimerBox, TextBox, ButtonsBox} from './styles';
 import {MainTestingContainer} from '../../../components/ui/ReadyStyles/Containers';
 import {AnswersOptions} from '@src/components/AnswersOptions/index';

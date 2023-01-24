@@ -15,11 +15,7 @@ export const Button = styled.TouchableOpacity<ViewBoxPropsType>`
   height: 40px;
   margin: 5px;
   background-color: ${props =>
-    props.isActive
-      ? Color.BlueLight
-      : props.questionStatus
-      ? Color.White
-      : Color.Gray};
+    props.isActive ? Color.BlueLight : props.questionStatus ? Color.White : Color.Gray};
 `;
 
 export const TextButton = styled.Text<{isActive: boolean}>`

@@ -12,10 +12,7 @@ export const CreateTest = () => {
     <ViewFlex>
       <Stack.Navigator>
         <Stack.Screen name={ScreenList.TEST_SET} component={TestSettings} />
-        <Stack.Screen
-          name={ScreenList.QUESTIONS_SET}
-          component={QuestionsSettings}
-        />
+        <Stack.Screen name={ScreenList.QUESTIONS_SET} component={QuestionsSettings} />
       </Stack.Navigator>
     </ViewFlex>
   );
