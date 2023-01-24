@@ -6,10 +6,5 @@ storiesOf('Answers options', module)
     <AnswersOptions onPress={() => {}} data={['one']} answerType="single" />
   ))
   .add('active', () => (
-    <AnswersOptions
-      onPress={() => {}}
-      selected={0}
-      data={['one']}
-      answerType="single"
-    />
+    <AnswersOptions onPress={() => {}} selected={0} data={['one']} answerType="single" />
   ));

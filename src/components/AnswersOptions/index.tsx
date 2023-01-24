@@ -45,7 +45,7 @@ export const AnswersOptions = ({
                   buttonOuterSize={30}
                 />
               ) : (
-                <CheckBox onPress={() => {}} checked={false} />
+                <CheckBox onPress={() => {}} isChecked={false} />
               )}
             </ViewMarginRight>
             <RadioButtonLabel
