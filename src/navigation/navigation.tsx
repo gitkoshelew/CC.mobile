@@ -2,11 +2,11 @@ import {
   BottomTabBarButtonProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {CreateTest} from '../screens/CreateTest/CreateTest';
-import {LiveCoding} from '../screens/LiveCoding';
+import {CreateTest} from '@src/screens/CreateTest/CreateTest';
+import {LiveCoding} from '@src/screens/LiveCoding';
 import {TabButton} from './TabButton/TabButton';
-import Tests from '../screens/Testing/Tests';
-import {Home} from '../screens/Main/Home';
+import Tests from '@src/screens/Testing/Tests';
+import {Home} from '@src/screens/Main/Home';
 import {StyleSheet, View} from 'react-native';
 import {DraggableBottomSheet} from '@src/components/DraggableBottomSheet';
 

@@ -2,11 +2,10 @@ import {FlatList, View} from 'react-native';
 import {ProgressView, ProgressType} from './ProgressView';
 import {renderItemType} from 'src/customTypes/common-types';
 
-const data: ProgressType[] = [...Array(10)].map((_, index) => ({
-  id: String(index + 1),
-  questionStatus: 'default',
-})); // fake data for flat list
-export const ProgressBar = () => {
+type IProgressBar = {
+  data: ProgressType[];
+};
+export const ProgressBar = ({data}: IProgressBar) => {
   const renderItem = ({item}: renderItemType<ProgressType>) => {
     return <ProgressView id={item.id} questionStatus={item.questionStatus} />;
   };

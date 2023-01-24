@@ -4,11 +4,11 @@ import {ViewContainer, ViewCenter} from '../../components/ui/ReadyStyles/Contain
 import {AppButton} from '../../components/ui/AppButton';
 import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
-import {AppSelect} from '../../components/ui/AppSelect';
-import {SwitchSelectors} from '../../components/SwitchSelectors';
+import {AppSelect} from '@src/components/ui/AppSelect';
+import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {useCallback, useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
+import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {createTest} from '@src/bll/testReducer';
 
 export type SelectorsType = {

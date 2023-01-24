@@ -1,9 +1,9 @@
 import {View} from 'react-native';
-import {ButtonAnswerBox, TextBox} from '@src/components/ui/ReadyStyles/Boxes/index';
-import {AddingAnswer} from '@src/components/AddingAnswer/index';
-import {AddButton} from '@src/components/ui/AddButton/index';
+import {ButtonAnswerBox, TextBox} from '@src/components/ui/ReadyStyles/Boxes';
+import {AddingAnswer} from '@src/components/AddingAnswer';
+import {AddButton} from '@src/components/ui/AddButton';
 import {Control} from 'react-hook-form';
-import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
+import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 
 type CreateAnswerPropsType = {
   control: Control<inputsFieldType>;

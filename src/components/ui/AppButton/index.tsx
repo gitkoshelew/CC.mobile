@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {IButtonProps} from '@types/AppButtun-customTypes';
+import {IButtonProps} from '@customTypes/AppButtun-types';
 import {styles} from './styles';
 import {Color} from '@theme/colors';
 

@@ -1,10 +1,11 @@
 import {fireEvent, render, screen} from '@testing-library/react-native';
-import {AnswersOptions} from '@src/components/AnswersOptions/index';
+import {AnswersOptions} from '@src/components/AnswersOptions';
 
 const onPressMock = jest.fn();
 export const AnswersOptionsProps = {
   onPress: onPressMock,
   data: ['one', 'two', 'three'],
+  answerType: 'single',
 };
 
 test('Should be displayed elements', () => {

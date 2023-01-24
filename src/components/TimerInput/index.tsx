@@ -1,7 +1,7 @@
 import {Colon, Container} from './styles';
-import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
+import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 import {View} from 'react-native';
-import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
+import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {Control} from 'react-hook-form';
 
 type TimerInputPropsType = {
