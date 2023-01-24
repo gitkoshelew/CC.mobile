@@ -90,24 +90,30 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
     append([{option: ''}]);
   }, [append]);
 
-  const deleteOptionPressed = (index: number) => {
-    remove(index);
-  };
+  const deleteOptionPressed = useCallback(
+    (index: number) => {
+      remove(index);
+    },
+    [remove],
+  );
 
-  const checkedCorrectOption = (index: number, checked: boolean) => {
-    let currentInput = getValues('options')[index].option;
-    if (currentInput !== '' && checked) {
-      setSelectorsData({
-        ...selectorsData,
-        correctAnswer: [...selectorsData.correctAnswer, currentInput],
-      });
-    } else {
-      setSelectorsData({
-        ...selectorsData,
-        correctAnswer: selectorsData.correctAnswer.filter(el => el !== currentInput),
-      });
-    }
-  };
+  const checkedCorrectOption = useCallback(
+    (index: number, checked: boolean) => {
+      let currentInput = getValues('options')[index].option;
+      if (currentInput !== '' && checked) {
+        setSelectorsData({
+          ...selectorsData,
+          correctAnswer: [...selectorsData.correctAnswer, currentInput],
+        });
+      } else {
+        setSelectorsData({
+          ...selectorsData,
+          correctAnswer: selectorsData.correctAnswer.filter(el => el !== currentInput),
+        });
+      }
+    },
+    [getValues, selectorsData],
+  );
 
   const selectQuestionDifficult = useCallback(
     (value: string) => {
