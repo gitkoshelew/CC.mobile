@@ -1,8 +1,9 @@
 import {quizzesAPI} from '@src/dal/quizzesAPI';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {questionsAPI} from '@src/dal/questionsAPI';
-import {AxiosError} from 'axios';
 import {createQuizRequestType} from '@customTypes/quizzesAPI-types';
+import {questionsAPI} from '@src/dal/questionsAPI';
+import {newQuestionType} from '@customTypes/quiz-types';
+import {AxiosError} from 'axios';
 
 export const getQuizzes = createAsyncThunk(
   'quiz/getQuiz',
