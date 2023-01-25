@@ -7,7 +7,7 @@ const Wrapper = styled.View`
 `;
 const Container = styled.View`
   margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 `;
 
 export {Wrapper, Container};

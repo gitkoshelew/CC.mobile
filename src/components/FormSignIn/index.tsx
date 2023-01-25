@@ -31,20 +31,16 @@ export const FormSignIn = ({isOpen}: IProps) => {
     };
   });
 
-  const changeOpacity = () => {
-    isOpen
-      ? (opacityValue.value = withTiming(1, {duration: 1500}))
-      : (opacityValue.value = withTiming(0, {duration: 300}));
-  };
-
-  isOpen ? changeOpacity() : changeOpacity();
+  isOpen
+    ? (opacityValue.value = withTiming(1, {duration: 1500}))
+    : (opacityValue.value = withTiming(0, {duration: 300}));
 
   const signInValues: ISignInValues = {
     email: '',
     password: '',
   };
 
-  const SigninSchema = Yup.object().shape({
+  const signInSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is equired'),
     password: Yup.string()
       .min(2, 'Too Short!')
@@ -58,7 +54,7 @@ export const FormSignIn = ({isOpen}: IProps) => {
       onSubmit={(values: ISignInValues): void => {
         console.log(values);
       }}
-      validationSchema={SigninSchema}>
+      validationSchema={signInSchema}>
       {({handleChange, handleSubmit, values, errors}) => (
         <Wrapper>
           <Animated.View style={opacity}>
@@ -71,7 +67,7 @@ export const FormSignIn = ({isOpen}: IProps) => {
                 onChangeText={handleChange('email')}
                 value={values.email}
               />
-              <TextError>{errors.email}</TextError>
+              {errors.email && <TextError>{errors.email}</TextError>}
             </BlockBox>
             <BlockBox>
               <FormInput
@@ -80,7 +76,7 @@ export const FormSignIn = ({isOpen}: IProps) => {
                 value={values.password}
                 secureTextEntry={true}
               />
-              <TextError>{errors.password}</TextError>
+              {errors.password && <TextError>{errors.password}</TextError>}
             </BlockBox>
             <Container>
               <LoginButton

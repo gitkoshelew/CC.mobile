@@ -22,13 +22,9 @@ export const Header = ({isOpen}: IProps) => {
     };
   });
 
-  const changeOpacity = () => {
-    isOpen
-      ? (opacityValue.value = withTiming(1, {duration: 1500}))
-      : (opacityValue.value = withTiming(0, {duration: 300}));
-  };
-
-  isOpen ? changeOpacity() : changeOpacity();
+  isOpen
+    ? (opacityValue.value = withTiming(1, {duration: 1500}))
+    : (opacityValue.value = withTiming(0, {duration: 300}));
 
   return (
     <Wrapper>
