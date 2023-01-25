@@ -1,4 +1,4 @@
-export type createTestRequestType = {
+export type createQuizRequestType = {
   title: string;
   description: string;
   topicId: 1;
@@ -6,7 +6,7 @@ export type createTestRequestType = {
   authorId: number;
 };
 
-export type getTestResponseType = {
+export type getQuizResponseType = {
   id: number;
   title: string;
   authorId: number;

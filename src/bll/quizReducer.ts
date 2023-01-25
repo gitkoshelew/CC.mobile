@@ -1,9 +1,8 @@
 import {quizzesAPI} from '@src/dal/quizzesAPI';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {createTestRequestQuiz} from '@customTypes/quizzesAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
-import {newQuestionType} from '@customTypes/quiz-types';
 import {AxiosError} from 'axios';
+import {createQuizRequestType} from '@customTypes/quizzesAPI-types';
 
 export const getQuizzes = createAsyncThunk(
   'quiz/getQuiz',
@@ -19,7 +18,7 @@ export const getQuizzes = createAsyncThunk(
 
 export const createQuiz = createAsyncThunk(
   'quiz/createQuiz',
-  async (param: createTestRequestQuiz, {rejectWithValue}) => {
+  async (param: createQuizRequestType, {rejectWithValue}) => {
     try {
       const res = await quizzesAPI.createQuiz(param);
       return res.data;

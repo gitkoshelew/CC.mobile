@@ -1,5 +1,5 @@
 import {instance} from '@src/dal/instance';
-import {questionType} from '@customTypes/test-types';
+import {questionType} from '@customTypes/quiz-types';
 
 export const questionsAPI = {
   getQuestions(id: number) {
