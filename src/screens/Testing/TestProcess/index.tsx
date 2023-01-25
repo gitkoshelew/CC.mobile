@@ -1,9 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {Timer} from '@src/components/Timer';
-import {
-  ViewContainer,
-  ViewFlexRight,
-} from '@src/components/ui/ReadyStyles/Containers';
+import {ViewContainer, ViewFlexRight} from '@src/components/ui/ReadyStyles/Containers';
 import {TimerBox, TextBox, ButtonsBox} from './styles';
 import {MainTestingContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {AnswersOptions} from '@src/components/AnswersOptions';
@@ -30,12 +27,12 @@ export const TestProcess = () => {
       setNumAnswer(numAnswer + 1);
     }
   };
-  const progressData: ProgressType[] = [
-    ...Array(quizIdMocState.questions.length),
-  ].map((_, index) => ({
-    id: index + 1,
-    questionStatus: 'default',
-  }));
+  const progressData: ProgressType[] = [...Array(quizIdMocState.questions.length)].map(
+    (_, index) => ({
+      id: index + 1,
+      questionStatus: 'default',
+    }),
+  );
   const data: ProgressType[] = progressData.map(e =>
     numAnswer >= e.id
       ? {
@@ -79,11 +76,7 @@ export const TestProcess = () => {
           />
         </ViewFlexCenter>
         <ButtonsBox>
-          <AppButton
-            title="Skip"
-            type="secondary"
-            onPress={onPressSkipAnswer}
-          />
+          <AppButton title="Skip" type="secondary" onPress={onPressSkipAnswer} />
           <AppButton title="Next" type="primary" onPress={onPressNextAnswer} />
         </ButtonsBox>
       </MainTestingContainer>

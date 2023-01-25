@@ -4,11 +4,7 @@ import {ViewCenter} from '../ui/ReadyStyles/Containers';
 import * as AppButton from '../ui/AppButton';
 import {useAppNavigate} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, {useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
 import {Title} from '../ui/ReadyStyles/Boxes';
 
 interface IProps {
@@ -46,9 +42,7 @@ export const Header = ({isOpen}: IProps) => {
             <AppButton.AppButton
               title="Log In"
               type="primary"
-              onPress={() =>
-                navigate(ScreenList.HOME, {screen: ScreenList.SIGN_IN})
-              }
+              onPress={() => navigate(ScreenList.HOME, {screen: ScreenList.SIGN_IN})}
             />
           </ViewCenter>
         </ViewCenter>

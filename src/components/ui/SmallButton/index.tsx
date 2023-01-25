@@ -10,15 +10,9 @@ export const SmallButton = ({type, onPress, ...props}: IButtonProps) => {
     <Box>
       <TouchableOpacity {...props} onPress={onPress}>
         {type === 'check' && (
-          <Ionicons
-            name={'shield-checkmark'}
-            size={17}
-            color={Color.GrayMedium}
-          />
+          <Ionicons name={'shield-checkmark'} size={17} color={Color.GrayMedium} />
         )}
-        {type === 'edit' && (
-          <MaterialIcons name={'edit'} size={17} color={Color.GrayMedium} />
-        )}
+        {type === 'edit' && <MaterialIcons name={'edit'} size={17} color={Color.GrayMedium} />}
         {type === 'delete' && (
           <MaterialIcons name={'delete'} size={17} color={Color.GrayMedium} />
         )}

@@ -11,8 +11,7 @@ export type CustomTextInputPropsType = {
   error?: FieldError;
   typeInput?: 'timer';
 };
-type CustomTextInputCombinePropsType = TextInputProps &
-  CustomTextInputPropsType;
+type CustomTextInputCombinePropsType = TextInputProps & CustomTextInputPropsType;
 
 export const CustomTextInput = ({
   onChangeText,
@@ -25,11 +24,7 @@ export const CustomTextInput = ({
 
   return (
     <View>
-      <CustomInput
-        {...props}
-        onChangeText={onChangeTextHandler}
-        value={value}
-      />
+      <CustomInput {...props} onChangeText={onChangeTextHandler} value={value} />
       {props.error && <TextError>{props.error?.message || ''}</TextError>}
     </View>
   );

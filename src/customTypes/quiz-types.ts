@@ -1,23 +1,49 @@
+export enum TypeOptions {
+  single = 'single',
+  multi = 'multi',
+}
+
+export enum Difficulty {
+  Easy = 'light',
+  Medium = 'medium',
+  Hard = 'hard',
+}
+
 export type answersType = {
   options: string[];
-  answers: string[];
+  correctAnswer: string[];
 };
 export type numberQuestionsType = 10 | 15 | 20 | 25 | 30;
+
+export type newQuestionType = {
+  title: string;
+  description: string;
+  content: answersType;
+  difficulty: Difficulty;
+  timer: number;
+  type: TypeOptions;
+  topicId: number;
+};
 
 export type questionType = {
   id: number;
   title: string;
   description: string;
   content: answersType;
-  difficulty: string;
+  difficulty: Difficulty;
   timer: number;
-  type: string;
-  // topic: number; // need explain
-  moderation: null;
-  quiz: number[]; // need explain
+  type: TypeOptions;
+  topicId: number;
+  moderationId: null;
+  // Quiz_Question: {
+  //   id: 1;
+  //   quizId: 25;
+  //   questionId: 2;
+  // }; // need explain
+  // quiz: number[]; // need explain
 };
 
-export type testType = {
+export type quizType = {
   id: number;
   title: string;
   description: string;
@@ -30,7 +56,7 @@ export type testType = {
 };
 
 export type initialStateTestType = {
-  test: testType;
+  test: quizType;
   currentQuestion: number;
   numberQuestions: number;
 };

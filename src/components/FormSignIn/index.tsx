@@ -52,19 +52,13 @@ export const FormSignIn = () => {
             </BlockBox>
             <ViewCenter>
               <SmallBox>
-                <LoginButton
-                  onPress={handleSubmit}
-                  title="Sign in"
-                  type="primary"
-                />
+                <LoginButton onPress={handleSubmit} title="Sign in" type="primary" />
               </SmallBox>
               <SmallBox>
                 <SmallTextBox>or</SmallTextBox>
               </SmallBox>
               <LoginButton
-                onPress={() =>
-                  navigate(ScreenList.HOME, {screen: ScreenList.SIGN_UP})
-                }
+                onPress={() => navigate(ScreenList.HOME, {screen: ScreenList.SIGN_UP})}
                 title="Sign up"
                 type="secondary"
               />
