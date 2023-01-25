@@ -58,12 +58,12 @@ exports[`Should render AnswersOptions and selected radio button 1`] = `
                 "alignItems": "center",
                 "alignSelf": "center",
                 "borderColor": "#49454F",
-                "borderRadius": 12.5,
+                "borderRadius": 15,
                 "borderWidth": 3,
-                "height": 25,
+                "height": 30,
                 "justifyContent": "center",
                 "opacity": 1,
-                "width": 25,
+                "width": 30,
               }
             }
           >
@@ -174,12 +174,12 @@ exports[`Should render AnswersOptions and selected radio button 1`] = `
                 "alignItems": "center",
                 "alignSelf": "center",
                 "borderColor": "#49454F",
-                "borderRadius": 12.5,
+                "borderRadius": 15,
                 "borderWidth": 3,
-                "height": 25,
+                "height": 30,
                 "justifyContent": "center",
                 "opacity": 1,
-                "width": 25,
+                "width": 30,
               }
             }
           >
@@ -290,12 +290,12 @@ exports[`Should render AnswersOptions and selected radio button 1`] = `
                 "alignItems": "center",
                 "alignSelf": "center",
                 "borderColor": "#49454F",
-                "borderRadius": 12.5,
+                "borderRadius": 15,
                 "borderWidth": 3,
-                "height": 25,
+                "height": 30,
                 "justifyContent": "center",
                 "opacity": 1,
-                "width": 25,
+                "width": 30,
               }
             }
           >
@@ -421,12 +421,12 @@ exports[`Should render AnswersOptions and selected radio button 2`] = `
                 "alignItems": "center",
                 "alignSelf": "center",
                 "borderColor": "#6B9DE9",
-                "borderRadius": 12.5,
+                "borderRadius": 15,
                 "borderWidth": 3,
-                "height": 25,
+                "height": 30,
                 "justifyContent": "center",
                 "opacity": 1,
-                "width": 25,
+                "width": 30,
               }
             }
           >
@@ -547,12 +547,12 @@ exports[`Should render AnswersOptions and selected radio button 2`] = `
                 "alignItems": "center",
                 "alignSelf": "center",
                 "borderColor": "#49454F",
-                "borderRadius": 12.5,
+                "borderRadius": 15,
                 "borderWidth": 3,
-                "height": 25,
+                "height": 30,
                 "justifyContent": "center",
                 "opacity": 1,
-                "width": 25,
+                "width": 30,
               }
             }
           >
@@ -663,12 +663,12 @@ exports[`Should render AnswersOptions and selected radio button 2`] = `
                 "alignItems": "center",
                 "alignSelf": "center",
                 "borderColor": "#49454F",
-                "borderRadius": 12.5,
+                "borderRadius": 15,
                 "borderWidth": 3,
-                "height": 25,
+                "height": 30,
                 "justifyContent": "center",
                 "opacity": 1,
-                "width": 25,
+                "width": 30,
               }
             }
           >

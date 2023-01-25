@@ -4,11 +4,7 @@ import {ViewCenter} from '../ui/ReadyStyles/Containers';
 import {BlockBox, SmallTitle} from '../ui/ReadyStyles/Boxes';
 import {LoginButton} from '../ui/LoginButton';
 import {Wrapper} from '../Header/styles';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, {useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
 import * as Yup from 'yup';
 import {TextError} from '../ui/ReadyStyles/TextError';
 import {Container} from './styles';
@@ -79,11 +75,7 @@ export const FormSignIn = ({isOpen}: IProps) => {
               {errors.password && <TextError>{errors.password}</TextError>}
             </BlockBox>
             <Container>
-              <LoginButton
-                onPress={handleSubmit}
-                title="Sign in"
-                type="primary"
-              />
+              <LoginButton onPress={handleSubmit} title="Sign in" type="primary" />
             </Container>
           </Animated.View>
         </Wrapper>

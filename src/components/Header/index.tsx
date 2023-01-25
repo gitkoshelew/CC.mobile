@@ -1,11 +1,7 @@
 import {UserIconContainer, Wrapper} from './styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {ViewCenter, ViewRightBotton} from '../ui/ReadyStyles/Containers';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, {useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
 import {BlockBoxMarginRight, Title} from '../ui/ReadyStyles/Boxes';
 import {SmallButton} from '../ui/SmallButton';
 

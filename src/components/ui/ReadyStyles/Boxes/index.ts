@@ -89,6 +89,10 @@ const RightBlockBox = styled.View`
   align-items: center;
 `;
 
+const ContainerDynamicWidth = styled.View<{width: string}>`
+  width: ${props => props.width};
+`;
+
 export {
   BlockBox,
   TextBox,
@@ -104,4 +108,5 @@ export {
   SmallTextBlack,
   BlockBoxMarginRight,
   SmallTitle,
+  ContainerDynamicWidth,
 };

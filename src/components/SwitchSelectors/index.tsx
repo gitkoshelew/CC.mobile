@@ -11,9 +11,9 @@ export const SwitchSelectors = ({onPress, type}: ISwitchSelectProps) => {
     () =>
       type === 'level'
         ? [
-            {label: 'Easy', value: 'easy'},
-            {label: 'Medium', value: 'medium'},
-            {label: 'Hard', value: 'hard'},
+            {label: 'Easy', value: 'Easy'},
+            {label: 'Medium', value: 'Medium'},
+            {label: 'Hard', value: 'Hard'},
           ]
         : type === 'number'
         ? [

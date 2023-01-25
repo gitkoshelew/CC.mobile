@@ -11,8 +11,7 @@ export const Timer = ({timeInMinutes, timeInSeconds}: IProps) => {
   const [timePeriod, setTimePeriod] = useState<number>(AllTimeInSeconds);
   const [isCouting, setIsCouting] = useState<boolean>(false);
 
-  const formatTime = (value: number): string =>
-    value.toString().padStart(2, '0');
+  const formatTime = (value: number): string => value.toString().padStart(2, '0');
 
   const minutes = formatTime(Math.floor(timePeriod / 60));
   const seconds = formatTime(timePeriod - +minutes * 60);

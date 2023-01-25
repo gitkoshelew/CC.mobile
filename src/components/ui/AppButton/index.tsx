@@ -4,13 +4,7 @@ import {IButtonProps} from '@customTypes/AppButtun-types';
 import {styles} from './styles';
 import {Color} from '@theme/colors';
 
-export const AppButton = ({
-  title,
-  type,
-  onPress,
-  disabled,
-  ...props
-}: IButtonProps) => {
+export const AppButton = ({title, type, onPress, disabled, ...props}: IButtonProps) => {
   const containerStyles = useMemo(
     () => [
       styles.container,
@@ -23,10 +17,7 @@ export const AppButton = ({
   );
 
   const containerText = useMemo(
-    () => [
-      styles.text,
-      {color: type === 'primary' ? Color.White : Color.Black},
-    ],
+    () => [styles.text, {color: type === 'primary' ? Color.White : Color.Black}],
     [type],
   );
 

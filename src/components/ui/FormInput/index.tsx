@@ -8,8 +8,7 @@ export type CustomFormInputPropsType = {
   onChangeText: (value: string) => void;
 };
 
-export type CustomFormInputCombinePropsType = TextInputProps &
-  CustomFormInputPropsType;
+export type CustomFormInputCombinePropsType = TextInputProps & CustomFormInputPropsType;
 
 export const FormInput = (props: CustomFormInputCombinePropsType) => {
   const [isFocused, setIsFocused] = useState(false);
