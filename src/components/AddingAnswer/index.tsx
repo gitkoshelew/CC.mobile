@@ -6,42 +6,50 @@ import {CheckBox} from '../ui/CheckBox';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
 import {useCallback} from 'react';
-import {Control, Controller} from 'react-hook-form';
-import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
+import {Control, Controller, useWatch} from 'react-hook-form';
+import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
 
 type AddingAnswerPropsType = {
-  item: {
-    id: string;
-    option: string;
-  };
   index: number;
-  control: Control<inputsFieldType>;
   correctAnswer: string[];
+  type: string;
+  control: Control<InputsFieldType>;
   disabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
-  onPressCorrectAnswer: (answer: string, checked: boolean) => void;
+  onPressCorrectAnswer: (index: number, checked: boolean) => void;
 };
 
 export const AddingAnswer = ({
-  item,
   index,
   onPressDelete,
   onPressCorrectAnswer,
   disabledDeleteBtn,
   ...props
 }: AddingAnswerPropsType) => {
+  const isCurrentAnswer = useWatch({
+    name: `options.${index}.option`,
+    control: props.control,
+  });
+
   const onPressCorrectAnswerHandler = useCallback(
     (checked: boolean) => {
-      onPressCorrectAnswer(item.option, checked);
+      onPressCorrectAnswer(index, checked);
     },
-    [item.option, onPressCorrectAnswer],
+    [index, onPressCorrectAnswer],
   );
 
   const onPressDeletePressed = () => {
     onPressDelete(index);
   };
 
-  const isCorrectAnswer = props.correctAnswer.includes(item.option);
+  const isChecked = props.correctAnswer.includes(isCurrentAnswer);
+
+  const disabledCheckbox =
+    props.type === 'Single'
+      ? (!isChecked && props.correctAnswer.length) || !isCurrentAnswer
+      : !isCurrentAnswer;
+
+  const disabledDeleteOption = disabledDeleteBtn || isChecked;
 
   return (
     <BlockAnswerBox>
@@ -69,12 +77,13 @@ export const AddingAnswer = ({
       <View style={styles.inner}>
         <CheckBox
           onPress={onPressCorrectAnswerHandler}
-          checked={isCorrectAnswer}
+          isChecked={isChecked}
+          disabled={!!disabledCheckbox}
         />
         <TouchableOpacity
-          style={disabledDeleteBtn && styles.disabled}
+          style={disabledDeleteOption && styles.disabled}
           onPress={onPressDeletePressed}
-          disabled={disabledDeleteBtn}>
+          disabled={disabledDeleteOption}>
           <AntDesign name="minuscircleo" size={30} color={Color.Red} />
         </TouchableOpacity>
       </View>

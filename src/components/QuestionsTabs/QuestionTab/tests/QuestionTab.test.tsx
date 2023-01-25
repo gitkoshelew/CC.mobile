@@ -3,11 +3,10 @@ import {QuestionTab, QuestionTabPropsType} from '../index';
 
 const onPressMock = jest.fn();
 const createTestProps = {
-  questionStatus: true,
   id: 1,
-  index: 1,
   isActive: true,
   onPress: onPressMock,
+  setIsActiveTab: onPressMock,
 } as QuestionTabPropsType;
 
 describe('Tab component functionality', () => {

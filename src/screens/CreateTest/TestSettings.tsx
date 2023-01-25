@@ -1,10 +1,7 @@
 import {Platform} from 'react-native';
-import {TextBox, BlockBox} from '@src/components/ui/ReadyStyles/Boxes';
-import {
-  ViewContainer,
-  ViewCenter,
-} from '@src/components/ui/ReadyStyles/Containers';
-import {AppButton} from '@src/components/ui/AppButton';
+import {TextBox, BlockBox} from '../../components/ui/ReadyStyles/Boxes';
+import {ViewContainer, ViewCenter} from '../../components/ui/ReadyStyles/Containers';
+import {AppButton} from '../../components/ui/AppButton';
 import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {AppSelect} from '@src/components/ui/AppSelect';
@@ -12,11 +9,10 @@ import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {useCallback, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
-import {createTest} from '@src/bll/testReducer';
+import {createQuiz} from '@src/bll/quizReducer';
 
 export type SelectorsType = {
   theme: string;
-  difficulty: string;
   numberQuestions: number;
 };
 
@@ -31,7 +27,6 @@ export const TestSettings = () => {
   const {navigate} = useAppNavigate();
   const [selectorsData, setSelectorsData] = useState<SelectorsType>({
     theme: 'Verify',
-    difficulty: 'easy',
     numberQuestions: 10,
   });
 
@@ -48,13 +43,6 @@ export const TestSettings = () => {
     [selectorsData],
   );
 
-  const selectsDifficultyPressed = useCallback(
-    (value: string) => {
-      setSelectorsData({...selectorsData, difficulty: value});
-    },
-    [selectorsData],
-  );
-
   const selectsNumberQuestionsPressed = useCallback(
     (value: string) => {
       setSelectorsData({...selectorsData, numberQuestions: Number(value)});
@@ -64,20 +52,19 @@ export const TestSettings = () => {
   const onPressQuestionsSettings = async (values: inputsFieldType) => {
     try {
       await dispatch(
-        createTest({
+        createQuiz({
           ...values,
           authorId: 1,
-          difficulty: 'light',
           topicId: 1,
         }),
       )
         .unwrap()
-        .then(res => {
+        .then(() => {
           navigate(ScreenList.CREATE_TEST, {
             screen: ScreenList.QUESTIONS_SET,
             params: {
               numberQuestions: selectorsData.numberQuestions,
-              idNewTest: res.id,
+              idNewTest: 25,
             },
           });
         });
@@ -128,23 +115,11 @@ export const TestSettings = () => {
       </BlockBox>
       <TextBox>Theme</TextBox>
       <BlockBox>
-        <AppSelect
-          size="m"
-          data={data}
-          type="primary"
-          onSelect={selectsThemePressed}
-        />
-      </BlockBox>
-      <TextBox>Test level</TextBox>
-      <BlockBox>
-        <SwitchSelectors type="level" onPress={selectsDifficultyPressed} />
+        <AppSelect size="m" data={data} type="primary" onSelect={selectsThemePressed} />
       </BlockBox>
       <TextBox>Number of questions</TextBox>
       <BlockBox>
-        <SwitchSelectors
-          type="number"
-          onPress={selectsNumberQuestionsPressed}
-        />
+        <SwitchSelectors type="number" onPress={selectsNumberQuestionsPressed} />
       </BlockBox>
       <ViewCenter>
         <AppButton

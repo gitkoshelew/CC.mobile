@@ -12,9 +12,7 @@ jest.mock('@storybook/react-native', () => ({
   clearDecorators: jest.fn(),
   addParameters: jest.fn(),
 }));
-jest.mock('react-native-reanimated', () =>
-  require('react-native-reanimated/mock'),
-);
+jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'));
 
 it('renders correctly', () => {
   render(<App />);

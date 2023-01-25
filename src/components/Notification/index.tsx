@@ -2,11 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '@hooks/hooks';
 import {Text, TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {
-  Container,
-  TextBlock,
-  Wrapper,
-} from '@src/components/Notification/styles';
+import {Container, TextBlock, Wrapper} from '@src/components/Notification/styles';
 import {Color} from '@theme/colors';
 import {hideAppMessage, removeLastMessage} from '@src/bll/appReducer';
 

@@ -10,6 +10,4 @@ export default {
   },
 };
 
-export const Basic: ComponentStory<typeof Button> = args => (
-  <Button {...args} />
-);
+export const Basic: ComponentStory<typeof Button> = args => <Button {...args} />;

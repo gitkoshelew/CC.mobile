@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {styles} from './styles';
 import {Color} from '@theme/colors';
-import {IButtonProps} from '@types/LoginButtun-customTypes';
+import {IButtonProps} from '@customTypes/LoginButtun-types';
 
 export const LoginButton = ({title, type, onPress, ...props}: IButtonProps) => {
   const containerStyles = useMemo(
@@ -18,10 +18,7 @@ export const LoginButton = ({title, type, onPress, ...props}: IButtonProps) => {
   );
 
   const containerText = useMemo(
-    () => [
-      styles.text,
-      {color: type === 'primary' ? Color.White : Color.BlueLight},
-    ],
+    () => [styles.text, {color: type === 'primary' ? Color.White : Color.BlueLight}],
     [type],
   );
 

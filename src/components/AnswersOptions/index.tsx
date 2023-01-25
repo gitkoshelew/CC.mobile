@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import RadioForm, {
-  RadioButtonInput,
-  RadioButtonLabel,
-} from 'react-native-simple-radio-button';
+import RadioForm, {RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {AnswerRadioContainer, styles, ViewMarginRight} from './styles';
 import {Color} from '@theme/colors';
 import {CheckBox} from '@src/components/ui/CheckBox';
@@ -48,7 +45,7 @@ export const AnswersOptions = ({
                   buttonOuterSize={30}
                 />
               ) : (
-                <CheckBox onPress={() => {}} checked={false} />
+                <CheckBox onPress={() => {}} isChecked={false} />
               )}
             </ViewMarginRight>
             <RadioButtonLabel

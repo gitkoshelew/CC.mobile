@@ -3,44 +3,45 @@ import {ButtonAnswerBox, TextBox} from '@src/components/ui/ReadyStyles/Boxes';
 import {AddingAnswer} from '@src/components/AddingAnswer';
 import {AddButton} from '@src/components/ui/AddButton';
 import {Control} from 'react-hook-form';
-import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
+import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
 
 type CreateAnswerPropsType = {
-  control: Control<inputsFieldType>;
+  control: Control<InputsFieldType>;
   fields: {id: string; option: string}[];
+  type: string;
   correctAnswer: string[];
   addNewOptionPressed: () => void;
   deleteOptionPressed: (index: number) => void;
-  checkedCorrectOption: (option: string, checked: boolean) => void;
+  checkedCorrectOption: (index: number, checked: boolean) => void;
 };
 
 export const CreateAnswer = ({
   fields,
   correctAnswer,
-  ...props
+  control,
+  type,
+  addNewOptionPressed,
+  deleteOptionPressed,
+  checkedCorrectOption,
 }: CreateAnswerPropsType) => {
   const disabledDeleteBtn = fields.length <= 2;
-
   return (
     <View>
       <TextBox>Answer choice</TextBox>
       {fields.map((item, index) => (
         <AddingAnswer
-          key={index}
+          key={item.id}
           index={index}
-          item={item}
-          control={props.control}
+          type={type}
+          control={control}
           correctAnswer={correctAnswer}
           disabledDeleteBtn={disabledDeleteBtn}
-          onPressDelete={props.deleteOptionPressed}
-          onPressCorrectAnswer={props.checkedCorrectOption}
+          onPressDelete={deleteOptionPressed}
+          onPressCorrectAnswer={checkedCorrectOption}
         />
       ))}
       <ButtonAnswerBox>
-        <AddButton
-          onPress={props.addNewOptionPressed}
-          disabled={fields.length > 6}
-        />
+        <AddButton onPress={addNewOptionPressed} disabled={fields.length > 6} />
         <TextBox>Add answer</TextBox>
       </ButtonAnswerBox>
     </View>
