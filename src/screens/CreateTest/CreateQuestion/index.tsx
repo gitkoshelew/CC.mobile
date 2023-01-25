@@ -18,9 +18,9 @@ import {useFieldArray, useForm} from 'react-hook-form';
 import {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch} from '@hooks/hooks';
 import {SwitchSelectors} from '@src/components/SwitchSelectors/index';
-import {Difficulty, questionType, TypeOptions} from '@customTypes/test-types';
+import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
 import {transformTime} from '@src/utils/transformTime';
-import {createQuestion, getQuizQuestions} from '@src/bll/testReducer';
+import {createQuestion, getQuizQuestions} from '@src/bll/quizReducer';
 import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
 
 export type InputsFieldType = {

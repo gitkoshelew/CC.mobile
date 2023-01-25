@@ -1,12 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {appReducer} from '../appReducer';
-import {testReducer} from '../testReducer';
+import {quizReducer} from '../quizReducer';
 import {processReducer} from '@src/bll/processReducer';
 
 export const store = configureStore({
   reducer: {
     app: appReducer,
-    testReducer,
+    quizReducer,
     processReducer,
   },
 });

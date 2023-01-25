@@ -7,8 +7,8 @@ import {useAppDispatch} from '@hooks/hooks';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootCreateTestParamsList} from '@customTypes/navigation-types';
 import {ScreenList} from '@src/navigation/navigation';
-import {Difficulty, questionType, TypeOptions} from '@customTypes/test-types';
-import {getQuizQuestions} from '@src/bll/testReducer';
+import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
+import {getQuizQuestions} from '@src/bll/quizReducer';
 
 export const QuestionsSettings = ({
   route,

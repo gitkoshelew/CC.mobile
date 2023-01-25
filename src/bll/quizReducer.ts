@@ -1,11 +1,11 @@
 import {quizzesAPI} from '@src/dal/quizzesAPI';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {createTestRequestQuiz} from '@customTypes/testsAPI-types';
+import {createTestRequestQuiz} from '@customTypes/quizzesAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
-import {newQuestionType} from '@customTypes/test-types';
+import {newQuestionType} from '@customTypes/quiz-types';
 import {AxiosError} from 'axios';
 
-export const getQuizzes = createAsyncThunk('test/getTests', async (_, {rejectWithValue}) => {
+export const getQuizzes = createAsyncThunk('quiz/getQuiz', async (_, {rejectWithValue}) => {
   try {
     await quizzesAPI.getQuiz();
   } catch (e) {
@@ -15,7 +15,7 @@ export const getQuizzes = createAsyncThunk('test/getTests', async (_, {rejectWit
 });
 
 export const createQuiz = createAsyncThunk(
-  'test/createTest',
+  'quiz/createQuiz',
   async (param: createTestRequestQuiz, {rejectWithValue}) => {
     try {
       const res = await quizzesAPI.createQuiz(param);
@@ -28,7 +28,7 @@ export const createQuiz = createAsyncThunk(
 );
 
 export const createQuestion = createAsyncThunk(
-  'test/createQuestion',
+  'quiz/createQuestion',
   async (param: newQuestionType, {rejectWithValue}) => {
     try {
       const responseCreateQuest = await questionsAPI.createQuestion(param);
@@ -45,7 +45,7 @@ export const createQuestion = createAsyncThunk(
 );
 
 export const getQuizQuestions = createAsyncThunk(
-  'test/createQuestion',
+  'quiz/createQuestion',
   async (id: number, {rejectWithValue}) => {
     try {
       const res = await quizzesAPI.getQuizQuestions(id);
@@ -59,12 +59,12 @@ export const getQuizQuestions = createAsyncThunk(
 
 const initialState = {};
 
-const testSlice = createSlice({
-  name: 'test',
+const quizSlice = createSlice({
+  name: 'quiz',
   initialState: initialState,
   reducers: {},
 });
 
-export const testReducer = testSlice.reducer;
+export const quizReducer = quizSlice.reducer;
 
-export const {} = testSlice.actions;
+export const {} = quizSlice.actions;

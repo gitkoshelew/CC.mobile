@@ -1,5 +1,5 @@
 import {instance} from '@src/dal/instance';
-import {addQuestionToQuiz, createTestRequestQuiz} from '@customTypes/testsAPI-types';
+import {addQuestionToQuiz, createTestRequestQuiz} from '@customTypes/quizzesAPI-types';
 
 export const quizzesAPI = {
   getQuiz() {

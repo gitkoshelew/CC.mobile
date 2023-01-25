@@ -9,7 +9,7 @@ import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {useCallback, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
-import {createQuiz} from '@src/bll/testReducer';
+import {createQuiz} from '@src/bll/quizReducer';
 
 export type SelectorsType = {
   theme: string;
