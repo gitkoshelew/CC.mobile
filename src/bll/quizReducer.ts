@@ -4,6 +4,7 @@ import {createTestRequestQuiz} from '@customTypes/quizzesAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
 import {newQuestionType} from '@customTypes/quiz-types';
 import {AxiosError} from 'axios';
+import {setAppMessage} from './appReducer';
 
 export const getQuizzes = createAsyncThunk('quiz/getQuiz', async (_, {rejectWithValue}) => {
   try {
@@ -16,12 +17,18 @@ export const getQuizzes = createAsyncThunk('quiz/getQuiz', async (_, {rejectWith
 
 export const createQuiz = createAsyncThunk(
   'quiz/createQuiz',
-  async (param: createTestRequestQuiz, {rejectWithValue}) => {
+  async (param: createTestRequestQuiz, {dispatch, rejectWithValue}) => {
     try {
       const res = await quizzesAPI.createQuiz(param);
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
+      dispatch(
+        setAppMessage({
+          text: 'something went wrong',
+          severity: 'error',
+        }),
+      );
       return rejectWithValue(err.message);
     }
   },
