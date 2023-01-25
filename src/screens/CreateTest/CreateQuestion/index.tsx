@@ -60,7 +60,6 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
     type: 'single',
     correctAnswers: [],
   });
-  // console.log(findMe);
 
   const onPressSaveQuestionHandler = (values: InputsFieldType) => {
     const isTime = transformTime({

@@ -31,10 +31,10 @@ export const createQuestion = createAsyncThunk(
   'quiz/createQuestion',
   async (param: newQuestionType, {rejectWithValue}) => {
     try {
-      const responseCreateQuest = await questionsAPI.createQuestion(param);
+      const createdQuestion = await questionsAPI.createQuestion(param);
       await quizzesAPI.addQuestionToQuiz({
         quizId: 25,
-        questionId: responseCreateQuest.data.id,
+        questionId: createdQuestion.data.id,
       }); // It's temporary, backend have to field than would immediately indicate quiz
     } catch (e) {
       const err = e as Error | AxiosError;
