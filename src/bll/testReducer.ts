@@ -4,6 +4,7 @@ import {createTestRequestType} from '@customTypes/testsAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
 import {questionType} from '@customTypes/test-types';
 import {AxiosError} from 'axios';
+import {setAppMessage} from '@src/bll/appReducer';
 
 export const getTests = createAsyncThunk(
   'test/getTests',
@@ -19,12 +20,18 @@ export const getTests = createAsyncThunk(
 
 export const createTest = createAsyncThunk(
   'test/createTest',
-  async (param: createTestRequestType, {rejectWithValue}) => {
+  async (param: createTestRequestType, {dispatch, rejectWithValue}) => {
     try {
       const res = await testsAPI.createTest(param);
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
+      dispatch(
+        setAppMessage({
+          text: 'something went wrong',
+          severity: 'error',
+        }),
+      );
       return rejectWithValue(err.message);
     }
   },
