@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from '@src/components/Notification/styles';
 import {Color} from '@theme/colors';
-import {hideAppMessage, setAppLastMessage} from '@src/bll/appReducer';
+import {hideAppMessage, removeLastMessage} from '@src/bll/appReducer';
 
 export const Notification = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ export const Notification = () => {
   const startTimer = () => {
     stopTimer();
     const id: ReturnType<typeof setInterval> = setInterval(() => {
-      dispatch(setAppLastMessage());
+      dispatch(removeLastMessage());
     }, 2900);
     setTimerId(id);
   };
