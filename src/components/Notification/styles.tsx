@@ -16,7 +16,7 @@ export const Wrapper = styled.View`
 `;
 
 export const Container = styled.View<NotificationContainerPropsType>`
-  width: 250px;
+  width: 270px;
   max-height: 80px;
   flex-direction: row;
   justify-content: space-between;
