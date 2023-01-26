@@ -8,11 +8,9 @@ import {useMemo} from 'react';
 
 export const SmallButton = ({type, onPress, ...props}: IButtonProps) => {
   const containerStyles = useMemo(
-    () => [
-      {
-        backgroundColor: type === 'theme' || 'exit' ? Color.Semitransparent : Color.GrayLight,
-      },
-    ],
+    () => ({
+      backgroundColor: type === 'theme' || 'exit' ? Color.Semitransparent : Color.GrayLight,
+    }),
     [type],
   );
 
