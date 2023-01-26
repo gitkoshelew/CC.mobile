@@ -1,46 +1,69 @@
 import {Formik} from 'formik';
 import {FormInput} from '../ui/FormInput';
-import {ViewCenter, ViewContainer} from '../ui/ReadyStyles/Containers';
-import {
-  BlockBox,
-  SmallBox,
-  SmallTextBox,
-  TextDescription,
-  Title,
-} from '../ui/ReadyStyles/Boxes';
-import {Container} from './styles';
+import {ViewCenter} from '../ui/ReadyStyles/Containers';
+import {BlockBox, SmallTitle} from '../ui/ReadyStyles/Boxes';
 import {LoginButton} from '../ui/LoginButton';
-import {useAppNavigate} from '@hooks/hooks';
-
-import {ScreenList} from '@src/navigation/navigation';
+import {Wrapper} from '../Header/styles';
+import Animated, {useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
+import * as Yup from 'yup';
+import {TextError} from '../ui/ReadyStyles/TextError';
+import {Container} from './styles';
 
 export interface ISignInValues {
   email: string;
   password: string;
 }
-export const FormSignIn = () => {
-  const {navigate} = useAppNavigate();
+
+interface IProps {
+  isOpen: boolean;
+}
+
+export const FormSignIn = ({isOpen}: IProps) => {
+  const opacityValue = useSharedValue(0);
+
+  const opacity = useAnimatedStyle(() => {
+    return {
+      opacity: opacityValue.value,
+    };
+  });
+
+  isOpen
+    ? (opacityValue.value = withTiming(1, {duration: 1500}))
+    : (opacityValue.value = withTiming(0, {duration: 300}));
 
   const signInValues: ISignInValues = {
     email: '',
     password: '',
   };
 
+  const signInSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Email is equired'),
+    password: Yup.string()
+      .min(2, 'Too Short!')
+      .max(10, 'Too Long!')
+      .required('Password is equired'),
+  });
+
   return (
-    <Formik initialValues={signInValues} onSubmit={(): void => {}}>
-      {({handleChange, handleSubmit, values}) => (
-        <Container
-          source={require('../../assets/images/background-second.png')}
-          resizeMode="stretch">
-          <ViewContainer>
-            <Title>Sign In</Title>
-            <TextDescription>Please sign in to continue</TextDescription>
+    <Formik
+      initialValues={signInValues}
+      onSubmit={(values: ISignInValues): void => {
+        console.log(values);
+      }}
+      validationSchema={signInSchema}>
+      {({handleChange, handleSubmit, values, errors}) => (
+        <Wrapper>
+          <Animated.View style={opacity}>
+            <ViewCenter>
+              <SmallTitle>Please sign in to continue</SmallTitle>
+            </ViewCenter>
             <BlockBox>
               <FormInput
                 placeholder="Enter email"
                 onChangeText={handleChange('email')}
                 value={values.email}
               />
+              {errors.email && <TextError>{errors.email}</TextError>}
             </BlockBox>
             <BlockBox>
               <FormInput
@@ -49,22 +72,13 @@ export const FormSignIn = () => {
                 value={values.password}
                 secureTextEntry={true}
               />
+              {errors.password && <TextError>{errors.password}</TextError>}
             </BlockBox>
-            <ViewCenter>
-              <SmallBox>
-                <LoginButton onPress={handleSubmit} title="Sign in" type="primary" />
-              </SmallBox>
-              <SmallBox>
-                <SmallTextBox>or</SmallTextBox>
-              </SmallBox>
-              <LoginButton
-                onPress={() => navigate(ScreenList.HOME, {screen: ScreenList.SIGN_UP})}
-                title="Sign up"
-                type="secondary"
-              />
-            </ViewCenter>
-          </ViewContainer>
-        </Container>
+            <Container>
+              <LoginButton onPress={handleSubmit} title="Sign in" type="primary" />
+            </Container>
+          </Animated.View>
+        </Wrapper>
       )}
     </Formik>
   );
