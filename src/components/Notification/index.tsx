@@ -1,37 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import {useCallback, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '@hooks/hooks';
-import {Text, TouchableOpacity} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import {Text} from 'react-native';
 import {Container, TextBlock, Wrapper} from '@src/components/Notification/styles';
-import {Color} from '@theme/colors';
 import {hideAppMessage, removeLastMessage} from '@src/bll/appReducer';
+import {CloseButton} from '@src/components/Notification/CloseButton/index';
 
 export const Notification = () => {
   const dispatch = useAppDispatch();
   const messages = useAppSelector(state => state.app.messages);
 
-  const [timerId, setTimerId] = useState<ReturnType<typeof setInterval>>();
-
   const setIsOpen = (id: number) => {
     dispatch(hideAppMessage(id));
   };
 
-  const stopTimer = () => {
-    clearInterval(timerId);
-  };
-
-  const startTimer = () => {
-    stopTimer();
-    const id: ReturnType<typeof setInterval> = setInterval(() => {
+  const startTimer = useCallback(() => {
+    setTimeout(() => {
       dispatch(removeLastMessage());
     }, 2900);
-    setTimerId(id);
-  };
+  }, [dispatch]);
 
   useEffect(() => {
-    messages.length ? startTimer() : stopTimer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messages]);
+    messages.length && startTimer();
+  }, [messages, startTimer]);
 
   return (
     <>
@@ -42,9 +32,7 @@ export const Notification = () => {
               <TextBlock>
                 <Text>{text}</Text>
               </TextBlock>
-              <TouchableOpacity onPress={() => setIsOpen(id)}>
-                <AntDesign name="close" size={24} color={Color.White} />
-              </TouchableOpacity>
+              <CloseButton id={id} setIsOpen={setIsOpen} />
             </Container>
           </Wrapper>
         ))}

@@ -13,15 +13,17 @@ export const Wrapper = styled.View`
   left: 50%;
   right: 50%;
   color: #fff;
+  z-index: 15;
 `;
 
 export const Container = styled.View<NotificationContainerPropsType>`
+  position: relative;
   width: 270px;
-  max-height: 80px;
+  mix-height: 90px;
   flex-direction: row;
   justify-content: space-between;
   border-radius: 20px;
-  padding: 5px 10px;
+  padding: 8px 10px;
   align-items: center;
   background-color: ${props =>
     props.severity === 'error'
