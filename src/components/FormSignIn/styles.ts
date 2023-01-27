@@ -1,7 +1,13 @@
 import styled from 'styled-components/native';
 
-const Container = styled.ImageBackground`
-  width: 100%;
+const Wrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  padding: -30px 0px 300px;
+`;
+const Container = styled.View`
+  margin-top: 10px;
+  margin-bottom: 60px;
 `;
 
-export {Container};
+export {Wrapper, Container};

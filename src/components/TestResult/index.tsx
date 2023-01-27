@@ -1,11 +1,7 @@
 import {CircularResultBar} from '../CircularResultBar';
 import {IncorrectAnswer, IncorrectAnswers} from '../Incorrectanswers';
 import {AppButton} from '../ui/AppButton';
-import {
-  BlockBoxMarginLeft,
-  BlockBoxMarginRight,
-  SmallTitleBlack,
-} from '../ui/ReadyStyles/Boxes';
+import {BlockBoxMarginLeft, SmallTitleBlack} from '../ui/ReadyStyles/Boxes';
 import {ViewCenter, ViewFlexCenter} from '../ui/ReadyStyles/Containers';
 import {SmallButton} from '../ui/SmallButton';
 import {Box, ButtonBox, Container, Group, StyledText} from './styles';
@@ -20,12 +16,8 @@ export const TestResult = () => {
   return (
     <Container>
       <ButtonBox>
-        <BlockBoxMarginRight>
-          <SmallButton type="check" onPress={() => {}} />
-        </BlockBoxMarginRight>
-        <BlockBoxMarginRight>
-          <SmallButton type="edit" onPress={() => {}} />
-        </BlockBoxMarginRight>
+        <SmallButton type="check" onPress={() => {}} />
+        <SmallButton type="edit" onPress={() => {}} />
         <SmallButton type="delete" onPress={() => {}} />
       </ButtonBox>
       <ViewCenter>

@@ -10,5 +10,6 @@ enum Color {
   GrayDark = '#6C6C6C',
   GrayStrongDark = '#49454F',
   Green = '#5fbb64',
+  Semitransparent = 'rgba(255, 255, 255, 0.17)',
 }
 export {Color};

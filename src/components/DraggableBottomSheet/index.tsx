@@ -3,10 +3,13 @@ import {Dimensions, ImageBackground, PanResponder, Platform, ScaledSize} from 'r
 import {StyleSheet, View, Animated} from 'react-native';
 import {Color} from '@theme/colors';
 import {Header} from '../Header';
+import {FormSignIn} from '../FormSignIn';
 
+const isAuth = true;
 export const {width: WINDOW_WIDTH, height: WINDOW_HEIGHT}: ScaledSize =
   Dimensions.get('window');
-const BOTTOM_SHEET_MAX_HEIGHT = WINDOW_HEIGHT * 0.4;
+const BOTTOM_SHEET_MAX_HEIGHT = isAuth ? WINDOW_HEIGHT * 0.3 : WINDOW_HEIGHT * 0.43;
+
 const BOTTOM_SHEET_MIN_HEIGHT = WINDOW_HEIGHT * 0.03;
 const MAX_UPWARD_TRANSLATE_Y = BOTTOM_SHEET_MIN_HEIGHT - BOTTOM_SHEET_MAX_HEIGHT;
 const MAX_DOWNWARD_TRANSLATE_Y = 0;
@@ -76,7 +79,7 @@ export const DraggableBottomSheet = () => {
           <View style={styles.draggableArea} {...panResponder.panHandlers}>
             <View style={styles.dragHandle} />
           </View>
-          <Header isOpen={isOpen} />
+          {isAuth ? <Header isOpen={isOpen} /> : <FormSignIn isOpen={isOpen} />}
         </ImageBackground>
       </Animated.View>
     </View>

@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import {Color} from '@theme/colors';
 
 const Wrapper = styled.View`
-  padding: 30px 10px 500px 13px;
+  padding: 0px 10px 100px 13px;
 `;
 
 const UserIconContainer = styled.View`
@@ -11,6 +11,7 @@ const UserIconContainer = styled.View`
   align-items: center;
   width: 70px;
   height: 70px;
+  margin-top: -10px;
   border-radius: 35px;
   overflow: hidden;
   background: ${Color.White};
