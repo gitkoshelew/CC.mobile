@@ -1,4 +1,4 @@
-import {useCallback, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '@hooks/hooks';
 import {Text} from 'react-native';
 import {Container, TextBlock, Wrapper} from '@src/components/Notification/styles';
@@ -13,15 +13,12 @@ export const Notification = () => {
     dispatch(hideAppMessage(id));
   };
 
-  const startTimer = useCallback(() => {
-    setTimeout(() => {
-      dispatch(removeLastMessage());
-    }, 2900);
-  }, [dispatch]);
-
   useEffect(() => {
-    messages.length && startTimer();
-  }, [messages, startTimer]);
+    messages.length &&
+      setTimeout(() => {
+        dispatch(removeLastMessage());
+      }, 2900);
+  }, [dispatch, messages]);
 
   return (
     <>
