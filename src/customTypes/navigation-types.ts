@@ -14,6 +14,7 @@ export type RootCreateTestParamsList = {
 export type RootTestingParamsList = {
   [ScreenList.TESTS_LIST]: undefined;
   [ScreenList.TEST_PROCESS]: undefined;
+  [ScreenList.TEST_RESULT]: undefined;
 };
 
 export type RootHomeScreenParamsList = {

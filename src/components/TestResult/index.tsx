@@ -9,14 +9,19 @@ import {
 import {ViewCenter, ViewFlexCenter} from '../ui/ReadyStyles/Containers';
 import {SmallButton} from '../ui/SmallButton';
 import {Box, ButtonBox, Container, Group, StyledText} from './styles';
+type ITestResult = {
+  onClickTry: () => void;
+  onClickClose: () => void;
+  incorrectAnswers: IncorrectAnswer[];
+  result: number;
+};
 
-export const TestResult = () => {
-  const incorrectAnswers: IncorrectAnswer[] = [
-    {number: 1, answer: 'i am incorrect'},
-    {number: 5, answer: 'i am incorrect'},
-    {number: 10, answer: 'i am incorrect'},
-  ];
-
+export const TestResult = ({
+  onClickTry,
+  onClickClose,
+  incorrectAnswers,
+  result,
+}: ITestResult) => {
   return (
     <Container>
       <ButtonBox>
@@ -30,7 +35,7 @@ export const TestResult = () => {
       </ButtonBox>
       <ViewCenter>
         <SmallTitleBlack>Your result</SmallTitleBlack>
-        <CircularResultBar result={85} />
+        <CircularResultBar result={result} />
         <Group>
           <Box>
             <StyledText>Question</StyledText>
@@ -42,10 +47,10 @@ export const TestResult = () => {
       <IncorrectAnswers data={incorrectAnswers} />
       <ViewFlexCenter>
         <BlockBoxMarginLeft>
-          <AppButton title="Try again" type="primary" />
+          <AppButton title="Try again" type="primary" onPress={onClickTry} />
         </BlockBoxMarginLeft>
         <BlockBoxMarginLeft>
-          <AppButton title="Close" type="secondary" />
+          <AppButton title="Close" type="secondary" onPress={onClickClose} />
         </BlockBoxMarginLeft>
       </ViewFlexCenter>
     </Container>

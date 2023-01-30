@@ -21,6 +21,7 @@ export enum ScreenList {
   QUESTIONS_SET = 'Questions settings',
   TEST_SET = 'Test settings',
   TEST_PROCESS = 'Test process',
+  TEST_RESULT = 'Test result',
   MAIN = 'Main',
   SIGN_IN = 'Sign in',
   SIGN_UP = 'Sign up',

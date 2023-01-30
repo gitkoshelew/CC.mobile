@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {CustomTextInput} from '@src/components/ui/CustomTextInput/index';
+import {CustomTextInput} from '@src/components/ui/CustomTextInput';
 
 export const Main = () => {
   return (

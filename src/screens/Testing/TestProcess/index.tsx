@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {Timer} from '@src/components/Timer';
 import {
   ViewContainer,
@@ -11,23 +11,170 @@ import {AppButton} from '@src/components/ui/AppButton';
 import {ViewFlexCenter, CountQuestionBox, ViewBlock} from './styles';
 import {ProgressBar} from '@src/components/ProgressBar';
 import {ProgressType} from '@src/components/ProgressBar/ProgressView';
-import {useAppSelector} from '@hooks/hooks';
+import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
+import {ScreenList} from '@src/navigation/navigation';
+import {clearStateResult, setStateResult} from '@src/bll/resultReducer';
+
+export type ResultType = {
+  id: number;
+  questionStatus: 'default' | 'active' | 'right' | 'error';
+  answer: string;
+};
 
 export const TestProcess = () => {
+  const {navigate} = useAppNavigate();
+  const dispatch = useAppDispatch();
+  const resultData = useAppSelector(state => state.resultReducer.result);
+  const checkData = useAppSelector(state => state.checkReducer.options);
   const quizIdMocState = useAppSelector(state => state.processReducer);
   const [numAnswer, setNumAnswer] = useState<number>(1);
+  const [singleAnswer, setSingleAnswer] = useState<string[]>([]);
+  const [isActiveRadio, setIsActiveRadio] = useState<number | undefined>(
+    undefined,
+  );
+  const checkDataAnswers = checkData.filter(e => e.check);
+  const checkAnswer = checkDataAnswers.map(e => e.label);
   const currentTest = quizIdMocState.questions.filter(e => e.id === numAnswer);
-  const onPressRadioHandler = useCallback((value: number) => {
-    console.log(value); // It's temporary
+  const onPressRadioHandler = useCallback((label: string, value: number) => {
+    console.log(label);
+    setSingleAnswer([label]);
+    setIsActiveRadio(value);
   }, []);
+  const progressResult = () => {
+    if (currentTest[0].type === 'single') {
+      if (
+        singleAnswer.join().toLowerCase() ===
+        currentTest[0].content.correctAnswer.join().toLowerCase()
+      ) {
+        dispatch(
+          setStateResult({
+            id: currentTest[0].id,
+            questionStatus: 'right',
+            answer: singleAnswer.join(),
+          }),
+        );
+      }
+      if (
+        singleAnswer.length > 0 &&
+        singleAnswer.join().toLowerCase() !==
+          currentTest[0].content.correctAnswer.join().toLowerCase()
+      ) {
+        dispatch(
+          setStateResult({
+            id: currentTest[0].id,
+            questionStatus: 'error',
+            answer: singleAnswer.join(),
+          }),
+        );
+      }
+      if (singleAnswer.length === 0) {
+        dispatch(
+          setStateResult({
+            id: currentTest[0].id,
+            questionStatus: 'default',
+            answer: singleAnswer.join(),
+          }),
+        );
+      }
+    }
+    if (currentTest[0].type === 'multi') {
+      if (
+        checkAnswer.sort().join('').toLowerCase() ===
+        [...currentTest[0].content.correctAnswer].sort().join('').toLowerCase()
+      ) {
+        dispatch(
+          setStateResult({
+            id: currentTest[0].id,
+            questionStatus: 'right',
+            answer: checkAnswer.join(),
+          }),
+        );
+        console.log(true);
+      }
+      if (
+        checkAnswer.length > 0 &&
+        checkAnswer.sort().join('').toLowerCase() !==
+          [...currentTest[0].content.correctAnswer]
+            .sort()
+            .join('')
+            .toLowerCase()
+      ) {
+        dispatch(
+          setStateResult({
+            id: currentTest[0].id,
+            questionStatus: 'error',
+            answer: checkAnswer.join(),
+          }),
+        );
+        console.log(false);
+      }
+      if (checkAnswer.length === 0) {
+        dispatch(
+          setStateResult({
+            id: currentTest[0].id,
+            questionStatus: 'default',
+            answer: checkAnswer.join(),
+          }),
+        );
+      }
+    }
+  };
   const onPressNextAnswer = () => {
-    if (numAnswer < quizIdMocState.questions.length) {
+    if (
+      numAnswer < quizIdMocState.questions.length &&
+      resultData.length < quizIdMocState.questions.length
+    ) {
+      progressResult();
       setNumAnswer(numAnswer + 1);
+      setSingleAnswer([]);
+      setIsActiveRadio(undefined);
+      console.log(resultData);
+    }
+    if (
+      numAnswer === quizIdMocState.questions.length &&
+      resultData.length < quizIdMocState.questions.length
+    ) {
+      navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
+      progressResult();
+      setSingleAnswer([]);
+      console.log(resultData);
     }
   };
   const onPressSkipAnswer = () => {
     if (numAnswer < quizIdMocState.questions.length) {
       setNumAnswer(numAnswer + 1);
+      setSingleAnswer([]);
+      if (currentTest[0].type === 'single') {
+        dispatch(
+          setStateResult({
+            id: currentTest[0].id,
+            questionStatus: 'default',
+            answer: singleAnswer.join(),
+          }),
+        );
+      }
+      if (currentTest[0].type === 'multi') {
+        dispatch(
+          setStateResult({
+            id: currentTest[0].id,
+            questionStatus: 'default',
+            answer: checkAnswer.join(),
+          }),
+        );
+      }
+    }
+
+    if (numAnswer === quizIdMocState.questions.length) {
+      navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
+      setSingleAnswer([]);
+
+      dispatch(
+        setStateResult({
+          id: currentTest[0].id,
+          questionStatus: 'default',
+          answer: singleAnswer.join(),
+        }),
+      );
     }
   };
   const progressData: ProgressType[] = [
@@ -50,15 +197,24 @@ export const TestProcess = () => {
   const timeSeconds = (currentTest[0].timer % 60).toString();
   const timeMinutes = Math.floor(currentTest[0].timer / 60).toString();
   const arrAnswers = currentTest[0].content.options;
-  const randomAnswers = [...arrAnswers].sort(() => Math.random() - 0.5);
+  const randomAnswers = useMemo(
+    () => [...arrAnswers].sort(() => Math.random() - 0.5),
+    [arrAnswers],
+  );
   const answerType = currentTest[0].type;
   const question = currentTest[0].title;
   const titleQuiz = quizIdMocState.title;
-
+  useEffect(() => {
+    dispatch(clearStateResult());
+  }, [dispatch]);
   return (
     <ViewContainer>
       <TimerBox>
-        <Timer timeInMinutes={timeMinutes} timeInSeconds={timeSeconds} />
+        <Timer
+          timeInMinutes={timeMinutes}
+          timeInSeconds={timeSeconds}
+          onClick={onPressNextAnswer}
+        />
       </TimerBox>
       <ViewBlock>
         <ProgressBar data={data} />
@@ -76,6 +232,7 @@ export const TestProcess = () => {
             data={randomAnswers}
             onPress={onPressRadioHandler}
             answerType={answerType}
+            selected={isActiveRadio}
           />
         </ViewFlexCenter>
         <ButtonsBox>
