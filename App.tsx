@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -7,6 +7,7 @@ import Navigation from '@src/navigation/navigation';
 import {Provider} from 'react-redux';
 import store from '@src/bll/store/store';
 import StorybookUIRoot from './.storybook/Storybook';
+import {Notification} from '@src/components/Notification/index';
 
 const useStorybook = false;
 
@@ -25,6 +26,7 @@ const App = () => {
     <NavigationContainer>
       <Provider store={store}>
         <Navigation />
+        <Notification />
         <StatusBar
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           backgroundColor={backgroundStyle.backgroundColor}
