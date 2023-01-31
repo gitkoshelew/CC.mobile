@@ -3,7 +3,7 @@ import {Color} from '@theme/colors';
 import {CustomTextInputPropsType} from './index';
 
 export const CustomInput = styled.TextInput<CustomTextInputPropsType>`
-  background: ${props => props.color || Color.White};
+  background: ${Color.White};
   border: 1px solid ${props => (props.error ? Color.Red : Color.GrayMedium)};
   border-radius: 15px;
   font-family: 'Montserrat-Regular';

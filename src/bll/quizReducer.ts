@@ -2,7 +2,7 @@ import {quizzesAPI} from '@src/dal/quizzesAPI';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {createTestRequestQuiz} from '@customTypes/quizzesAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
-import {newQuestionType} from '@customTypes/quiz-types';
+import {newQuestionInQuizType} from '@customTypes/quiz-types';
 import {AxiosError} from 'axios';
 import {setAppMessage} from './appReducer';
 
@@ -20,12 +20,18 @@ export const createQuiz = createAsyncThunk(
   async (param: createTestRequestQuiz, {dispatch, rejectWithValue}) => {
     try {
       const res = await quizzesAPI.createQuiz(param);
+      dispatch(
+        setAppMessage({
+          text: 'The test was created successfully',
+          severity: 'success',
+        }),
+      );
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(
         setAppMessage({
-          text: 'something went wrong',
+          text: 'Something went wrong',
           severity: 'error',
         }),
       );
@@ -36,16 +42,28 @@ export const createQuiz = createAsyncThunk(
 
 export const createQuestion = createAsyncThunk(
   'quiz/createQuestion',
-  async (param: newQuestionType, {rejectWithValue}) => {
+  async (param: newQuestionInQuizType, {dispatch, rejectWithValue}) => {
+    const {quizId, ...newTest} = param;
     try {
-      const createdQuestion = await questionsAPI.createQuestion(param);
+      const createdQuestion = await questionsAPI.createQuestion(newTest);
       await quizzesAPI.addQuestionToQuiz({
-        quizId: 25,
+        quizId: quizId,
         questionId: createdQuestion.data.id,
-      }); // It's temporary, backend have to field than would immediately indicate quiz
+      });
+      dispatch(
+        setAppMessage({
+          text: 'The question is created',
+          severity: 'success',
+        }),
+      );
     } catch (e) {
       const err = e as Error | AxiosError;
-      console.error(err.message);
+      dispatch(
+        setAppMessage({
+          text: 'The question has not been created',
+          severity: 'error',
+        }),
+      );
       return rejectWithValue(err.message);
     }
   },

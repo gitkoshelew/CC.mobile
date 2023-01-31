@@ -1,5 +1,5 @@
 import {CircularResultBar} from '../CircularResultBar';
-import {IncorrectAnswer, IncorrectAnswers} from '../Incorrectanswers';
+import {IncorrectAnswer, IncorrectAnswers} from '../IncorrectAnswers';
 import {AppButton} from '../ui/AppButton';
 import {BlockBoxMarginLeft, SmallTitleBlack} from '../ui/ReadyStyles/Boxes';
 import {ViewCenter, ViewFlexCenter} from '../ui/ReadyStyles/Containers';

@@ -10,6 +10,8 @@ import {ScreenList} from '@src/navigation/navigation';
 import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
 import {getQuizQuestions} from '@src/bll/quizReducer';
 
+const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
+
 export const QuestionsSettings = ({
   route,
 }: NativeStackScreenProps<RootCreateTestParamsList, ScreenList.QUESTIONS_SET>) => {
@@ -34,7 +36,6 @@ export const QuestionsSettings = ({
   const listQuestionsTabs = [...Array(route.params.numberQuestions)].map((el, i) => i);
   const [questions, setQuestions] = useState<questionType[]>([newQuestion()]);
   const [currentQuestion, setCurrentQuestion] = useState<questionType>(questions[0]);
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
   const onPressCurrentQuestionPressed = useCallback(
     (index: number) => {
@@ -69,11 +70,12 @@ export const QuestionsSettings = ({
             <QuestionsTabs
               onPressCurrentQuestion={onPressCurrentQuestionPressed}
               listQuestionsTabs={listQuestionsTabs}
+              amountFilledQuestion={questions.length}
             />
             <CreateQuestion
               currentQuestion={currentQuestion}
               setQuestions={setQuestions}
-              questions={questions}
+              quizId={route.params.idNewTest}
             />
           </View>
         </ScrollView>

@@ -18,7 +18,7 @@ const BlockBoxMarginLeft = styled.View`
 `;
 
 const BlockBoxMarginRight = styled.View`
-  margin-right: 8px;
+  margin-right: 20px;
 `;
 
 const TextBox = styled.Text`
