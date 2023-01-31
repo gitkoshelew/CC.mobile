@@ -21,6 +21,8 @@ type inputsFieldType = {
   description: string;
 };
 
+const numberOfLines = Platform.OS === 'ios' ? undefined : 4;
+
 export const TestSettings = () => {
   const data = ['Verify', 'Date', 'Popularity', 'Something else'];
   const dispatch = useAppDispatch();
@@ -35,7 +37,6 @@ export const TestSettings = () => {
     handleSubmit,
     formState: {errors},
   } = useForm<inputsFieldType>();
-
   const selectsThemePressed = useCallback(
     (value: string) => {
       setSelectorsData({...selectorsData, theme: value});
@@ -59,12 +60,12 @@ export const TestSettings = () => {
         }),
       )
         .unwrap()
-        .then(() => {
+        .then(res => {
           navigate(ScreenList.CREATE_TEST, {
             screen: ScreenList.QUESTIONS_SET,
             params: {
               numberQuestions: selectorsData.numberQuestions,
-              idNewTest: 25,
+              idNewTest: res.id,
             },
           });
         });
@@ -109,7 +110,7 @@ export const TestSettings = () => {
           }}
           multiline
           textAlignVertical={'top'}
-          numberOfLines={Platform.OS === 'ios' ? undefined : 4}
+          numberOfLines={numberOfLines}
           height={Platform.OS === 'ios' ? '100px' : undefined}
         />
       </BlockBox>

@@ -24,6 +24,9 @@ export type newQuestionType = {
   type: TypeOptions;
   topicId: number;
 };
+export type newQuestionInQuizType = newQuestionType & {
+  quizId: number;
+};
 
 export type questionType = {
   id: number;
@@ -40,7 +43,6 @@ export type questionType = {
   //   quizId: 25;
   //   questionId: 2;
   // }; // need explain
-  // quiz: number[]; // need explain
 };
 
 export type quizType = {

@@ -30,7 +30,7 @@ export const CloseButton = ({id, setIsOpen}: CloseButtonPropsType) => {
       <TouchableOpacity onPress={() => setIsOpen(id)}>
         <AntDesign name="close" size={22} color={Color.White} />
         <Svg style={styles.circle} width={30} height={30}>
-          <Circle cx={15} cy={15} stroke={Color.Red} strokeWidth={2} r={radios} />
+          <Circle cx={15} cy={15} stroke={Color.Semitransparent} strokeWidth={2} r={radios} />
           <AnimatedCircle
             cx={15}
             cy={15}

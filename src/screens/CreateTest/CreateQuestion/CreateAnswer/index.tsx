@@ -12,7 +12,7 @@ type CreateAnswerPropsType = {
   correctAnswer: string[];
   addNewOptionPressed: () => void;
   deleteOptionPressed: (index: number) => void;
-  checkedCorrectOption: (index: number, checked: boolean) => void;
+  checkedCorrectOption: (index: number, checked: boolean, textOption: string) => void;
 };
 
 export const CreateAnswer = ({
@@ -31,6 +31,7 @@ export const CreateAnswer = ({
       {fields.map((item, index) => (
         <AddingAnswer
           key={item.id}
+          option={item.option}
           index={index}
           type={type}
           control={control}

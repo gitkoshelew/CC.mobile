@@ -1,6 +1,6 @@
 import {UserIconContainer, Wrapper} from './styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {ViewCenter, ViewRightBotton} from '../ui/ReadyStyles/Containers';
+import {ViewCenter, ViewRightBottom} from '../ui/ReadyStyles/Containers';
 import Animated, {useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
 import {BlockBoxMarginRight, Title} from '../ui/ReadyStyles/Boxes';
 import {SmallButton} from '../ui/SmallButton';
@@ -25,14 +25,14 @@ export const Header = ({isOpen}: IProps) => {
   return (
     <Wrapper>
       <Animated.View style={opacity}>
-        <ViewRightBotton>
+        <ViewRightBottom>
           <BlockBoxMarginRight>
             <SmallButton type="theme" onPress={() => {}} />
           </BlockBoxMarginRight>
           <BlockBoxMarginRight>
             <SmallButton type="exit" onPress={() => {}} />
           </BlockBoxMarginRight>
-        </ViewRightBotton>
+        </ViewRightBottom>
         <ViewCenter>
           <UserIconContainer>
             <FontAwesome name={'user'} size={80} />
