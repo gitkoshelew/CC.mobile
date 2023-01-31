@@ -22,7 +22,7 @@ export const createQuiz = createAsyncThunk(
       const res = await quizzesAPI.createQuiz(param);
       dispatch(
         setAppMessage({
-          text: 'the test was created successfully',
+          text: 'The test was created successfully',
           severity: 'success',
         }),
       );
@@ -31,7 +31,7 @@ export const createQuiz = createAsyncThunk(
       const err = e as Error | AxiosError;
       dispatch(
         setAppMessage({
-          text: 'something went wrong',
+          text: 'Something went wrong',
           severity: 'error',
         }),
       );
