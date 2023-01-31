@@ -16,7 +16,7 @@ const Group = styled.View`
   padding: 7px 14px 10px;
   margin: 31px 0 21px;
   border-radius: 15px;
-  background-color: ${Color.Blue};
+  background-color: ${Color.DarkBlue};
 `;
 
 const Box = styled.View`

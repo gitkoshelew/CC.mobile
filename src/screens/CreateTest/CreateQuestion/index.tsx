@@ -106,18 +106,18 @@ export const CreateQuestion = ({
   const checkedCorrectOption = useCallback(
     (index: number, checked: boolean, textOption: string) => {
       if (textOption !== '' && checked) {
-        setSelectorsData({
-          ...selectorsData,
-          correctAnswers: [...selectorsData.correctAnswers, textOption],
-        });
+        setSelectorsData(state => ({
+          ...state,
+          correctAnswers: [...state.correctAnswers, textOption],
+        }));
       } else {
-        setSelectorsData({
-          ...selectorsData,
-          correctAnswers: selectorsData.correctAnswers.filter(el => el !== textOption),
-        });
+        setSelectorsData(state => ({
+          ...state,
+          correctAnswers: state.correctAnswers.filter(el => el !== textOption),
+        }));
       }
     },
-    [selectorsData],
+    [],
   );
 
   const selectQuestionDifficult = useCallback(

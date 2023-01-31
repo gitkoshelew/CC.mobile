@@ -5,7 +5,7 @@ import {useState} from 'react';
 export type QuestionsTabsPropsType = {
   onPressCurrentQuestion: (id: number) => void;
   listQuestionsTabs: number[];
-  isFilledQuestion: number;
+  amountFilledQuestion: number;
 };
 
 type renderTabsType = {
@@ -14,7 +14,7 @@ type renderTabsType = {
 
 export const QuestionsTabs = ({
   listQuestionsTabs,
-  isFilledQuestion,
+  amountFilledQuestion,
   ...props
 }: QuestionsTabsPropsType) => {
   const [isActiveTab, setIsActiveTab] = useState(0);
@@ -27,7 +27,7 @@ export const QuestionsTabs = ({
         isActive={id === isActiveTab}
         onPress={props.onPressCurrentQuestion}
         setIsActiveTab={setIsActiveTab}
-        isFilledQuestion={isFilledQuestion > id}
+        isFilledQuestion={amountFilledQuestion > id}
       />
     );
   };

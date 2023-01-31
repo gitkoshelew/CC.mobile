@@ -70,7 +70,7 @@ export const QuestionsSettings = ({
             <QuestionsTabs
               onPressCurrentQuestion={onPressCurrentQuestionPressed}
               listQuestionsTabs={listQuestionsTabs}
-              isFilledQuestion={questions.length}
+              amountFilledQuestion={questions.length}
             />
             <CreateQuestion
               currentQuestion={currentQuestion}

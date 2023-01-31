@@ -49,9 +49,7 @@ export const AddingAnswer = ({
       onPressCorrectAnswer(index, false, props.option);
       setIsChecked(false);
     }
-    // will be infinite call when change isCurrentOptionText
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isCurrentOptionText, props.type]);
+  }, [index, isCurrentOptionText, onPressCorrectAnswer, props.option]);
 
   useEffect(() => {
     setIsChecked(props.correctAnswer.includes(isCurrentOptionText));

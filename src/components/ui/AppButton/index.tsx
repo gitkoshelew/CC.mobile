@@ -9,7 +9,7 @@ export const AppButton = ({title, type, onPress, disabled, ...props}: IButtonPro
     () => [
       styles.container,
       {
-        backgroundColor: type === 'primary' ? Color.Blue : Color.GrayLight,
+        backgroundColor: type === 'primary' ? Color.DarkBlue : Color.GrayLight,
         opacity: disabled ? 0.5 : 1,
       },
     ],

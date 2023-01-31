@@ -52,7 +52,7 @@ export const createQuestion = createAsyncThunk(
       });
       dispatch(
         setAppMessage({
-          text: 'The question created',
+          text: 'The question is created',
           severity: 'success',
         }),
       );

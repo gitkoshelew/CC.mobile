@@ -19,7 +19,7 @@ export const CheckBox = ({onPress, isChecked, disabled, fillColor}: CheckBoxProp
     <View>
       <BouncyCheckbox
         disableText
-        fillColor={fillColor ? fillColor : '#4287f5'}
+        fillColor={fillColor ? fillColor : Color.Blue}
         size={30}
         style={disabled && styles.disabled}
         isChecked={isChecked}
