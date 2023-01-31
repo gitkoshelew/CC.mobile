@@ -5,17 +5,10 @@ import {ISelectProps} from 'src/customTypes/AppSelect-types';
 import {useMemo} from 'react';
 import {Color} from '@theme/colors';
 
-export const AppSelect = ({
-  size,
-  type,
-  data,
-  onSelect,
-  value,
-  ...props
-}: ISelectProps) => {
+export const AppSelect = ({size, type, data, onSelect, value, ...props}: ISelectProps) => {
   const containerButtonStyle = useMemo(
     () => ({
-      backgroundColor: type === 'primary' ? Color.Blue : Color.White,
+      backgroundColor: type === 'primary' ? Color.DarkBlue : Color.White,
       borderRadius: size === 'm' ? 15 : 5,
       height: size === 'm' ? 36 : 26,
       width: size === 'm' ? '100%' : 125,

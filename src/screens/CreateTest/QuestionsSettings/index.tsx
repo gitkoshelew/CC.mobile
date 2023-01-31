@@ -4,39 +4,58 @@ import {CreateQuestion} from '../CreateQuestion/index';
 import {useCallback, useEffect, useState} from 'react';
 import {styles} from './styles';
 import {useAppDispatch} from '@hooks/hooks';
-import {getQuestions} from '@src/bll/testReducer';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootCreateTestParamsList} from '@customTypes/navigation-types';
 import {ScreenList} from '@src/navigation/navigation';
+import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
+import {getQuizQuestions} from '@src/bll/quizReducer';
+
+const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
 export const QuestionsSettings = ({
   route,
-}: NativeStackScreenProps<
-  RootCreateTestParamsList,
-  ScreenList.QUESTIONS_SET
->) => {
-  const createQuestionsTabs = [...Array(route.params.numberQuestions)].map(
-    (_, index) => ({
-      id: index + 1,
+}: NativeStackScreenProps<RootCreateTestParamsList, ScreenList.QUESTIONS_SET>) => {
+  const newQuestion = useCallback(
+    () => ({
+      id: Math.random(),
+      title: '',
+      description: '',
+      content: {
+        options: ['', ''],
+        correctAnswer: [],
+      },
+      difficulty: Difficulty.Easy,
+      timer: 0,
+      type: TypeOptions.single,
+      topicId: 1,
+      moderationId: null,
     }),
+    [],
   );
-
   const dispatch = useAppDispatch();
-  const [questions, setQuestions] = useState([{id: 1}]);
-  const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
+  const listQuestionsTabs = [...Array(route.params.numberQuestions)].map((el, i) => i);
+  const [questions, setQuestions] = useState<questionType[]>([newQuestion()]);
+  const [currentQuestion, setCurrentQuestion] = useState<questionType>(questions[0]);
+
   const onPressCurrentQuestionPressed = useCallback(
-    (id: number) => {
-      setCurrentQuestion(questions.find(el => el.id === id)!);
+    (index: number) => {
+      if (questions[index]) {
+        setCurrentQuestion(questions[index]);
+      } else {
+        setCurrentQuestion(newQuestion);
+      }
     },
-    [questions],
+    [newQuestion, questions],
   );
 
   useEffect(() => {
-    dispatch(getQuestions(route.params.idNewTest))
+    dispatch(getQuizQuestions(route.params.idNewTest))
       .unwrap()
       .then(res => {
-        setQuestions(res.question);
+        if (res.question.length) {
+          setQuestions(res.question);
+          setCurrentQuestion(res.question[0]);
+        }
       });
   }, [dispatch, route.params.idNewTest]);
 
@@ -46,16 +65,18 @@ export const QuestionsSettings = ({
       keyboardVerticalOffset={keyboardVerticalOffset}
       style={styles.container}>
       <View style={styles.ViewContainer}>
-        <ScrollView
-          style={styles.container}
-          showsVerticalScrollIndicator={false}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
           <View style={styles.inner}>
             <QuestionsTabs
               onPressCurrentQuestion={onPressCurrentQuestionPressed}
-              questions={createQuestionsTabs}
-              currentQuestionsId={currentQuestion.id}
+              listQuestionsTabs={listQuestionsTabs}
+              amountFilledQuestion={questions.length}
             />
-            <CreateQuestion />
+            <CreateQuestion
+              currentQuestion={currentQuestion}
+              setQuestions={setQuestions}
+              quizId={route.params.idNewTest}
+            />
           </View>
         </ScrollView>
       </View>

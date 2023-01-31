@@ -1,9 +1,6 @@
 import React, {useEffect, useMemo} from 'react';
 import {Text, View} from 'react-native';
-import RadioForm, {
-  RadioButtonInput,
-  RadioButtonLabel,
-} from 'react-native-simple-radio-button';
+import RadioForm, {RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {AnswerRadioContainer, styles, ViewMarginRight} from './styles';
 import {Color} from '@theme/colors';
 import {MultipleCheckboxes} from '@src/components/MultipleCheckboxes/MultipleCheckboxes';
@@ -62,9 +59,7 @@ export const AnswersOptions = ({
                   index={i}
                   isSelected={selected === i}
                   onPress={onPressRadio}
-                  buttonOuterColor={
-                    selected === i ? Color.BlueLight : Color.GrayStrongDark
-                  }
+                  buttonOuterColor={selected === i ? Color.BlueLight : Color.GrayStrongDark}
                   buttonSize={15}
                   buttonOuterSize={30}
                 />

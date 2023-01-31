@@ -1,9 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {Timer} from '@src/components/Timer';
-import {
-  ViewContainer,
-  ViewFlexRight,
-} from '@src/components/ui/ReadyStyles/Containers';
+import {ViewContainer, ViewFlexRight} from '@src/components/ui/ReadyStyles/Containers';
 import {TimerBox, TextBox, ButtonsBox} from './styles';
 import {MainTestingContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {AnswersOptions} from '@src/components/AnswersOptions';
@@ -29,9 +26,7 @@ export const TestProcess = () => {
   const quizIdMocState = useAppSelector(state => state.processReducer);
   const [numAnswer, setNumAnswer] = useState<number>(1);
   const [singleAnswer, setSingleAnswer] = useState<string[]>([]);
-  const [isActiveRadio, setIsActiveRadio] = useState<number | undefined>(
-    undefined,
-  );
+  const [isActiveRadio, setIsActiveRadio] = useState<number | undefined>(undefined);
   const checkDataAnswers = checkData.filter(e => e.check);
   const checkAnswer = checkDataAnswers.map(e => e.label);
   const currentTest = quizIdMocState.questions.filter(e => e.id === numAnswer);
@@ -93,10 +88,7 @@ export const TestProcess = () => {
       if (
         checkAnswer.length > 0 &&
         checkAnswer.sort().join('').toLowerCase() !==
-          [...currentTest[0].content.correctAnswer]
-            .sort()
-            .join('')
-            .toLowerCase()
+          [...currentTest[0].content.correctAnswer].sort().join('').toLowerCase()
       ) {
         dispatch(
           setStateResult({
@@ -174,12 +166,12 @@ export const TestProcess = () => {
       );
     }
   };
-  const progressData: ProgressType[] = [
-    ...Array(quizIdMocState.questions.length),
-  ].map((_, index) => ({
-    id: index + 1,
-    questionStatus: 'default',
-  }));
+  const progressData: ProgressType[] = [...Array(quizIdMocState.questions.length)].map(
+    (_, index) => ({
+      id: index + 1,
+      questionStatus: 'default',
+    }),
+  );
   const data: ProgressType[] = progressData.map(e =>
     numAnswer >= e.id
       ? {
@@ -233,11 +225,7 @@ export const TestProcess = () => {
           />
         </ViewFlexCenter>
         <ButtonsBox>
-          <AppButton
-            title="Skip"
-            type="secondary"
-            onPress={onPressSkipAnswer}
-          />
+          <AppButton title="Skip" type="secondary" onPress={onPressSkipAnswer} />
           <AppButton title="Next" type="primary" onPress={onPressNextAnswer} />
         </ButtonsBox>
       </MainTestingContainer>

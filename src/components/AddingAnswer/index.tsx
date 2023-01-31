@@ -5,43 +5,62 @@ import {CustomTextInput} from '../ui/CustomTextInput';
 import {CheckBox} from '../ui/CheckBox';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
-import {useCallback} from 'react';
-import {Control, Controller} from 'react-hook-form';
-import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
+import {useCallback, useEffect, useState} from 'react';
+import {Control, Controller, useWatch} from 'react-hook-form';
+import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 
 type AddingAnswerPropsType = {
-  item: {
-    id: string;
-    option: string;
-  };
   index: number;
-  control: Control<inputsFieldType>;
+  option: string;
   correctAnswer: string[];
+  type: string;
+  control: Control<InputsFieldType>;
   disabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
-  onPressCorrectAnswer: (answer: string, checked: boolean) => void;
+  onPressCorrectAnswer: (index: number, checked: boolean, textOption: string) => void;
 };
 
 export const AddingAnswer = ({
-  item,
   index,
   onPressDelete,
   onPressCorrectAnswer,
   disabledDeleteBtn,
   ...props
 }: AddingAnswerPropsType) => {
+  const isCurrentOptionText = useWatch({
+    name: `options.${index}.option`,
+    control: props.control,
+  });
+  const [isChecked, setIsChecked] = useState(false);
+
   const onPressCorrectAnswerHandler = useCallback(
     (checked: boolean) => {
-      onPressCorrectAnswer(item.option, checked);
+      setIsChecked(checked);
+      onPressCorrectAnswer(index, checked, isCurrentOptionText);
     },
-    [item.option, onPressCorrectAnswer],
+    [index, isCurrentOptionText, onPressCorrectAnswer],
   );
-
-  const onPressDeletePressed = () => {
+  const onPressDeletePressed = useCallback(() => {
     onPressDelete(index);
-  };
+  }, [index, onPressDelete]);
 
-  const isCorrectAnswer = props.correctAnswer.includes(item.option);
+  useEffect(() => {
+    if (props.option !== isCurrentOptionText) {
+      onPressCorrectAnswer(index, false, props.option);
+      setIsChecked(false);
+    }
+  }, [index, isCurrentOptionText, onPressCorrectAnswer, props.option]);
+
+  useEffect(() => {
+    setIsChecked(props.correctAnswer.includes(isCurrentOptionText));
+  }, [isCurrentOptionText, props.correctAnswer, props.option]);
+
+  const disabledCheckbox =
+    props.type === 'single'
+      ? (!isChecked && props.correctAnswer.length) || !isCurrentOptionText
+      : !isCurrentOptionText;
+
+  const disabledDeleteOption = disabledDeleteBtn || isChecked;
 
   return (
     <BlockAnswerBox>
@@ -69,12 +88,14 @@ export const AddingAnswer = ({
       <View style={styles.inner}>
         <CheckBox
           onPress={onPressCorrectAnswerHandler}
-          checked={isCorrectAnswer}
+          isChecked={isChecked}
+          disabled={!!disabledCheckbox}
+          fillColor={Color.GreenLight}
         />
         <TouchableOpacity
-          style={disabledDeleteBtn && styles.disabled}
+          style={disabledDeleteOption && styles.disabled}
           onPress={onPressDeletePressed}
-          disabled={disabledDeleteBtn}>
+          disabled={disabledDeleteOption}>
           <AntDesign name="minuscircleo" size={30} color={Color.Red} />
         </TouchableOpacity>
       </View>

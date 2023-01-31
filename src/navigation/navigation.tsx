@@ -51,11 +51,7 @@ const Navigation = () => {
             tabBarShowLabel: true,
             ...screenOptions,
           })}>
-          <Tab.Screen
-            name={ScreenList.HOME}
-            component={Home}
-            options={{headerShown: false}}
-          />
+          <Tab.Screen name={ScreenList.HOME} component={Home} options={{headerShown: false}} />
           <Tab.Screen
             name={ScreenList.CREATE_TEST}
             component={CreateTest}

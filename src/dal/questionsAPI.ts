@@ -1,11 +1,8 @@
 import {instance} from '@src/dal/instance';
-import {questionType} from '@customTypes/test-types';
+import {newQuestionType} from '@customTypes/quiz-types';
 
 export const questionsAPI = {
-  getQuestions(id: number) {
-    return instance.get(`/quiz/${id}`);
-  },
-  createQuestion(params: questionType) {
-    return instance.post('/questions', {params});
+  createQuestion(params: newQuestionType) {
+    return instance.post('/questions', params);
   },
 };

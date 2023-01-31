@@ -8,8 +8,7 @@ const TextBox = styled.Text<{fontWeight?: boolean}>`
   margin-bottom: 19px;
   text-align: center;
   font-size: 16px;
-  font-family: ${props =>
-    props.fontWeight ? 'Montserrat-Bold' : 'Montserrat-Regular'};
+  font-family: ${props => (props.fontWeight ? 'Montserrat-Bold' : 'Montserrat-Regular')};
 `;
 
 const CountQuestionBox = styled.Text`

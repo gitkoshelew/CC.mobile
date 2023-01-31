@@ -30,5 +30,4 @@ const checkSlice = createSlice({
 
 export const checkReducer = checkSlice.reducer;
 
-export const {changeStateCheck, clearStateCheck, setStateCheck} =
-  checkSlice.actions;
+export const {changeStateCheck, clearStateCheck, setStateCheck} = checkSlice.actions;

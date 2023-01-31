@@ -5,7 +5,7 @@ type ViewBoxPropsType = {
   questionStatus: 'default' | 'active' | 'right' | 'error';
 };
 const statusColor = {
-  active: Color.Blue,
+  active: Color.DarkBlue,
   right: Color.BlueLight,
   error: Color.Red,
   default: Color.GrayMedium,

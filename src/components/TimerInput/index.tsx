@@ -1,11 +1,11 @@
 import {Colon, Container} from './styles';
-import {inputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
+import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 import {View} from 'react-native';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {Control} from 'react-hook-form';
 
 type TimerInputPropsType = {
-  control: Control<inputsFieldType>;
+  control: Control<InputsFieldType>;
 };
 
 export const TimerInput = ({control}: TimerInputPropsType) => {

@@ -14,6 +14,14 @@ const ViewFlexRight = styled.View`
   align-items: flex-end;
 `;
 
+const ViewRightBottom = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
 const ViewCenter = styled.View`
   align-items: center;
   justify-content: center;
@@ -55,4 +63,5 @@ export {
   MainTestingContainer,
   ViewFlexRight,
   ViewFlexCenter,
+  ViewRightBottom,
 };

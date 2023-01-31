@@ -1,30 +1,33 @@
 import {QuestionTab} from './QuestionTab/index';
 import {ScrollViewBlock, TabsBlock} from './styles';
+import {useState} from 'react';
 
 export type QuestionsTabsPropsType = {
-  onPressCurrentQuestion: (idQuestion: number) => void;
-  questions: {id: number}[];
-  currentQuestionsId: number;
+  onPressCurrentQuestion: (id: number) => void;
+  listQuestionsTabs: number[];
+  amountFilledQuestion: number;
 };
 
 type renderTabsType = {
   id: number;
-  index: number;
 };
 
 export const QuestionsTabs = ({
-  questions,
-  currentQuestionsId,
+  listQuestionsTabs,
+  amountFilledQuestion,
   ...props
 }: QuestionsTabsPropsType) => {
-  const renderItem = ({id, index}: renderTabsType) => {
+  const [isActiveTab, setIsActiveTab] = useState(0);
+
+  const renderItem = ({id}: renderTabsType) => {
     return (
       <QuestionTab
         key={id}
         id={id}
-        isActive={id === currentQuestionsId}
-        index={index}
+        isActive={id === isActiveTab}
         onPress={props.onPressCurrentQuestion}
+        setIsActiveTab={setIsActiveTab}
+        isFilledQuestion={amountFilledQuestion > id}
       />
     );
   };
@@ -35,11 +38,10 @@ export const QuestionsTabs = ({
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={true}
       testID="ScrollViewBlock">
-      <TabsBlock flexDirection={questions.length > 10 ? 'column' : 'row'}>
-        {questions.map((item, index) =>
+      <TabsBlock flexDirection={listQuestionsTabs.length > 10 ? 'column' : 'row'}>
+        {listQuestionsTabs.map(item =>
           renderItem({
-            id: item.id,
-            index,
+            id: item,
           }),
         )}
       </TabsBlock>

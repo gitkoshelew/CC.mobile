@@ -18,7 +18,7 @@ const BlockBoxMarginLeft = styled.View`
 `;
 
 const BlockBoxMarginRight = styled.View`
-  margin-right: 8px;
+  margin-right: 20px;
 `;
 
 const TextBox = styled.Text`
@@ -47,6 +47,14 @@ const Title = styled.Text`
   font-family: 'Montserrat-Regular';
   color: ${Color.White};
   font-weight: 600;
+`;
+
+const SmallTitle = styled.Text`
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 16px;
+  font-family: 'Montserrat-Regular';
+  color: ${Color.White};
 `;
 
 const SmallTitleBlack = styled.Text`
@@ -81,6 +89,10 @@ const RightBlockBox = styled.View`
   align-items: center;
 `;
 
+const ContainerDynamicWidth = styled.View<{width: string}>`
+  width: ${props => props.width};
+`;
+
 export {
   BlockBox,
   TextBox,
@@ -95,4 +107,6 @@ export {
   SmallTitleBlack,
   SmallTextBlack,
   BlockBoxMarginRight,
+  SmallTitle,
+  ContainerDynamicWidth,
 };

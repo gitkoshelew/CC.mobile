@@ -4,5 +4,5 @@ export type ITouchableOpacityProps = DefaultTouchableOpacityProps;
 
 export interface IButtonProps extends ITouchableOpacityProps {
   onPress?: () => void;
-  type: 'check' | 'edit' | 'delete';
+  type: 'check' | 'edit' | 'delete' | 'theme' | 'exit';
 }

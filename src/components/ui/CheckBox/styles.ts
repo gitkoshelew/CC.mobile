@@ -9,4 +9,7 @@ export const styles = StyleSheet.create({
     width: 15,
     height: 15,
   },
+  disabled: {
+    opacity: 0.5,
+  },
 });

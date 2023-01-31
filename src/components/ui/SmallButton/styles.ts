@@ -1,14 +1,17 @@
-import {Color} from '@theme/colors';
 import styled from 'styled-components/native';
 
-const Box = styled.View`
+const Box = styled.TouchableOpacity`
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+`;
+
+const ButtonContainer = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 14px;
-  background: ${Color.GrayLight};
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
 `;
-
-export {Box};
+export {Box, ButtonContainer};

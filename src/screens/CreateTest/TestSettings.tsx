@@ -1,9 +1,6 @@
 import {Platform} from 'react-native';
 import {TextBox, BlockBox} from '@src/components/ui/ReadyStyles/Boxes';
-import {
-  ViewContainer,
-  ViewCenter,
-} from '@src/components/ui/ReadyStyles/Containers';
+import {ViewContainer, ViewCenter} from '@src/components/ui/ReadyStyles/Containers';
 import {AppButton} from '@src/components/ui/AppButton';
 import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
@@ -12,11 +9,10 @@ import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {useCallback, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
-import {createTest} from '@src/bll/testReducer';
+import {createQuiz} from '@src/bll/quizReducer';
 
 export type SelectorsType = {
   theme: string;
-  difficulty: string;
   numberQuestions: number;
 };
 
@@ -25,13 +21,14 @@ type inputsFieldType = {
   description: string;
 };
 
+const numberOfLines = Platform.OS === 'ios' ? undefined : 4;
+
 export const TestSettings = () => {
   const data = ['Verify', 'Date', 'Popularity', 'Something else'];
   const dispatch = useAppDispatch();
   const {navigate} = useAppNavigate();
   const [selectorsData, setSelectorsData] = useState<SelectorsType>({
     theme: 'Verify',
-    difficulty: 'easy',
     numberQuestions: 10,
   });
 
@@ -40,17 +37,9 @@ export const TestSettings = () => {
     handleSubmit,
     formState: {errors},
   } = useForm<inputsFieldType>();
-
   const selectsThemePressed = useCallback(
     (value: string) => {
       setSelectorsData({...selectorsData, theme: value});
-    },
-    [selectorsData],
-  );
-
-  const selectsDifficultyPressed = useCallback(
-    (value: string) => {
-      setSelectorsData({...selectorsData, difficulty: value});
     },
     [selectorsData],
   );
@@ -64,10 +53,9 @@ export const TestSettings = () => {
   const onPressQuestionsSettings = async (values: inputsFieldType) => {
     try {
       await dispatch(
-        createTest({
+        createQuiz({
           ...values,
           authorId: 1,
-          difficulty: 'light',
           topicId: 1,
         }),
       )
@@ -122,29 +110,17 @@ export const TestSettings = () => {
           }}
           multiline
           textAlignVertical={'top'}
-          numberOfLines={Platform.OS === 'ios' ? undefined : 4}
+          numberOfLines={numberOfLines}
           height={Platform.OS === 'ios' ? '100px' : undefined}
         />
       </BlockBox>
       <TextBox>Theme</TextBox>
       <BlockBox>
-        <AppSelect
-          size="m"
-          data={data}
-          type="primary"
-          onSelect={selectsThemePressed}
-        />
-      </BlockBox>
-      <TextBox>Test level</TextBox>
-      <BlockBox>
-        <SwitchSelectors type="level" onPress={selectsDifficultyPressed} />
+        <AppSelect size="m" data={data} type="primary" onSelect={selectsThemePressed} />
       </BlockBox>
       <TextBox>Number of questions</TextBox>
       <BlockBox>
-        <SwitchSelectors
-          type="number"
-          onPress={selectsNumberQuestionsPressed}
-        />
+        <SwitchSelectors type="number" onPress={selectsNumberQuestionsPressed} />
       </BlockBox>
       <ViewCenter>
         <AppButton
