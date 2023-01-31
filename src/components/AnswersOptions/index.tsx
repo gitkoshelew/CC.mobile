@@ -29,7 +29,6 @@ export const AnswersOptions = ({
   answerType,
 }: AnswersOptionsPropsType) => {
   const dispatch = useAppDispatch();
-  const transformData = data.map((el, i) => ({label: el, value: i}));
   const dataOptions: IDataOptions[] = useMemo(
     () =>
       [...data].map((e, i) => ({
@@ -54,7 +53,7 @@ export const AnswersOptions = ({
   return (
     <View>
       <RadioForm formHorizontal={false} animation={true}>
-        {transformData.map((obj, i) => (
+        {dataOptions.map((obj, i) => (
           <AnswerRadioContainer key={i}>
             <ViewMarginRight>
               {answerType === 'single' ? (
