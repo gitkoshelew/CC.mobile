@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {Text, View} from 'react-native';
 import RadioForm, {
   RadioButtonInput,
@@ -30,11 +30,15 @@ export const AnswersOptions = ({
 }: AnswersOptionsPropsType) => {
   const dispatch = useAppDispatch();
   const transformData = data.map((el, i) => ({label: el, value: i}));
-  const dataOptions: IDataOptions[] = [...data].map((e, i) => ({
-    label: e,
-    value: i,
-    check: false,
-  }));
+  const dataOptions: IDataOptions[] = useMemo(
+    () =>
+      [...data].map((e, i) => ({
+        label: e,
+        value: i,
+        check: false,
+      })),
+    [data],
+  );
   const onPressRadio = (value: number) => {
     let answer: string = data[value];
     onPress(answer, value);
@@ -45,8 +49,7 @@ export const AnswersOptions = ({
 
   useEffect(() => {
     dispatch(setStateCheck(dataOptions));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answerType]);
+  }, [dataOptions, dispatch]);
 
   return (
     <View>

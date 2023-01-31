@@ -36,7 +36,6 @@ export const TestProcess = () => {
   const checkAnswer = checkDataAnswers.map(e => e.label);
   const currentTest = quizIdMocState.questions.filter(e => e.id === numAnswer);
   const onPressRadioHandler = useCallback((label: string, value: number) => {
-    console.log(label);
     setSingleAnswer([label]);
     setIsActiveRadio(value);
   }, []);
@@ -128,7 +127,6 @@ export const TestProcess = () => {
       setNumAnswer(numAnswer + 1);
       setSingleAnswer([]);
       setIsActiveRadio(undefined);
-      console.log(resultData);
     }
     if (
       numAnswer === quizIdMocState.questions.length &&
@@ -137,7 +135,6 @@ export const TestProcess = () => {
       navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
       progressResult();
       setSingleAnswer([]);
-      console.log(resultData);
     }
   };
   const onPressSkipAnswer = () => {
