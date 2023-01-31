@@ -5,18 +5,19 @@ import {CustomTextInput} from '../ui/CustomTextInput';
 import {CheckBox} from '../ui/CheckBox';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
-import {useCallback} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Control, Controller, useWatch} from 'react-hook-form';
 import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
 
 type AddingAnswerPropsType = {
   index: number;
+  option: string;
   correctAnswer: string[];
   type: string;
   control: Control<InputsFieldType>;
   disabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
-  onPressCorrectAnswer: (index: number, checked: boolean) => void;
+  onPressCorrectAnswer: (index: number, checked: boolean, textOption: string) => void;
 };
 
 export const AddingAnswer = ({
@@ -26,28 +27,40 @@ export const AddingAnswer = ({
   disabledDeleteBtn,
   ...props
 }: AddingAnswerPropsType) => {
-  const isCurrentAnswer = useWatch({
+  const isCurrentOptionText = useWatch({
     name: `options.${index}.option`,
     control: props.control,
   });
+  const [isChecked, setIsChecked] = useState(false);
 
   const onPressCorrectAnswerHandler = useCallback(
     (checked: boolean) => {
-      onPressCorrectAnswer(index, checked);
+      setIsChecked(checked);
+      onPressCorrectAnswer(index, checked, isCurrentOptionText);
     },
-    [index, onPressCorrectAnswer],
+    [index, isCurrentOptionText, onPressCorrectAnswer],
   );
-
-  const onPressDeletePressed = () => {
+  const onPressDeletePressed = useCallback(() => {
     onPressDelete(index);
-  };
+  }, [index, onPressDelete]);
 
-  const isChecked = props.correctAnswer.includes(isCurrentAnswer);
+  useEffect(() => {
+    if (props.option !== isCurrentOptionText) {
+      onPressCorrectAnswer(index, false, props.option);
+      setIsChecked(false);
+    }
+    // will be infinite call when change isCurrentOptionText
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCurrentOptionText, props.type]);
+
+  useEffect(() => {
+    setIsChecked(props.correctAnswer.includes(isCurrentOptionText));
+  }, [isCurrentOptionText, props.correctAnswer, props.option]);
 
   const disabledCheckbox =
-    props.type === 'Single'
-      ? (!isChecked && props.correctAnswer.length) || !isCurrentAnswer
-      : !isCurrentAnswer;
+    props.type === 'single'
+      ? (!isChecked && props.correctAnswer.length) || !isCurrentOptionText
+      : !isCurrentOptionText;
 
   const disabledDeleteOption = disabledDeleteBtn || isChecked;
 
@@ -79,6 +92,7 @@ export const AddingAnswer = ({
           onPress={onPressCorrectAnswerHandler}
           isChecked={isChecked}
           disabled={!!disabledCheckbox}
+          fillColor={Color.GreenLight}
         />
         <TouchableOpacity
           style={disabledDeleteOption && styles.disabled}

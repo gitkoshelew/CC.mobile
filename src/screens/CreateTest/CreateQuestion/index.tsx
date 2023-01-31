@@ -33,19 +33,23 @@ export type InputsFieldType = {
 export type CreateQuestionPropsType = {
   currentQuestion: questionType;
   setQuestions: (value: questionType[]) => void;
-  questions: questionType[];
+  quizId: number;
 };
 
 const numberOfLines = Platform.OS === 'ios' ? undefined : 2;
 
-export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPropsType) => {
+export const CreateQuestion = ({
+  currentQuestion,
+  setQuestions,
+  quizId,
+}: CreateQuestionPropsType) => {
   const dataAnswerType = [TypeOptions.single, TypeOptions.multi];
 
   const dispatch = useAppDispatch();
-  const {control, handleSubmit, reset, getValues} = useForm<InputsFieldType>({
+  const {control, handleSubmit, reset} = useForm<InputsFieldType>({
     defaultValues: {
-      title: '',
-      descriptions: '',
+      title: currentQuestion.title,
+      descriptions: currentQuestion.description,
     },
   });
 
@@ -56,9 +60,9 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
     type: string;
     correctAnswers: string[];
   }>({
-    difficulty: 'Easy',
-    type: 'single',
-    correctAnswers: [],
+    difficulty: currentQuestion.difficulty,
+    type: currentQuestion.type,
+    correctAnswers: currentQuestion.content.correctAnswer,
   });
 
   const onPressSaveQuestionHandler = (values: InputsFieldType) => {
@@ -73,13 +77,14 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
         title: values.title,
         description: values.descriptions,
         timer: isTime as number,
-        content: {options: isOptions as string[], correctAnswer: ['']},
-        difficulty: Difficulty[selectorsData.difficulty as keyof typeof Difficulty],
+        content: {options: isOptions as string[], correctAnswer: selectorsData.correctAnswers},
+        difficulty: selectorsData.difficulty as unknown as Difficulty,
         type: TypeOptions[selectorsData.type as keyof typeof TypeOptions],
         topicId: 1,
+        quizId,
       }),
     ).then(() => {
-      dispatch(getQuizQuestions(25))
+      dispatch(getQuizQuestions(46))
         .unwrap()
         .then(res => {
           setQuestions(res.question);
@@ -99,21 +104,20 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
   );
 
   const checkedCorrectOption = useCallback(
-    (index: number, checked: boolean) => {
-      let currentInput = getValues('options')[index].option;
-      if (currentInput !== '' && checked) {
+    (index: number, checked: boolean, textOption: string) => {
+      if (textOption !== '' && checked) {
         setSelectorsData({
           ...selectorsData,
-          correctAnswers: [...selectorsData.correctAnswers, currentInput],
+          correctAnswers: [...selectorsData.correctAnswers, textOption],
         });
       } else {
         setSelectorsData({
           ...selectorsData,
-          correctAnswers: selectorsData.correctAnswers.filter(el => el !== currentInput),
+          correctAnswers: selectorsData.correctAnswers.filter(el => el !== textOption),
         });
       }
     },
-    [getValues, selectorsData],
+    [selectorsData],
   );
 
   const selectQuestionDifficult = useCallback(
@@ -140,7 +144,21 @@ export const CreateQuestion = ({currentQuestion, setQuestions}: CreateQuestionPr
         totalSeconds: currentQuestion.timer,
       }) as object),
     });
-  }, [currentQuestion, reset]);
+  }, [
+    currentQuestion.content.options,
+    currentQuestion.description,
+    currentQuestion.timer,
+    currentQuestion.title,
+    reset,
+  ]);
+
+  useEffect(() => {
+    setSelectorsData(state => ({
+      ...state,
+      type: currentQuestion.type,
+      correctAnswers: currentQuestion.content.correctAnswer,
+    }));
+  }, [currentQuestion.content.correctAnswer, currentQuestion.type]);
 
   return (
     <View>
