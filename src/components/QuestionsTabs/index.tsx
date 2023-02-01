@@ -19,6 +19,10 @@ export const QuestionsTabs = ({
 }: QuestionsTabsPropsType) => {
   const [isActiveTab, setIsActiveTab] = useState(0);
 
+  const onPressedActiveTab = (value: number) => {
+    value <= amountFilledQuestion && setIsActiveTab(value);
+  };
+
   const renderItem = ({id}: renderTabsType) => {
     return (
       <QuestionTab
@@ -26,7 +30,7 @@ export const QuestionsTabs = ({
         id={id}
         isActive={id === isActiveTab}
         onPress={props.onPressCurrentQuestion}
-        setIsActiveTab={setIsActiveTab}
+        setIsActiveTab={onPressedActiveTab}
         isFilledQuestion={amountFilledQuestion > id}
       />
     );

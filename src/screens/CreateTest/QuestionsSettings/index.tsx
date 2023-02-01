@@ -9,6 +9,7 @@ import {RootCreateTestParamsList} from '@customTypes/navigation-types';
 import {ScreenList} from '@src/navigation/navigation';
 import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
 import {getQuizQuestions} from '@src/bll/quizReducer';
+import {CustomModal} from '@src/components/ui/Modal/index';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
@@ -36,14 +37,18 @@ export const QuestionsSettings = ({
   const listQuestionsTabs = [...Array(route.params.numberQuestions)].map((el, i) => i);
   const [questions, setQuestions] = useState<questionType[]>([newQuestion()]);
   const [currentQuestion, setCurrentQuestion] = useState<questionType>(questions[0]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const onPressCurrentQuestionPressed = useCallback(
     (index: number) => {
-      if (questions[index]) {
-        setCurrentQuestion(questions[index]);
-      } else {
-        setCurrentQuestion(newQuestion);
+      if (index > questions.length) {
+        setIsModalVisible(true);
+        return;
       }
+
+      questions[index]
+        ? setCurrentQuestion(questions[index])
+        : setCurrentQuestion(newQuestion());
     },
     [newQuestion, questions],
   );
@@ -65,6 +70,11 @@ export const QuestionsSettings = ({
       keyboardVerticalOffset={keyboardVerticalOffset}
       style={styles.container}>
       <View style={styles.ViewContainer}>
+        <CustomModal
+          isModalVisible={isModalVisible}
+          onPress={setIsModalVisible}
+          text="Create a question to move on to the next one"
+        />
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
           <View style={styles.inner}>
             <QuestionsTabs

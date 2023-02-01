@@ -84,7 +84,7 @@ export const CreateQuestion = ({
         quizId,
       }),
     ).then(() => {
-      dispatch(getQuizQuestions(46))
+      dispatch(getQuizQuestions(quizId))
         .unwrap()
         .then(res => {
           setQuestions(res.question);
