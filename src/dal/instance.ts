@@ -8,7 +8,6 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   async config => {
-    console.log('config', JSON.stringify(config, null, 2));
     await getToken(config);
     return config;
   },
