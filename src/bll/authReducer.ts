@@ -1,13 +1,11 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {AxiosError} from 'axios';
 import {authAPI} from '@src/dal/authAPI';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {setAppMessage} from '@src/bll/appReducer';
 
 export const login = createAsyncThunk('auth/login', async (_, {dispatch, rejectWithValue}) => {
   try {
-    const res = await authAPI.login();
-    await AsyncStorage.setItem('token', res.data.accessToken);
+    await authAPI.login();
     dispatch(
       setAppMessage({
         text: 'Sign in is successful',

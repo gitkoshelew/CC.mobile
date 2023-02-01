@@ -6,22 +6,13 @@ export const quizzesAPI = {
     return instance.get('/quiz');
   },
   createQuiz(params: createRequestQuiz) {
-    return instance.post('/quiz', params.newQuiz, {
-      headers: {
-        Authorization: 'Bearer ' + params.token,
-      },
-    });
+    console.log({instance});
+    return instance.post('/quiz', params);
   },
   getQuizQuestions(id: number) {
     return instance.get(`/quiz/${id}`);
   },
-  addQuestionToQuiz(params: addQuestionToQuiz & {token: string | null}) {
-    console.log(params);
-    const {token, ...resParams} = params;
-    return instance.put('quiz/add', resParams, {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
-    });
+  addQuestionToQuiz(params: addQuestionToQuiz) {
+    return instance.put('quiz/add', params);
   },
 };

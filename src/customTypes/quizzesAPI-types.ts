@@ -1,9 +1,6 @@
 export type createRequestQuiz = {
-  newQuiz: {
-    title: string;
-    description: string;
-  };
-  token: string | null;
+  title: string;
+  description: string;
 };
 
 export type CreateQuizType = {

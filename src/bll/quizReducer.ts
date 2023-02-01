@@ -5,7 +5,6 @@ import {questionsAPI} from '@src/dal/questionsAPI';
 import {newQuestionInQuizType} from '@customTypes/quiz-types';
 import {AxiosError} from 'axios';
 import {setAppMessage} from './appReducer';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const getQuizzes = createAsyncThunk('quiz/getQuiz', async (_, {rejectWithValue}) => {
   try {
@@ -20,8 +19,7 @@ export const createQuiz = createAsyncThunk(
   'quiz/createQuiz',
   async (param: CreateQuizType, {dispatch, rejectWithValue}) => {
     try {
-      const token = await AsyncStorage.getItem('token');
-      const res = await quizzesAPI.createQuiz({newQuiz: param, token});
+      const res = await quizzesAPI.createQuiz(param);
       dispatch(
         setAppMessage({
           text: 'The test was created successfully',
@@ -47,12 +45,10 @@ export const createQuestion = createAsyncThunk(
   async (param: newQuestionInQuizType, {dispatch, rejectWithValue}) => {
     const {quizId, ...newQuestion} = param;
     try {
-      const token = await AsyncStorage.getItem('token');
-      const createdQuestion = await questionsAPI.createQuestion({...newQuestion, token});
+      const createdQuestion = await questionsAPI.createQuestion(newQuestion);
       await quizzesAPI.addQuestionToQuiz({
         quizId,
         questionId: createdQuestion.data.id,
-        token,
       });
       dispatch(
         setAppMessage({
