@@ -6,7 +6,6 @@ export const quizzesAPI = {
     return instance.get('/quiz');
   },
   createQuiz(params: createRequestQuiz) {
-    console.log({instance});
     return instance.post('/quiz', params);
   },
   getQuizQuestions(id: number) {

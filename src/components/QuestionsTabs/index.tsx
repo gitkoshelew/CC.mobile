@@ -8,10 +8,6 @@ export type QuestionsTabsPropsType = {
   amountFilledQuestion: number;
 };
 
-type renderTabsType = {
-  id: number;
-};
-
 export const QuestionsTabs = ({
   listQuestionsTabs,
   amountFilledQuestion,
@@ -23,19 +19,6 @@ export const QuestionsTabs = ({
     value <= amountFilledQuestion && setIsActiveTab(value);
   };
 
-  const renderItem = ({id}: renderTabsType) => {
-    return (
-      <QuestionTab
-        key={id}
-        id={id}
-        isActive={id === isActiveTab}
-        onPress={props.onPressCurrentQuestion}
-        setIsActiveTab={onPressedActiveTab}
-        isFilledQuestion={amountFilledQuestion > id}
-      />
-    );
-  };
-
   return (
     <ScrollViewBlock
       horizontal
@@ -43,11 +26,16 @@ export const QuestionsTabs = ({
       showsHorizontalScrollIndicator={true}
       testID="ScrollViewBlock">
       <TabsBlock flexDirection={listQuestionsTabs.length > 10 ? 'column' : 'row'}>
-        {listQuestionsTabs.map(item =>
-          renderItem({
-            id: item,
-          }),
-        )}
+        {listQuestionsTabs.map(id => (
+          <QuestionTab
+            key={id}
+            id={id}
+            isActive={id === isActiveTab}
+            onPress={props.onPressCurrentQuestion}
+            setIsActiveTab={onPressedActiveTab}
+            isFilledQuestion={amountFilledQuestion > id}
+          />
+        ))}
       </TabsBlock>
     </ScrollViewBlock>
   );
