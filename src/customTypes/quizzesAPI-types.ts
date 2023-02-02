@@ -24,3 +24,7 @@ export type addQuestionToQuiz = {
   quizId: number;
   questionId: number;
 };
+
+export type createTopic = {
+  title: string;
+};

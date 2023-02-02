@@ -22,6 +22,7 @@ import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
 import {transformTime} from '@src/utils/transformTime';
 import {createQuestion, getQuizQuestions} from '@src/bll/quizReducer';
 import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
+import {TopicQuestion} from '@src/screens/CreateTest/CreateQuestion/TopicQuestion/index';
 
 export type InputsFieldType = {
   title: string;
@@ -196,6 +197,10 @@ export const CreateQuestion = ({
       <BlockBox>
         <TextBox>Question difficulty</TextBox>
         <SwitchSelectors type="level" onPress={selectQuestionDifficult} />
+      </BlockBox>
+      <BlockBox>
+        <TextBox>Select or create your topic</TextBox>
+        <TopicQuestion />
       </BlockBox>
       <ViewFlexForTwoElements>
         <BlockBox>
