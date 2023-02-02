@@ -7,7 +7,7 @@ import Navigation from '@src/navigation/navigation';
 import {Provider} from 'react-redux';
 import store from '@src/bll/store/store';
 import StorybookUIRoot from './.storybook/Storybook';
-import {Notification} from '@src/components/Notification';
+import {Notification} from '@src/components/ui/Notification/index';
 
 const useStorybook = false;
 
