@@ -55,8 +55,6 @@ export const TestSettings = () => {
       await dispatch(
         createQuiz({
           ...values,
-          authorId: 1,
-          topicId: 1,
         }),
       )
         .unwrap()
