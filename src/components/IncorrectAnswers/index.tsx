@@ -1,6 +1,6 @@
 import {SmallTextBlack} from '../ui/ReadyStyles/Boxes';
 import {ViewCenter} from '../ui/ReadyStyles/Containers';
-import {NumberBox, AnswerBox, Wrapper} from './styles';
+import {AnswerBox, NumberBox, Wrapper} from './styles';
 
 export interface IncorrectAnswer {
   number: number;
