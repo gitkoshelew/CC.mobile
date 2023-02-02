@@ -1,9 +1,9 @@
 import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '@hooks/hooks';
 import {Text} from 'react-native';
-import {Container, TextBlock, Wrapper} from '@src/components/Notification/styles';
+import {Container, TextBlock, Wrapper} from '@src/components/ui/Notification/styles';
 import {hideAppMessage, removeLastMessage} from '@src/bll/appReducer';
-import {CloseButton} from '@src/components/Notification/CloseButton/index';
+import {CloseButton} from '@src/components/ui/Notification/CloseButton/index';
 
 export const Notification = () => {
   const dispatch = useAppDispatch();

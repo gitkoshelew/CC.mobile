@@ -24,6 +24,7 @@ export type newQuestionType = {
   type: TypeOptions;
   topicId: number;
 };
+
 export type newQuestionInQuizType = newQuestionType & {
   quizId: number;
 };
