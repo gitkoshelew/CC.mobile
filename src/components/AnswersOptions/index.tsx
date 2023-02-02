@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useCallback, useEffect, useMemo} from 'react';
 import {Text, View} from 'react-native';
 import RadioForm, {RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {AnswerRadioContainer, styles, ViewMarginRight} from './styles';
@@ -16,7 +16,7 @@ type AnswersOptionsPropsType = {
 export type IDataOptions = {
   label: string;
   value: number;
-  check: boolean;
+  isChecked: boolean;
 };
 
 export const AnswersOptions = ({
@@ -31,7 +31,7 @@ export const AnswersOptions = ({
       [...data].map((e, i) => ({
         label: e,
         value: i,
-        check: false,
+        isChecked: false,
       })),
     [data],
   );
@@ -39,9 +39,12 @@ export const AnswersOptions = ({
     let answer: string = data[value];
     onPress(answer, value);
   };
-  const onPressCheck = (label: string, value: number, check: boolean) => {
-    dispatch(changeStateCheck({label, value, check}));
-  };
+  const onPressCheck = useCallback(
+    (label: string, value: number, isChecked: boolean) => {
+      dispatch(changeStateCheck({label, value, isChecked}));
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
     dispatch(setStateCheck(dataOptions));
@@ -64,7 +67,7 @@ export const AnswersOptions = ({
                   buttonOuterSize={30}
                 />
               ) : (
-                <MultipleCheckboxes it={obj} onPress={onPressCheck} />
+                <MultipleCheckboxes item={obj} onPress={onPressCheck} />
               )}
             </ViewMarginRight>
             {answerType === 'single' ? (

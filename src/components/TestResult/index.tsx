@@ -5,6 +5,7 @@ import {AppButton} from '@src/components/ui/AppButton';
 import {SmallButton} from '@src/components/ui/SmallButton';
 import {CircularResultBar} from '@src/components/CircularResultBar';
 import {BlockBoxMarginLeft, SmallTitleBlack} from '../ui/ReadyStyles/Boxes';
+
 type ITestResult = {
   onClickTry: () => void;
   onClickClose: () => void;

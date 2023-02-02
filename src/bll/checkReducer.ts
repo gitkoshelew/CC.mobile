@@ -15,7 +15,7 @@ const checkSlice = createSlice({
     changeStateCheck: (state, {payload}: PayloadAction<IDataOptions>) => {
       state.options = [
         ...state.options.map(item =>
-          item.value === payload.value ? {...item, check: payload.check} : item,
+          item.value === payload.value ? {...item, isChecked: payload.isChecked} : item,
         ),
       ];
     },

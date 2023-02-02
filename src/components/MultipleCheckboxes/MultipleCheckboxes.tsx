@@ -1,45 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import {CheckboxComponent} from '@src/components/MultipleCheckboxes/CheckboxComponent/CheckboxComponent';
 
-type ICheckboxComponent = {
+export type ICheckboxComponent = {
   label: string;
   value: number;
 };
-
-type IItem = {
+export type IItem = {
   item: ICheckboxComponent;
-};
-type IIt = {
-  it: ICheckboxComponent;
-  onPress: (label: string, value: number, check: boolean) => void;
+  onPress: (label: string, value: number, isChecked: boolean) => void;
 };
 
-export const MultipleCheckboxes = ({it, onPress}: IIt) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [toggleCheckbox, setToggleCheckbox] = useState<any>({});
-  const handleToggleState = (item: ICheckboxComponent) => {
-    setToggleCheckbox({
-      [item.value]: !toggleCheckbox[item.value],
-    });
-    onPress(item.label, item.value, !toggleCheckbox[item.value]);
-  };
-  const CheckboxComponent = ({item}: IItem) => {
-    const {value, label} = item;
-    return (
-      <BouncyCheckbox
-        disableBuiltInState
-        fillColor="#4287f5"
-        size={30}
-        isChecked={toggleCheckbox[value]}
-        key={value}
-        onPress={() => handleToggleState({value, label})}
-      />
-    );
-  };
+export const MultipleCheckboxes = ({item, onPress}: IItem) => {
   return (
     <View>
-      <CheckboxComponent item={{...it}} />
+      <CheckboxComponent item={{...item}} onPress={onPress} />
     </View>
   );
 };
