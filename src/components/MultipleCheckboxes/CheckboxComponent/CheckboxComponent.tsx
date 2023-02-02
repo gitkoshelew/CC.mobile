@@ -7,7 +7,8 @@ import {
 import {Color} from '@theme/colors';
 
 type IToggle = {[key: string]: boolean};
-export const CheckboxComponent = ({item, onPress}: IItem) => {
+
+export const CheckboxComponent = ({item: {value, label}, onPress}: IItem) => {
   const [toggleCheckbox, setToggleCheckbox] = useState<IToggle>({});
   const handleToggleState = (items: ICheckboxComponent) => {
     setToggleCheckbox({
@@ -15,7 +16,7 @@ export const CheckboxComponent = ({item, onPress}: IItem) => {
     });
     onPress(items.label, items.value, !toggleCheckbox[items.value]);
   };
-  const {value, label} = item;
+
   return (
     <BouncyCheckbox
       disableBuiltInState

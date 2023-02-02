@@ -7,7 +7,7 @@ import React from 'react';
 import {ViewContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
-import {IncorrectAnswer} from '@src/components/Incorrectanswers';
+import {IncorrectAnswer} from '@src/components/IncorrectAnswers';
 
 export const TestResultScreen = () => {
   const {navigate} = useAppNavigate();

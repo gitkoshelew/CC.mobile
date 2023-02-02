@@ -12,6 +12,7 @@ import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {clearStateResult, setStateResult} from '@src/bll/resultReducer';
 import {getCheckedAnswers} from '@src/utils/getCheckedAnswers';
+import {progressResult} from '@src/utils/progressResult';
 
 export type ResultType = {
   id: number;
@@ -34,49 +35,10 @@ export const TestProcess = () => {
     setSingleAnswer([label]);
     setIsActiveRadio(value);
   }, []);
-  const progressResult = () => {
-    switch (currentTest[0].type) {
-      case 'single': {
-        if (
-          singleAnswer.join().toLowerCase() ===
-          currentTest[0].content.correctAnswer.join().toLowerCase()
-        ) {
-          return 'right';
-        } else if (
-          singleAnswer.length > 0 &&
-          singleAnswer.join().toLowerCase() !==
-            currentTest[0].content.correctAnswer.join().toLowerCase()
-        ) {
-          return 'error';
-        } else if (singleAnswer.length === 0) {
-          return 'default';
-        }
-        break;
-      }
-      case 'multi': {
-        if (
-          [...checkedAnswer].sort().join('').toLowerCase() ===
-          [...currentTest[0].content.correctAnswer].sort().join('').toLowerCase()
-        ) {
-          return 'right';
-        } else if (
-          checkedAnswer.length > 0 &&
-          checkedAnswer.sort().join('').toLowerCase() !==
-            [...currentTest[0].content.correctAnswer].sort().join('').toLowerCase()
-        ) {
-          return 'error';
-        } else if (checkedAnswer.length === 0) {
-          return 'default';
-        }
-        break;
-      }
-      default:
-        return 'active';
-    }
-  };
-  const setNextResult = (
-    questionStatus: 'default' | 'active' | 'right' | 'error' | undefined,
-  ) => {
+  const answer = currentTest[0].type === 'single' ? singleAnswer : checkedAnswer;
+  const correctAnswer = currentTest[0].content.correctAnswer;
+  const type = currentTest[0].type;
+  const setNextResult = (questionStatus: ResultType['questionStatus']) => {
     dispatch(
       setStateResult({
         id: currentTest[0].id,
@@ -90,7 +52,7 @@ export const TestProcess = () => {
       numAnswer < quizIdData.questions.length &&
       resultData.length < quizIdData.questions.length
     ) {
-      setNextResult(progressResult());
+      setNextResult(progressResult({type, answer, correctAnswer}));
       setNumAnswer(numAnswer + 1);
       setSingleAnswer([]);
       setIsActiveRadio(undefined);
@@ -100,7 +62,7 @@ export const TestProcess = () => {
       resultData.length < quizIdData.questions.length
     ) {
       navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
-      setNextResult(progressResult());
+      setNextResult(progressResult({type, answer, correctAnswer}));
       setSingleAnswer([]);
     }
   };
@@ -118,15 +80,13 @@ export const TestProcess = () => {
       setNumAnswer(numAnswer + 1);
       setSingleAnswer([]);
       if (currentTest[0].type === 'single') {
-        setSkipResult();
       } else if (currentTest[0].type === 'multi') {
-        setSkipResult();
       }
     } else if (numAnswer === quizIdData.questions.length) {
       navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
       setSingleAnswer([]);
-      setSkipResult();
     }
+    setSkipResult();
   };
   const progressData: ProgressType[] = [...Array(quizIdData.questions.length)].map(
     (_, index) => ({
@@ -159,7 +119,7 @@ export const TestProcess = () => {
   return (
     <ViewContainer>
       <TimerBox>
-        <Timer AllTimeInSeconds={currentTest[0].timer} onClick={onPressNextAnswer} />
+        <Timer allTimeInSeconds={currentTest[0].timer} onClick={onPressNextAnswer} />
       </TimerBox>
       <ViewBlock>
         <ProgressBar data={data} />

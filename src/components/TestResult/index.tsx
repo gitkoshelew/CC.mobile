@@ -1,4 +1,4 @@
-import {IncorrectAnswer, IncorrectAnswers} from '@src/components/Incorrectanswers';
+import {IncorrectAnswer, IncorrectAnswers} from '@src/components/IncorrectAnswers';
 import {ViewCenter, ViewFlexCenter} from '../ui/ReadyStyles/Containers';
 import {Box, ButtonBox, Container, Group, StyledText} from './styles';
 import {AppButton} from '@src/components/ui/AppButton';
