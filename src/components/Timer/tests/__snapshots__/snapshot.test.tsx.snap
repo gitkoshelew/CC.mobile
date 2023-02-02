@@ -23,7 +23,7 @@ exports[`timer snapshot 1`] = `
       ]
     }
   >
-    10
+    NaN
   </Text>
   <Text
     style={
@@ -49,7 +49,7 @@ exports[`timer snapshot 1`] = `
       ]
     }
   >
-    00
+    NaN
   </Text>
 </View>
 `;
