@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {Timer} from '@src/components/Timer';
 import {ViewContainer, ViewFlexRight} from '@src/components/ui/ReadyStyles/Containers';
 import {TimerBox, TextBox, ButtonsBox} from './styles';
@@ -8,26 +8,87 @@ import {AppButton} from '@src/components/ui/AppButton';
 import {ViewFlexCenter, CountQuestionBox, ViewBlock} from './styles';
 import {ProgressBar} from '@src/components/ProgressBar';
 import {ProgressType} from '@src/components/ProgressBar/ProgressView';
-import {useAppSelector} from '@hooks/hooks';
+import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
+import {ScreenList} from '@src/navigation/navigation';
+import {clearStateResult, setStateResult} from '@src/bll/resultReducer';
+import {getCheckedAnswers} from '@src/utils/getCheckedAnswers';
+import {progressResult} from '@src/utils/progressResult';
+
+export type ResultType = {
+  id: number;
+  questionStatus: 'default' | 'active' | 'right' | 'error' | undefined;
+  answer: string;
+};
 
 export const TestProcess = () => {
-  const quizIdMocState = useAppSelector(state => state.processReducer);
+  const {navigate} = useAppNavigate();
+  const dispatch = useAppDispatch();
+  const resultData = useAppSelector(state => state.resultReducer.result);
+  const checkedData = useAppSelector(state => state.checkReducer.options);
+  const quizIdData = useAppSelector(state => state.processReducer);
   const [numAnswer, setNumAnswer] = useState<number>(1);
-  const currentTest = quizIdMocState.questions.filter(e => e.id === numAnswer);
-  const onPressRadioHandler = useCallback((value: number) => {
-    console.log(value); // It's temporary
+  const [singleAnswer, setSingleAnswer] = useState<string[]>([]);
+  const [isActiveRadio, setIsActiveRadio] = useState<number | undefined>(undefined);
+  const checkedAnswer = getCheckedAnswers(checkedData);
+  const currentTest = quizIdData.questions.filter(e => e.id === numAnswer);
+  const onPressRadioHandler = useCallback((label: string, value: number) => {
+    setSingleAnswer([label]);
+    setIsActiveRadio(value);
   }, []);
+  const answer = currentTest[0].type === 'single' ? singleAnswer : checkedAnswer;
+  const correctAnswer = currentTest[0].content.correctAnswer;
+  const type = currentTest[0].type;
+  const setNextResult = (questionStatus: ResultType['questionStatus']) => {
+    dispatch(
+      setStateResult({
+        id: currentTest[0].id,
+        questionStatus,
+        answer: currentTest[0].type === 'single' ? singleAnswer.join() : checkedAnswer.join(),
+      }),
+    );
+  };
   const onPressNextAnswer = () => {
-    if (numAnswer < quizIdMocState.questions.length) {
+    if (
+      numAnswer < quizIdData.questions.length &&
+      resultData.length < quizIdData.questions.length
+    ) {
+      setNextResult(progressResult({type, answer, correctAnswer}));
       setNumAnswer(numAnswer + 1);
+      setSingleAnswer([]);
+      setIsActiveRadio(undefined);
     }
+    if (
+      numAnswer === quizIdData.questions.length &&
+      resultData.length < quizIdData.questions.length
+    ) {
+      navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
+      setNextResult(progressResult({type, answer, correctAnswer}));
+      setSingleAnswer([]);
+    }
+  };
+  const setSkipResult = () => {
+    dispatch(
+      setStateResult({
+        id: currentTest[0].id,
+        questionStatus: 'default',
+        answer: currentTest[0].type === 'single' ? singleAnswer.join() : checkedAnswer.join(),
+      }),
+    );
   };
   const onPressSkipAnswer = () => {
-    if (numAnswer < quizIdMocState.questions.length) {
+    if (numAnswer < quizIdData.questions.length) {
       setNumAnswer(numAnswer + 1);
+      setSingleAnswer([]);
+      if (currentTest[0].type === 'single') {
+      } else if (currentTest[0].type === 'multi') {
+      }
+    } else if (numAnswer === quizIdData.questions.length) {
+      navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
+      setSingleAnswer([]);
     }
+    setSkipResult();
   };
-  const progressData: ProgressType[] = [...Array(quizIdMocState.questions.length)].map(
+  const progressData: ProgressType[] = [...Array(quizIdData.questions.length)].map(
     (_, index) => ({
       id: index + 1,
       questionStatus: 'default',
@@ -44,18 +105,21 @@ export const TestProcess = () => {
           questionStatus: 'default',
         },
   );
-  const timeSeconds = (currentTest[0].timer % 60).toString();
-  const timeMinutes = Math.floor(currentTest[0].timer / 60).toString();
   const arrAnswers = currentTest[0].content.options;
-  const randomAnswers = [...arrAnswers].sort(() => Math.random() - 0.5);
+  const randomAnswers = useMemo(
+    () => [...arrAnswers].sort(() => Math.random() - 0.5),
+    [arrAnswers],
+  );
   const answerType = currentTest[0].type;
   const question = currentTest[0].title;
-  const titleQuiz = quizIdMocState.title;
-
+  const titleQuiz = quizIdData.title;
+  useEffect(() => {
+    dispatch(clearStateResult());
+  }, [dispatch]);
   return (
     <ViewContainer>
       <TimerBox>
-        <Timer timeInMinutes={timeMinutes} timeInSeconds={timeSeconds} />
+        <Timer allTimeInSeconds={currentTest[0].timer} onClick={onPressNextAnswer} />
       </TimerBox>
       <ViewBlock>
         <ProgressBar data={data} />
@@ -63,7 +127,7 @@ export const TestProcess = () => {
       <MainTestingContainer>
         <ViewFlexRight>
           <CountQuestionBox>
-            {numAnswer}/{quizIdMocState.questions.length}
+            {numAnswer}/{quizIdData.questions.length}
           </CountQuestionBox>
         </ViewFlexRight>
         <ViewFlexCenter>
@@ -73,6 +137,7 @@ export const TestProcess = () => {
             data={randomAnswers}
             onPress={onPressRadioHandler}
             answerType={answerType}
+            selected={isActiveRadio}
           />
         </ViewFlexCenter>
         <ButtonsBox>

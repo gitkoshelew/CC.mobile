@@ -3,7 +3,7 @@ import {ButtonAnswerBox, TextBox} from '@src/components/ui/ReadyStyles/Boxes';
 import {AddingAnswer} from '@src/components/AddingAnswer';
 import {AddButton} from '@src/components/ui/AddButton';
 import {Control} from 'react-hook-form';
-import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
+import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 
 type CreateAnswerPropsType = {
   control: Control<InputsFieldType>;

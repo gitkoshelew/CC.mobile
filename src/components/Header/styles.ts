@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import {Color} from '@theme/colors';
 
 const Wrapper = styled.View`
-  padding: 0px 10px 100px 13px;
+  padding: 0 10px 100px 13px;
 `;
 
 const UserIconContainer = styled.View`

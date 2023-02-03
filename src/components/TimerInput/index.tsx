@@ -1,5 +1,5 @@
 import {Colon, Container} from './styles';
-import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
+import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 import {View} from 'react-native';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {Control} from 'react-hook-form';
