@@ -1,20 +1,17 @@
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import React, {useState} from 'react';
-import {
-  ICheckboxComponent,
-  IItem,
-} from '@src/components/MultipleCheckboxes/MultipleCheckboxes';
+import {IItem} from '@src/components/MultipleCheckboxes/MultipleCheckboxes';
 import {Color} from '@theme/colors';
 
 type IToggle = {[key: string]: boolean};
 
 export const CheckboxComponent = ({item: {value, label}, onPress}: IItem) => {
   const [toggleCheckbox, setToggleCheckbox] = useState<IToggle>({});
-  const handleToggleState = (items: ICheckboxComponent) => {
+  const handleToggleState = () => {
     setToggleCheckbox({
-      [items.value]: !toggleCheckbox[items.value],
+      [value]: !toggleCheckbox[value],
     });
-    onPress(items.label, items.value, !toggleCheckbox[items.value]);
+    onPress(label, value, !toggleCheckbox[value]);
   };
 
   return (
@@ -24,7 +21,7 @@ export const CheckboxComponent = ({item: {value, label}, onPress}: IItem) => {
       size={30}
       isChecked={toggleCheckbox[value]}
       key={value}
-      onPress={() => handleToggleState({value, label})}
+      onPress={() => handleToggleState()}
     />
   );
 };

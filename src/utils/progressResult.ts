@@ -1,15 +1,9 @@
 type IPogressResult = {
   type: string;
   answer: string[];
-  correctAnswer: string[]; //currentTest[0].content.correctAnswer
-  // answerLength: number; //answer.length
+  correctAnswer: string[];
 };
-export const progressResult = ({
-  type,
-  answer,
-  //answerLength,
-  correctAnswer,
-}: IPogressResult) => {
+export const progressResult = ({type, answer, correctAnswer}: IPogressResult) => {
   switch (type) {
     case 'single': {
       if (answer.join().toLowerCase() === correctAnswer.join().toLowerCase()) {
