@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import LottieView from 'lottie-react-native';
 
-export const Loader = ({}) => {
+export const Loader = () => {
   return (
     <View style={[StyleSheet.absoluteFill, styles.container]}>
       <LottieView
