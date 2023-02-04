@@ -46,6 +46,7 @@ export const TopicQuestion = ({setValue}: TopicQuestionPropsType) => {
         setTopics(res);
       });
   }, [dispatch]);
+
   return (
     <View style={styles.container}>
       <View style={styles.selectContainer}>
