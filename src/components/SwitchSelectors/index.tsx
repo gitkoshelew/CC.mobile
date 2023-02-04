@@ -6,14 +6,14 @@ import {ISwitchSelectProps} from 'src/customTypes/SwitchSelectjrs-types';
 import {useMemo} from 'react';
 import {styles} from './styles';
 
-export const SwitchSelectors = ({onPress, type}: ISwitchSelectProps) => {
+export const SwitchSelectors = ({onPress, type, value}: ISwitchSelectProps) => {
   const containerData = useMemo(
     () =>
       type === 'level'
         ? [
-            {label: 'Easy', value: 'Easy'},
-            {label: 'Medium', value: 'Medium'},
-            {label: 'Hard', value: 'Hard'},
+            {label: 'Easy', value: 'light'},
+            {label: 'Medium', value: 'medium'},
+            {label: 'Hard', value: 'hard'},
           ]
         : type === 'number'
         ? [
@@ -35,6 +35,7 @@ export const SwitchSelectors = ({onPress, type}: ISwitchSelectProps) => {
       <SwitchSelector
         options={containerData}
         initial={0}
+        value={containerData.findIndex(el => el.value === value)}
         onPress={onPress}
         selectedColor={Color.White}
         buttonColor={Color.BlueLight}

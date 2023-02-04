@@ -12,7 +12,7 @@ import {CreateAnswer} from './CreateAnswer/index';
 import {AppButton} from '@src/components/ui/AppButton';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {useFieldArray, useForm} from 'react-hook-form';
-import {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch} from '@hooks/hooks';
 import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
@@ -27,6 +27,7 @@ export type InputsFieldType = {
   seconds: string;
   options: {option: string}[];
 };
+
 export type CreateQuestionPropsType = {
   currentQuestion: questionType;
   setQuestions: (value: questionType[]) => void;
@@ -152,10 +153,15 @@ export const CreateQuestion = ({
   useEffect(() => {
     setSelectorsData(state => ({
       ...state,
+      difficulty: currentQuestion.difficulty,
       type: currentQuestion.type,
       correctAnswers: currentQuestion.content.correctAnswer,
     }));
-  }, [currentQuestion.content.correctAnswer, currentQuestion.type]);
+  }, [
+    currentQuestion.content.correctAnswer,
+    currentQuestion.difficulty,
+    currentQuestion.type,
+  ]);
 
   return (
     <View>
@@ -192,7 +198,11 @@ export const CreateQuestion = ({
       </BlockBox>
       <BlockBox>
         <TextBox>Question difficulty</TextBox>
-        <SwitchSelectors type="level" onPress={selectQuestionDifficult} />
+        <SwitchSelectors
+          type="level"
+          onPress={selectQuestionDifficult}
+          value={selectorsData.difficulty}
+        />
       </BlockBox>
       <ViewFlexForTwoElements>
         <BlockBox>

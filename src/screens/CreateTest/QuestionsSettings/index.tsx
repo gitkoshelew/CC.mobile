@@ -38,7 +38,6 @@ export const QuestionsSettings = ({
   const [questions, setQuestions] = useState<questionType[]>([newQuestion()]);
   const [currentQuestion, setCurrentQuestion] = useState<questionType>(questions[0]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const onPressCurrentQuestionPressed = useCallback(
     (index: number) => {
       if (index > questions.length) {
