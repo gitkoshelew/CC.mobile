@@ -2,32 +2,35 @@ import {useCallback, useEffect, useState} from 'react';
 import {Container, StyledText} from './styles';
 
 export interface IProps {
-  timeInMinutes: string;
-  timeInSeconds: string;
+  allTimeInSeconds: number;
+  onClick: () => void;
 }
 
-export const Timer = ({timeInMinutes, timeInSeconds}: IProps) => {
-  const AllTimeInSeconds: number = +timeInMinutes * 60 + +timeInSeconds;
-  const [timePeriod, setTimePeriod] = useState<number>(AllTimeInSeconds);
+export const Timer = ({allTimeInSeconds, onClick}: IProps) => {
+  const [timePeriod, setTimePeriod] = useState<number>(allTimeInSeconds);
   const [isCouting, setIsCouting] = useState<boolean>(false);
-
   const formatTime = (value: number): string => value.toString().padStart(2, '0');
-
   const minutes = formatTime(Math.floor(timePeriod / 60));
   const seconds = formatTime(timePeriod - +minutes * 60);
-
   const handleStart = useCallback(() => {
     setIsCouting(true);
   }, []);
 
   const handleStop = useCallback(() => {
-    setIsCouting(false);
+    setIsCouting(true);
   }, []);
 
   const handleReset = useCallback(() => {
     setIsCouting(false);
-    setTimePeriod(AllTimeInSeconds);
-  }, [AllTimeInSeconds]);
+    setTimePeriod(allTimeInSeconds);
+  }, [allTimeInSeconds]);
+
+  useEffect(() => {
+    if (timePeriod === 0) {
+      onClick();
+      setTimePeriod(allTimeInSeconds);
+    }
+  }, [allTimeInSeconds, onClick, timePeriod]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,12 +43,13 @@ export const Timer = ({timeInMinutes, timeInSeconds}: IProps) => {
 
   useEffect(() => {
     handleStart();
+    setTimePeriod(allTimeInSeconds);
 
     return () => {
       handleStop(); // It's temporary
       handleReset(); // It's temporary
     };
-  }, [handleReset, handleStart, handleStop]);
+  }, [allTimeInSeconds, handleReset, handleStart, handleStop]);
 
   return (
     <>

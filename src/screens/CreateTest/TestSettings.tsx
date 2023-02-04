@@ -1,8 +1,8 @@
 import {Platform} from 'react-native';
-import {TextBox, BlockBox} from '../../components/ui/ReadyStyles/Boxes';
-import {ViewContainer, ViewCenter} from '../../components/ui/ReadyStyles/Containers';
-import {AppButton} from '../../components/ui/AppButton';
-import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
+import {TextBox, BlockBox} from '@src/components/ui/ReadyStyles/Boxes';
+import {ViewContainer, ViewCenter} from '@src/components/ui/ReadyStyles/Containers';
+import {AppButton} from '@src/components/ui/AppButton';
+import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {AppSelect} from '@src/components/ui/AppSelect';
 import {SwitchSelectors} from '@src/components/SwitchSelectors';

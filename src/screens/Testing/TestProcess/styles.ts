@@ -34,5 +34,19 @@ const ViewBlock = styled.View`
   align-items: center;
   margin-bottom: 16px;
 `;
+const ViewBlockResult = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+`;
 
-export {TimerBox, TextBox, ButtonsBox, ViewFlexCenter, CountQuestionBox, ViewBlock};
+export {
+  TimerBox,
+  TextBox,
+  ButtonsBox,
+  ViewFlexCenter,
+  CountQuestionBox,
+  ViewBlock,
+  ViewBlockResult,
+};

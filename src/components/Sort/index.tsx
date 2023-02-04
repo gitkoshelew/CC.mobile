@@ -8,7 +8,7 @@ export const Sort = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sorting</Text>
-      <AppSelect size="s" data={data} type="secondary" onSelect={() => {}} />
+      <AppSelect onSelect={() => {}} size="s" data={data} type="secondary" />
     </View>
   );
 };

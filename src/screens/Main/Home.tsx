@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ViewFlex} from '../../components/ui/ReadyStyles/Containers';
+import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers';
 import {ScreenList} from '@src/navigation/navigation';
 import {Main} from './Main';
 import {SignUp} from './SignUp';

@@ -4,20 +4,17 @@ import {
   BlockBoxMarginLeft,
   TextBox,
   ContainerDynamicWidth,
-} from '@src/components/ui/ReadyStyles/Boxes/index';
-import {
-  ViewCenter,
-  ViewFlexForTwoElements,
-} from '@src/components/ui/ReadyStyles/Containers/index';
-import {AppSelect} from '@src/components/ui/AppSelect/index';
-import {TimerInput} from '@src/components/TimerInput/index';
+} from '@src/components/ui/ReadyStyles/Boxes';
+import {ViewCenter, ViewFlexForTwoElements} from '@src/components/ui/ReadyStyles/Containers';
+import {AppSelect} from '@src/components/ui/AppSelect';
+import {TimerInput} from '@src/components/TimerInput';
 import {CreateAnswer} from './CreateAnswer/index';
-import {AppButton} from '@src/components/ui/AppButton/index';
-import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
+import {AppButton} from '@src/components/ui/AppButton';
+import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {useFieldArray, useForm} from 'react-hook-form';
 import {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch} from '@hooks/hooks';
-import {SwitchSelectors} from '@src/components/SwitchSelectors/index';
+import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
 import {transformTime} from '@src/utils/transformTime';
 import {createQuestion, getQuizQuestions} from '@src/bll/quizReducer';

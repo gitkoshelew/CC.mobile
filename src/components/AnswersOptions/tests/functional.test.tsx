@@ -1,5 +1,8 @@
 import {fireEvent, render, screen} from '@testing-library/react-native';
 import {AnswersOptions} from '@src/components/AnswersOptions';
+import {Provider} from 'react-redux';
+import store from '@src/bll/store/store';
+import React from 'react';
 
 const onPressMock = jest.fn();
 export const AnswersOptionsProps = {
@@ -9,14 +12,26 @@ export const AnswersOptionsProps = {
 };
 
 test('Should be displayed elements', () => {
-  render(<AnswersOptions {...AnswersOptionsProps} />);
+  render(
+    <Provider store={store}>
+      render(
+      <AnswersOptions {...AnswersOptionsProps} />
+      );
+    </Provider>,
+  );
 
   expect(screen.getByText('one')).toBeVisible();
   expect(screen.getByText('three')).toBeVisible();
 });
 
 test('Should call method on press', () => {
-  render(<AnswersOptions {...AnswersOptionsProps} />);
+  render(
+    <Provider store={store}>
+      render(
+      <AnswersOptions {...AnswersOptionsProps} />
+      );
+    </Provider>,
+  );
 
   fireEvent.press(screen.getByText('two'));
 

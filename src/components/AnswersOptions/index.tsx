@@ -1,15 +1,22 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React, {useCallback, useEffect, useMemo} from 'react';
+import {Text, View} from 'react-native';
 import RadioForm, {RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {AnswerRadioContainer, styles, ViewMarginRight} from './styles';
 import {Color} from '@theme/colors';
-import {CheckBox} from '@src/components/ui/CheckBox';
+import {MultipleCheckboxes} from '@src/components/MultipleCheckboxes/MultipleCheckboxes';
+import {changeStateCheck, setStateCheck} from '@src/bll/checkReducer';
+import {useAppDispatch} from '@hooks/hooks';
 
 type AnswersOptionsPropsType = {
-  onPress: (value: number) => void;
+  onPress: (label: string, value: number) => void;
   data: string[];
   answerType: string;
   selected?: number;
+};
+export type IDataOptions = {
+  label: string;
+  value: number;
+  isChecked: boolean;
 };
 
 export const AnswersOptions = ({
@@ -18,43 +25,64 @@ export const AnswersOptions = ({
   selected,
   answerType,
 }: AnswersOptionsPropsType) => {
-  const transformData = data.map((el, i) => ({label: el, value: i}));
-  const [isActiveRadio, setIsActiveRadio] = useState<number>(selected!);
-
+  const dispatch = useAppDispatch();
+  const dataOptions: IDataOptions[] = useMemo(
+    () =>
+      [...data].map((e, i) => ({
+        label: e,
+        value: i,
+        isChecked: false,
+      })),
+    [data],
+  );
   const onPressRadio = (value: number) => {
-    setIsActiveRadio(value);
-    onPress(value);
+    let answer: string = data[value];
+    onPress(answer, value);
   };
+  const onPressCheck = useCallback(
+    (label: string, value: number, isChecked: boolean) => {
+      dispatch(changeStateCheck({label, value, isChecked}));
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    dispatch(setStateCheck(dataOptions));
+  }, [dataOptions, dispatch]);
 
   return (
     <View>
       <RadioForm formHorizontal={false} animation={true}>
-        {transformData.map((obj, i) => (
+        {dataOptions.map((obj, i) => (
           <AnswerRadioContainer key={i}>
             <ViewMarginRight>
               {answerType === 'single' ? (
                 <RadioButtonInput
                   obj={obj}
                   index={i}
-                  isSelected={isActiveRadio === i}
+                  isSelected={selected === i}
                   onPress={onPressRadio}
-                  buttonOuterColor={
-                    isActiveRadio === i ? Color.BlueLight : Color.GrayStrongDark
-                  }
+                  buttonOuterColor={selected === i ? Color.BlueLight : Color.GrayStrongDark}
                   buttonSize={15}
                   buttonOuterSize={30}
                 />
               ) : (
-                <CheckBox onPress={() => {}} isChecked={false} />
+                <MultipleCheckboxes item={obj} onPress={onPressCheck} />
               )}
             </ViewMarginRight>
-            <RadioButtonLabel
-              obj={obj}
-              index={i}
-              labelHorizontal={false}
-              onPress={onPressRadio}
-              labelStyle={styles.textRadio}
-            />
+            {answerType === 'single' ? (
+              <RadioButtonLabel
+                obj={obj}
+                index={i}
+                labelHorizontal={false}
+                onPress={onPressRadio}
+                labelStyle={styles.textRadio}
+              />
+            ) : (
+              <Text key={i} style={styles.textRadio}>
+                {obj.label}
+              </Text>
+            )}
           </AnswerRadioContainer>
         ))}
       </RadioForm>

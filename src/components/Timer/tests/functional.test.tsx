@@ -2,8 +2,7 @@ import {render} from '@testing-library/react-native';
 import {Timer, IProps} from '../index';
 
 const TimerProps = {
-  timeInMinutes: '10',
-  timeInSeconds: '00',
+  allTimeInSeconds: 10,
 } as IProps;
 
 describe('Timer component functionality', () => {
