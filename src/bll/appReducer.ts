@@ -1,17 +1,15 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppMessageType} from '@customTypes/notificationTypes';
 
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
-
 export type AppStateT = {
-  status: RequestStatusType;
+  isFetching: boolean;
   messages: AppMessageType[];
 };
 
 const slice = createSlice({
   name: 'app',
   initialState: {
-    status: 'idle',
+    isFetching: false,
     messages: [],
   } as AppStateT,
   reducers: {
@@ -32,9 +30,12 @@ const slice = createSlice({
     hideAppMessage(state, action: PayloadAction<number>) {
       state.messages = state.messages.filter(el => el.id !== action.payload);
     },
+    setIsFetching(state, action: PayloadAction<boolean>) {
+      state.isFetching = action.payload;
+    },
   },
 });
 
 export const appReducer = slice.reducer;
 
-export const {removeLastMessage, hideAppMessage, setAppMessage} = slice.actions;
+export const {removeLastMessage, hideAppMessage, setAppMessage, setIsFetching} = slice.actions;

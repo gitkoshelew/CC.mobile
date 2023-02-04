@@ -1,4 +1,4 @@
-import {Platform, View} from 'react-native';
+import {Platform} from 'react-native';
 import {
   BlockBox,
   BlockBoxMarginLeft,
@@ -23,6 +23,7 @@ import {transformTime} from '@src/utils/transformTime';
 import {createQuestion, getQuizQuestions} from '@src/bll/quizReducer';
 import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
 import {TopicQuestion} from '@src/screens/CreateTest/CreateQuestion/TopicQuestion/index';
+import {Container} from '@src/screens/CreateTest/CreateQuestion/styles';
 
 export type InputsFieldType = {
   title: string;
@@ -30,6 +31,7 @@ export type InputsFieldType = {
   minutes: string;
   seconds: string;
   options: {option: string}[];
+  topicId: number;
 };
 export type CreateQuestionPropsType = {
   currentQuestion: questionType;
@@ -45,9 +47,8 @@ export const CreateQuestion = ({
   quizId,
 }: CreateQuestionPropsType) => {
   const dataAnswerType = [TypeOptions.single, TypeOptions.multi];
-
   const dispatch = useAppDispatch();
-  const {control, handleSubmit, reset} = useForm<InputsFieldType>({
+  const {control, handleSubmit, reset, setValue} = useForm<InputsFieldType>({
     defaultValues: {
       title: currentQuestion.title,
       descriptions: currentQuestion.description,
@@ -81,7 +82,7 @@ export const CreateQuestion = ({
         content: {options: isOptions as string[], correctAnswer: selectorsData.correctAnswers},
         difficulty: selectorsData.difficulty as unknown as Difficulty,
         type: TypeOptions[selectorsData.type as keyof typeof TypeOptions],
-        topicId: 1,
+        topicId: values.topicId,
         quizId,
       }),
     ).then(() => {
@@ -162,7 +163,7 @@ export const CreateQuestion = ({
   }, [currentQuestion.content.correctAnswer, currentQuestion.type]);
 
   return (
-    <View>
+    <Container>
       <TextBox>Question title</TextBox>
       <BlockBox>
         <TextInputHookForm
@@ -200,7 +201,7 @@ export const CreateQuestion = ({
       </BlockBox>
       <BlockBox>
         <TextBox>Select or create your topic</TextBox>
-        <TopicQuestion />
+        <TopicQuestion setValue={setValue} />
       </BlockBox>
       <ViewFlexForTwoElements>
         <BlockBox>
@@ -236,9 +237,6 @@ export const CreateQuestion = ({
           onPress={handleSubmit(onPressSaveQuestionHandler)}
         />
       </ViewCenter>
-      <ViewCenter>
-        <AppButton title="Save test" type="primary" onPress={() => {}} disabled={true} />
-      </ViewCenter>
-    </View>
+    </Container>
   );
 };

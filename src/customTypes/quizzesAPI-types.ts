@@ -28,6 +28,11 @@ export type addQuestionToQuiz = {
   questionId: number;
 };
 
-export type createTopic = {
+export type createTopicType = {
+  title: string;
+};
+
+export type TopicType = {
+  id: string;
   title: string;
 };

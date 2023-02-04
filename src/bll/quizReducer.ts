@@ -4,7 +4,55 @@ import {CreateQuizType} from '@customTypes/quizzesAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
 import {newQuestionInQuizType} from '@customTypes/quiz-types';
 import {AxiosError} from 'axios';
-import {setAppMessage} from './appReducer';
+import {setAppMessage, setIsFetching} from './appReducer';
+import {topicAPI} from '@src/dal/topicAPI';
+
+export const createTopic = createAsyncThunk(
+  'quiz/createTopic',
+  async (title: string, {dispatch, rejectWithValue}) => {
+    try {
+      dispatch(setIsFetching(true));
+      const res = await topicAPI.createTopic({title});
+      dispatch(
+        setAppMessage({
+          text: 'Theme is created',
+          severity: 'success',
+        }),
+      );
+      return res.data;
+    } catch (e) {
+      const err = e as Error | AxiosError;
+      dispatch(
+        setAppMessage({
+          text: 'Something went wrong',
+          severity: 'error',
+        }),
+      );
+      return rejectWithValue(err.message);
+    } finally {
+      dispatch(setIsFetching(false));
+    }
+  },
+);
+
+export const getTopics = createAsyncThunk(
+  'quiz/getTopics',
+  async (_, {dispatch, rejectWithValue}) => {
+    try {
+      const res = await topicAPI.getTopics();
+      return res.data;
+    } catch (e) {
+      const err = e as Error | AxiosError;
+      dispatch(
+        setAppMessage({
+          text: 'Something went wrong',
+          severity: 'error',
+        }),
+      );
+      return rejectWithValue(err.message);
+    }
+  },
+);
 
 export const getQuizzes = createAsyncThunk('quiz/getQuiz', async (_, {rejectWithValue}) => {
   try {
@@ -18,6 +66,7 @@ export const getQuizzes = createAsyncThunk('quiz/getQuiz', async (_, {rejectWith
 export const createQuiz = createAsyncThunk(
   'quiz/createQuiz',
   async (param: CreateQuizType, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
     try {
       const res = await quizzesAPI.createQuiz(param);
       dispatch(
@@ -36,6 +85,8 @@ export const createQuiz = createAsyncThunk(
         }),
       );
       return rejectWithValue(err.message);
+    } finally {
+      dispatch(setIsFetching(false));
     }
   },
 );
