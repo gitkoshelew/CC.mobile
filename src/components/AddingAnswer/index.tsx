@@ -32,7 +32,6 @@ export const AddingAnswer = ({
   const isCurrentOptionText = useWatch({
     name: `options.${index}.option`,
     control: props.control,
-    disabled: false,
   });
   const [isChecked, setIsChecked] = useState(false);
   const [inputWhichCorrect, setInputWhichCorrect] = useState(props.option);

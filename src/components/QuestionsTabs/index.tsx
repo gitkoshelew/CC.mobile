@@ -11,7 +11,6 @@ export type QuestionsTabsPropsType = {
 export const QuestionsTabs = ({
   listQuestionsTabs,
   amountFilledQuestion,
-  // setIsActiveTab,
   isActiveTab,
   ...props
 }: QuestionsTabsPropsType) => {
