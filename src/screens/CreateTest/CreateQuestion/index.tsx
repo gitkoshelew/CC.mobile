@@ -2,21 +2,21 @@ import {Platform, ScrollView, View} from 'react-native';
 import {
   BlockBox,
   BlockBoxMarginLeft,
-  TextBox,
   ContainerDynamicWidth,
+  TextBox,
 } from '@src/components/ui/ReadyStyles/Boxes';
 import {
   ViewCenter,
-  ViewFlexForTwoElements,
   ViewDynamicFlex,
+  ViewFlexForTwoElements,
 } from '@src/components/ui/ReadyStyles/Containers';
 import {AppSelect} from '@src/components/ui/AppSelect';
 import {TimerInput} from '@src/components/TimerInput';
 import {CreateAnswer} from './CreateAnswer/index';
 import {AppButton} from '@src/components/ui/AppButton';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
-import {useFieldArray, useForm} from 'react-hook-form';
-import React, {useCallback, useEffect, useState} from 'react';
+import {useFieldArray, useForm, useWatch} from 'react-hook-form';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
 import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
@@ -25,9 +25,13 @@ import {createQuestion, getQuizQuestions} from '@src/bll/quizReducer';
 import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
-import {CircleButton} from '@src/components/ui/ReadyStyles/CircleButton';
 import {ScreenList} from '@src/navigation/navigation';
-import {ContainerSaveButton} from '@src/screens/CreateTest/CreateQuestion/styles';
+import {
+  ContainerSaveButton,
+  NextQuestionButton,
+} from '@src/screens/CreateTest/CreateQuestion/styles';
+import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
+import {TypeAppButton} from '@customTypes/AppButtun-types';
 
 export type InputsFieldType = {
   title: string;
@@ -42,7 +46,7 @@ export type CreateQuestionPropsType = {
   setCurrentQuestion: (values: questionType) => void;
   setQuestions: (value: questionType[]) => void;
   quizId: number;
-  isActiveTab: number;
+  activeTab: number;
   onPressCurrentQuestionPressed: (value: number) => void;
   scrollRef: React.RefObject<ScrollView>;
   numberQuestions: number;
@@ -60,7 +64,7 @@ export const CreateQuestion = ({
   const dataAnswerType = [TypeOptions.single, TypeOptions.multi];
   const resetNavigate = useAppNavigate().reset;
   const dispatch = useAppDispatch();
-  const {control, handleSubmit, reset, watch} = useForm<InputsFieldType>({
+  const {control, handleSubmit, reset} = useForm<InputsFieldType>({
     defaultValues: {
       title: currentQuestion.title,
       descriptions: currentQuestion.description,
@@ -78,27 +82,33 @@ export const CreateQuestion = ({
     correctAnswers: currentQuestion.content.correctAnswer,
   });
 
-  const watchFieldArray = watch('options') || [];
-  const arrayOptions = watchFieldArray.map(el => el.option).filter(el => el !== '');
-  const checkingForDuplicate = new Set(arrayOptions).size !== arrayOptions.length;
+  const watchFieldArray = useWatch({
+    control,
+    name: 'options',
+  });
+
+  const arrayOptions = useMemo(() => {
+    return watchFieldArray ? watchFieldArray.map(el => el.option).filter(el => el !== '') : [];
+  }, [watchFieldArray]);
+  const isCheckingDuplicate = new Set(arrayOptions).size !== arrayOptions.length;
 
   const nextQuestionPressed = useCallback(() => {
-    props.onPressCurrentQuestionPressed(props.isActiveTab + 1);
+    props.onPressCurrentQuestionPressed(props.activeTab + 1);
     props.scrollRef.current?.scrollTo({x: 0, y: 0, animated: true});
   }, [props]);
 
   const onPressSaveQuestionHandler = async (values: InputsFieldType) => {
-    const isTime = transformTime({
+    const time = transformTime({
       format: 'onlySeconds',
       isMinutes: values.minutes,
       isSeconds: values.seconds,
     });
-    const isOptions = transformFormatOptions(values.options);
+    const options = transformFormatOptions(values.options);
     const newQuestion = {
       title: values.title,
       description: values.descriptions,
-      timer: isTime as number,
-      content: {options: isOptions as string[], correctAnswer: selectorsData.correctAnswers},
+      timer: time as number,
+      content: {options: options as string[], correctAnswer: selectorsData.correctAnswers},
       difficulty: selectorsData.difficulty as unknown as Difficulty,
       type: TypeOptions[selectorsData.type as keyof typeof TypeOptions],
       topicId: 1,
@@ -183,6 +193,8 @@ export const CreateQuestion = ({
     currentQuestion.type,
   ]);
 
+  const isQuestionsEnd = props.activeTab + 1 === props.numberQuestions;
+
   return (
     <View>
       <TextBox>Question title</TextBox>
@@ -219,7 +231,7 @@ export const CreateQuestion = ({
       <BlockBox>
         <TextBox>Question difficulty</TextBox>
         <SwitchSelectors
-          type="level"
+          type={TypeSwitchSelect.LEVEL}
           onPress={selectQuestionDifficult}
           value={selectorsData.difficulty}
         />
@@ -244,7 +256,7 @@ export const CreateQuestion = ({
       </ViewFlexForTwoElements>
       <CreateAnswer
         fields={fields}
-        checkingForDuplicate={checkingForDuplicate}
+        isCheckingDuplicate={isCheckingDuplicate}
         control={control}
         type={selectorsData.type}
         correctAnswer={selectorsData.correctAnswers}
@@ -257,15 +269,15 @@ export const CreateQuestion = ({
           <ContainerSaveButton>
             <AppButton
               title="Save question"
-              type="primary"
+              type={TypeAppButton.PRIMARY}
               onPress={handleSubmit(onPressSaveQuestionHandler)}
-              disabled={checkingForDuplicate}
+              disabled={isCheckingDuplicate}
             />
           </ContainerSaveButton>
-          {props.isActiveTab + 1 === props.numberQuestions ? (
+          {isQuestionsEnd ? (
             <AppButton
               title="Exit"
-              type="primary"
+              type={TypeAppButton.PRIMARY}
               onPress={() => {
                 resetNavigate({
                   index: 0,
@@ -274,10 +286,25 @@ export const CreateQuestion = ({
               }}
             />
           ) : (
-            <CircleButton onPress={nextQuestionPressed} disabled={!currentQuestion.title}>
+            <NextQuestionButton
+              onPress={nextQuestionPressed}
+              disabled={!currentQuestion.title}>
               <AntDesign name="rightcircle" size={36} color={Color.DarkBlue} />
-            </CircleButton>
+            </NextQuestionButton>
           )}
+          <AppButton
+            title="Exit"
+            type={TypeAppButton.PRIMARY}
+            onPress={() => {
+              resetNavigate({
+                index: 0,
+                routes: [{name: ScreenList.HOME}],
+              });
+            }}
+          />
+          <NextQuestionButton onPress={nextQuestionPressed} disabled={!currentQuestion.title}>
+            <AntDesign name="rightcircle" size={36} color={Color.DarkBlue} />
+          </NextQuestionButton>
         </ViewDynamicFlex>
       </BlockBox>
       <ViewCenter />

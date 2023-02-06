@@ -35,7 +35,7 @@ export const QuestionsSettings = ({
   );
   const dispatch = useAppDispatch();
   const listQuestionsTabs = [...Array(route.params.numberQuestions)].map((el, i) => i);
-  const [isActiveTab, setIsActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
   const [questions, setQuestions] = useState<questionType[]>([newQuestion()]);
   const [currentQuestion, setCurrentQuestion] = useState<questionType>(questions[0]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -51,7 +51,7 @@ export const QuestionsSettings = ({
         return;
       }
 
-      setIsActiveTab(index);
+      setActiveTab(index);
       questions[index]
         ? setCurrentQuestion(questions[index])
         : setCurrentQuestion(newQuestion());
@@ -85,7 +85,7 @@ export const QuestionsSettings = ({
           <View style={styles.inner}>
             <QuestionsTabs
               listQuestionsTabs={listQuestionsTabs}
-              isActiveTab={isActiveTab}
+              activeTab={activeTab}
               onPressCurrentQuestion={onPressCurrentQuestionPressed}
               amountFilledQuestion={questions.length}
             />
@@ -94,7 +94,7 @@ export const QuestionsSettings = ({
               setCurrentQuestion={setCurrentQuestion}
               setQuestions={setQuestions}
               quizId={route.params.idNewTest}
-              isActiveTab={isActiveTab}
+              activeTab={activeTab}
               onPressCurrentQuestionPressed={onPressCurrentQuestionPressed}
               scrollRef={scroll}
               numberQuestions={route.params.numberQuestions}

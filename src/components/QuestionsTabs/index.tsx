@@ -5,13 +5,13 @@ export type QuestionsTabsPropsType = {
   onPressCurrentQuestion: (id: number) => void;
   listQuestionsTabs: number[];
   amountFilledQuestion: number;
-  isActiveTab: number;
+  activeTab: number;
 };
 
 export const QuestionsTabs = ({
   listQuestionsTabs,
   amountFilledQuestion,
-  isActiveTab,
+  activeTab,
   ...props
 }: QuestionsTabsPropsType) => {
   return (
@@ -25,7 +25,7 @@ export const QuestionsTabs = ({
           <QuestionTab
             key={id}
             id={id}
-            isActive={id === isActiveTab}
+            isActive={id === activeTab}
             onPress={props.onPressCurrentQuestion}
             isFilledQuestion={amountFilledQuestion > id}
           />

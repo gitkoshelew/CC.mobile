@@ -18,7 +18,7 @@ type AddingAnswerPropsType = {
   disabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
   onPressCorrectAnswer: (index: number, checked: boolean, textOption: string) => void;
-  checkingForDuplicate: boolean;
+  isCheckingDuplicate: boolean;
 };
 
 export const AddingAnswer = ({
@@ -26,7 +26,7 @@ export const AddingAnswer = ({
   onPressDelete,
   disabledDeleteBtn,
   onPressCorrectAnswer,
-  checkingForDuplicate,
+  isCheckingDuplicate,
   ...props
 }: AddingAnswerPropsType) => {
   const isCurrentOptionText = useWatch({
@@ -94,7 +94,7 @@ export const AddingAnswer = ({
           onPress={onPressCorrectAnswerHandler}
           isChecked={isChecked}
           disabled={!!disabledCheckbox}
-          fillColor={checkingForDuplicate ? Color.Red : Color.GreenLight}
+          fillColor={isCheckingDuplicate ? Color.Red : Color.GreenLight}
         />
         <TouchableOpacity
           style={disabledDeleteOption && styles.disabled}

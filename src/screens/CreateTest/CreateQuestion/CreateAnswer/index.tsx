@@ -9,7 +9,7 @@ import {TextError} from '@src/components/ui/ReadyStyles/TextError';
 type CreateAnswerPropsType = {
   control: Control<InputsFieldType>;
   fields: {id: string; option: string}[];
-  checkingForDuplicate: boolean;
+  isCheckingDuplicate: boolean;
   type: string;
   correctAnswer: string[];
   addNewOptionPressed: () => void;
@@ -19,7 +19,7 @@ type CreateAnswerPropsType = {
 
 export const CreateAnswer = ({
   fields,
-  checkingForDuplicate,
+  isCheckingDuplicate,
   correctAnswer,
   control,
   type,
@@ -43,10 +43,10 @@ export const CreateAnswer = ({
           disabledDeleteBtn={disabledDeleteBtn}
           onPressDelete={deleteOptionPressed}
           onPressCorrectAnswer={checkedCorrectOption}
-          checkingForDuplicate={checkingForDuplicate}
+          isCheckingDuplicate={isCheckingDuplicate}
         />
       ))}
-      {checkingForDuplicate && <TextError>You have 2 identical answers</TextError>}
+      {isCheckingDuplicate && <TextError>You have 2 identical answers</TextError>}
       <ButtonAnswerBox>
         <AddButton onPress={addNewOptionPressed} disabled={fields.length > 6} />
         <TextBox>Add answer</TextBox>
