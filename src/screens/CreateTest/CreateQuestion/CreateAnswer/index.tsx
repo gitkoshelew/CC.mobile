@@ -4,10 +4,12 @@ import {AddingAnswer} from '@src/components/AddingAnswer';
 import {AddButton} from '@src/components/ui/AddButton';
 import {Control} from 'react-hook-form';
 import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
+import {TextError} from '@src/components/ui/ReadyStyles/TextError';
 
 type CreateAnswerPropsType = {
   control: Control<InputsFieldType>;
   fields: {id: string; option: string}[];
+  checkingForDuplicate: boolean;
   type: string;
   correctAnswer: string[];
   addNewOptionPressed: () => void;
@@ -17,6 +19,7 @@ type CreateAnswerPropsType = {
 
 export const CreateAnswer = ({
   fields,
+  checkingForDuplicate,
   correctAnswer,
   control,
   type,
@@ -25,6 +28,7 @@ export const CreateAnswer = ({
   checkedCorrectOption,
 }: CreateAnswerPropsType) => {
   const disabledDeleteBtn = fields.length <= 2;
+
   return (
     <View>
       <TextBox>Answer choice</TextBox>
@@ -39,8 +43,10 @@ export const CreateAnswer = ({
           disabledDeleteBtn={disabledDeleteBtn}
           onPressDelete={deleteOptionPressed}
           onPressCorrectAnswer={checkedCorrectOption}
+          checkingForDuplicate={checkingForDuplicate}
         />
       ))}
+      {checkingForDuplicate && <TextError>You have 2 identical answers</TextError>}
       <ButtonAnswerBox>
         <AddButton onPress={addNewOptionPressed} disabled={fields.length > 6} />
         <TextBox>Add answer</TextBox>

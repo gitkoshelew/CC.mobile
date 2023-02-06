@@ -40,6 +40,17 @@ const ViewFlex = styled.View`
   flex: 1;
 `;
 
+const ViewDynamicFlex = styled.View<{
+  justifyC: string;
+  alignI: string;
+  flexD?: string;
+}>`
+  justify-content: ${props => props.justifyC};
+  align-items: ${props => props.alignI};
+  flex-direction: ${props => props.flexD};
+  margin-left: 40px;
+`;
+
 const ViewFlexForTwoElements = styled.View`
   display: flex;
   flex-direction: row;
@@ -64,4 +75,5 @@ export {
   ViewFlexRight,
   ViewFlexCenter,
   ViewRightBottom,
+  ViewDynamicFlex,
 };

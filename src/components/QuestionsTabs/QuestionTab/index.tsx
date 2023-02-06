@@ -4,7 +4,6 @@ export type QuestionTabPropsType = {
   isActive: boolean;
   id: number;
   onPress: (id: number) => void;
-  setIsActiveTab: (value: number) => void;
   isFilledQuestion: boolean;
 };
 
@@ -12,12 +11,10 @@ export const QuestionTab = ({
   id,
   isActive,
   onPress,
-  setIsActiveTab,
   isFilledQuestion,
 }: QuestionTabPropsType) => {
   const onPressHandler = () => {
     onPress(id);
-    setIsActiveTab(id);
   };
 
   return (

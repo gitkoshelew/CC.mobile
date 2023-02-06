@@ -18,24 +18,28 @@ type AddingAnswerPropsType = {
   disabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
   onPressCorrectAnswer: (index: number, checked: boolean, textOption: string) => void;
+  checkingForDuplicate: boolean;
 };
 
 export const AddingAnswer = ({
   index,
   onPressDelete,
-  onPressCorrectAnswer,
   disabledDeleteBtn,
+  onPressCorrectAnswer,
+  checkingForDuplicate,
   ...props
 }: AddingAnswerPropsType) => {
   const isCurrentOptionText = useWatch({
     name: `options.${index}.option`,
     control: props.control,
+    disabled: false,
   });
   const [isChecked, setIsChecked] = useState(false);
-
+  const [inputWhichCorrect, setInputWhichCorrect] = useState(props.option);
   const onPressCorrectAnswerHandler = useCallback(
     (checked: boolean) => {
       setIsChecked(checked);
+      setInputWhichCorrect(isCurrentOptionText);
       onPressCorrectAnswer(index, checked, isCurrentOptionText);
     },
     [index, isCurrentOptionText, onPressCorrectAnswer],
@@ -45,11 +49,12 @@ export const AddingAnswer = ({
   }, [index, onPressDelete]);
 
   useEffect(() => {
-    if (props.option !== isCurrentOptionText) {
-      onPressCorrectAnswer(index, false, props.option);
+    if (inputWhichCorrect !== isCurrentOptionText) {
+      onPressCorrectAnswer(index, false, inputWhichCorrect);
       setIsChecked(false);
+      setInputWhichCorrect('');
     }
-  }, [index, isCurrentOptionText, onPressCorrectAnswer, props.option]);
+  }, [index, inputWhichCorrect, isCurrentOptionText, onPressCorrectAnswer]);
 
   useEffect(() => {
     setIsChecked(props.correctAnswer.includes(isCurrentOptionText));
@@ -61,7 +66,6 @@ export const AddingAnswer = ({
       : !isCurrentOptionText;
 
   const disabledDeleteOption = disabledDeleteBtn || isChecked;
-
   return (
     <BlockAnswerBox>
       <View style={styles.inputBox}>
@@ -90,7 +94,7 @@ export const AddingAnswer = ({
           onPress={onPressCorrectAnswerHandler}
           isChecked={isChecked}
           disabled={!!disabledCheckbox}
-          fillColor={Color.GreenLight}
+          fillColor={checkingForDuplicate ? Color.Red : Color.GreenLight}
         />
         <TouchableOpacity
           style={disabledDeleteOption && styles.disabled}
