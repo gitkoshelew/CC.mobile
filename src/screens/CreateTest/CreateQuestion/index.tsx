@@ -299,19 +299,6 @@ export const CreateQuestion = ({
               <AntDesign name="rightcircle" size={36} color={Color.DarkBlue} />
             </NextQuestionButton>
           )}
-          <AppButton
-            title="Exit"
-            type={TypeAppButton.PRIMARY}
-            onPress={() => {
-              resetNavigate({
-                index: 0,
-                routes: [{name: ScreenList.HOME}],
-              });
-            }}
-          />
-          <NextQuestionButton onPress={nextQuestionPressed} disabled={!currentQuestion.title}>
-            <AntDesign name="rightcircle" size={36} color={Color.DarkBlue} />
-          </NextQuestionButton>
         </ViewDynamicFlex>
       </BlockBox>
       <ViewCenter />
