@@ -27,7 +27,7 @@ export const CreateAnswer = ({
   deleteOptionPressed,
   checkedCorrectOption,
 }: CreateAnswerPropsType) => {
-  const disabledDeleteBtn = fields.length <= 2;
+  const isDisabledDeleteBtn = fields.length <= 2;
 
   return (
     <View>
@@ -40,7 +40,7 @@ export const CreateAnswer = ({
           type={type}
           control={control}
           correctAnswer={correctAnswer}
-          disabledDeleteBtn={disabledDeleteBtn}
+          isDisabledDeleteBtn={isDisabledDeleteBtn}
           onPressDelete={deleteOptionPressed}
           onPressCorrectAnswer={checkedCorrectOption}
           isCheckingDuplicate={isCheckingDuplicate}

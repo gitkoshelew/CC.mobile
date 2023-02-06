@@ -15,7 +15,7 @@ type AddingAnswerPropsType = {
   correctAnswer: string[];
   type: string;
   control: Control<InputsFieldType>;
-  disabledDeleteBtn: boolean;
+  isDisabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
   onPressCorrectAnswer: (index: number, checked: boolean, textOption: string) => void;
   isCheckingDuplicate: boolean;
@@ -24,7 +24,7 @@ type AddingAnswerPropsType = {
 export const AddingAnswer = ({
   index,
   onPressDelete,
-  disabledDeleteBtn,
+  isDisabledDeleteBtn,
   onPressCorrectAnswer,
   isCheckingDuplicate,
   ...props
@@ -64,7 +64,7 @@ export const AddingAnswer = ({
       ? (!isChecked && props.correctAnswer.length) || !isCurrentOptionText
       : !isCurrentOptionText;
 
-  const disabledDeleteOption = disabledDeleteBtn || isChecked;
+  const isDisabledDeleteOption = isDisabledDeleteBtn || isChecked;
 
   return (
     <BlockAnswerBox>
@@ -97,9 +97,9 @@ export const AddingAnswer = ({
           fillColor={isCheckingDuplicate ? Color.Red : Color.GreenLight}
         />
         <TouchableOpacity
-          style={disabledDeleteOption && styles.disabled}
+          style={isDisabledDeleteOption && styles.disabled}
           onPress={onPressDeletePressed}
-          disabled={disabledDeleteOption}>
+          disabled={isDisabledDeleteOption}>
           <AntDesign name="minuscircleo" size={30} color={Color.Red} />
         </TouchableOpacity>
       </View>
