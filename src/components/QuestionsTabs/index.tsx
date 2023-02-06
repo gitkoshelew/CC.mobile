@@ -1,24 +1,19 @@
 import {QuestionTab} from './QuestionTab/index';
 import {ScrollViewBlock, TabsBlock} from './styles';
-import {useState} from 'react';
 
 export type QuestionsTabsPropsType = {
   onPressCurrentQuestion: (id: number) => void;
   listQuestionsTabs: number[];
   amountFilledQuestion: number;
+  activeTab: number;
 };
 
 export const QuestionsTabs = ({
   listQuestionsTabs,
   amountFilledQuestion,
+  activeTab,
   ...props
 }: QuestionsTabsPropsType) => {
-  const [isActiveTab, setIsActiveTab] = useState(0);
-
-  const onPressedActiveTab = (value: number) => {
-    value <= amountFilledQuestion && setIsActiveTab(value);
-  };
-
   return (
     <ScrollViewBlock
       horizontal
@@ -30,9 +25,8 @@ export const QuestionsTabs = ({
           <QuestionTab
             key={id}
             id={id}
-            isActive={id === isActiveTab}
+            isActive={id === activeTab}
             onPress={props.onPressCurrentQuestion}
-            setIsActiveTab={onPressedActiveTab}
             isFilledQuestion={amountFilledQuestion > id}
           />
         ))}

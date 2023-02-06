@@ -2,7 +2,7 @@ import {quizzesAPI} from '@src/dal/quizzesAPI';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {CreateQuizType} from '@customTypes/quizzesAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
-import {newQuestionInQuizType} from '@customTypes/quiz-types';
+import {addQuestionToQuizParamType, newQuestionInQuizType} from '@customTypes/quiz-types';
 import {AxiosError} from 'axios';
 import {setAppMessage} from './appReducer';
 
@@ -46,21 +46,40 @@ export const createQuestion = createAsyncThunk(
     const {quizId, ...newQuestion} = param;
     try {
       const createdQuestion = await questionsAPI.createQuestion(newQuestion);
-      await quizzesAPI.addQuestionToQuiz({
-        quizId,
-        questionId: createdQuestion.data.id,
-      });
+      await dispatch(addQuestionToQuiz({quizId, questionId: createdQuestion.data.id}));
       dispatch(
         setAppMessage({
           text: 'The question is created',
           severity: 'success',
         }),
       );
+      return createdQuestion.data;
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(
         setAppMessage({
           text: 'The question has not been created',
+          severity: 'error',
+        }),
+      );
+      return rejectWithValue(err.message);
+    }
+  },
+);
+
+export const addQuestionToQuiz = createAsyncThunk(
+  'quiz/addQuestionToQuiz',
+  async ({quizId, questionId}: addQuestionToQuizParamType, {dispatch, rejectWithValue}) => {
+    try {
+      await quizzesAPI.addQuestionToQuiz({
+        quizId,
+        questionId,
+      });
+    } catch (e) {
+      const err = e as Error | AxiosError;
+      dispatch(
+        setAppMessage({
+          text: 'The question was not added to the test',
           severity: 'error',
         }),
       );

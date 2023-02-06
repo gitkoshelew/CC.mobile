@@ -71,3 +71,8 @@ export type testSettingData = {
   difficulty: string;
   numberQuestions: numberQuestionsType;
 };
+
+export type addQuestionToQuizParamType = {
+  quizId: number;
+  questionId: number;
+};

@@ -5,5 +5,10 @@ export type ITouchableOpacityProps = DefaultTouchableOpacityProps;
 export interface IButtonProps extends ITouchableOpacityProps {
   onPress?: () => void;
   title: string;
-  type: 'primary' | 'secondary';
+  type: TypeAppButton;
+}
+
+export enum TypeAppButton {
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
 }
