@@ -65,6 +65,7 @@ export const AddingAnswer = ({
       : !isCurrentOptionText;
 
   const disabledDeleteOption = disabledDeleteBtn || isChecked;
+
   return (
     <BlockAnswerBox>
       <View style={styles.inputBox}>

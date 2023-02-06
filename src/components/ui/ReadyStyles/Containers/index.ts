@@ -46,9 +46,8 @@ const ViewDynamicFlex = styled.View<{
   flexD?: string;
 }>`
   justify-content: ${props => props.justifyC};
-  align-items: ${props => props.alignI};
+  align-items: ${props => props.alignI}
   flex-direction: ${props => props.flexD};
-  margin-left: 40px;
 `;
 
 const ViewFlexForTwoElements = styled.View`
