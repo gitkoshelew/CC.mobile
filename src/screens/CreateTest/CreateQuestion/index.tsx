@@ -79,7 +79,7 @@ export const CreateQuestion = ({
   });
 
   const watchFieldArray = watch('options') || [];
-  const arrayOptions = watchFieldArray.map(el => el.option);
+  const arrayOptions = watchFieldArray.map(el => el.option).filter(el => el !== '');
   const checkingForDuplicate = new Set(arrayOptions).size !== arrayOptions.length;
 
   const nextQuestionPressed = useCallback(() => {
