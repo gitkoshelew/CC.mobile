@@ -22,21 +22,21 @@ export const TopicQuestion = ({setValue}: TopicQuestionPropsType) => {
   const dispatch = useAppDispatch();
   const {control, handleSubmit, reset} = useForm<InputFieldType>();
   const [topics, setTopics] = useState<TopicType[]>([]);
-  const [isTopic, setIsTopic] = useState<string>();
+  const [topic, setTopic] = useState<string>();
 
   const onCreateTopicPressed = async ({topicName}: InputFieldType) => {
     const newTopic = await dispatch(createTopic(topicName)).unwrap();
     const allTopics = await dispatch(getTopics()).unwrap();
     setTopics(allTopics);
     setValue('topicId', newTopic.id);
-    setIsTopic(newTopic.title);
+    setTopic(newTopic.title);
     reset({topicName: ''});
   };
 
   const onSelectTopicPressed = (title: string) => {
-    const isTopicId = +topics.find(el => el.title === title)!.id;
-    setIsTopic(title);
-    setValue('topicId', isTopicId);
+    const topicId = +topics.find(el => el.title === title)!.id;
+    setTopic(title);
+    setValue('topicId', topicId);
   };
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export const TopicQuestion = ({setValue}: TopicQuestionPropsType) => {
           size="m"
           type="primary"
           onSelect={onSelectTopicPressed}
-          value={isTopic}
+          value={topic}
         />
       </View>
       <View style={styles.createTopicTypeContainer}>
