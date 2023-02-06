@@ -1,8 +1,8 @@
 import {Platform} from 'react-native';
-import {TextBox, BlockBox} from '@src/components/ui/ReadyStyles/Boxes';
-import {ViewContainer, ViewCenter} from '@src/components/ui/ReadyStyles/Containers';
+import {BlockBox, TextBox} from '@src/components/ui/ReadyStyles/Boxes';
+import {ViewCenter, ViewContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {AppButton} from '@src/components/ui/AppButton';
-import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
+import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {AppSelect} from '@src/components/ui/AppSelect';
 import {SwitchSelectors} from '@src/components/SwitchSelectors';
@@ -11,6 +11,8 @@ import {useForm} from 'react-hook-form';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {createQuiz} from '@src/bll/quizReducer';
 import {Loader} from '@src/components/ui/Loader/index';
+import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
+import {TypeAppButton} from '@customTypes/AppButtun-types';
 
 export type SelectorsType = {
   theme: string;
@@ -122,12 +124,15 @@ export const TestSettings = () => {
         </BlockBox>
         <TextBox>Number of questions</TextBox>
         <BlockBox>
-          <SwitchSelectors type="number" onPress={selectsNumberQuestionsPressed} />
+          <SwitchSelectors
+            type={TypeSwitchSelect.NUMBER}
+            onPress={selectsNumberQuestionsPressed}
+          />
         </BlockBox>
         <ViewCenter>
           <AppButton
             title="Questions settings"
-            type="primary"
+            type={TypeAppButton.PRIMARY}
             onPress={handleSubmit(onPressQuestionsSettings)}
             disabled={!disabledQuestionsSettings}
           />

@@ -1,5 +1,11 @@
 export interface ISwitchSelectProps {
   onPress?: (value: string) => void;
   value?: string | number;
-  type: 'level' | 'number' | 'filter';
+  type: TypeSwitchSelect;
+}
+
+export enum TypeSwitchSelect {
+  LEVEL = 'level',
+  NUMBER = 'number',
+  FILTER = 'filter',
 }

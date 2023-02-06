@@ -6,8 +6,9 @@ import {SwitchSelectors} from '../../../components/SwitchSelectors';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {FilterBlock} from './styles';
 import {useCallback} from 'react';
-import {useAppNavigate} from '../../../hooks/hooks';
-import {ScreenList} from '../../../navigation/navigation';
+import {useAppNavigate} from '@hooks/hooks';
+import {ScreenList} from '@src/navigation/navigation';
+import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 
 const data = [...Array(10)].map((_, index) => ({
   id: String(index + 1),
@@ -27,7 +28,7 @@ export const TestsList = () => {
       <Tabs />
       <FilterBlock>
         <View style={styles.container}>
-          <SwitchSelectors type="filter" onPress={() => {}} />
+          <SwitchSelectors type={TypeSwitchSelect.FILTER} onPress={() => {}} />
         </View>
         <Sort />
       </FilterBlock>

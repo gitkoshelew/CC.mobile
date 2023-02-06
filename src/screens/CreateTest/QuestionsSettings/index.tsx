@@ -1,7 +1,7 @@
 import {QuestionsTabs} from '@src/components/QuestionsTabs';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import {CreateQuestion} from '../CreateQuestion/index';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {styles} from './styles';
 import {useAppDispatch, useAppSelector} from '@hooks/hooks';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -37,22 +37,28 @@ export const QuestionsSettings = ({
   const dispatch = useAppDispatch();
   const listQuestionsTabs = [...Array(route.params.numberQuestions)].map((el, i) => i);
   const isFetching = useAppSelector(state => state.app.isFetching);
+  const [activeTab, setActiveTab] = useState(0);
   const [questions, setQuestions] = useState<questionType[]>([newQuestion()]);
   const [currentQuestion, setCurrentQuestion] = useState<questionType>(questions[0]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const scroll = useRef(null);
 
   const onPressCurrentQuestionPressed = useCallback(
     (index: number) => {
-      if (index > questions.length) {
+      if (
+        (!currentQuestion.title && index > questions.length - 1) ||
+        index - questions.length > 0
+      ) {
         setIsModalVisible(true);
         return;
       }
 
+      setActiveTab(index);
       questions[index]
         ? setCurrentQuestion(questions[index])
         : setCurrentQuestion(newQuestion());
     },
-    [newQuestion, questions],
+    [currentQuestion.title, newQuestion, questions],
   );
 
   useEffect(() => {
@@ -79,17 +85,26 @@ export const QuestionsSettings = ({
             onPress={setIsModalVisible}
             text="Create a question to move on to the next one"
           />
-          <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+          <ScrollView
+            style={styles.container}
+            showsVerticalScrollIndicator={false}
+            ref={scroll}>
             <View style={styles.inner}>
               <QuestionsTabs
-                onPressCurrentQuestion={onPressCurrentQuestionPressed}
                 listQuestionsTabs={listQuestionsTabs}
+                activeTab={activeTab}
+                onPressCurrentQuestion={onPressCurrentQuestionPressed}
                 amountFilledQuestion={questions.length}
               />
               <CreateQuestion
                 currentQuestion={currentQuestion}
+                setCurrentQuestion={setCurrentQuestion}
                 setQuestions={setQuestions}
                 quizId={route.params.idNewTest}
+                activeTab={activeTab}
+                onPressCurrentQuestionPressed={onPressCurrentQuestionPressed}
+                scrollRef={scroll}
+                numberQuestions={route.params.numberQuestions}
               />
             </View>
           </ScrollView>
