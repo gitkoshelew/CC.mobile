@@ -4,33 +4,17 @@ import {ViewCenter} from '../ui/ReadyStyles/Containers';
 import {BlockBox, SmallTitle} from '../ui/ReadyStyles/Boxes';
 import {LoginButton} from '../ui/LoginButton';
 import {Wrapper} from '../Header/styles';
-import Animated, {useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
 import * as Yup from 'yup';
 import {TextError} from '../ui/ReadyStyles/TextError';
 import {Container} from './styles';
+import {View} from 'react-native';
 
 export interface ISignInValues {
   email: string;
   password: string;
 }
 
-interface IProps {
-  isOpen: boolean;
-}
-
-export const FormSignIn = ({isOpen}: IProps) => {
-  const opacityValue = useSharedValue(0);
-
-  const opacity = useAnimatedStyle(() => {
-    return {
-      opacity: opacityValue.value,
-    };
-  });
-
-  isOpen
-    ? (opacityValue.value = withTiming(1, {duration: 1500}))
-    : (opacityValue.value = withTiming(0, {duration: 300}));
-
+export const FormSignIn = () => {
   const signInValues: ISignInValues = {
     email: '',
     password: '',
@@ -53,7 +37,7 @@ export const FormSignIn = ({isOpen}: IProps) => {
       validationSchema={signInSchema}>
       {({handleChange, handleSubmit, values, errors}) => (
         <Wrapper>
-          <Animated.View style={opacity}>
+          <View>
             <ViewCenter>
               <SmallTitle>Please sign in to continue</SmallTitle>
             </ViewCenter>
@@ -77,7 +61,7 @@ export const FormSignIn = ({isOpen}: IProps) => {
             <Container>
               <LoginButton onPress={handleSubmit} title="Sign in" type="primary" />
             </Container>
-          </Animated.View>
+          </View>
         </Wrapper>
       )}
     </Formik>

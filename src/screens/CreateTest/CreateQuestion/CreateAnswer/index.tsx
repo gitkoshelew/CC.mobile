@@ -5,6 +5,7 @@ import {AddButton} from '@src/components/ui/AddButton';
 import {Control} from 'react-hook-form';
 import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 import {TextError} from '@src/components/ui/ReadyStyles/TextError';
+import {useTranslation} from 'react-i18next';
 
 type CreateAnswerPropsType = {
   control: Control<InputsFieldType>;
@@ -28,6 +29,7 @@ export const CreateAnswer = ({
   checkedCorrectOption,
 }: CreateAnswerPropsType) => {
   const isDisabledDeleteBtn = fields.length <= 2;
+  const {t} = useTranslation('validationFields');
 
   return (
     <View>
@@ -46,7 +48,7 @@ export const CreateAnswer = ({
           isCheckingDuplicate={isCheckingDuplicate}
         />
       ))}
-      {isCheckingDuplicate && <TextError>You have 2 identical answers</TextError>}
+      {isCheckingDuplicate && <TextError>{t('option.CheckingForDuplication')}</TextError>}
       <ButtonAnswerBox>
         <AddButton onPress={addNewOptionPressed} disabled={fields.length > 6} />
         <TextBox>Add answer</TextBox>

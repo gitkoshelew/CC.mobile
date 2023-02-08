@@ -1,5 +1,5 @@
 import {ButtonCenter, styleWithSheet} from '../styles';
-import {getIcon} from '../../utils/getIconNavigate';
+import {getIcon} from '@src/utils/getIconNavigate';
 import {BottomTabBarButtonProps} from '@react-navigation/bottom-tabs';
 import Animated, {
   useAnimatedStyle,

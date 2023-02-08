@@ -18,15 +18,15 @@ export const SmallButton = ({type, onPress, ...props}: IButtonProps) => {
     <Box onPress={onPress}>
       <ButtonContainer {...props} style={containerStyles}>
         {type === 'check' && (
-          <Ionicons name={'shield-checkmark'} size={30} color={Color.GrayMedium} />
+          <Ionicons name="shield-checkmark" size={27} color={Color.GrayMedium} />
         )}
-        {type === 'edit' && <MaterialIcons name={'edit'} size={30} color={Color.GrayMedium} />}
+        {type === 'edit' && <MaterialIcons name={'edit'} size={27} color={Color.GrayMedium} />}
         {type === 'delete' && (
-          <MaterialIcons name={'delete'} size={30} color={Color.GrayMedium} />
+          <MaterialIcons name={'delete'} size={27} color={Color.GrayMedium} />
         )}
-        {type === 'theme' && <Ionicons name={'moon'} size={30} color={Color.White} />}
+        {type === 'theme' && <Ionicons name={'moon'} size={27} color={Color.White} />}
         {type === 'exit' && (
-          <MaterialCommunityIcons name={'location-exit'} size={30} color={Color.White} />
+          <MaterialCommunityIcons name={'location-exit'} size={27} color={Color.White} />
         )}
       </ButtonContainer>
     </Box>

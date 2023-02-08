@@ -12,6 +12,7 @@ import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {createQuiz} from '@src/bll/quizReducer';
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
+import {useTranslation} from 'react-i18next';
 
 export type SelectorsType = {
   theme: string;
@@ -29,6 +30,7 @@ export const TestSettings = () => {
   const data = ['Verify', 'Date', 'Popularity', 'Something else'];
   const dispatch = useAppDispatch();
   const {navigate} = useAppNavigate();
+  const {t} = useTranslation(['createQuiz', 'validationFields']);
   const [selectorsData, setSelectorsData] = useState<SelectorsType>({
     theme: 'Verify',
     numberQuestions: 10,
@@ -78,34 +80,34 @@ export const TestSettings = () => {
 
   return (
     <ViewContainer>
-      <TextBox>Test title</TextBox>
+      <TextBox>{t('title')}</TextBox>
       <BlockBox>
         <TextInputHookForm
           name="title"
           control={control}
           rules={{
-            required: 'Title is required',
+            required: `${t('title.required', {ns: 'validationFields'})}`,
             minLength: {
               value: 3,
-              message: 'Title should be minimum 3 characters long',
+              message: `${t('title.minLength', {ns: 'validationFields'})}`,
             },
             maxLength: {
               value: 20,
-              message: 'Title should be maximum 50 characters long',
+              message: `${t('title.maxLength', {ns: 'validationFields'})}`,
             },
           }}
         />
       </BlockBox>
-      <TextBox>Description</TextBox>
+      <TextBox>{t('description')}</TextBox>
       <BlockBox>
         <TextInputHookForm
           name="description"
           control={control}
           rules={{
-            required: 'Description is required',
+            required: `${t('description.required', {ns: 'validationFields'})}`,
             maxLength: {
               value: 50,
-              message: 'Description should be maximum 50 characters long',
+              message: `${t('description.maxLength', {ns: 'validationFields'})}`,
             },
           }}
           multiline
@@ -114,11 +116,11 @@ export const TestSettings = () => {
           height={Platform.OS === 'ios' ? '100px' : undefined}
         />
       </BlockBox>
-      <TextBox>Theme</TextBox>
+      <TextBox>{t('topic')}</TextBox>
       <BlockBox>
         <AppSelect size="m" data={data} type="primary" onSelect={selectsThemePressed} />
       </BlockBox>
-      <TextBox>Number of questions</TextBox>
+      <TextBox>{t('numberOfQuestions')}</TextBox>
       <BlockBox>
         <SwitchSelectors
           type={TypeSwitchSelect.NUMBER}
@@ -127,7 +129,7 @@ export const TestSettings = () => {
       </BlockBox>
       <ViewCenter>
         <AppButton
-          title="Questions settings"
+          title={t('questionSettings')}
           type={TypeAppButton.PRIMARY}
           onPress={handleSubmit(onPressQuestionsSettings)}
           disabled={!disabledQuestionsSettings}

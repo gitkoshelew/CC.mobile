@@ -2,10 +2,9 @@ import {useRef, useState} from 'react';
 import {Dimensions, ImageBackground, PanResponder, Platform, ScaledSize} from 'react-native';
 import {StyleSheet, View, Animated} from 'react-native';
 import {Color} from '@theme/colors';
-import {Header} from '../Header';
-import {FormSignIn} from '../FormSignIn';
+import {Content} from '@src/components/DraggableBottomSheet/Content/index';
 
-const isAuth = true;
+const isAuth = false;
 export const {width: WINDOW_WIDTH, height: WINDOW_HEIGHT}: ScaledSize =
   Dimensions.get('window');
 const BOTTOM_SHEET_MAX_HEIGHT = isAuth ? WINDOW_HEIGHT * 0.26 : WINDOW_HEIGHT * 0.43;
@@ -74,12 +73,13 @@ export const DraggableBottomSheet = () => {
     <View style={styles.container}>
       <Animated.View style={[styles.bottomSheet, bottomSheetAnimation]}>
         <ImageBackground
+          style={styles.imageBackground}
           source={require('../../assets/images/background-second.png')}
           resizeMode="stretch">
           <View style={styles.draggableArea} {...panResponder.panHandlers}>
             <View style={styles.dragHandle} />
           </View>
-          {isAuth ? <Header isOpen={isOpen} /> : <FormSignIn isOpen={isOpen} />}
+          <Content isOpen={isOpen} />
         </ImageBackground>
       </Animated.View>
     </View>
@@ -124,5 +124,8 @@ const styles = StyleSheet.create({
     height: 5,
     backgroundColor: Color.White,
     borderRadius: 10,
+  },
+  imageBackground: {
+    paddingHorizontal: 20,
   },
 });
