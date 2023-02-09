@@ -1,11 +1,13 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {AxiosError} from 'axios';
 import {authAPI} from '@src/dal/authAPI';
-import {setAppMessage} from '@src/bll/appReducer';
+import {setAppMessage, setIsFetching} from '@src/bll/appReducer';
 
 export const register = createAsyncThunk(
   'auth/register',
   async (_, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
+
     try {
       await authAPI.registration();
       dispatch(
@@ -23,11 +25,14 @@ export const register = createAsyncThunk(
         }),
       );
       return rejectWithValue(err.message);
+    } finally {
+      dispatch(setIsFetching(false));
     }
   },
 );
 
 export const login = createAsyncThunk('auth/login', async (_, {dispatch, rejectWithValue}) => {
+  dispatch(setIsFetching(true));
   try {
     await authAPI.login();
     dispatch(
@@ -45,6 +50,8 @@ export const login = createAsyncThunk('auth/login', async (_, {dispatch, rejectW
       }),
     );
     return rejectWithValue(err.message);
+  } finally {
+    dispatch(setIsFetching(false));
   }
 });
 

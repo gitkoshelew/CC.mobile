@@ -9,7 +9,6 @@ import {ViewFlexForTwoElements} from '@src/components/ui/ReadyStyles/Containers/
 
 export const Main = () => {
   const dispatch = useAppDispatch();
-
   const onPressLogin = () => {
     dispatch(login());
   };
