@@ -2,6 +2,7 @@ import React from 'react';
 import 'react-native';
 import App from '../App';
 import {render} from '@testing-library/react-native';
+import i18n from '../i18n';
 
 // Note: test renderer must be required after react-native.
 jest.mock('@react-native-async-storage/async-storage', () =>
@@ -15,6 +16,10 @@ jest.mock('@storybook/react-native', () => ({
   addParameters: jest.fn(),
 }));
 jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'));
+
+beforeEach(() => {
+  i18n.init();
+});
 
 it('renders correctly', () => {
   render(<App />);

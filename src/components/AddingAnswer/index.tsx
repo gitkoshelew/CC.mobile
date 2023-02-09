@@ -8,6 +8,7 @@ import {Color} from '@theme/colors';
 import {useCallback, useEffect, useState} from 'react';
 import {Control, Controller, useWatch} from 'react-hook-form';
 import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
+import {useTranslation} from 'react-i18next';
 
 type AddingAnswerPropsType = {
   index: number;
@@ -15,27 +16,31 @@ type AddingAnswerPropsType = {
   correctAnswer: string[];
   type: string;
   control: Control<InputsFieldType>;
-  disabledDeleteBtn: boolean;
+  isDisabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
   onPressCorrectAnswer: (index: number, checked: boolean, textOption: string) => void;
+  isCheckingDuplicate: boolean;
 };
 
 export const AddingAnswer = ({
   index,
   onPressDelete,
+  isDisabledDeleteBtn,
   onPressCorrectAnswer,
-  disabledDeleteBtn,
+  isCheckingDuplicate,
   ...props
 }: AddingAnswerPropsType) => {
   const isCurrentOptionText = useWatch({
     name: `options.${index}.option`,
     control: props.control,
   });
+  const {t} = useTranslation(['validationFields']);
   const [isChecked, setIsChecked] = useState(false);
-
+  const [inputWhichCorrect, setInputWhichCorrect] = useState(props.option);
   const onPressCorrectAnswerHandler = useCallback(
     (checked: boolean) => {
       setIsChecked(checked);
+      setInputWhichCorrect(isCurrentOptionText);
       onPressCorrectAnswer(index, checked, isCurrentOptionText);
     },
     [index, isCurrentOptionText, onPressCorrectAnswer],
@@ -45,11 +50,12 @@ export const AddingAnswer = ({
   }, [index, onPressDelete]);
 
   useEffect(() => {
-    if (props.option !== isCurrentOptionText) {
-      onPressCorrectAnswer(index, false, props.option);
+    if (inputWhichCorrect !== isCurrentOptionText) {
+      onPressCorrectAnswer(index, false, inputWhichCorrect);
       setIsChecked(false);
+      setInputWhichCorrect('');
     }
-  }, [index, isCurrentOptionText, onPressCorrectAnswer, props.option]);
+  }, [index, inputWhichCorrect, isCurrentOptionText, onPressCorrectAnswer]);
 
   useEffect(() => {
     setIsChecked(props.correctAnswer.includes(isCurrentOptionText));
@@ -60,7 +66,7 @@ export const AddingAnswer = ({
       ? (!isChecked && props.correctAnswer.length) || !isCurrentOptionText
       : !isCurrentOptionText;
 
-  const disabledDeleteOption = disabledDeleteBtn || isChecked;
+  const isDisabledDeleteOption = isDisabledDeleteBtn || isChecked;
 
   return (
     <BlockAnswerBox>
@@ -75,10 +81,10 @@ export const AddingAnswer = ({
             />
           )}
           rules={{
-            required: 'option is required',
+            required: `${t('option.required')}`,
             maxLength: {
               value: 50,
-              message: 'option should be maximum 50 characters long',
+              message: `${t('validationFields.option.minLength')}`,
             },
           }}
           name={`options.${index}.option`}
@@ -90,12 +96,12 @@ export const AddingAnswer = ({
           onPress={onPressCorrectAnswerHandler}
           isChecked={isChecked}
           disabled={!!disabledCheckbox}
-          fillColor={Color.GreenLight}
+          fillColor={isCheckingDuplicate ? Color.Red : Color.GreenLight}
         />
         <TouchableOpacity
-          style={disabledDeleteOption && styles.disabled}
+          style={isDisabledDeleteOption && styles.disabled}
           onPress={onPressDeletePressed}
-          disabled={disabledDeleteOption}>
+          disabled={isDisabledDeleteOption}>
           <AntDesign name="minuscircleo" size={30} color={Color.Red} />
         </TouchableOpacity>
       </View>

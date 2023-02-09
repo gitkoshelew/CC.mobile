@@ -13,6 +13,7 @@ import {ScreenList} from '@src/navigation/navigation';
 import {clearStateResult, setStateResult} from '@src/bll/resultReducer';
 import {getCheckedAnswers} from '@src/utils/getCheckedAnswers';
 import {progressResult} from '@src/utils/progressResult';
+import {TypeAppButton} from '@customTypes/AppButtun-types';
 
 export type ResultType = {
   id: number;
@@ -141,8 +142,8 @@ export const TestProcess = () => {
           />
         </ViewFlexCenter>
         <ButtonsBox>
-          <AppButton title="Skip" type="secondary" onPress={onPressSkipAnswer} />
-          <AppButton title="Next" type="primary" onPress={onPressNextAnswer} />
+          <AppButton title="Skip" type={TypeAppButton.PRIMARY} onPress={onPressSkipAnswer} />
+          <AppButton title="Next" type={TypeAppButton.PRIMARY} onPress={onPressNextAnswer} />
         </ButtonsBox>
       </MainTestingContainer>
     </ViewContainer>

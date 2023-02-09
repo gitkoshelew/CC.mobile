@@ -9,6 +9,7 @@ import {useCallback, useEffect} from 'react';
 import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {getQuizQuestions, getQuizzes} from '@src/bll/quizReducer';
+import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 
 export const TestsList = () => {
   const {navigate} = useAppNavigate();
@@ -34,7 +35,7 @@ export const TestsList = () => {
       <Tabs />
       <FilterBlock>
         <View style={styles.container}>
-          <SwitchSelectors type="filter" onPress={() => {}} />
+          <SwitchSelectors type={TypeSwitchSelect.FILTER} onPress={() => {}} />
         </View>
         <Sort />
       </FilterBlock>

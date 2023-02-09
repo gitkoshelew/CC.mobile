@@ -4,6 +4,7 @@ import {Color} from '@theme/colors';
 const BlockBox = styled.View`
   margin-bottom: 15px;
 `;
+
 const BlockAnswerBox = styled.View`
   width: 100%;
   flex-direction: row;

@@ -1,0 +1,36 @@
+{
+  "createQuiz": {
+    "title": "Заголовок",
+    "description": "Описание",
+    "topic": "Тема",
+    "numberOfQuestions": "Количество вопросов",
+    "questionSettings": "Создать вопросы"
+  },
+  "createQuestion": {
+    "title": "Заголовок",
+    "description": "Описание",
+    "difficulty": "Сложность",
+    "answerType": "Тип ответа",
+    "timer": "Таймер",
+    "answerChoice": "Варианты ответов",
+    "addAnswerBtn": "Добавить ответ",
+    "saveQuestionBtn": "Сохранить вопрос",
+    "exitBtn": "Выход"
+  },
+  "validationFields": {
+    "title": {
+      "required": "Заголовок обязателен",
+      "minLength": "Заголовок должен содержать не менее 3 символов",
+      "maxLength": "Заголовок должен содержать не более 20 символов"
+    },
+    "description": {
+      "required": "Описание обязательно",
+      "maxLength": "Описание должно содержать не более 50 символов"
+    },
+    "option": {
+      "required": "option is required",
+      "minLength": "Option should be maximum 50 characters long",
+      "CheckingForDuplication": "У вас 2 одинаковых ответа"
+    }
+  }
+}

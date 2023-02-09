@@ -1,0 +1,36 @@
+{
+  "createQuiz": {
+    "title": "Test title",
+    "description": "Description",
+    "topic": "Topic",
+    "numberOfQuestions": "Number of questions",
+    "questionSettings": "Create questions"
+  },
+  "createQuestion": {
+    "title" : "Title",
+    "description" : "Description",
+    "difficulty" : "Difficulty",
+    "answerType" : "Answer type",
+    "timer" : "Timer",
+    "answerChoice" : "Answer choice",
+    "addAnswerBtn" : "Add answer",
+    "saveQuestionBtn" : "Save question",
+    "exitBtn" : "Exit"
+  },
+  "validationFields": {
+    "title": {
+      "required": "Title is required",
+      "minLength": "Title should be minimum 3 characters long",
+      "maxLength": "Title should be maximum 50 characters long"
+    },
+    "description": {
+      "required": "Description is required",
+      "maxLength": "Description should be maximum 50 characters long"
+    },
+    "option": {
+      "required": "option is required",
+      "minLength": "Option should be maximum 50 characters long",
+      "CheckingForDuplication" : "You have 2 identical answers"
+    }
+  }
+}

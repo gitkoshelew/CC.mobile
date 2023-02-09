@@ -103,3 +103,8 @@ export type authorType = {
   password: string;
   status: null;
 };
+
+export type addQuestionToQuizParamType = {
+  quizId: number;
+  questionId: number;
+};
