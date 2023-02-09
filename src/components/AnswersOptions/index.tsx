@@ -45,7 +45,6 @@ export const AnswersOptions = ({
     },
     [dispatch],
   );
-
   useEffect(() => {
     dispatch(setStateCheck(dataOptions));
   }, [dataOptions, dispatch]);

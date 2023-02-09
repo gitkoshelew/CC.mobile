@@ -71,3 +71,35 @@ export type testSettingData = {
   difficulty: string;
   numberQuestions: numberQuestionsType;
 };
+export type quizTypeResponse = {
+  id: number;
+  title: string;
+  authorId: number;
+  author: authorType;
+  question: questionTypeResponse[];
+};
+export type questionTypeResponse = {
+  id: number;
+  title: string;
+  description: string;
+  content: answersType;
+  difficulty: Difficulty;
+  timer: number;
+  type: TypeOptions;
+  topicId: number;
+  moderationId: number | null;
+  Quiz_Question: {
+    id: number;
+    quizId: number;
+    questionId: number;
+  };
+};
+export type authorType = {
+  id: number;
+  name: string;
+  surname: null;
+  email: string;
+  nickname: string;
+  password: string;
+  status: null;
+};

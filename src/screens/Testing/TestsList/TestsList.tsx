@@ -1,27 +1,34 @@
-import {Tabs} from '../../../components/Tabs';
-import {Sort} from '../../../components/Sort';
-import {TestCard} from '../../../components/TestCard';
-import {BlockBox} from '../../../components/ui/ReadyStyles/Boxes';
-import {SwitchSelectors} from '../../../components/SwitchSelectors';
+import {Tabs} from '@src/components/Tabs';
+import {Sort} from '@src/components/Sort';
+import {TestCard} from '@src/components/TestCard';
+import {BlockBox} from '@src/components/ui/ReadyStyles/Boxes';
+import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {FilterBlock} from './styles';
-import {useCallback} from 'react';
-import {useAppNavigate} from '../../../hooks/hooks';
-import {ScreenList} from '../../../navigation/navigation';
-
-const data = [...Array(10)].map((_, index) => ({
-  id: String(index + 1),
-  name: 'Node.js',
-  descriptions: 'General questions about Node.js',
-})); // fake data for flat list
+import {useCallback, useEffect} from 'react';
+import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
+import {ScreenList} from '@src/navigation/navigation';
+import {getQuizQuestions, getQuizzes} from '@src/bll/quizReducer';
 
 export const TestsList = () => {
   const {navigate} = useAppNavigate();
+  const dispatch = useAppDispatch();
+  const quizzesData = useAppSelector(state => state.quizReducer.quizzes);
+  const quizzes = quizzesData.map(quiz => ({
+    id: quiz.id,
+    title: quiz.title,
+  }));
 
-  const onPressStartTestingHandler = useCallback(() => {
-    navigate(ScreenList.TESTS, {screen: ScreenList.TEST_PROCESS});
-  }, [navigate]);
-
+  const onPressStartTestingHandler = useCallback(
+    (id: number) => {
+      navigate(ScreenList.TESTS, {screen: ScreenList.TEST_PROCESS});
+      dispatch(getQuizQuestions(id));
+    },
+    [dispatch, navigate],
+  );
+  useEffect(() => {
+    dispatch(getQuizzes());
+  }, [dispatch]);
   return (
     <View>
       <Tabs />
@@ -32,10 +39,10 @@ export const TestsList = () => {
         <Sort />
       </FilterBlock>
       <FlatList
-        data={data}
-        renderItem={() => (
+        data={quizzes}
+        renderItem={({item}) => (
           <BlockBox>
-            <TestCard onPress={onPressStartTestingHandler} />
+            <TestCard onPress={onPressStartTestingHandler} title={item.title} id={item.id} />
           </BlockBox>
         )}
       />

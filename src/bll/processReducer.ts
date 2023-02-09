@@ -1,14 +1,19 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {quizIdMoc} from '@src/Mocs/Testing';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {quizTypeResponse} from '@customTypes/quiz-types';
 
-const initialState = quizIdMoc;
-
+const initialState = {
+  quiz: {} as quizTypeResponse,
+};
 const processSlice = createSlice({
   name: 'process',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setStateQuiz: (state, {payload}: PayloadAction<quizTypeResponse>) => {
+      state.quiz = payload;
+    },
+  },
 });
 
 export const processReducer = processSlice.reducer;
 
-export const {} = processSlice.actions;
+export const {setStateQuiz} = processSlice.actions;
