@@ -8,6 +8,7 @@ import {Color} from '@theme/colors';
 import {useCallback, useEffect, useState} from 'react';
 import {Control, Controller, useWatch} from 'react-hook-form';
 import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
+import {useTranslation} from 'react-i18next';
 
 type AddingAnswerPropsType = {
   index: number;
@@ -33,6 +34,7 @@ export const AddingAnswer = ({
     name: `options.${index}.option`,
     control: props.control,
   });
+  const {t} = useTranslation(['validationFields']);
   const [isChecked, setIsChecked] = useState(false);
   const [inputWhichCorrect, setInputWhichCorrect] = useState(props.option);
   const onPressCorrectAnswerHandler = useCallback(
@@ -79,10 +81,10 @@ export const AddingAnswer = ({
             />
           )}
           rules={{
-            required: 'option is required',
+            required: `${t('option.required')}`,
             maxLength: {
               value: 50,
-              message: 'option should be maximum 50 characters long',
+              message: `${t('validationFields.option.minLength')}`,
             },
           }}
           name={`options.${index}.option`}

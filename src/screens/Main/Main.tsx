@@ -6,6 +6,7 @@ import {useAppDispatch} from '@hooks/hooks';
 import {login, register} from '@src/bll/authReducer';
 import {BlockBoxMarginRight} from '@src/components/ui/ReadyStyles/Boxes/index';
 import {ViewFlexForTwoElements} from '@src/components/ui/ReadyStyles/Containers/index';
+import {TypeAppButton} from '@customTypes/AppButtun-types';
 
 export const Main = () => {
   const dispatch = useAppDispatch();
@@ -24,11 +25,15 @@ export const Main = () => {
       <ViewFlexForTwoElements>
         <BlockBoxMarginRight>
           <TouchableOpacity>
-            <AppButton title="login" type="primary" onPress={onPressLogin} />
+            <AppButton title="login" type={TypeAppButton.PRIMARY} onPress={onPressLogin} />
           </TouchableOpacity>
         </BlockBoxMarginRight>
         <TouchableOpacity>
-          <AppButton title="registration" type="primary" onPress={onPressRegister} />
+          <AppButton
+            title="registration"
+            type={TypeAppButton.PRIMARY}
+            onPress={onPressRegister}
+          />
         </TouchableOpacity>
       </ViewFlexForTwoElements>
     </SafeAreaView>

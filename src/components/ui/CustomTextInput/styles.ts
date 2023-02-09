@@ -19,6 +19,7 @@ export const CustomInput = styled.TextInput<CustomTextInputPropsType>`
           padding: 9px 16px;
           width: 100%;
         `}
+
   ${props =>
     props.height &&
     css`

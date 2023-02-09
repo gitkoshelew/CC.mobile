@@ -34,6 +34,7 @@ import {
 } from '@src/screens/CreateTest/CreateQuestion/styles';
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
+import {useTranslation} from 'react-i18next';
 
 export type InputsFieldType = {
   title: string;
@@ -66,6 +67,7 @@ export const CreateQuestion = ({
 }: CreateQuestionPropsType) => {
   const dataAnswerType = [TypeOptions.single, TypeOptions.multi];
   const resetNavigate = useAppNavigate().reset;
+  const {t} = useTranslation(['createQuestion', 'validationFields']);
   const dispatch = useAppDispatch();
   const {control, handleSubmit, reset, setValue} = useForm<InputsFieldType>({
     defaultValues: {
@@ -200,21 +202,21 @@ export const CreateQuestion = ({
 
   return (
     <Container>
-      <TextBox>Question title</TextBox>
+      <TextBox>{t('title')}</TextBox>
       <BlockBox>
         <TextInputHookForm
           name="title"
           control={control}
           rules={{
-            required: 'Description is required',
+            required: `${t('title.required', {ns: 'validationFields'})}`,
             maxLength: {
-              value: 50,
-              message: 'Description should be maximum 50 characters long',
+              value: 20,
+              message: `${t('title.maxLength', {ns: 'validationFields'})}`,
             },
           }}
         />
       </BlockBox>
-      <TextBox>Description</TextBox>
+      <TextBox>{t('description')}</TextBox>
       <BlockBox>
         <TextInputHookForm
           name="descriptions"
@@ -222,7 +224,7 @@ export const CreateQuestion = ({
           rules={{
             maxLength: {
               value: 50,
-              message: 'Description should be maximum 50 characters long',
+              message: `${t('description.maxLength', {ns: 'validationFields'})}`,
             },
           }}
           multiline
@@ -232,7 +234,7 @@ export const CreateQuestion = ({
         />
       </BlockBox>
       <BlockBox>
-        <TextBox>Question difficulty</TextBox>
+        <TextBox>{t('difficulty')}</TextBox>
         <SwitchSelectors
           type={TypeSwitchSelect.LEVEL}
           onPress={selectQuestionDifficult}
@@ -245,7 +247,7 @@ export const CreateQuestion = ({
       </BlockBox>
       <ViewFlexForTwoElements>
         <BlockBox>
-          <TextBox>Answer type</TextBox>
+          <TextBox>{t('answerType')}</TextBox>
           <ContainerDynamicWidth width="117px">
             <AppSelect
               value={selectorsData.type}
@@ -257,7 +259,7 @@ export const CreateQuestion = ({
           </ContainerDynamicWidth>
         </BlockBox>
         <BlockBoxMarginLeft>
-          <TextBox>Timer</TextBox>
+          <TextBox>{t('timer')}</TextBox>
           <TimerInput control={control} />
         </BlockBoxMarginLeft>
       </ViewFlexForTwoElements>
@@ -275,7 +277,7 @@ export const CreateQuestion = ({
         <ViewDynamicFlex justifyC="flex-end" alignI="center" flexD="row">
           <ContainerSaveButton>
             <AppButton
-              title="Save question"
+              title={t('saveQuestionBtn')}
               type={TypeAppButton.PRIMARY}
               onPress={handleSubmit(onPressSaveQuestionHandler)}
               disabled={isCheckingDuplicate}
@@ -283,7 +285,7 @@ export const CreateQuestion = ({
           </ContainerSaveButton>
           {isQuestionsEnd ? (
             <AppButton
-              title="Exit"
+              title={t('exitBtn')}
               type={TypeAppButton.PRIMARY}
               onPress={() => {
                 resetNavigate({
