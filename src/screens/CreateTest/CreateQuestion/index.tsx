@@ -1,9 +1,9 @@
-import {Platform, ScrollView, View} from 'react-native';
+import {Platform, ScrollView} from 'react-native';
 import {
   BlockBox,
   BlockBoxMarginLeft,
-  ContainerDynamicWidth,
   TextBox,
+  ContainerDynamicWidth,
 } from '@src/components/ui/ReadyStyles/Boxes';
 import {
   ViewCenter,
@@ -23,6 +23,8 @@ import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
 import {transformTime} from '@src/utils/transformTime';
 import {createQuestion, getQuizQuestions} from '@src/bll/quizReducer';
 import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
+import {TopicQuestion} from '@src/screens/CreateTest/CreateQuestion/TopicQuestion/index';
+import {Container} from '@src/screens/CreateTest/CreateQuestion/styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
 import {ScreenList} from '@src/navigation/navigation';
@@ -40,6 +42,7 @@ export type InputsFieldType = {
   minutes: string;
   seconds: string;
   options: {option: string}[];
+  topicId: number;
 };
 
 export type CreateQuestionPropsType = {
@@ -66,7 +69,7 @@ export const CreateQuestion = ({
   const resetNavigate = useAppNavigate().reset;
   const {t} = useTranslation(['createQuestion', 'validationFields']);
   const dispatch = useAppDispatch();
-  const {control, handleSubmit, reset} = useForm<InputsFieldType>({
+  const {control, handleSubmit, reset, setValue} = useForm<InputsFieldType>({
     defaultValues: {
       title: currentQuestion.title,
       descriptions: currentQuestion.description,
@@ -113,7 +116,7 @@ export const CreateQuestion = ({
       content: {options: options as string[], correctAnswer: selectorsData.correctAnswers},
       difficulty: selectorsData.difficulty as unknown as Difficulty,
       type: TypeOptions[selectorsData.type as keyof typeof TypeOptions],
-      topicId: 1,
+      topicId: values.topicId,
       quizId,
     };
     const createdQuestion = await dispatch(createQuestion(newQuestion)).unwrap();
@@ -198,7 +201,7 @@ export const CreateQuestion = ({
   const isQuestionsEnd = props.activeTab + 1 === props.numberQuestions;
 
   return (
-    <View>
+    <Container>
       <TextBox>{t('title')}</TextBox>
       <BlockBox>
         <TextInputHookForm
@@ -237,6 +240,10 @@ export const CreateQuestion = ({
           onPress={selectQuestionDifficult}
           value={selectorsData.difficulty}
         />
+      </BlockBox>
+      <BlockBox>
+        <TextBox>Select or create your topic</TextBox>
+        <TopicQuestion setValue={setValue} />
       </BlockBox>
       <ViewFlexForTwoElements>
         <BlockBox>
@@ -297,6 +304,6 @@ export const CreateQuestion = ({
         </ViewDynamicFlex>
       </BlockBox>
       <ViewCenter />
-    </View>
+    </Container>
   );
 };

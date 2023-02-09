@@ -10,7 +10,6 @@ import {TypeAppButton} from '@customTypes/AppButtun-types';
 
 export const Main = () => {
   const dispatch = useAppDispatch();
-
   const onPressLogin = () => {
     dispatch(login());
   };

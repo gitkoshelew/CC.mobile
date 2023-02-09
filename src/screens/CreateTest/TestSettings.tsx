@@ -2,7 +2,7 @@ import {Platform} from 'react-native';
 import {BlockBox, TextBox} from '@src/components/ui/ReadyStyles/Boxes';
 import {ViewCenter, ViewContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {AppButton} from '@src/components/ui/AppButton';
-import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
+import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {AppSelect} from '@src/components/ui/AppSelect';
 import {SwitchSelectors} from '@src/components/SwitchSelectors';
@@ -10,6 +10,7 @@ import {useCallback, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {createQuiz} from '@src/bll/quizReducer';
+import {Loader} from '@src/components/ui/Loader/index';
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
 import {useTranslation} from 'react-i18next';
@@ -28,6 +29,7 @@ const numberOfLines = Platform.OS === 'ios' ? undefined : 4;
 
 export const TestSettings = () => {
   const data = ['Verify', 'Date', 'Popularity', 'Something else'];
+  const isFetching = useAppSelector(state => state.app.isFetching);
   const dispatch = useAppDispatch();
   const {navigate} = useAppNavigate();
   const {t} = useTranslation(['createQuiz', 'validationFields']);
@@ -79,6 +81,8 @@ export const TestSettings = () => {
   const disabledQuestionsSettings = Object.keys(errors).length === 0;
 
   return (
+   <>
+      {isFetching && <Loader />}
     <ViewContainer>
       <TextBox>{t('title')}</TextBox>
       <BlockBox>
@@ -136,5 +140,6 @@ export const TestSettings = () => {
         />
       </ViewCenter>
     </ViewContainer>
+     </>
   );
 };

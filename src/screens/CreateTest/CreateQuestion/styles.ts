@@ -1,5 +1,9 @@
 import styled from 'styled-components/native';
 
+export const Container = styled.View`
+  padding-bottom: 40px;
+`;
+
 export const ContainerSaveButton = styled.View`
   justify-content: center;
   margin-right: 75px;
