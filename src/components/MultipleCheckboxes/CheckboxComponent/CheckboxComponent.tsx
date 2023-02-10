@@ -13,7 +13,6 @@ export const CheckboxComponent = ({item: {value, label}, onPress}: IItem) => {
     });
     onPress(label, value, !toggleCheckbox[value]);
   };
-  console.log(toggleCheckbox);
   return (
     <BouncyCheckbox
       disableBuiltInState
