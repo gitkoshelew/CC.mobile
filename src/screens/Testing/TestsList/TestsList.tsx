@@ -22,8 +22,9 @@ export const TestsList = () => {
 
   const onPressStartTestingHandler = useCallback(
     (id: number) => {
-      navigate(ScreenList.TESTS, {screen: ScreenList.TEST_PROCESS});
-      dispatch(getQuizQuestions(id));
+      dispatch(getQuizQuestions(id))
+        .unwrap()
+        .then(() => navigate(ScreenList.TESTS, {screen: ScreenList.TEST_PROCESS}));
     },
     [dispatch, navigate],
   );
