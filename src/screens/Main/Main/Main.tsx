@@ -1,4 +1,4 @@
-import {Image, ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Image, ScrollView, TouchableOpacity, View} from 'react-native';
 import {useAppDispatch} from '@hooks/hooks';
 import {login, register} from '@src/bll/authReducer';
 import {Title, BlockBoxMarginRight} from '@src/components/ui/ReadyStyles/Boxes/index';
@@ -14,6 +14,7 @@ import {MyQuizzes} from '@src/components/MyQuizzes/index';
 import {MemoryCardsList} from '@src/components/MemoryCardsList/index';
 import {AppButton} from '@src/components/ui/AppButton/index';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
+import {styles} from '@src/screens/Main/Main/styles';
 
 export const Main = () => {
   const dispatch = useAppDispatch();
@@ -74,45 +75,3 @@ export const Main = () => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
-  aboutUser: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginBottom: 80,
-    paddingHorizontal: 20,
-  },
-  containerProfile: {
-    position: 'absolute',
-    top: -180,
-    left: 0,
-    right: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  backgroundImage: {
-    borderBottomLeftRadius: 130,
-    borderBottomRightRadius: 130,
-    width: 500,
-    height: 500,
-  },
-  profile: {
-    marginTop: 50,
-    marginBottom: 60,
-  },
-  containerBalls: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  content: {
-    flex: 1,
-    paddingLeft: 20,
-    marginBottom: 50,
-  },
-});
