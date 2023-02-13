@@ -1,5 +1,3 @@
-import {DIFFICULTY_ARRAY} from '@src/components/MyQuizzes/ListQuizzes/index';
-
 export const TestMoc = {
   id: 1,
   title: 'test',
@@ -99,6 +97,8 @@ export const quizIdMoc = {
     },
   ],
 };
+
+const DIFFICULTY_ARRAY = ['light', 'medium', 'hard']; // it's temp
 
 export const QuizzesMoc = [...Array(10)].map((el, i) => ({
   id: i,
