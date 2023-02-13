@@ -1,9 +1,10 @@
 import {quizzesAPI} from '@src/dal/quizzesAPI';
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {CreateQuizType} from '@customTypes/quizzesAPI-types';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {CreateQuizType, getQuizResponseType} from '@customTypes/quizzesAPI-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
 import {addQuestionToQuizParamType, newQuestionInQuizType} from '@customTypes/quiz-types';
 import {AxiosError} from 'axios';
+import {setStateQuiz} from '@src/bll/processReducer';
 import {setAppMessage, setIsFetching} from './appReducer';
 import {topicAPI} from '@src/dal/topicAPI';
 
@@ -54,14 +55,18 @@ export const getTopics = createAsyncThunk(
   },
 );
 
-export const getQuizzes = createAsyncThunk('quiz/getQuiz', async (_, {rejectWithValue}) => {
-  try {
-    await quizzesAPI.getQuiz();
-  } catch (e) {
-    const err = e as Error | AxiosError;
-    return rejectWithValue(err.message);
-  }
-});
+export const getQuizzes = createAsyncThunk(
+  'quiz/getQuiz',
+  async (_, {dispatch, rejectWithValue}) => {
+    try {
+      const res = await quizzesAPI.getQuiz();
+      dispatch(setStateQuizzes(res.data));
+    } catch (e) {
+      const err = e as Error | AxiosError;
+      return rejectWithValue(err.message);
+    }
+  },
+);
 
 export const createQuiz = createAsyncThunk(
   'quiz/createQuiz',
@@ -141,25 +146,33 @@ export const addQuestionToQuiz = createAsyncThunk(
 
 export const getQuizQuestions = createAsyncThunk(
   'quiz/createQuestion',
-  async (id: number, {rejectWithValue}) => {
+  async (id: number, {dispatch, rejectWithValue}) => {
     try {
       const res = await quizzesAPI.getQuizQuestions(id);
-      return res.data;
+      dispatch(setStateQuiz(res.data));
     } catch (e) {
       const err = e as Error | AxiosError;
       return rejectWithValue(err.message);
     }
   },
 );
-
-const initialState = {};
+type IQuizzes = {
+  quizzes: getQuizResponseType[];
+};
+const initialState: IQuizzes = {
+  quizzes: [],
+};
 
 const quizSlice = createSlice({
   name: 'quiz',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setStateQuizzes: (state, {payload}: PayloadAction<getQuizResponseType[]>) => {
+      state.quizzes = payload;
+    },
+  },
 });
 
 export const quizReducer = quizSlice.reducer;
 
-export const {} = quizSlice.actions;
+export const {setStateQuizzes} = quizSlice.actions;

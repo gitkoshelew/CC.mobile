@@ -5,6 +5,7 @@ import {AppButton} from '@src/components/ui/AppButton';
 import {SmallButton} from '@src/components/ui/SmallButton';
 import {CircularResultBar} from '@src/components/CircularResultBar';
 import {BlockBoxMarginLeft, SmallTitleBlack} from '../ui/ReadyStyles/Boxes';
+import {TypeAppButton} from '@customTypes/AppButtun-types';
 
 type ITestResult = {
   onClickTry: () => void;
@@ -40,10 +41,10 @@ export const TestResult = ({
       <IncorrectAnswers data={incorrectAnswers} />
       <ViewFlexCenter>
         <BlockBoxMarginLeft>
-          <AppButton title="Try again" type="primary" onPress={onClickTry} />
+          <AppButton title="Try again" type={TypeAppButton.PRIMARY} onPress={onClickTry} />
         </BlockBoxMarginLeft>
         <BlockBoxMarginLeft>
-          <AppButton title="Close" type="secondary" onPress={onClickClose} />
+          <AppButton title="Close" type={TypeAppButton.SECONDARY} onPress={onClickClose} />
         </BlockBoxMarginLeft>
       </ViewFlexCenter>
     </Container>

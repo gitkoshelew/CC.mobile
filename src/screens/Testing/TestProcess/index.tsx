@@ -13,10 +13,11 @@ import {ScreenList} from '@src/navigation/navigation';
 import {clearStateResult, setStateResult} from '@src/bll/resultReducer';
 import {getCheckedAnswers} from '@src/utils/getCheckedAnswers';
 import {progressResult} from '@src/utils/progressResult';
+import {TypeAppButton} from '@customTypes/AppButtun-types';
 
 export type ResultType = {
   id: number;
-  questionStatus: 'default' | 'active' | 'right' | 'error' | undefined;
+  questionStatus: 'default' | 'active' | 'right' | 'error';
   answer: string;
 };
 
@@ -25,12 +26,12 @@ export const TestProcess = () => {
   const dispatch = useAppDispatch();
   const resultData = useAppSelector(state => state.resultReducer.result);
   const checkedData = useAppSelector(state => state.checkReducer.options);
-  const quizIdData = useAppSelector(state => state.processReducer);
+  const quizIdData = useAppSelector(state => state.processReducer.quiz);
   const [numAnswer, setNumAnswer] = useState<number>(1);
   const [singleAnswer, setSingleAnswer] = useState<string[]>([]);
   const [isActiveRadio, setIsActiveRadio] = useState<number | undefined>(undefined);
   const checkedAnswer = getCheckedAnswers(checkedData);
-  const currentTest = quizIdData.questions.filter(e => e.id === numAnswer);
+  const currentTest = [...quizIdData.question].filter((e, index) => index + 1 === numAnswer);
   const onPressRadioHandler = useCallback((label: string, value: number) => {
     setSingleAnswer([label]);
     setIsActiveRadio(value);
@@ -38,7 +39,7 @@ export const TestProcess = () => {
   const answer = currentTest[0].type === 'single' ? singleAnswer : checkedAnswer;
   const correctAnswer = currentTest[0].content.correctAnswer;
   const type = currentTest[0].type;
-  const setNextResult = (questionStatus: ResultType['questionStatus']) => {
+  const setNextResult = (questionStatus: ResultType['questionStatus'] = 'default') => {
     dispatch(
       setStateResult({
         id: currentTest[0].id,
@@ -49,8 +50,8 @@ export const TestProcess = () => {
   };
   const onPressNextAnswer = () => {
     if (
-      numAnswer < quizIdData.questions.length &&
-      resultData.length < quizIdData.questions.length
+      numAnswer < quizIdData.question.length &&
+      resultData.length < quizIdData.question.length
     ) {
       setNextResult(progressResult({type, answer, correctAnswer}));
       setNumAnswer(numAnswer + 1);
@@ -58,8 +59,8 @@ export const TestProcess = () => {
       setIsActiveRadio(undefined);
     }
     if (
-      numAnswer === quizIdData.questions.length &&
-      resultData.length < quizIdData.questions.length
+      numAnswer === quizIdData.question.length &&
+      resultData.length < quizIdData.question.length
     ) {
       navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
       setNextResult(progressResult({type, answer, correctAnswer}));
@@ -76,19 +77,19 @@ export const TestProcess = () => {
     );
   };
   const onPressSkipAnswer = () => {
-    if (numAnswer < quizIdData.questions.length) {
+    if (numAnswer < quizIdData.question.length) {
       setNumAnswer(numAnswer + 1);
       setSingleAnswer([]);
       if (currentTest[0].type === 'single') {
       } else if (currentTest[0].type === 'multi') {
       }
-    } else if (numAnswer === quizIdData.questions.length) {
+    } else if (numAnswer === quizIdData.question.length) {
       navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
       setSingleAnswer([]);
     }
     setSkipResult();
   };
-  const progressData: ProgressType[] = [...Array(quizIdData.questions.length)].map(
+  const progressData: ProgressType[] = [...Array(quizIdData.question.length)].map(
     (_, index) => ({
       id: index + 1,
       questionStatus: 'default',
@@ -127,7 +128,7 @@ export const TestProcess = () => {
       <MainTestingContainer>
         <ViewFlexRight>
           <CountQuestionBox>
-            {numAnswer}/{quizIdData.questions.length}
+            {numAnswer}/{quizIdData.question.length}
           </CountQuestionBox>
         </ViewFlexRight>
         <ViewFlexCenter>
@@ -141,8 +142,8 @@ export const TestProcess = () => {
           />
         </ViewFlexCenter>
         <ButtonsBox>
-          <AppButton title="Skip" type="secondary" onPress={onPressSkipAnswer} />
-          <AppButton title="Next" type="primary" onPress={onPressNextAnswer} />
+          <AppButton title="Skip" type={TypeAppButton.PRIMARY} onPress={onPressSkipAnswer} />
+          <AppButton title="Next" type={TypeAppButton.PRIMARY} onPress={onPressNextAnswer} />
         </ButtonsBox>
       </MainTestingContainer>
     </ViewContainer>

@@ -3,15 +3,17 @@ import {styles} from './styles';
 import {AppButton} from '../ui/AppButton';
 
 type ITestCard = {
-  onPress: () => void;
+  id: number;
+  onPress: (id: number) => void;
+  title: string;
 };
 
-export const TestCard = (props: ITestCard) => {
+export const TestCard = ({onPress, title, id}: ITestCard) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Node.js</Text>
-      <Text style={styles.description}>General questions about Node.js</Text>
-      <AppButton type="primary" title="Start" onPress={props.onPress} />
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.description}>Description</Text>
+      <AppButton type="primary" title="Start" onPress={() => onPress(id)} />
     </View>
   );
 };

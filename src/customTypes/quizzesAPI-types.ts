@@ -1,3 +1,5 @@
+import {questionTypeResponse} from '@customTypes/quiz-types';
+
 export type createRequestQuiz = {
   title: string;
   description: string;
@@ -21,7 +23,7 @@ export type getQuizResponseType = {
     password: string;
     status: null;
   };
-  question: [];
+  question: questionTypeResponse[];
 };
 export type addQuestionToQuiz = {
   quizId: number;

@@ -22,9 +22,7 @@ exports[`Should render testCard list 1`] = `
         "fontWeight": "600",
       }
     }
-  >
-    Node.js
-  </Text>
+  />
   <Text
     style={
       {
@@ -34,7 +32,7 @@ exports[`Should render testCard list 1`] = `
       }
     }
   >
-    General questions about Node.js
+    Description
   </Text>
   <View
     style={
