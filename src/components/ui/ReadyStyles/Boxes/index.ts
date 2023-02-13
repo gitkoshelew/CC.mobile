@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled, {css} from 'styled-components/native';
 import {Color} from '@theme/colors';
 
 const BlockBox = styled.View`
@@ -92,6 +92,23 @@ const RightBlockBox = styled.View`
 
 const ContainerDynamicWidth = styled.View<{width: string}>`
   width: ${props => props.width};
+`;
+
+export const CustomText = styled.Text<{
+  fs: string;
+  fw?: string;
+  color?: Color;
+  m?: string;
+}>`
+  font-size: ${props => props.fs};
+  color: ${props => Color.Black && props.color};
+  font-weight: ${props => (props.fw ? props.fw : 'normal')};
+  font-family: 'Montserrat-Regular';
+  ${props =>
+    props.m &&
+    css`
+      margin: ${props.m};
+    `}
 `;
 
 export {

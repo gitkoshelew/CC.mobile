@@ -12,7 +12,13 @@ enum Color {
   GrayStrongDark = '#49454F',
   Green = '#5fbb64',
   Semitransparent = 'rgba(255, 255, 255, 0.17)',
+  Transparent = 'rgba(28,0,255,0)',
   GreenLight = '#acda87',
   Yellow = '#ffd606',
+  Lightpink = '#ffb6c1',
+  LightGreen = '#63ce63',
+  Violet = '#ee82ee',
+  LightSalmon = '#ffa07a',
+  LightSeagreen = '#20b2aa',
 }
 export {Color};

@@ -1,10 +1,10 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers';
 import {ScreenList} from '@src/navigation/navigation';
-import {Main} from './Main';
 import {SignUp} from './SignUp';
 import {FormSignIn} from '@src/components/FormSignIn';
 import {RootHomeScreenParamsList} from '@src/customTypes/navigation-types';
+import {Main} from '@src/screens/Main/Main/Main';
 
 const {Navigator, Screen} = createNativeStackNavigator<RootHomeScreenParamsList>();
 

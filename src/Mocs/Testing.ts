@@ -97,3 +97,70 @@ export const quizIdMoc = {
     },
   ],
 };
+
+const DIFFICULTY_ARRAY = ['light', 'medium', 'hard']; // it's temp
+
+export const QuizzesMoc = [...Array(10)].map((el, i) => ({
+  id: i,
+  title: 'Node',
+  difficulty: DIFFICULTY_ARRAY[Math.floor(Math.random() * DIFFICULTY_ARRAY.length)],
+  questions: [
+    {
+      id: 1,
+      title: 'Which of the following is a core module in Node?',
+      content: {
+        options: ['webpack', 'crypto', 'request', 'chalk'],
+        correctAnswer: ['crypto'],
+      },
+      type: 'single',
+      difficulty: 'medium',
+      description: 'that test will show us ur power in Node js',
+      timer: 9,
+      topicId: 1,
+      moderationId: 1,
+    },
+    {
+      id: 2,
+      title: 'what is 2 plus 2 ?',
+      content: {
+        options: ['eight minus four', 'three', 'five', 'four'],
+        correctAnswer: ['four', 'eight minus four'],
+      },
+      type: 'multi',
+      difficulty: 'light',
+      description: 'that test will show us ur power in Node js',
+      timer: 17,
+      topicId: 1,
+      moderationId: 1,
+    },
+    {
+      id: 3,
+      title: 'true - What data type is it ?',
+      content: {
+        options: ['number', 'boolean', 'null', 'string'],
+        correctAnswer: ['boolean'],
+      },
+      type: 'single',
+      difficulty: 'light',
+      description: 'that test will show us ur power in Node js',
+      timer: 130,
+      topicId: 1,
+      moderationId: 1,
+    },
+    {
+      id: 4,
+      title: '"true" - What data type is it ?',
+      content: {
+        options: ['number', 'boolean', 'null', 'string'],
+        correctAnswer: ['boolean', 'string'],
+      },
+      type: 'multi',
+      difficulty: 'light',
+      description: 'that test will show us ur power in Node js',
+      timer: 13,
+      topicId: 1,
+      moderationId: 1,
+    },
+  ],
+  // countQuestion: [...Array(Math.floor(Math.random() * (30 - 10) + 10))],
+}));
