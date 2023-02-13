@@ -31,7 +31,7 @@ export const Main = () => {
         <View style={styles.containerProfile}>
           <Image
             style={styles.backgroundImage}
-            source={require('../../assets/images/background-second.png')}
+            source={require('../../../assets/images/background-second.png')}
             resizeMode="stretch"
           />
         </View>
