@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 type StylesPropsType = 'row' | 'column';
 
-export const styles = (props?: StylesPropsType) =>
+export const getStyles = (props?: StylesPropsType) =>
   StyleSheet.create({
     wrapper: {
       paddingRight: 20,

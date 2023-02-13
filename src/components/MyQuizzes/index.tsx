@@ -4,13 +4,13 @@ import {styles} from '@src/components/MyQuizzes/styles';
 import {ListQuizzes} from '@src/components/MyQuizzes/ListQuizzes/index';
 import {CustomText} from '@src/components/ui/ReadyStyles/Boxes/index';
 
-export const MyQuizzes = () => {
-  const listImages = [
-    require('../../assets/images/light.jpeg'),
-    require('../../assets/images/medium.jpeg'),
-    require('../../assets/images/hard.jpeg'),
-  ];
+const listImages = [
+  require('../../assets/images/light.jpeg'),
+  require('../../assets/images/medium.jpeg'),
+  require('../../assets/images/hard.jpeg'),
+];
 
+export const MyQuizzes = () => {
   return (
     <>
       <View style={styles.container}>

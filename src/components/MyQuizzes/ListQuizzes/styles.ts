@@ -25,7 +25,6 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
     alignItems: 'center',
-    opacity: 0.7,
     justifyContent: 'space-around',
   },
   title: {
@@ -43,12 +42,11 @@ export const styles = StyleSheet.create({
   description: {
     color: Color.White,
     fontSize: 16,
-    fontWeight: 'bold',
     shadowOffset: {
       width: 0,
       height: 4,
     },
     shadowOpacity: 0.8,
-    elevation: 8,
+    fontWeight: 'bold',
   },
 });

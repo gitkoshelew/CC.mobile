@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {randomColors} from '@src/utils/randomColor';
+import {randomColors} from '@src/utils/getRandomColors';
 
 type stylesPropsType = {
   blockStructure?: 'row' | 'column';
