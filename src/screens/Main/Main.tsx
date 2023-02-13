@@ -1,11 +1,18 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {CustomTextInput} from '@src/components/ui/CustomTextInput/index';
-import {AppButton} from '@src/components/ui/AppButton/index';
+import {Image, ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useAppDispatch} from '@hooks/hooks';
 import {login, register} from '@src/bll/authReducer';
-import {BlockBoxMarginRight} from '@src/components/ui/ReadyStyles/Boxes/index';
-import {ViewFlexForTwoElements} from '@src/components/ui/ReadyStyles/Containers/index';
+import {Title, BlockBoxMarginRight} from '@src/components/ui/ReadyStyles/Boxes/index';
+import {
+  ViewCenter,
+  ViewFlexForTwoElements,
+} from '@src/components/ui/ReadyStyles/Containers/index';
+import {UserIconContainer} from '@src/components/Header/styles';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {LateralBall} from '@src/components/LateralBall/index';
+import {CentralBall} from '@src/components/CentralBall/index';
+import {MyQuizzes} from '@src/components/MyQuizzes/index';
+import {MemoryCardsList} from '@src/components/MemoryCardsList/index';
+import {AppButton} from '@src/components/ui/AppButton/index';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
 
 export const Main = () => {
@@ -18,35 +25,94 @@ export const Main = () => {
   };
 
   return (
-    <SafeAreaView style={styles.box}>
-      <View style={styles.inputBox}>
-        <CustomTextInput onChangeText={() => {}} value={'Hello world'} />
-      </View>
-      <ViewFlexForTwoElements>
-        <BlockBoxMarginRight>
-          <TouchableOpacity>
-            <AppButton title="login" type={TypeAppButton.PRIMARY} onPress={onPressLogin} />
-          </TouchableOpacity>
-        </BlockBoxMarginRight>
-        <TouchableOpacity>
-          <AppButton
-            title="registration"
-            type={TypeAppButton.PRIMARY}
-            onPress={onPressRegister}
+    <ScrollView style={styles.wrapper}>
+      <View style={styles.aboutUser}>
+        <View style={styles.containerProfile}>
+          <Image
+            style={styles.backgroundImage}
+            source={require('../../assets/images/background-second.png')}
+            resizeMode="stretch"
           />
-        </TouchableOpacity>
-      </ViewFlexForTwoElements>
-    </SafeAreaView>
+        </View>
+        <View style={styles.profile}>
+          <View>
+            <ViewCenter>
+              <UserIconContainer>
+                <FontAwesome name={'user'} size={80} />
+              </UserIconContainer>
+              <ViewCenter>
+                <Title>User Name</Title>
+              </ViewCenter>
+            </ViewCenter>
+          </View>
+        </View>
+        <View style={styles.containerBalls}>
+          <LateralBall value="73%" description="Success" />
+          <CentralBall value={99} description="Quizzes" />
+          <LateralBall value="1" description="Ranks" />
+        </View>
+      </View>
+
+      <View style={styles.content}>
+        <MyQuizzes />
+        <MemoryCardsList />
+        <ViewFlexForTwoElements>
+          <BlockBoxMarginRight>
+            <TouchableOpacity>
+              <AppButton title="login" type={TypeAppButton.PRIMARY} onPress={onPressLogin} />
+            </TouchableOpacity>
+          </BlockBoxMarginRight>
+          <TouchableOpacity>
+            <AppButton
+              title="registration"
+              type={TypeAppButton.PRIMARY}
+              onPress={onPressRegister}
+            />
+          </TouchableOpacity>
+        </ViewFlexForTwoElements>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  box: {
-    height: '100%',
+  wrapper: {
+    flex: 1,
+  },
+  aboutUser: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: 80,
+    paddingHorizontal: 20,
+  },
+  containerProfile: {
+    position: 'absolute',
+    top: -180,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backgroundImage: {
+    borderBottomLeftRadius: 130,
+    borderBottomRightRadius: 130,
+    width: 500,
+    height: 500,
+  },
+  profile: {
+    marginTop: 50,
+    marginBottom: 60,
+  },
+  containerBalls: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     width: '100%',
   },
-  inputBox: {
-    width: 130,
-    marginBottom: 20,
+  content: {
+    flex: 1,
+    paddingLeft: 20,
+    marginBottom: 50,
   },
 });

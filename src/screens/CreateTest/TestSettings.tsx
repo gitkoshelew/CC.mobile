@@ -81,65 +81,65 @@ export const TestSettings = () => {
   const disabledQuestionsSettings = Object.keys(errors).length === 0;
 
   return (
-   <>
+    <>
       {isFetching && <Loader />}
-    <ViewContainer>
-      <TextBox>{t('title')}</TextBox>
-      <BlockBox>
-        <TextInputHookForm
-          name="title"
-          control={control}
-          rules={{
-            required: `${t('title.required', {ns: 'validationFields'})}`,
-            minLength: {
-              value: 3,
-              message: `${t('title.minLength', {ns: 'validationFields'})}`,
-            },
-            maxLength: {
-              value: 20,
-              message: `${t('title.maxLength', {ns: 'validationFields'})}`,
-            },
-          }}
-        />
-      </BlockBox>
-      <TextBox>{t('description')}</TextBox>
-      <BlockBox>
-        <TextInputHookForm
-          name="description"
-          control={control}
-          rules={{
-            required: `${t('description.required', {ns: 'validationFields'})}`,
-            maxLength: {
-              value: 50,
-              message: `${t('description.maxLength', {ns: 'validationFields'})}`,
-            },
-          }}
-          multiline
-          textAlignVertical={'top'}
-          numberOfLines={numberOfLines}
-          height={Platform.OS === 'ios' ? '100px' : undefined}
-        />
-      </BlockBox>
-      <TextBox>{t('topic')}</TextBox>
-      <BlockBox>
-        <AppSelect size="m" data={data} type="primary" onSelect={selectsThemePressed} />
-      </BlockBox>
-      <TextBox>{t('numberOfQuestions')}</TextBox>
-      <BlockBox>
-        <SwitchSelectors
-          type={TypeSwitchSelect.NUMBER}
-          onPress={selectsNumberQuestionsPressed}
-        />
-      </BlockBox>
-      <ViewCenter>
-        <AppButton
-          title={t('questionSettings')}
-          type={TypeAppButton.PRIMARY}
-          onPress={handleSubmit(onPressQuestionsSettings)}
-          disabled={!disabledQuestionsSettings}
-        />
-      </ViewCenter>
-    </ViewContainer>
-     </>
+      <ViewContainer>
+        <TextBox>{t('title')}</TextBox>
+        <BlockBox>
+          <TextInputHookForm
+            name="title"
+            control={control}
+            rules={{
+              required: `${t('title.required', {ns: 'validationFields'})}`,
+              minLength: {
+                value: 3,
+                message: `${t('title.minLength', {ns: 'validationFields'})}`,
+              },
+              maxLength: {
+                value: 20,
+                message: `${t('title.maxLength', {ns: 'validationFields'})}`,
+              },
+            }}
+          />
+        </BlockBox>
+        <TextBox>{t('description')}</TextBox>
+        <BlockBox>
+          <TextInputHookForm
+            name="description"
+            control={control}
+            rules={{
+              required: `${t('description.required', {ns: 'validationFields'})}`,
+              maxLength: {
+                value: 50,
+                message: `${t('description.maxLength', {ns: 'validationFields'})}`,
+              },
+            }}
+            multiline
+            textAlignVertical={'top'}
+            numberOfLines={numberOfLines}
+            height={Platform.OS === 'ios' ? '100px' : undefined}
+          />
+        </BlockBox>
+        <TextBox>{t('topic')}</TextBox>
+        <BlockBox>
+          <AppSelect size="m" data={data} type="primary" onSelect={selectsThemePressed} />
+        </BlockBox>
+        <TextBox>{t('numberOfQuestions')}</TextBox>
+        <BlockBox>
+          <SwitchSelectors
+            type={TypeSwitchSelect.NUMBER}
+            onPress={selectsNumberQuestionsPressed}
+          />
+        </BlockBox>
+        <ViewCenter>
+          <AppButton
+            title={t('questionSettings')}
+            type={TypeAppButton.PRIMARY}
+            onPress={handleSubmit(onPressQuestionsSettings)}
+            disabled={!disabledQuestionsSettings}
+          />
+        </ViewCenter>
+      </ViewContainer>
+    </>
   );
 };
