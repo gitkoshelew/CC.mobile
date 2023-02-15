@@ -67,7 +67,6 @@ export const getQuizzes = createAsyncThunk(
     }
   },
 );
-
 export const createQuiz = createAsyncThunk(
   'quiz/createQuiz',
   async (param: CreateQuizType, {dispatch, rejectWithValue}) => {
@@ -150,6 +149,18 @@ export const getQuizQuestions = createAsyncThunk(
     try {
       const res = await quizzesAPI.getQuizQuestions(id);
       dispatch(setStateQuiz(res.data));
+    } catch (e) {
+      const err = e as Error | AxiosError;
+      return rejectWithValue(err.message);
+    }
+  },
+);
+export const deleteQuizQuestions = createAsyncThunk(
+  'quiz/deleteQuizQuestions',
+  async (id: number, {dispatch, rejectWithValue}) => {
+    try {
+      await quizzesAPI.deleteQuizQuestions(id);
+      dispatch(getQuizzes());
     } catch (e) {
       const err = e as Error | AxiosError;
       return rejectWithValue(err.message);

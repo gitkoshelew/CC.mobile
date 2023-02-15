@@ -24,8 +24,8 @@ export const SwitchSelectors = ({onPress, type, value}: ISwitchSelectProps) => {
             {label: '30', value: '30'},
           ]
         : [
-            {label: 'My', value: 'My'},
             {label: 'All', value: 'All'},
+            {label: 'My', value: 'My'},
           ],
     [type],
   );

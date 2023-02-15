@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {Color} from '@theme/colors';
+import {LIST_ITEM_HEIGHT} from '@src/components/MyTestCards/index';
 
 export const styles = StyleSheet.create({
   container: {
@@ -12,7 +13,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: Color.White,
     height: 71,
-    marginVertical: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
     borderRadius: 10,
@@ -33,5 +33,18 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: Color.Black,
     fontWeight: '500',
+  },
+  iconContainer: {
+    width: 70,
+    height: LIST_ITEM_HEIGHT,
+    position: 'absolute',
+    right: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconUser: {
+    position: 'absolute',
+    left: 2,
+    top: 2,
   },
 });
