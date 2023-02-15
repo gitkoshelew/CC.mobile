@@ -6,21 +6,18 @@ import {FilterBlock} from './styles';
 import {useCallback, useEffect, useRef} from 'react';
 import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
-import {
-  deleteQuizQuestions,
-  getQuizQuestions,
-  getQuizzes,
-  setStateQuizzes,
-} from '@src/bll/quizReducer';
+import {deleteQuiz, getQuizQuestions, getQuizzes, setStateQuizzes} from '@src/bll/quizReducer';
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {MyTestCards} from '@src/components/MyTestCards';
 import {ScrollView} from 'react-native-gesture-handler';
 import {TestCard} from '@src/components/TestCard';
 import {getAuth} from '@src/bll/authReducer';
+import {Loader} from '@src/components/ui/Loader';
 
 export const TestsList = () => {
   const {navigate} = useAppNavigate();
   const dispatch = useAppDispatch();
+  const isFetching = useAppSelector(state => state.app.isFetching);
   const quizzesData = useAppSelector(state => state.quizReducer.quizzes);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
   const quizzes = quizzesData.map(quiz => ({
@@ -28,10 +25,10 @@ export const TestsList = () => {
     title: quiz.title,
     authorId: quiz.authorId,
   }));
-  const myQuizzes = quizzesData.filter(quiz => quiz.authorId === authorId);
+  const myQuizzes = [...quizzesData].filter(quiz => quiz.authorId === authorId);
   const onDismiss = useCallback(
     (id: number) => {
-      dispatch(deleteQuizQuestions(id));
+      dispatch(deleteQuiz(id));
     },
     [dispatch],
   );
@@ -61,28 +58,40 @@ export const TestsList = () => {
   }, [dispatch]);
 
   return (
-    <View>
-      <Tabs />
-      <FilterBlock>
-        <View style={styles.container}>
-          <SwitchSelectors type={TypeSwitchSelect.FILTER} onPress={handlerSwitchSelectors} />
-        </View>
-        <Sort />
-      </FilterBlock>
-      <ScrollView style={styles.scroll}>
-        {quizzes.map(test => {
-          if (authorId !== undefined) {
-            if (test.authorId === authorId) {
-              return (
-                <MyTestCards
-                  key={test.id}
-                  onPress={onPressStartTestingHandler}
-                  title={test.title}
-                  id={test.id}
-                  onDismiss={onDismiss}
-                  simultaneousHandlers={scrollRef}
-                />
-              );
+    <>
+      {isFetching && <Loader />}
+      <View>
+        <Tabs />
+        <FilterBlock>
+          <View style={styles.container}>
+            <SwitchSelectors type={TypeSwitchSelect.FILTER} onPress={handlerSwitchSelectors} />
+          </View>
+          <Sort />
+        </FilterBlock>
+        <ScrollView style={styles.scroll}>
+          {quizzes.map(test => {
+            if (authorId !== undefined) {
+              if (test.authorId === authorId) {
+                return (
+                  <MyTestCards
+                    key={test.id}
+                    onPress={onPressStartTestingHandler}
+                    title={test.title}
+                    id={test.id}
+                    onDismiss={onDismiss}
+                    simultaneousHandlers={scrollRef}
+                  />
+                );
+              } else {
+                return (
+                  <TestCard
+                    key={test.id}
+                    onPress={onPressStartTestingHandler}
+                    title={test.title}
+                    id={test.id}
+                  />
+                );
+              }
             } else {
               return (
                 <TestCard
@@ -93,19 +102,10 @@ export const TestsList = () => {
                 />
               );
             }
-          } else {
-            return (
-              <TestCard
-                key={test.id}
-                onPress={onPressStartTestingHandler}
-                title={test.title}
-                id={test.id}
-              />
-            );
-          }
-        })}
-      </ScrollView>
-    </View>
+          })}
+        </ScrollView>
+      </View>
+    </>
   );
 };
 

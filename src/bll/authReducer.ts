@@ -33,9 +33,9 @@ export const register = createAsyncThunk(
 );
 
 export const login = createAsyncThunk('auth/login', async (_, {dispatch, rejectWithValue}) => {
+  dispatch(setIsFetching(true));
   try {
     await authAPI.login();
-    dispatch(setIsFetching(true));
     dispatch(
       setAppMessage({
         text: 'Sign in is successful',

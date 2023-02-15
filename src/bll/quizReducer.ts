@@ -58,8 +58,10 @@ export const getTopics = createAsyncThunk(
 export const getQuizzes = createAsyncThunk(
   'quiz/getQuiz',
   async (_, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
     try {
       const res = await quizzesAPI.getQuiz();
+      dispatch(setIsFetching(false));
       dispatch(setStateQuizzes(res.data));
     } catch (e) {
       const err = e as Error | AxiosError;
@@ -70,7 +72,6 @@ export const getQuizzes = createAsyncThunk(
 export const createQuiz = createAsyncThunk(
   'quiz/createQuiz',
   async (param: CreateQuizType, {dispatch, rejectWithValue}) => {
-    dispatch(setIsFetching(true));
     try {
       const res = await quizzesAPI.createQuiz(param);
       dispatch(
@@ -155,12 +156,13 @@ export const getQuizQuestions = createAsyncThunk(
     }
   },
 );
-export const deleteQuizQuestions = createAsyncThunk(
-  'quiz/deleteQuizQuestions',
+export const deleteQuiz = createAsyncThunk(
+  'quiz/deleteQuiz',
   async (id: number, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
     try {
-      await quizzesAPI.deleteQuizQuestions(id);
-      dispatch(getQuizzes());
+      await quizzesAPI.deleteQuiz(id);
+      dispatch(setIsFetching(false));
     } catch (e) {
       const err = e as Error | AxiosError;
       return rejectWithValue(err.message);
