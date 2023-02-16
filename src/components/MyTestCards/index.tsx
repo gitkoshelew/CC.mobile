@@ -67,9 +67,7 @@ export const MyTestCards = ({
     ],
   }));
   const rIconContainerStyle = useAnimatedStyle(() => {
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    const opacity = withTiming(translateX.value < TRANSLATE_X_THRESHOLD ? 1 : 0);
-    return {opacity};
+    return {opacity: withTiming(translateX.value < TRANSLATE_X_THRESHOLD ? 1 : 0)};
   });
 
   const rTaskContainerStyle = useAnimatedStyle(() => {
@@ -89,12 +87,6 @@ export const MyTestCards = ({
         onGestureEvent={panGesture}
         simultaneousHandlers={simultaneousHandlers}>
         <Animated.View style={[styles.test, rStyle]}>
-          <Icon
-            name="user-circle-o"
-            size={20}
-            color={Color.LightSeagreen}
-            style={styles.iconUser}
-          />
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.description}>Description</Text>
           <AppButton type={TypeAppButton.PRIMARY} title="Start" onPress={() => onPress(id)} />

@@ -69,40 +69,25 @@ export const TestsList = () => {
           <Sort />
         </FilterBlock>
         <ScrollView style={styles.scroll}>
-          {quizzes.map(test => {
-            if (authorId !== undefined) {
-              if (test.authorId === authorId) {
-                return (
-                  <MyTestCards
-                    key={test.id}
-                    onPress={onPressStartTestingHandler}
-                    title={test.title}
-                    id={test.id}
-                    onDismiss={onDismiss}
-                    simultaneousHandlers={scrollRef}
-                  />
-                );
-              } else {
-                return (
-                  <TestCard
-                    key={test.id}
-                    onPress={onPressStartTestingHandler}
-                    title={test.title}
-                    id={test.id}
-                  />
-                );
-              }
-            } else {
-              return (
-                <TestCard
-                  key={test.id}
-                  onPress={onPressStartTestingHandler}
-                  title={test.title}
-                  id={test.id}
-                />
-              );
-            }
-          })}
+          {quizzes.map(test =>
+            test.authorId === authorId ? (
+              <MyTestCards
+                key={test.id}
+                onPress={onPressStartTestingHandler}
+                title={test.title}
+                id={test.id}
+                onDismiss={onDismiss}
+                simultaneousHandlers={scrollRef}
+              />
+            ) : (
+              <TestCard
+                key={test.id}
+                onPress={onPressStartTestingHandler}
+                title={test.title}
+                id={test.id}
+              />
+            ),
+          )}
         </ScrollView>
       </View>
     </>

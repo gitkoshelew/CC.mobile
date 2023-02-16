@@ -12,6 +12,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 15,
     backgroundColor: Color.White,
+    borderRightColor: Color.BlueLight,
+    borderRightWidth: 5,
     height: 71,
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -41,10 +43,5 @@ export const styles = StyleSheet.create({
     right: '10%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  iconUser: {
-    position: 'absolute',
-    left: 2,
-    top: 2,
   },
 });
