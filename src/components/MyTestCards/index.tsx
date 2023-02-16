@@ -26,7 +26,7 @@ interface ITestCard extends Pick<PanGestureHandlerProps, 'simultaneousHandlers'>
 export const LIST_ITEM_HEIGHT = 70;
 
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
-const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.2;
+const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.3;
 
 export const MyTestCards = ({
   onPress,
