@@ -19,9 +19,9 @@ export type newQuestionType = {
   title: string;
   description: string;
   content: answersType;
-  difficulty: Difficulty;
+  difficulty: string;
   timer: number;
-  type: TypeOptions;
+  type: string;
   topicId: number;
 };
 
@@ -105,6 +105,6 @@ export type authorType = {
 };
 
 export type addQuestionToQuizParamType = {
-  moderationId: number;
+  quizId: number;
   questionId: number;
 };

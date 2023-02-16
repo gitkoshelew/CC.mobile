@@ -26,7 +26,7 @@ export type getQuizResponseType = {
   question: questionTypeResponse[];
 };
 export type addQuestionToQuiz = {
-  moderationId: number;
+  quizId: number;
   questionId: number;
 };
 

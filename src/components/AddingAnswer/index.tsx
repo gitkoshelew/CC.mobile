@@ -8,14 +8,14 @@ import {Color} from '@theme/colors';
 import {useCallback, useEffect, useState} from 'react';
 import {Control, Controller, useWatch} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
-import {InputsFieldType} from '@src/screens/CreateQuiz/QuestionsSettings/CreateQuestion/index';
+import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
 
 type AddingAnswerPropsType = {
   index: number;
   option: string;
   correctAnswer: string[];
   type: string;
-  control: Control<InputsFieldType>;
+  control: Control<CreateQuestionFieldType>;
   isDisabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
   onPressCorrectAnswer: (index: number, checked: boolean, textOption: string) => void;
@@ -56,11 +56,11 @@ export const AddingAnswer = ({
       setInputWhichCorrect('');
     }
   }, [index, inputWhichCorrect, isCurrentOptionText, onPressCorrectAnswer]);
-
+  console.log(props.type);
+  console.log(props.correctAnswer);
   useEffect(() => {
     setIsChecked(props.correctAnswer.includes(isCurrentOptionText));
   }, [isCurrentOptionText, props.correctAnswer, props.option]);
-
   const disabledCheckbox =
     props.type === 'single'
       ? (!isChecked && props.correctAnswer.length) || !isCurrentOptionText

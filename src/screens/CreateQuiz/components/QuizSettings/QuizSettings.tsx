@@ -3,27 +3,26 @@ import {BlockBox, TextBox} from '@src/components/ui/ReadyStyles/Boxes';
 import {ViewCenter, ViewContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {AppButton} from '@src/components/ui/AppButton';
 import {AppSelect} from '@src/components/ui/AppSelect';
-import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {useCallback, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
 import {useTranslation} from 'react-i18next';
 import {TextInputWithLabel} from '@src/components/TextInputWithLabel/index';
-import {QuestionsSettingsType} from '@src/screens/CreateQuiz/components/QuizSettings/QuizSettingsContainer';
+import {SwitchSelectorsHookForm} from '@src/components/SwitchSelectorsHookForm/index';
 
 export type SelectorsType = {
-  theme: string;
-  numberQuestions: number;
+  topic: string;
 };
 
 export type CreateQuizFieldType = {
   title: string;
   description: string;
+  numberOfQuestions: string;
 };
 
 type QuizSettingsPropsType = {
-  onQuestionsSettings: (value: QuestionsSettingsType) => {};
+  onQuestionsSettings: (value: CreateQuizFieldType) => {};
 };
 
 const numberOfLines = Platform.OS === 'ios' ? undefined : 4;
@@ -31,35 +30,24 @@ const numberOfLines = Platform.OS === 'ios' ? undefined : 4;
 export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
   const data = ['Verify', 'Date', 'Popularity', 'Something else'];
   const {t} = useTranslation(['createQuiz', 'validationFields']);
-  const [selectorsData, setSelectorsData] = useState<SelectorsType>({
-    theme: 'Verify',
-    numberQuestions: 10,
-  });
+  const [topic, setTopic] = useState<string>('Verify');
 
   const {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm<CreateQuizFieldType>();
-
-  const selectsThemePressed = useCallback(
-    (value: string) => {
-      setSelectorsData({...selectorsData, theme: value});
+  } = useForm<CreateQuizFieldType>({
+    defaultValues: {
+      numberOfQuestions: '10',
     },
-    [selectorsData],
-  );
+  });
 
-  const selectsNumberQuestionsPressed = useCallback(
-    (value: string) => {
-      setSelectorsData({...selectorsData, numberQuestions: Number(value)});
-    },
-    [selectorsData],
-  );
-  const onPressQuestionsSettings = async (values: CreateQuizFieldType) => {
-    onQuestionsSettings({
-      valuesFields: values,
-      numberOfQuestions: selectorsData.numberQuestions,
-    });
+  const handlerSelectsTopic = useCallback((value: string) => {
+    setTopic(value);
+  }, []);
+
+  const onPressQuestionsSettings = async (valuesField: CreateQuizFieldType) => {
+    onQuestionsSettings(valuesField);
   };
 
   const disabledQuestionsSettings = Object.keys(errors).length === 0;
@@ -100,13 +88,20 @@ export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
       />
       <TextBox>{t('topic')}</TextBox>
       <BlockBox>
-        <AppSelect size="m" data={data} type="primary" onSelect={selectsThemePressed} />
+        <AppSelect
+          value={topic}
+          size="m"
+          data={data}
+          type="primary"
+          onSelect={handlerSelectsTopic}
+        />
       </BlockBox>
-      <TextBox>{t('numberOfQuestions')}</TextBox>
       <BlockBox>
-        <SwitchSelectors
+        <SwitchSelectorsHookForm
+          label={t('numberOfQuestions')}
+          name="numberOfQuestions"
+          control={control}
           type={TypeSwitchSelect.NUMBER}
-          onPress={selectsNumberQuestionsPressed}
         />
       </BlockBox>
       <ViewCenter>

@@ -5,10 +5,10 @@ import {AddButton} from '@src/components/ui/AddButton';
 import {Control} from 'react-hook-form';
 import {TextError} from '@src/components/ui/ReadyStyles/TextError';
 import {useTranslation} from 'react-i18next';
-import {InputsFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/index';
+import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
 
 type CreateAnswerPropsType = {
-  control: Control<InputsFieldType>;
+  control: Control<CreateQuestionFieldType>;
   fields: {id: string; option: string}[];
   isCheckingDuplicate: boolean;
   type: string;

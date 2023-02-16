@@ -5,8 +5,8 @@ import {ScreenList} from '../navigation/navigation';
 
 export type RootCreateQuizParamsList = {
   [ScreenList.QUESTIONS_SET]: {
-    numberQuestions: number;
-    idNewTest: number;
+    numberOfQuestions: number;
+    idNewQuiz: number;
   };
   [ScreenList.QUIZ_SET]: undefined;
 };

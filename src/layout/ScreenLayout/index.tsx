@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Loader} from '@src/components/ui/Loader/index';
 
 type ScreenLayoutPropsType = {
@@ -9,9 +9,15 @@ type ScreenLayoutPropsType = {
 
 export const ScreenLayout = ({isFetching, children}: ScreenLayoutPropsType) => {
   return (
-    <View>
+    <View style={styles.container}>
       {isFetching && <Loader />}
       {children}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
