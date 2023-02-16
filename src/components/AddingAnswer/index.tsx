@@ -56,8 +56,7 @@ export const AddingAnswer = ({
       setInputWhichCorrect('');
     }
   }, [index, inputWhichCorrect, isCurrentOptionText, onPressCorrectAnswer]);
-  console.log(props.type);
-  console.log(props.correctAnswer);
+
   useEffect(() => {
     setIsChecked(props.correctAnswer.includes(isCurrentOptionText));
   }, [isCurrentOptionText, props.correctAnswer, props.option]);
