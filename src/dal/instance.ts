@@ -39,7 +39,7 @@ const getToken = async (config: AxiosRequestConfig) => {
 const setToken = (accessToken: string) => {
   try {
     if (accessToken) {
-      AsyncStorage.setItem('token', accessToken);
+      AsyncStorage.setItem('token', accessToken); // ?
     }
   } catch (e) {
     console.log('setToken => catch => ', e);

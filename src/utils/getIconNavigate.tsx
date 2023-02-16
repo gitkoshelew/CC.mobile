@@ -12,13 +12,13 @@ export const getIcon = (routeName: string, color?: Color, size?: number) => {
       Icon = FontAwesome;
       iconName = 'user-circle-o';
       break;
-    case 'Create test':
+    case 'Create quiz':
       iconName = 'post-add';
       break;
-    case 'Tests':
+    case 'Quizzes':
       iconName = 'format-list-bulleted';
       break;
-    case 'Live coding':
+    case 'Cards':
       Icon = FontAwesome;
       iconName = 'file-code-o';
       break;

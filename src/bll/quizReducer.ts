@@ -74,6 +74,7 @@ export const createQuiz = createAsyncThunk(
     dispatch(setIsFetching(true));
     try {
       const res = await quizzesAPI.createQuiz(param);
+      // console.log(JSON.stringify(res, null, 2));
       dispatch(
         setAppMessage({
           text: 'The test was created successfully',
@@ -99,10 +100,12 @@ export const createQuiz = createAsyncThunk(
 export const createQuestion = createAsyncThunk(
   'quiz/createQuestion',
   async (param: newQuestionInQuizType, {dispatch, rejectWithValue}) => {
-    const {quizId, ...newQuestion} = param;
+    const {...newQuestion} = param;
     try {
       const createdQuestion = await questionsAPI.createQuestion(newQuestion);
-      await dispatch(addQuestionToQuiz({quizId, questionId: createdQuestion.data.id}));
+      console.log(JSON.stringify(createdQuestion, null, 2));
+
+      // await dispatch(addQuestionToQuiz({quizId, questionId: createdQuestion.data.id}));
       dispatch(
         setAppMessage({
           text: 'The question is created',
@@ -125,10 +128,13 @@ export const createQuestion = createAsyncThunk(
 
 export const addQuestionToQuiz = createAsyncThunk(
   'quiz/addQuestionToQuiz',
-  async ({quizId, questionId}: addQuestionToQuizParamType, {dispatch, rejectWithValue}) => {
+  async (
+    {moderationId, questionId}: addQuestionToQuizParamType,
+    {dispatch, rejectWithValue},
+  ) => {
     try {
       await quizzesAPI.addQuestionToQuiz({
-        quizId,
+        moderationId,
         questionId,
       });
     } catch (e) {
@@ -150,6 +156,7 @@ export const getQuizQuestions = createAsyncThunk(
     try {
       const res = await quizzesAPI.getQuizQuestions(id);
       dispatch(setStateQuiz(res.data));
+      return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
       return rejectWithValue(err.message);

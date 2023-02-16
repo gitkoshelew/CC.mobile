@@ -3,9 +3,9 @@ import {ButtonAnswerBox, TextBox} from '@src/components/ui/ReadyStyles/Boxes';
 import {AddingAnswer} from '@src/components/AddingAnswer';
 import {AddButton} from '@src/components/ui/AddButton';
 import {Control} from 'react-hook-form';
-import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 import {TextError} from '@src/components/ui/ReadyStyles/TextError';
 import {useTranslation} from 'react-i18next';
+import {InputsFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/index';
 
 type CreateAnswerPropsType = {
   control: Control<InputsFieldType>;

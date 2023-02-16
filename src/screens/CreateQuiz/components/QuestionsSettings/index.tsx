@@ -1,22 +1,22 @@
 import {QuestionsTabs} from '@src/components/QuestionsTabs';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
-import {CreateQuestion} from '../CreateQuestion/index';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {styles} from './styles';
 import {useAppDispatch, useAppSelector} from '@hooks/hooks';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootCreateTestParamsList} from '@customTypes/navigation-types';
+import {RootCreateQuizParamsList} from '@customTypes/navigation-types';
 import {ScreenList} from '@src/navigation/navigation';
 import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
 import {getQuizQuestions} from '@src/bll/quizReducer';
 import {CustomModal} from '@src/components/ui/Modal/index';
 import {Loader} from '@src/components/ui/Loader/index';
+import {CreateQuestion} from '@src/screens/CreateQuiz/components/CreateQuestion/index';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
 export const QuestionsSettings = ({
   route,
-}: NativeStackScreenProps<RootCreateTestParamsList, ScreenList.QUESTIONS_SET>) => {
+}: NativeStackScreenProps<RootCreateQuizParamsList, ScreenList.QUESTIONS_SET>) => {
   const newQuestion = useCallback(
     () => ({
       id: Math.random(),

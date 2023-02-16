@@ -7,8 +7,8 @@ import {useForm, UseFormSetValue} from 'react-hook-form';
 import {useAppDispatch} from '@hooks/hooks';
 import {createTopic, getTopics} from '@src/bll/quizReducer';
 import {TopicType} from '@customTypes/quizzesAPI-types';
-import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
 import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
+import {InputsFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/index';
 
 type TopicQuestionPropsType = {
   setValue: UseFormSetValue<InputsFieldType>;

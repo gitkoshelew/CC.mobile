@@ -105,6 +105,6 @@ export type authorType = {
 };
 
 export type addQuestionToQuizParamType = {
-  quizId: number;
+  moderationId: number;
   questionId: number;
 };

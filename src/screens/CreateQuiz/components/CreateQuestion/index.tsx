@@ -23,18 +23,15 @@ import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
 import {transformTime} from '@src/utils/transformTime';
 import {createQuestion, getQuizQuestions} from '@src/bll/quizReducer';
 import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
-import {TopicQuestion} from '@src/screens/CreateTest/CreateQuestion/TopicQuestion/index';
-import {Container} from '@src/screens/CreateTest/CreateQuestion/styles';
+import {Container, ContainerSaveButton, NextQuestionButton} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
 import {ScreenList} from '@src/navigation/navigation';
-import {
-  ContainerSaveButton,
-  NextQuestionButton,
-} from '@src/screens/CreateTest/CreateQuestion/styles';
+
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
 import {useTranslation} from 'react-i18next';
+import {TopicQuestion} from '@src/screens/CreateQuiz/components/CreateQuestion/TopicQuestion/index';
 
 export type InputsFieldType = {
   title: string;

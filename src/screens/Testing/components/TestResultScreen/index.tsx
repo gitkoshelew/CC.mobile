@@ -2,7 +2,7 @@ import {TestResult} from '@src/components/TestResult';
 import {View} from 'react-native';
 import {styles} from './styles';
 import {ProgressBar} from '@src/components/ProgressBar';
-import {ViewBlockResult} from '@src/screens/Testing/TestProcess/styles';
+import {ViewBlockResult} from '@src/screens/Testing/components/TestProcess/styles';
 import React from 'react';
 import {ViewContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {useAppNavigate, useAppSelector} from '@hooks/hooks';
@@ -20,7 +20,7 @@ export const TestResultScreen = () => {
   }));
   const result = (100 / resultData.length) * correctData.length;
   const onClickTry = () => {
-    navigate(ScreenList.TESTS, {screen: ScreenList.TESTS_LIST});
+    navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZZES_LIST});
   };
   const onClickClose = () => {
     navigate(ScreenList.HOME, {screen: ScreenList.MAIN});

@@ -24,7 +24,7 @@ export const TestsList = () => {
     (id: number) => {
       dispatch(getQuizQuestions(id))
         .unwrap()
-        .then(() => navigate(ScreenList.TESTS, {screen: ScreenList.TEST_PROCESS}));
+        .then(() => navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_PROCESS}));
     },
     [dispatch, navigate],
   );
