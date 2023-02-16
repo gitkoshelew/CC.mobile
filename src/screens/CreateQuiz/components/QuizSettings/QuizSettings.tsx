@@ -11,10 +11,6 @@ import {useTranslation} from 'react-i18next';
 import {TextInputWithLabel} from '@src/components/TextInputWithLabel/index';
 import {SwitchSelectorsHookForm} from '@src/components/SwitchSelectorsHookForm/index';
 
-export type SelectorsType = {
-  topic: string;
-};
-
 export type CreateQuizFieldType = {
   title: string;
   description: string;
