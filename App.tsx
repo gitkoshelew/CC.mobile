@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import {useEffect} from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -7,7 +8,7 @@ import Navigation from '@src/navigation/navigation';
 import {Provider} from 'react-redux';
 import store from '@src/bll/store/store';
 import StorybookUIRoot from './.storybook/Storybook';
-import {Notification} from '@src/components/ui/Notification/index';
+import {Notification} from '@src/components/ui/Notification';
 
 const useStorybook = false;
 

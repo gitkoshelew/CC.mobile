@@ -1,8 +1,8 @@
 import {fireEvent, render} from '@testing-library/react-native';
-import {TestCard} from '../index';
+import {TestCard} from '@src/components/TestCard';
 
 test('Should render testCard list', async () => {
-  const {getByText, toJSON} = render(<TestCard onPress={() => {}} />);
+  const {getByText, toJSON} = render(<TestCard onPress={() => {}} id={1} title={'Star'} />);
   const button = getByText('Start');
   fireEvent.press(button);
   expect(toJSON()).toMatchSnapshot();
