@@ -1,21 +1,80 @@
-import {useRef, useState} from 'react';
-import {Dimensions, ImageBackground, PanResponder, Platform, ScaledSize} from 'react-native';
-import {StyleSheet, View, Animated} from 'react-native';
+import {useEffect, useRef, useState} from 'react';
+import {
+  Animated,
+  Dimensions,
+  ImageBackground,
+  PanResponder,
+  Platform,
+  ScaledSize,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {Color} from '@theme/colors';
 import {Content} from '@src/components/DraggableBottomSheet/Content/index';
+import {useAppSelector} from '@hooks/hooks';
 
-const isAuth = false;
 export const {width: WINDOW_WIDTH, height: WINDOW_HEIGHT}: ScaledSize =
   Dimensions.get('window');
-const BOTTOM_SHEET_MAX_HEIGHT = isAuth ? WINDOW_HEIGHT * 0.26 : WINDOW_HEIGHT * 0.43;
-
-const BOTTOM_SHEET_MIN_HEIGHT = WINDOW_HEIGHT * 0.03;
-const MAX_UPWARD_TRANSLATE_Y = BOTTOM_SHEET_MIN_HEIGHT - BOTTOM_SHEET_MAX_HEIGHT;
-const MAX_DOWNWARD_TRANSLATE_Y = 0;
-const DRAG_THRESHOLD = 30;
 
 export const DraggableBottomSheet = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLogForm, setIsLogForm] = useState(false);
+
+  const isAuth = useAppSelector(state => state.authReducer.isAuth);
+
+  const BOTTOM_SHEET_MAX_HEIGHT = isAuth
+    ? WINDOW_HEIGHT * 0.26
+    : isLogForm
+    ? WINDOW_HEIGHT * 0.5
+    : WINDOW_HEIGHT * 0.68;
+  const BOTTOM_SHEET_MIN_HEIGHT = WINDOW_HEIGHT * 0.03;
+  const MAX_UPWARD_TRANSLATE_Y = BOTTOM_SHEET_MIN_HEIGHT - BOTTOM_SHEET_MAX_HEIGHT;
+  const MAX_DOWNWARD_TRANSLATE_Y = 0;
+  const DRAG_THRESHOLD = 30;
+
+  const styles = StyleSheet.create({
+    container: {
+      position: 'absolute',
+      width: '100%',
+      bottom: 50,
+      flex: 1,
+    },
+    bottomSheet: {
+      position: 'absolute',
+      width: '100%',
+      height: BOTTOM_SHEET_MAX_HEIGHT,
+      bottom: BOTTOM_SHEET_MIN_HEIGHT - BOTTOM_SHEET_MAX_HEIGHT,
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
+      ...Platform.select({
+        android: {elevation: 3},
+        ios: {
+          shadowColor: Color.GrayLight,
+          shadowopacity: 1,
+          shadowRadius: 6,
+          shadowOffset: {
+            width: 2,
+            height: 2,
+          },
+        },
+      }),
+    },
+    draggableArea: {
+      width: 50,
+      height: 28,
+      alignSelf: 'center',
+      justifyContent: 'center',
+    },
+    dragHandle: {
+      width: 50,
+      height: 5,
+      backgroundColor: Color.White,
+      borderRadius: 10,
+    },
+    imageBackground: {
+      paddingHorizontal: 20,
+    },
+  });
 
   const animatedValue = useRef(new Animated.Value(0)).current;
   const lastGestureDy = useRef(0);
@@ -69,6 +128,10 @@ export const DraggableBottomSheet = () => {
     ],
   };
 
+  useEffect(() => {
+    !isAuth && setIsLogForm(true);
+  }, [isAuth]);
+
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.bottomSheet, bottomSheetAnimation]}>
@@ -79,53 +142,9 @@ export const DraggableBottomSheet = () => {
           <View style={styles.draggableArea} {...panResponder.panHandlers}>
             <View style={styles.dragHandle} />
           </View>
-          <Content isOpen={isOpen} />
+          <Content isOpen={isOpen} isLogForm={isLogForm} setIsLogForm={setIsLogForm} />
         </ImageBackground>
       </Animated.View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    width: '100%',
-    bottom: 50,
-    flex: 1,
-  },
-  bottomSheet: {
-    position: 'absolute',
-    width: '100%',
-    height: BOTTOM_SHEET_MAX_HEIGHT,
-    bottom: BOTTOM_SHEET_MIN_HEIGHT - BOTTOM_SHEET_MAX_HEIGHT,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    ...Platform.select({
-      android: {elevation: 3},
-      ios: {
-        shadowColor: Color.GrayLight,
-        shadowopacity: 1,
-        shadowRadius: 6,
-        shadowOffset: {
-          width: 2,
-          height: 2,
-        },
-      },
-    }),
-  },
-  draggableArea: {
-    width: 50,
-    height: 28,
-    alignSelf: 'center',
-    justifyContent: 'center',
-  },
-  dragHandle: {
-    width: 50,
-    height: 5,
-    backgroundColor: Color.White,
-    borderRadius: 10,
-  },
-  imageBackground: {
-    paddingHorizontal: 20,
-  },
-});

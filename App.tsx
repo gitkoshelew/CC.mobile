@@ -1,18 +1,26 @@
-import {useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import SplashScreen from 'react-native-splash-screen';
 import Navigation from '@src/navigation/navigation';
-import {Provider} from 'react-redux';
-import store from '@src/bll/store/store';
-import StorybookUIRoot from './.storybook/Storybook';
 import {Notification} from '@src/components/ui/Notification/index';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {useAppDispatch} from '@hooks/hooks';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {loginAC} from '@src/bll/authReducer';
 
-const useStorybook = false;
-
-const App = () => {
+export const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  const dispatch = useAppDispatch();
+
+  const checkToken = useCallback(async () => {
+    const value = await AsyncStorage.getItem('token');
+    if (value) {
+      dispatch(loginAC(true));
+    }
+    return;
+  }, [dispatch]);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -20,20 +28,17 @@ const App = () => {
 
   useEffect(() => {
     SplashScreen.hide();
-  }, []);
+    checkToken();
+  }, [checkToken]);
 
   return (
     <NavigationContainer>
-      <Provider store={store}>
-        <Navigation />
-        <Notification />
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-      </Provider>
+      <Navigation />
+      <Notification />
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={backgroundStyle.backgroundColor}
+      />
     </NavigationContainer>
   );
 };
-
-export default useStorybook ? StorybookUIRoot : App;
