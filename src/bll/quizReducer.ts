@@ -8,8 +8,10 @@ import {setIsFetching} from './appReducer';
 export const getQuizzes = createAsyncThunk(
   'quiz/getQuiz',
   async (_, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
     try {
       const res = await quizzesAPI.getQuiz();
+      dispatch(setIsFetching(false));
       dispatch(setStateQuizzes(res.data));
     } catch (e) {
       const err = e as Error | AxiosError;
@@ -31,6 +33,20 @@ export const getQuizQuestions = createAsyncThunk(
       return rejectWithValue(err.message);
     } finally {
       dispatch(setIsFetching(false));
+    }
+  },
+);
+
+export const deleteQuiz = createAsyncThunk(
+  'quiz/deleteQuiz',
+  async (id: number, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
+    try {
+      await quizzesAPI.deleteQuiz(id);
+      dispatch(setIsFetching(false));
+    } catch (e) {
+      const err = e as Error | AxiosError;
+      return rejectWithValue(err.message);
     }
   },
 );

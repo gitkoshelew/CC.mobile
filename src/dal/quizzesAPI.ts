@@ -11,6 +11,9 @@ export const quizzesAPI = {
   getQuizQuestions(id: number) {
     return instance.get(`/quiz/${id}`);
   },
+  deleteQuiz(id: number) {
+    return instance.delete(`/quiz/${id}`);
+  },
   addQuestionToQuiz(params: addQuestionToQuiz) {
     return instance.put('quiz/add', params);
   },
