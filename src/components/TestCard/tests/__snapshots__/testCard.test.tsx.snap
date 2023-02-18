@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render testCard list 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 10,
+        "elevation": 5,
+        "flexDirection": "row",
+        "height": 71,
+        "justifyContent": "space-between",
+        "marginVertical": 10,
+        "paddingHorizontal": 15,
+        "shadowOffset": {
+          "height": 20,
+          "width": 0,
+        },
+        "shadowOpacity": 0.1,
+        "shadowRadius": 10,
+        "width": "90%",
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#000000",
+          "fontSize": 14,
+          "fontWeight": "600",
+        }
+      }
+    >
+      Star
+    </Text>
+    <Text
+      style={
+        {
+          "color": "#000000",
+          "fontSize": 14,
+          "fontWeight": "500",
+        }
+      }
+    >
+      Description
+    </Text>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "alignItems": "center",
+            "backgroundColor": "#2D3E6B",
+            "borderRadius": 20,
+            "height": 38,
+            "justifyContent": "center",
+            "opacity": 1,
+            "paddingHorizontal": 14,
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "Montserrat-Regular",
+                "fontSize": 14,
+              },
+              {
+                "color": "#FFFFFF",
+              },
+            ]
+          }
+        >
+          Start
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
