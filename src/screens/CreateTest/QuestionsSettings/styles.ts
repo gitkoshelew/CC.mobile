@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 21,
     paddingBottom: 3,
   },
-  inner: {
+  picker: {
     flex: 1,
     justifyContent: 'space-around',
   },

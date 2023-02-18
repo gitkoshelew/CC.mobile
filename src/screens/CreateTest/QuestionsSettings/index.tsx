@@ -89,7 +89,7 @@ export const QuestionsSettings = ({
             style={styles.container}
             showsVerticalScrollIndicator={false}
             ref={scroll}>
-            <View style={styles.inner}>
+            <View style={styles.picker}>
               <QuestionsTabs
                 listQuestionsTabs={listQuestionsTabs}
                 activeTab={activeTab}

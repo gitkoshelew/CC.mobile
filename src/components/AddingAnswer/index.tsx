@@ -91,7 +91,7 @@ export const AddingAnswer = ({
           control={props.control}
         />
       </View>
-      <View style={styles.inner}>
+      <View style={styles.picker}>
         <CheckBox
           onPress={onPressCorrectAnswerHandler}
           isChecked={isChecked}

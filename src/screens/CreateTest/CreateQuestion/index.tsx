@@ -1,9 +1,9 @@
-import {Platform, ScrollView} from 'react-native';
+import {Platform, ScrollView, Text} from 'react-native';
 import {
   BlockBox,
-  BlockBoxMarginLeft,
   TextBox,
   ContainerDynamicWidth,
+  BlockDynamicMargin,
 } from '@src/components/ui/ReadyStyles/Boxes';
 import {
   ViewCenter,
@@ -11,7 +11,6 @@ import {
   ViewFlexForTwoElements,
 } from '@src/components/ui/ReadyStyles/Containers';
 import {AppSelect} from '@src/components/ui/AppSelect';
-import {TimerInput} from '@src/components/TimerInput';
 import {CreateAnswer} from './CreateAnswer/index';
 import {AppButton} from '@src/components/ui/AppButton';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
@@ -35,6 +34,7 @@ import {
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
 import {useTranslation} from 'react-i18next';
+import {TimePicker} from '@src/components/TimePicker/index';
 
 export type InputsFieldType = {
   title: string;
@@ -247,7 +247,9 @@ export const CreateQuestion = ({
       </BlockBox>
       <ViewFlexForTwoElements>
         <BlockBox>
-          <TextBox>{t('answerType')}</TextBox>
+          <BlockDynamicMargin m="0 30px 15px 0">
+            <TextBox>{t('answerType')}</TextBox>
+          </BlockDynamicMargin>
           <ContainerDynamicWidth width="117px">
             <AppSelect
               value={selectorsData.type}
@@ -258,10 +260,10 @@ export const CreateQuestion = ({
             />
           </ContainerDynamicWidth>
         </BlockBox>
-        <BlockBoxMarginLeft>
-          <TextBox>{t('timer')}</TextBox>
-          <TimerInput control={control} />
-        </BlockBoxMarginLeft>
+        <ViewDynamicFlex alignI="center" justifyC="center">
+          <Text>{t('timer')}</Text>
+          <TimePicker control={control} />
+        </ViewDynamicFlex>
       </ViewFlexForTwoElements>
       <CreateAnswer
         fields={fields}
