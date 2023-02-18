@@ -1,24 +1,32 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {AppSelect} from '@src/components/ui/AppSelect/index';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
-import {useForm, UseFormSetValue} from 'react-hook-form';
+import {
+  FieldPath,
+  FieldValues,
+  Path,
+  PathValue,
+  useForm,
+  UseFormSetValue,
+} from 'react-hook-form';
 import {useAppDispatch} from '@hooks/hooks';
 import {TopicType} from '@customTypes/quizzesAPI-types';
 import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
-import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
 import {createTopic, getTopics} from '@src/screens/CreateQuiz/services/services';
 
-type TopicQuestionPropsType = {
-  setValue: UseFormSetValue<CreateQuestionFieldType>;
+type SelectAndCreateTopicPropsType<T extends FieldValues> = {
+  setValue: UseFormSetValue<T>;
 };
 
 type InputFieldType = {
   topicName: string;
 };
 
-export const TopicQuestion = ({setValue}: TopicQuestionPropsType) => {
+export const SelectAndCreateTopic = <T extends FieldValues>({
+  setValue,
+}: SelectAndCreateTopicPropsType<T>) => {
   const dispatch = useAppDispatch();
   const {control, handleSubmit, reset} = useForm<InputFieldType>();
   const [topics, setTopics] = useState<TopicType[]>([]);
@@ -28,24 +36,28 @@ export const TopicQuestion = ({setValue}: TopicQuestionPropsType) => {
     const newTopic = await dispatch(createTopic(topicName)).unwrap();
     const allTopics = await dispatch(getTopics()).unwrap();
     setTopics(allTopics);
-    setValue('topicId', newTopic.id);
+    setValue('topicId' as FieldPath<T>, newTopic.id);
     setTopic(newTopic.title);
     reset({topicName: ''});
   };
 
-  const onSelectTopicPressed = (title: string) => {
-    const topicId = +topics.find(el => el.title === title)!.id;
-    setTopic(title);
-    setValue('topicId', topicId);
-  };
+  const onSelectTopicPressed = useCallback(
+    (title: string) => {
+      const topicId = +topics.find(el => el.title === title)!.id;
+      setTopic(title);
+      setValue('topicId' as FieldPath<T>, topicId as PathValue<T, Path<T>>);
+    },
+    [setValue, topics],
+  );
 
   useEffect(() => {
     dispatch(getTopics())
       .unwrap()
       .then(res => {
         setTopics(res);
+        setValue('topicId' as FieldPath<T>, res[0].id);
       });
-  }, [dispatch]);
+  }, [dispatch, setValue]);
 
   return (
     <View style={styles.container}>

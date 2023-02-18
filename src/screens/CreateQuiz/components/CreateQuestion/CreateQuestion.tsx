@@ -26,11 +26,11 @@ import {ScreenList} from '@src/navigation/navigation';
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
 import {useTranslation} from 'react-i18next';
-import {TopicQuestion} from '@src/screens/CreateQuiz/components/CreateQuestion/TopicQuestion/index';
 import {SwitchSelectorsHookForm} from '@src/components/SwitchSelectorsHookForm/index';
 import {AppSelectHookForm} from '@src/components/AppSelectHookForm/index';
 import {SaveQuestionValuesType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestionContainer';
 import {TimePicker} from '@src/components/TimePicker/index';
+import {SelectAndCreateTopic} from '@src/components/SelectAndCreateTopic/index';
 
 export type CreateQuestionFieldType = {
   title: string;
@@ -125,7 +125,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
     },
     [],
   );
-  console.log(JSON.stringify(props.currentQuestion, null, 2));
+
   useEffect(() => {
     reset({
       title: currentQuestion.title,
@@ -199,7 +199,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
       />
       <BlockBox>
         <TextBox>Select or create your topic</TextBox>
-        <TopicQuestion setValue={setValue} />
+        <SelectAndCreateTopic setValue={setValue} />
       </BlockBox>
       <ViewFlexForTwoElements>
         <BlockBox>
