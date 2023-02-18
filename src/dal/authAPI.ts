@@ -15,4 +15,7 @@ export const authAPI = {
       nickname: 'MaryBog',
     });
   },
+  auth() {
+    return instance.get('/auth/me');
+  },
 };

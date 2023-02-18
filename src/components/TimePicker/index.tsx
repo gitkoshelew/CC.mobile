@@ -2,16 +2,24 @@ import React, {ReactElement} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {Control, Controller} from 'react-hook-form';
-import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion/index';
+import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
 
 type TimePickerPropsType = {
-  control: Control<InputsFieldType>;
+  control: Control<CreateQuestionFieldType>;
 };
 
 export const TimePicker = ({control}: TimePickerPropsType) => {
-  const getItems = () => {
+  const getMinutesItems = () => {
     const items: ReactElement[] = [];
     for (let i = 0; i <= 59; i++) {
+      items.push(<Picker.Item testID="minutesItem" key={i} value={i} label={String(i)} />);
+    }
+    return items;
+  };
+
+  const getSecondsItems = () => {
+    const items: ReactElement[] = [];
+    for (let i = 0; i <= 59; i += 5) {
       items.push(<Picker.Item testID="minutesItem" key={i} value={i} label={String(i)} />);
     }
     return items;
@@ -32,7 +40,7 @@ export const TimePicker = ({control}: TimePickerPropsType) => {
                 itemStyle={styles.itemPicker}
                 selectedValue={value}
                 onValueChange={onChange}>
-                {getItems()}
+                {getMinutesItems()}
               </Picker>
             )}
           />
@@ -49,7 +57,7 @@ export const TimePicker = ({control}: TimePickerPropsType) => {
                 itemStyle={styles.itemPicker}
                 selectedValue={value}
                 onValueChange={onChange}>
-                {getItems()}
+                {getSecondsItems()}
               </Picker>
             )}
           />

@@ -1,10 +1,10 @@
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text} from 'react-native';
 
-export const LiveCoding = () => {
+export const CardsList = () => {
   return (
     <SafeAreaView>
-      <Text>Live coding</Text>
+      <Text>Memory Cards</Text>
     </SafeAreaView>
   );
 };

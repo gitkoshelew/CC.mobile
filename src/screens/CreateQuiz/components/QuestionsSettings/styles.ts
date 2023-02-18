@@ -10,6 +10,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 21,
     paddingBottom: 3,
   },
+  inner: {
+    flex: 1,
+    justifyContent: 'space-around',
+  },
   picker: {
     flex: 1,
     justifyContent: 'space-around',
