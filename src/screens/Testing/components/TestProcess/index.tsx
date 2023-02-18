@@ -62,7 +62,7 @@ export const TestProcess = () => {
       numAnswer === quizIdData.question.length &&
       resultData.length < quizIdData.question.length
     ) {
-      navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
+      navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_RESULT});
       setNextResult(progressResult({type, answer, correctAnswer}));
       setSingleAnswer([]);
     }
@@ -84,7 +84,7 @@ export const TestProcess = () => {
       } else if (currentTest[0].type === 'multi') {
       }
     } else if (numAnswer === quizIdData.question.length) {
-      navigate(ScreenList.TESTS, {screen: ScreenList.TEST_RESULT});
+      navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_RESULT});
       setSingleAnswer([]);
     }
     setSkipResult();

@@ -3,18 +3,18 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {NavigationProp, NavigatorScreenParams} from '@react-navigation/native';
 import {ScreenList} from '../navigation/navigation';
 
-export type RootCreateTestParamsList = {
+export type RootCreateQuizParamsList = {
   [ScreenList.QUESTIONS_SET]: {
-    numberQuestions: number;
-    idNewTest: number;
+    numberOfQuestions: number;
+    idNewQuiz: number;
   };
-  [ScreenList.TEST_SET]: undefined;
+  [ScreenList.QUIZ_SET]: undefined;
 };
 
 export type RootTestingParamsList = {
-  [ScreenList.TESTS_LIST]: undefined;
-  [ScreenList.TEST_PROCESS]: undefined;
-  [ScreenList.TEST_RESULT]: undefined;
+  [ScreenList.QUIZZES_LIST]: undefined;
+  [ScreenList.QUIZ_PROCESS]: undefined;
+  [ScreenList.QUIZ_RESULT]: undefined;
 };
 
 export type RootHomeScreenParamsList = {
@@ -23,11 +23,15 @@ export type RootHomeScreenParamsList = {
   [ScreenList.SIGN_UP]: undefined;
 };
 
+export type RootCardsScreenParamsList = {
+  [ScreenList.CARDS_LIST]: undefined;
+};
+
 export type RootStackParamList = {
   [ScreenList.HOME]: NavigatorScreenParams<RootHomeScreenParamsList>;
-  [ScreenList.CREATE_TEST]: NavigatorScreenParams<RootCreateTestParamsList>;
-  [ScreenList.TESTS]: NavigatorScreenParams<RootTestingParamsList>;
-  [ScreenList.LIVE_CODING]: undefined;
+  [ScreenList.CREATE_QUIZ]: NavigatorScreenParams<RootCreateQuizParamsList>;
+  [ScreenList.QUIZZES]: NavigatorScreenParams<RootTestingParamsList>;
+  [ScreenList.CARDS]: NavigatorScreenParams<RootCardsScreenParamsList>;
 };
 
 export type NavigationType = NativeStackNavigationProp<RootStackParamList>;
