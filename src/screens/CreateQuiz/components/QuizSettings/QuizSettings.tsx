@@ -8,7 +8,8 @@ import {TypeAppButton} from '@customTypes/AppButtun-types';
 import {useTranslation} from 'react-i18next';
 import {TextInputWithLabel} from '@src/components/TextInputWithLabel/index';
 import {SwitchSelectorsHookForm} from '@src/components/SwitchSelectorsHookForm/index';
-import {SelectAndCreateTopic} from '@src/components/SelectAndCreateTopic/index';
+import {SelectAndCreateTopicContainer} from '@src/components/SelectAndCreateTopic/SelectAndCreateTopicContainer';
+import {TextError} from '@src/components/ui/ReadyStyles/TextError';
 
 export type CreateQuizFieldType = {
   title: string;
@@ -24,27 +25,23 @@ type QuizSettingsPropsType = {
 const numberOfLines = Platform.OS === 'ios' ? undefined : 4;
 
 export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
-  // const data = ['Verify', 'Date', 'Popularity', 'Something else'];
-  // const [topic, setTopic] = useState<string>('Verify');
   const {t} = useTranslation(['createQuiz', 'validationFields']);
 
   const {
     control,
     handleSubmit,
     setValue,
+    clearErrors,
     formState: {errors},
   } = useForm<CreateQuizFieldType>({
     defaultValues: {
       numberOfQuestions: '10',
+      topicId: 0,
     },
   });
 
-  // const handlerSelectsTopic = useCallback((value: string) => {
-  //   setTopic(value);
-  // }, []);
-  const onPressQuestionsSettings = async (valuesField: CreateQuizFieldType) => {
+  const handleQuestionsSettings = async (valuesField: CreateQuizFieldType) => {
     onQuestionsSettings(valuesField);
-    console.log(valuesField);
   };
 
   const disabledQuestionsSettings = Object.keys(errors).length === 0;
@@ -85,8 +82,17 @@ export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
       />
       <BlockBox>
         <TextBox>Select or create your topic</TextBox>
-        <SelectAndCreateTopic setValue={setValue} />
+        <SelectAndCreateTopicContainer
+          control={control}
+          setValue={setValue}
+          clearErrors={clearErrors}
+        />
       </BlockBox>
+      {errors.topicId && (
+        <BlockBox>
+          <TextError>{errors.topicId.message}</TextError>
+        </BlockBox>
+      )}
       <BlockBox>
         <SwitchSelectorsHookForm
           label={t('numberOfQuestions')}
@@ -99,7 +105,7 @@ export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
         <AppButton
           title={t('questionSettings')}
           type={TypeAppButton.PRIMARY}
-          onPress={handleSubmit(onPressQuestionsSettings)}
+          onPress={handleSubmit(handleQuestionsSettings)}
           disabled={!disabledQuestionsSettings}
         />
       </ViewCenter>

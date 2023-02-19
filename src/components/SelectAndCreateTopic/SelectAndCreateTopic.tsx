@@ -1,23 +1,16 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {AppSelect} from '@src/components/ui/AppSelect/index';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
-import {
-  FieldPath,
-  FieldValues,
-  Path,
-  PathValue,
-  useForm,
-  UseFormSetValue,
-} from 'react-hook-form';
-import {useAppDispatch} from '@hooks/hooks';
+import {Control, Controller, FieldValues, Path, useForm} from 'react-hook-form';
 import {TopicType} from '@customTypes/quizzesAPI-types';
 import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
-import {createTopic, getTopics} from '@src/screens/CreateQuiz/services/services';
 
 type SelectAndCreateTopicPropsType<T extends FieldValues> = {
-  setValue: UseFormSetValue<T>;
+  mainControl: Control<T>;
+  topics: TopicType[];
+  onCreateTopic: (topicName: string) => Promise<void>;
 };
 
 type InputFieldType = {
@@ -25,49 +18,58 @@ type InputFieldType = {
 };
 
 export const SelectAndCreateTopic = <T extends FieldValues>({
-  setValue,
+  mainControl,
+  onCreateTopic,
+  topics,
 }: SelectAndCreateTopicPropsType<T>) => {
-  const dispatch = useAppDispatch();
   const {control, handleSubmit, reset} = useForm<InputFieldType>();
-  const [topics, setTopics] = useState<TopicType[]>([]);
-  const [topic, setTopic] = useState<string>();
 
-  const onCreateTopicPressed = async ({topicName}: InputFieldType) => {
-    const newTopic = await dispatch(createTopic(topicName)).unwrap();
-    const allTopics = await dispatch(getTopics()).unwrap();
-    setTopics(allTopics);
-    setValue('topicId' as FieldPath<T>, newTopic.id);
-    setTopic(newTopic.title);
-    reset({topicName: ''});
-  };
-
-  const onSelectTopicPressed = useCallback(
-    (title: string) => {
-      const topicId = +topics.find(el => el.title === title)!.id;
-      setTopic(title);
-      setValue('topicId' as FieldPath<T>, topicId as PathValue<T, Path<T>>);
+  const onPressCreateTopic = useCallback(
+    ({topicName}: InputFieldType) => {
+      onCreateTopic(topicName).then(() => {
+        reset({topicName: ''});
+      });
     },
-    [setValue, topics],
+    [onCreateTopic, reset],
   );
 
-  useEffect(() => {
-    dispatch(getTopics())
-      .unwrap()
-      .then(res => {
-        setTopics(res);
-        setValue('topicId' as FieldPath<T>, res[0].id);
-      });
-  }, [dispatch, setValue]);
+  const handlerSelectTopic = useCallback(
+    (title: string, onChange: (value: number) => void) => {
+      const topicId = topics.find(el => el.title === title)!.id;
+      onChange(topicId);
+    },
+    [topics],
+  );
+
+  const getTopicTitle = (topicId: number, arrTopics: TopicType[]) => {
+    const findTopicTitle = arrTopics.filter(el => el.id === topicId);
+    return findTopicTitle.length ? findTopicTitle[0].title : '';
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.selectContainer}>
-        <AppSelect
-          data={topics.map((el: TopicType) => el.title)}
-          size="m"
-          type="primary"
-          onSelect={onSelectTopicPressed}
-          value={topic}
+        <Controller
+          control={mainControl}
+          name={'topicId' as Path<T>}
+          render={({field: {onChange, value}}) => (
+            <AppSelect
+              value={getTopicTitle(value, topics)}
+              size="m"
+              data={topics.map((el: TopicType) => el.title)}
+              type="primary"
+              onSelect={(changedValue: string) => handlerSelectTopic(changedValue, onChange)}
+            />
+          )}
+          rules={{
+            validate: {
+              required: value => {
+                if (value === 0) {
+                  return 'Select or create topic';
+                }
+              },
+            },
+          }}
         />
       </View>
       <View style={styles.createTopicTypeContainer}>
@@ -86,7 +88,7 @@ export const SelectAndCreateTopic = <T extends FieldValues>({
           />
         </View>
         <View style={styles.button}>
-          <TouchableOpacity onPress={handleSubmit(onCreateTopicPressed)}>
+          <TouchableOpacity onPress={handleSubmit(onPressCreateTopic)}>
             <AntDesign name="pluscircleo" size={30} color={Color.BlueLight} />
           </TouchableOpacity>
         </View>

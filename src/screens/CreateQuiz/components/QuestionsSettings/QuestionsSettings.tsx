@@ -10,6 +10,7 @@ import {CreateQuestionContainer} from '@src/screens/CreateQuiz/components/Create
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
 type QuestionsSettingsPropsType = {
+  topicId: number;
   questions: questionType[];
   idNewQuiz: number;
   changeQuestions: (value: questionType[]) => void;
@@ -17,6 +18,7 @@ type QuestionsSettingsPropsType = {
 };
 
 export const QuestionsSettings = ({
+  topicId,
   questions,
   idNewQuiz,
   changeQuestions,
@@ -27,7 +29,7 @@ export const QuestionsSettings = ({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const scrollRef = useRef(null);
 
-  const currentQuestion = questions[currentQuestionIndex] || getNewQuestion();
+  const currentQuestion = questions[currentQuestionIndex] || {...getNewQuestion(), topicId};
 
   const onPressCurrentQuestionPressed = useCallback(
     (index: number) => {

@@ -1,9 +1,10 @@
-import {Platform, ScrollView, Text} from 'react-native';
+import {Platform, ScrollView, View} from 'react-native';
 import {
   BlockBox,
   ContainerDynamicWidth,
   BlockDynamicMargin,
   TextBox,
+  CustomText,
 } from '@src/components/ui/ReadyStyles/Boxes';
 import {
   ViewCenter,
@@ -30,7 +31,7 @@ import {SwitchSelectorsHookForm} from '@src/components/SwitchSelectorsHookForm/i
 import {AppSelectHookForm} from '@src/components/AppSelectHookForm/index';
 import {SaveQuestionValuesType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestionContainer';
 import {TimePicker} from '@src/components/TimePicker/index';
-import {SelectAndCreateTopic} from '@src/components/SelectAndCreateTopic/index';
+import {SelectAndCreateTopicContainer} from '@src/components/SelectAndCreateTopic/SelectAndCreateTopicContainer';
 
 export type CreateQuestionFieldType = {
   title: string;
@@ -66,12 +67,20 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
   const dataAnswerType = [TypeOptions.single, TypeOptions.multi];
   const resetNavigate = useAppNavigate().reset;
   const {t} = useTranslation(['createQuestion', 'validationFields']);
-  const {control, handleSubmit, reset, setValue} = useForm<CreateQuestionFieldType>({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    setError,
+    formState: {errors},
+  } = useForm<CreateQuestionFieldType>({
     defaultValues: {
       title: currentQuestion.title,
       description: currentQuestion.description,
       difficulty: currentQuestion.difficulty,
       type: currentQuestion.type,
+      topicId: currentQuestion.topicId,
     },
   });
   const {fields, append, remove} = useFieldArray({name: 'options', control});
@@ -101,6 +110,10 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
   }, [currentQuestionIndex, onPressCurrentQuestionPressed, scrollRef]);
 
   const onPressSaveQuestionHandler = (values: CreateQuestionFieldType) => {
+    if (values.minutes + values.seconds === 0) {
+      setError('minutes', {type: ' custom', message: 'Set the time'});
+      return;
+    }
     onSaveQuestion({valuesFields: values, correctAnswers: correctAnswers});
   };
 
@@ -137,6 +150,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
       }) as object),
       difficulty: currentQuestion.difficulty,
       type: currentQuestion.type,
+      topicId: currentQuestion.topicId,
     });
   }, [
     currentQuestion.content.options,
@@ -144,6 +158,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
     currentQuestion.difficulty,
     currentQuestion.timer,
     currentQuestion.title,
+    currentQuestion.topicId,
     currentQuestion.type,
     reset,
   ]);
@@ -199,16 +214,15 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
       />
       <BlockBox>
         <TextBox>Select or create your topic</TextBox>
-        <SelectAndCreateTopic setValue={setValue} />
+        <SelectAndCreateTopicContainer control={control} setValue={setValue} />
       </BlockBox>
       <ViewFlexForTwoElements>
-        <BlockBox>
+        <View>
           <BlockDynamicMargin m="0 30px 15px 0">
             <TextBox>{t('answerType')}</TextBox>
           </BlockDynamicMargin>
           <ContainerDynamicWidth width="117px">
             <AppSelectHookForm
-              label={t('answerType')}
               name="type"
               control={control}
               type="primary"
@@ -216,10 +230,10 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
               size="m"
             />
           </ContainerDynamicWidth>
-        </BlockBox>
+        </View>
         <ViewDynamicFlex alignI="center" justifyC="center">
-          <Text>{t('timer')}</Text>
-          <TimePicker control={control} />
+          <CustomText fs="16px">{t('timer')}</CustomText>
+          <TimePicker control={control} errors={errors.minutes?.message} />
         </ViewDynamicFlex>
       </ViewFlexForTwoElements>
       <CreateAnswer
