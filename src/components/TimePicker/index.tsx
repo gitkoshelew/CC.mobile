@@ -3,12 +3,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {Control, Controller} from 'react-hook-form';
 import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
+import {TextError} from '@src/components/ui/ReadyStyles/TextError';
 
 type TimePickerPropsType = {
   control: Control<CreateQuestionFieldType>;
+  errors: string | undefined;
 };
 
-export const TimePicker = ({control}: TimePickerPropsType) => {
+export const TimePicker = ({control, errors}: TimePickerPropsType) => {
   const getMinutesItems = () => {
     const items: ReactElement[] = [];
     for (let i = 0; i <= 59; i++) {
@@ -63,6 +65,7 @@ export const TimePicker = ({control}: TimePickerPropsType) => {
           />
         </View>
       </View>
+      {errors && <TextError>{errors}</TextError>}
     </View>
   );
 };

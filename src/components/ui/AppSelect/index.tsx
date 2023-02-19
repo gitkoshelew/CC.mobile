@@ -50,7 +50,7 @@ export const AppSelect = ({size, type, data, onSelect, value, ...props}: ISelect
       {...props}
       data={data}
       onSelect={onSelect}
-      defaultValue={value || data[0]}
+      defaultValue={value}
       buttonTextAfterSelection={selectedItem => selectedItem}
       rowTextForSelection={item => item}
       buttonStyle={containerButtonStyle}
