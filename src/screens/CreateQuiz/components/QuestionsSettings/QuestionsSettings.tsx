@@ -1,11 +1,12 @@
 import {QuestionsTabs} from '@src/components/QuestionsTabs';
 import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
-import {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {styles} from './styles';
 import {questionType} from '@customTypes/quiz-types';
 import {CustomModal} from '@src/components/ui/Modal/index';
 import {getNewQuestion} from '@src/screens/CreateQuiz/utils/getNewQuestion';
 import {CreateQuestionContainer} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestionContainer';
+import {ListQuestionsContainer} from '@src/screens/CreateQuiz/components/ListQuestions/ListQuestionsContainer';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
@@ -68,6 +69,7 @@ export const QuestionsSettings = ({
               amountFilledQuestion={questions.length}
               onPressCurrentQuestion={onPressCurrentQuestionPressed}
             />
+            <ListQuestionsContainer />
             <CreateQuestionContainer
               quizId={idNewQuiz}
               scrollRef={scrollRef}

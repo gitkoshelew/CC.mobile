@@ -15,6 +15,7 @@ const Tab = createBottomTabNavigator();
 export enum ScreenList {
   HOME = 'Home',
   CREATE_QUIZ = 'Create quiz',
+  MAIN_CREATION = 'Creation',
   QUIZZES = 'Quizzes',
   QUIZZES_LIST = 'Tests list',
   QUESTIONS_SET = 'Questions settings',

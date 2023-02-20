@@ -4,6 +4,7 @@ import {NavigationProp, NavigatorScreenParams} from '@react-navigation/native';
 import {ScreenList} from '../navigation/navigation';
 
 export type RootCreateQuizParamsList = {
+  [ScreenList.MAIN_CREATION]: undefined;
   [ScreenList.QUESTIONS_SET]: {
     numberOfQuestions: number;
     idNewQuiz: number;

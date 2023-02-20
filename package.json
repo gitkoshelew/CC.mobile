@@ -31,6 +31,7 @@
     "react-native": "0.70.6",
     "react-native-bouncy-checkbox": "3.0.6",
     "react-native-circular-progress-indicator": "^4.4.2",
+    "react-native-collapsible": "^1.6.0",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-modal": "^13.0.1",
