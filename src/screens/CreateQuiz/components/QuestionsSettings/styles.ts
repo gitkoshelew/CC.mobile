@@ -14,8 +14,16 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
   },
-  picker: {
+  tabsContainer: {
     flex: 1,
-    justifyContent: 'space-around',
+  },
+  tabBarStyle: {
+    borderRadius: 15,
+    marginBottom: 20,
+  },
+  tabBarIndicatorContainerStyle: {
+    marginLeft: 30,
+    width: 230,
+    marginBottom: 5,
   },
 });

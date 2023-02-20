@@ -1,12 +1,14 @@
 import {QuestionsTabs} from '@src/components/QuestionsTabs';
-import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
-import React, {useCallback, useRef, useState} from 'react';
+import {KeyboardAvoidingView, Platform, View} from 'react-native';
+import React, {useCallback, useState} from 'react';
 import {styles} from './styles';
 import {questionType} from '@customTypes/quiz-types';
 import {CustomModal} from '@src/components/ui/Modal/index';
 import {getNewQuestion} from '@src/screens/CreateQuiz/utils/getNewQuestion';
 import {CreateQuestionContainer} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestionContainer';
 import {ListQuestionsContainer} from '@src/screens/CreateQuiz/components/ListQuestions/ListQuestionsContainer';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {ScreenList} from '@src/navigation/navigation';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
@@ -18,6 +20,8 @@ type QuestionsSettingsPropsType = {
   numberOfQuestions: number;
 };
 
+const Tab = createMaterialTopTabNavigator();
+
 export const QuestionsSettings = ({
   topicId,
   questions,
@@ -28,7 +32,6 @@ export const QuestionsSettings = ({
   const listQuestionsTabs = [...Array(numberOfQuestions)].map((el, i) => i);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const scrollRef = useRef(null);
 
   const currentQuestion = questions[currentQuestionIndex] || {...getNewQuestion(), topicId};
 
@@ -58,10 +61,7 @@ export const QuestionsSettings = ({
           onPress={setIsModalVisible}
           text="Create a question to move on to the next one"
         />
-        <ScrollView
-          ref={scrollRef}
-          style={styles.container}
-          showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
           <View style={styles.inner}>
             <QuestionsTabs
               activeTab={currentQuestionIndex}
@@ -69,18 +69,33 @@ export const QuestionsSettings = ({
               amountFilledQuestion={questions.length}
               onPressCurrentQuestion={onPressCurrentQuestionPressed}
             />
-            <ListQuestionsContainer />
-            <CreateQuestionContainer
-              quizId={idNewQuiz}
-              scrollRef={scrollRef}
-              changeQuestions={changeQuestions}
-              currentQuestion={currentQuestion}
-              numberOfQuestions={numberOfQuestions}
-              currentQuestionIndex={currentQuestionIndex}
-              onPressCurrentQuestionPressed={onPressCurrentQuestionPressed}
-            />
+            <View style={styles.tabsContainer}>
+              <Tab.Navigator
+                screenOptions={{
+                  tabBarStyle: styles.tabBarStyle,
+                  tabBarIndicatorContainerStyle: styles.tabBarIndicatorContainerStyle,
+                }}>
+                <Tab.Screen
+                  name={ScreenList.CREATE_QUESTION}
+                  children={() => (
+                    <CreateQuestionContainer
+                      quizId={idNewQuiz}
+                      changeQuestions={changeQuestions}
+                      currentQuestion={currentQuestion}
+                      numberOfQuestions={numberOfQuestions}
+                      currentQuestionIndex={currentQuestionIndex}
+                      onPressCurrentQuestionPressed={onPressCurrentQuestionPressed}
+                    />
+                  )}
+                />
+                <Tab.Screen
+                  name={ScreenList.LIST_QUESTIONS}
+                  component={ListQuestionsContainer}
+                />
+              </Tab.Navigator>
+            </View>
           </View>
-        </ScrollView>
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
