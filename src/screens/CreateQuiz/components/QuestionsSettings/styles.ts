@@ -26,4 +26,7 @@ export const styles = StyleSheet.create({
     width: 230,
     marginBottom: 5,
   },
+  tabBarLabelStyle: {
+    fontFamily: 'Montserrat-Regular',
+  },
 });

@@ -74,6 +74,7 @@ export const QuestionsSettings = ({
                 screenOptions={{
                   tabBarStyle: styles.tabBarStyle,
                   tabBarIndicatorContainerStyle: styles.tabBarIndicatorContainerStyle,
+                  tabBarLabelStyle: styles.tabBarLabelStyle,
                 }}>
                 <Tab.Screen
                   name={ScreenList.CREATE_QUESTION}
