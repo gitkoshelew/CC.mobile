@@ -14,4 +14,19 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
   },
+  tabsContainer: {
+    flex: 1,
+  },
+  tabBarStyle: {
+    borderRadius: 15,
+    marginBottom: 5,
+  },
+  tabBarIndicatorContainerStyle: {
+    marginLeft: 30,
+    width: 230,
+    marginBottom: 5,
+  },
+  tabBarLabelStyle: {
+    fontFamily: 'Montserrat-Regular',
+  },
 });

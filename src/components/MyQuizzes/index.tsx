@@ -18,7 +18,7 @@ export const MyQuizzes = () => {
           My quizzes
         </CustomText>
         <Text style={styles.text}>Difficulty</Text>
-        <View style={styles.inner}>
+        <View style={styles.picker}>
           {listImages.map((el, i) => (
             <ImageBackground
               key={i}

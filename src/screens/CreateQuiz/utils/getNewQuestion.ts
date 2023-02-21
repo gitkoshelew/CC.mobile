@@ -11,6 +11,6 @@ export const getNewQuestion = () => ({
   difficulty: Difficulty.Easy,
   timer: 0,
   type: TypeOptions.single,
-  topicId: 1,
+  topicId: 0,
   moderationId: null,
 });

@@ -12,10 +12,10 @@ import {getQuizQuestions} from '@src/bll/quizReducer';
 export const QuestionsSettingsContainer = ({
   route,
 }: NativeStackScreenProps<RootCreateQuizParamsList, ScreenList.QUESTIONS_SET>) => {
+  const {numberOfQuestions, idNewQuiz, topicId} = route.params;
   const dispatch = useAppDispatch();
   const isFetching = useAppSelector(state => state.app.isFetching);
-  const [questions, setQuestions] = useState<questionType[]>([getNewQuestion()]);
-  const {numberOfQuestions, idNewQuiz} = route.params;
+  const [questions, setQuestions] = useState<questionType[]>([{...getNewQuestion(), topicId}]);
 
   useEffect(() => {
     dispatch(getQuizQuestions(idNewQuiz))
@@ -28,6 +28,7 @@ export const QuestionsSettingsContainer = ({
   return (
     <ScreenLayout isFetching={isFetching}>
       <QuestionsSettings
+        topicId={topicId}
         idNewQuiz={idNewQuiz}
         questions={questions}
         changeQuestions={setQuestions}

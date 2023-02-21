@@ -4,8 +4,8 @@ import {formatTimeType, transformTime} from '@src/utils/transformTime';
 type NewQuestionType = {
   title: string;
   description: string;
-  minutes: string;
-  seconds: string;
+  minutes: number;
+  seconds: number;
   topicId: number;
   difficulty: string;
   type: string;

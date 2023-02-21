@@ -1,4 +1,4 @@
-import React from 'react';
+import {useRef} from 'react';
 import {
   CreateQuestion,
   CreateQuestionFieldType,
@@ -13,7 +13,6 @@ import {transformTimeSerializer} from '@src/screens/CreateQuiz/serializer/index'
 
 export type CreateQuestionPropsType = {
   quizId: number;
-  scrollRef: React.RefObject<ScrollView>;
   changeQuestions: (value: questionType[]) => void;
   currentQuestion: questionType;
   numberOfQuestions: number;
@@ -29,7 +28,6 @@ export type SaveQuestionValuesType = {
 export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
   const {
     quizId,
-    scrollRef,
     changeQuestions,
     currentQuestion,
     numberOfQuestions,
@@ -37,6 +35,7 @@ export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
     onPressCurrentQuestionPressed,
   } = props;
   const dispatch = useAppDispatch();
+  const scrollRef = useRef(null);
 
   const handlerSaveQuestion = async (values: SaveQuestionValuesType) => {
     const {valuesFields, correctAnswers} = values;
@@ -55,13 +54,15 @@ export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
   };
 
   return (
-    <CreateQuestion
-      scrollRef={scrollRef}
-      currentQuestion={currentQuestion}
-      numberOfQuestions={numberOfQuestions}
-      onSaveQuestion={handlerSaveQuestion}
-      currentQuestionIndex={currentQuestionIndex}
-      onPressCurrentQuestionPressed={onPressCurrentQuestionPressed}
-    />
+    <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+      <CreateQuestion
+        scrollRef={scrollRef}
+        currentQuestion={currentQuestion}
+        numberOfQuestions={numberOfQuestions}
+        onSaveQuestion={handlerSaveQuestion}
+        currentQuestionIndex={currentQuestionIndex}
+        onPressCurrentQuestionPressed={onPressCurrentQuestionPressed}
+      />
+    </ScrollView>
   );
 };

@@ -7,6 +7,7 @@ export type RootCreateQuizParamsList = {
   [ScreenList.QUESTIONS_SET]: {
     numberOfQuestions: number;
     idNewQuiz: number;
+    topicId: number;
   };
   [ScreenList.QUIZ_SET]: undefined;
 };

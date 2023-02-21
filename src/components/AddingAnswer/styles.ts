@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   disabled: {
     opacity: 0.4,
   },
-  inner: {
+  picker: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
