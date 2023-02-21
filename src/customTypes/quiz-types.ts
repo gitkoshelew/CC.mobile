@@ -46,6 +46,23 @@ export type questionType = {
   // }; // need explain
 };
 
+export type questionResponseType = {
+  id: number;
+  title: string;
+  description: string;
+  content: answersType;
+  type: TypeOptions;
+  difficulty: Difficulty;
+  timer: number;
+  topicId: number;
+  topic: {
+    id: number;
+    title: string;
+  };
+  moderationId: null;
+  quiz: [];
+};
+
 export type quizType = {
   id: number;
   title: string;

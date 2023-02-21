@@ -5,4 +5,7 @@ export const questionsAPI = {
   createQuestion(params: newQuestionType) {
     return instance.post('/questions', params);
   },
+  getQuestions() {
+    return instance.get('/questions');
+  },
 };

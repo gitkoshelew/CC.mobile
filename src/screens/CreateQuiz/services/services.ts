@@ -160,3 +160,25 @@ export const createTopic = createAsyncThunk(
     }
   },
 );
+
+export const getQuestions = createAsyncThunk(
+  'questions/getQuestions',
+  async (_, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
+    try {
+      const res = await questionsAPI.getQuestions();
+      return res.data;
+    } catch (e) {
+      const err = e as Error | AxiosError;
+      dispatch(
+        setAppMessage({
+          text: 'Something went wrong',
+          severity: 'error',
+        }),
+      );
+      return rejectWithValue(err.message);
+    } finally {
+      dispatch(setIsFetching(false));
+    }
+  },
+);
