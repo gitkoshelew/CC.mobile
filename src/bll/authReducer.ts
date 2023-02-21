@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AxiosError} from 'axios';
 import {authAPI} from '@src/dal/authAPI';
-import {setAppMessage, setIsFetching} from '@src/bll/appReducer';
+import {setAppMessage, setIsFetching, setIsLogin} from '@src/bll/appReducer';
 import {AuthTypes} from '@customTypes/auth-types';
 
 export const register = createAsyncThunk(
@@ -42,6 +42,8 @@ export const login = createAsyncThunk('auth/login', async (_, {dispatch, rejectW
         severity: 'success',
       }),
     );
+    dispatch(setIsLogin(true));
+    dispatch(getAuth());
   } catch (e) {
     const err = e as Error | AxiosError;
     dispatch(

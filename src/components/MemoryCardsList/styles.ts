@@ -21,4 +21,8 @@ export const getStyles = (props?: StylesPropsType) =>
       width: 80,
       height: 80,
     },
+    description: {
+      marginTop: 18,
+      paddingLeft: 20,
+    },
   });

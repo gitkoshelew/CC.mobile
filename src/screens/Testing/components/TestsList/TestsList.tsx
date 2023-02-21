@@ -28,7 +28,11 @@ export const TestsList = () => {
   const myQuizzes = [...quizzesData].filter(quiz => quiz.authorId === authorId);
   const onDismiss = useCallback(
     (id: number) => {
-      dispatch(deleteQuiz(id));
+      dispatch(deleteQuiz(id))
+        .unwrap()
+        .then(() => {
+          dispatch(getQuizzes());
+        });
     },
     [dispatch],
   );
