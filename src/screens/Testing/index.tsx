@@ -14,11 +14,7 @@ export const Tests = () => {
     <ViewFlex>
       <Stack.Navigator initialRouteName={ScreenList.QUIZZES_LIST}>
         <Stack.Screen name={ScreenList.QUIZZES_LIST} component={TestsList} />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name={ScreenList.QUIZ_PROCESS}
-          component={TestProcess}
-        />
+        <Stack.Screen name={ScreenList.QUIZ_PROCESS} component={TestProcess} />
         <Stack.Screen
           options={{headerShown: false}}
           name={ScreenList.QUIZ_RESULT}
