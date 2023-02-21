@@ -21,7 +21,7 @@ export const IncorrectAnswers = ({data}: IProps) => {
               <SmallTextBlack>{number}</SmallTextBlack>
             </NumberBox>
             <AnswerBox>
-              <SmallTextBlack>{answer}</SmallTextBlack>
+              <SmallTextBlack>{answer.replaceAll(',', ', ')}</SmallTextBlack>
             </AnswerBox>
           </Wrapper>
         );
