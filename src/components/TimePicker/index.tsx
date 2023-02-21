@@ -1,9 +1,8 @@
-import React, {ReactElement} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Picker} from '@react-native-picker/picker';
 import {Control, Controller} from 'react-hook-form';
 import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
 import {TextError} from '@src/components/ui/ReadyStyles/TextError';
+import {PickerItem} from '@src/components/TimePicker/PickerItem/index';
 
 type TimePickerPropsType = {
   control: Control<CreateQuestionFieldType>;
@@ -11,22 +10,6 @@ type TimePickerPropsType = {
 };
 
 export const TimePicker = ({control, errors}: TimePickerPropsType) => {
-  const getMinutesItems = () => {
-    const items: ReactElement[] = [];
-    for (let i = 0; i <= 59; i++) {
-      items.push(<Picker.Item testID="minutesItem" key={i} value={i} label={String(i)} />);
-    }
-    return items;
-  };
-
-  const getSecondsItems = () => {
-    const items: ReactElement[] = [];
-    for (let i = 0; i <= 59; i += 5) {
-      items.push(<Picker.Item testID="minutesItem" key={i} value={i} label={String(i)} />);
-    }
-    return items;
-  };
-
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
@@ -36,14 +19,7 @@ export const TimePicker = ({control, errors}: TimePickerPropsType) => {
             control={control}
             name="minutes"
             render={({field: {onChange, value}}) => (
-              <Picker
-                style={styles.picker}
-                mode="dropdown"
-                itemStyle={styles.itemPicker}
-                selectedValue={value}
-                onValueChange={onChange}>
-                {getMinutesItems()}
-              </Picker>
+              <PickerItem type="minutes" value={value} onChange={onChange} />
             )}
           />
         </View>
@@ -53,14 +29,7 @@ export const TimePicker = ({control, errors}: TimePickerPropsType) => {
             control={control}
             name="seconds"
             render={({field: {onChange, value}}) => (
-              <Picker
-                style={styles.picker}
-                mode="dropdown"
-                itemStyle={styles.itemPicker}
-                selectedValue={value}
-                onValueChange={onChange}>
-                {getSecondsItems()}
-              </Picker>
+              <PickerItem type="seconds" value={value} onChange={onChange} />
             )}
           />
         </View>
@@ -86,18 +55,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  picker: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 100,
-    height: 50,
-  },
-  itemPicker: {
-    width: 85,
-    height: 50,
-    fontSize: 14,
   },
   text: {
     fontFamily: 'Montserrat-Regular',

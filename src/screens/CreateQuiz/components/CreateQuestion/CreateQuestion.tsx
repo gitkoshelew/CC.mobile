@@ -104,24 +104,35 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
   }, [currentArrayOptions]);
   const isCheckingDuplicate = new Set(arrayOptions).size !== arrayOptions.length;
 
-  const nextQuestionPressed = useCallback(() => {
+  const onPressNextQuestion = useCallback(() => {
     onPressCurrentQuestionPressed(currentQuestionIndex + 1);
     scrollRef.current?.scrollTo({x: 0, y: 0, animated: true});
   }, [currentQuestionIndex, onPressCurrentQuestionPressed, scrollRef]);
 
-  const onPressSaveQuestionHandler = (values: CreateQuestionFieldType) => {
-    if (values.minutes + values.seconds === 0) {
-      setError('minutes', {type: ' custom', message: 'Set the time'});
-      return;
-    }
-    onSaveQuestion({valuesFields: values, correctAnswers: correctAnswers});
-  };
+  const onPressSaveQuestion = useCallback(
+    (values: CreateQuestionFieldType) => {
+      if (values.minutes + values.seconds === 0) {
+        setError('minutes', {type: ' custom', message: 'Set the time'});
+        return;
+      }
+      onSaveQuestion({valuesFields: values, correctAnswers: correctAnswers});
+    },
+    [correctAnswers, onSaveQuestion, setError],
+  );
 
-  const addNewOptionPressed = useCallback(() => {
+  const handlerAppSelectHookForm = useCallback(
+    (value: string, onPress: (value: string) => void) => {
+      setCorrectAnswers([]);
+      onPress(value);
+    },
+    [],
+  );
+
+  const onPressAddNewOption = useCallback(() => {
     append([{option: ''}]);
   }, [append]);
 
-  const deleteOptionPressed = useCallback(
+  const onPressDeleteOption = useCallback(
     (index: number) => {
       remove(index);
     },
@@ -166,10 +177,6 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
   useEffect(() => {
     setCorrectAnswers(currentQuestion.content.correctAnswer);
   }, [currentQuestion.content.correctAnswer]);
-
-  useEffect(() => {
-    setCorrectAnswers([]);
-  }, [currentType]);
 
   const isQuestionsEnd = currentQuestionIndex + 1 === numberOfQuestions;
 
@@ -224,10 +231,11 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
           <ContainerDynamicWidth width="117px">
             <AppSelectHookForm
               name="type"
-              control={control}
-              type="primary"
-              data={dataAnswerType}
               size="m"
+              type="primary"
+              control={control}
+              data={dataAnswerType}
+              onAppSelect={handlerAppSelectHookForm}
             />
           </ContainerDynamicWidth>
         </View>
@@ -241,8 +249,8 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
         control={control}
         type={currentType}
         isCheckingDuplicate={isCheckingDuplicate}
-        addNewOptionPressed={addNewOptionPressed}
-        deleteOptionPressed={deleteOptionPressed}
+        addNewOptionPressed={onPressAddNewOption}
+        deleteOptionPressed={onPressDeleteOption}
         checkedCorrectOption={checkedCorrectOption}
         correctAnswer={correctAnswers}
       />
@@ -252,7 +260,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
             <AppButton
               title={t('saveQuestionBtn')}
               type={TypeAppButton.PRIMARY}
-              onPress={handleSubmit(onPressSaveQuestionHandler)}
+              onPress={handleSubmit(onPressSaveQuestion)}
               disabled={isCheckingDuplicate}
             />
           </ContainerSaveButton>
@@ -269,7 +277,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
             />
           ) : (
             <NextQuestionButton
-              onPress={nextQuestionPressed}
+              onPress={onPressNextQuestion}
               disabled={!currentQuestion.title}>
               <AntDesign name="rightcircle" size={36} color={Color.DarkBlue} />
             </NextQuestionButton>

@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   },
   tabBarStyle: {
     borderRadius: 15,
-    marginBottom: 20,
+    marginBottom: 5,
   },
   tabBarIndicatorContainerStyle: {
     marginLeft: 30,
