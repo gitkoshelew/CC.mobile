@@ -50,7 +50,11 @@ export const Main = () => {
           <View>
             <ViewCenter>
               <UserIconContainer>
-                <FontAwesome name={isLogin ? 'user' : 'user-secret'} size={80} />
+                <FontAwesome
+                  name={isLogin ? 'user' : 'user-secret'}
+                  size={80}
+                  style={!isLogin && styles.icon}
+                />
               </UserIconContainer>
               <ViewCenter>
                 <Title>{isLogin ? authData.nickname : 'Incognito'}</Title>

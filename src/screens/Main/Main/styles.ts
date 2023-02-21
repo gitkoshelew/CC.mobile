@@ -40,4 +40,8 @@ export const styles = StyleSheet.create({
     paddingLeft: 20,
     marginBottom: 50,
   },
+  icon: {
+    marginLeft: 3,
+    marginTop: 4,
+  },
 });
