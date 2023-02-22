@@ -4,8 +4,10 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Color} from '@theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {DefaultTimeType} from '@src/utils/transformTime';
 
 type HeaderPropsType = {
+  time: DefaultTimeType;
   title: string;
   topic: string;
   isAddedQuestion: boolean;
@@ -14,7 +16,7 @@ type HeaderPropsType = {
 };
 
 export const Header = (props: HeaderPropsType) => {
-  const {isActive, title, topic, onPress, isAddedQuestion} = props;
+  const {isActive, time, title, topic, onPress, isAddedQuestion} = props;
   return (
     <View style={[styles.wrapper, isActive ? styles.active : styles.inactive]}>
       <View>
@@ -41,7 +43,9 @@ export const Header = (props: HeaderPropsType) => {
             color={Color.BlueLight}
             size={18}
           />
-          <Text style={styles.text}>1000 sec.</Text>
+          <Text style={styles.text}>
+            {time.minutes}m. {time.seconds}s.
+          </Text>
         </View>
       </View>
       {isAddedQuestion ? (

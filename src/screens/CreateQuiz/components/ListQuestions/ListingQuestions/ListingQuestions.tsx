@@ -4,6 +4,7 @@ import {TouchableOpacity} from 'react-native';
 import {questionResponseType, questionType} from '@customTypes/quiz-types';
 import {Header} from '@src/screens/CreateQuiz/components/ListQuestions/Header/index';
 import {Content} from '@src/screens/CreateQuiz/components/ListQuestions/Content/index';
+import {DefaultTimeType, transformTime} from '@src/utils/transformTime';
 
 type ListingQuestionsPropsType = {
   filteredQuestions: questionResponseType[];
@@ -26,8 +27,14 @@ export const ListingQuestions = ({
     (section: questionResponseType, index: number, isActive: boolean) => {
       const questionId = section.id;
       const isAddedQuestion = !!currentQuizQuestions.find(el => el.id === section.id);
+      const time = transformTime({
+        format: 'default',
+        totalSeconds: section.timer,
+      }) as DefaultTimeType;
+
       return (
         <Header
+          time={time}
           isActive={isActive}
           title={section.title}
           topic={section.topic.title}
