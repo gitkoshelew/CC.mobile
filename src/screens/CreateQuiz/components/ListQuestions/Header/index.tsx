@@ -8,10 +8,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 type HeaderPropsType = {
   title: string;
   topic: string;
+  isAddedQuestion: boolean;
+  onPress: () => void;
   isActive: boolean;
 };
 
-export const Header = ({isActive, title, topic}: HeaderPropsType) => {
+export const Header = (props: HeaderPropsType) => {
+  const {isActive, title, topic, onPress, isAddedQuestion} = props;
   return (
     <View style={[styles.wrapper, isActive ? styles.active : styles.inactive]}>
       <View>
@@ -41,9 +44,20 @@ export const Header = ({isActive, title, topic}: HeaderPropsType) => {
           <Text style={styles.text}>1000 sec.</Text>
         </View>
       </View>
-      <TouchableOpacity>
-        <Ionicons name="add-circle-outline" size={40} color={Color.BlueLight} />
-      </TouchableOpacity>
+      {isAddedQuestion ? (
+        <TouchableOpacity>
+          <Ionicons name="ios-checkmark-circle-outline" size={40} color={Color.Green} />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity>
+          <Ionicons
+            name="add-circle-outline"
+            size={40}
+            color={Color.BlueLight}
+            onPress={onPress}
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

@@ -3,13 +3,13 @@ import {
   CreateQuestion,
   CreateQuestionFieldType,
 } from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
-import {ScrollView} from 'react-native';
 import {questionType} from '@customTypes/quiz-types';
 import {transformFormatOptions} from '@src/utils/transformFormatOptions';
 import {createQuestion} from '@src/screens/CreateQuiz/services/services';
 import {getQuizQuestions} from '@src/bll/quizReducer';
 import {useAppDispatch} from '@hooks/hooks';
 import {transformTimeSerializer} from '@src/screens/CreateQuiz/serializer/index';
+import {Wrapper} from '@src/screens/CreateQuiz/components/CreateQuestion/styles';
 
 export type CreateQuestionPropsType = {
   quizId: number;
@@ -54,7 +54,7 @@ export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
   };
 
   return (
-    <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+    <Wrapper ref={scrollRef} showsVerticalScrollIndicator={false}>
       <CreateQuestion
         scrollRef={scrollRef}
         currentQuestion={currentQuestion}
@@ -63,6 +63,6 @@ export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
         currentQuestionIndex={currentQuestionIndex}
         onPressCurrentQuestionPressed={onPressCurrentQuestionPressed}
       />
-    </ScrollView>
+    </Wrapper>
   );
 };

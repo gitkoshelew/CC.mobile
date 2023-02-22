@@ -60,7 +60,6 @@ export type questionResponseType = {
     title: string;
   };
   moderationId: null;
-  quiz: [];
 };
 
 export type quizType = {

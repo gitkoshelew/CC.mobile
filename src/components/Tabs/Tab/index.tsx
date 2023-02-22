@@ -3,13 +3,15 @@ import {ButtonTab, TitleTab} from './styles';
 export type TabPropsType = {
   item: string;
   index: number;
+  onPress: (value: string) => void;
   isActive: boolean;
   setCurrentTab: (value: number) => void;
 };
 
-export const Tab = ({item, index, isActive, ...props}: TabPropsType) => {
+export const Tab = ({item, index, isActive, onPress, setCurrentTab}: TabPropsType) => {
   const addTabHandler = () => {
-    props.setCurrentTab(index);
+    setCurrentTab(index);
+    onPress(item);
   };
 
   return (

@@ -74,6 +74,12 @@ export const addQuestionToQuiz = createAsyncThunk(
         quizId,
         questionId,
       });
+      dispatch(
+        setAppMessage({
+          text: 'The question is added',
+          severity: 'success',
+        }),
+      );
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(

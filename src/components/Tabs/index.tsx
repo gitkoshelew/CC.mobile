@@ -4,30 +4,29 @@ import {useState} from 'react';
 import {TabsBox} from './styles';
 import {renderItemType} from '@customTypes/common-types';
 
-export const Tabs = () => {
-  const tabsData = [
-    'All',
-    'Category 1',
-    'Category 2',
-    'Category 3',
-    'Category 4',
-    'Category 5',
-  ];
-  const [currentTab, setCurrentTab] = useState<number>(0);
+type TabsPropsType = {
+  data: string[];
+  onPress: (value: string) => void;
+};
+
+export const Tabs = ({data, onPress}: TabsPropsType) => {
+  const [currentTabIndex, setCurrentTabIndex] = useState<number>(0);
+
   const renderTabs = ({item, index}: renderItemType) => (
     <Tab
       key={index}
       item={item}
       index={index}
-      isActive={currentTab === index}
-      setCurrentTab={setCurrentTab}
+      onPress={onPress}
+      isActive={currentTabIndex === index}
+      setCurrentTab={setCurrentTabIndex}
     />
   );
 
   return (
     <TabsBox>
       <FlatList
-        data={tabsData}
+        data={data}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         renderItem={renderTabs}

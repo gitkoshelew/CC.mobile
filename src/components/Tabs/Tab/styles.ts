@@ -3,6 +3,7 @@ import {Color} from '@theme/colors';
 
 export const TitleTab = styled.Text`
   font-size: 14px;
+  font-family: 'Montserrat-Regular';
   color: ${Color.Black};
 `;
 

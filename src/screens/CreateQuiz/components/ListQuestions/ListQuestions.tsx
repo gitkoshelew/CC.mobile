@@ -1,60 +1,64 @@
-import {useCallback, useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import Accordion from 'react-native-collapsible/Accordion';
+import {useCallback, useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {Color} from '@theme/colors';
-import {Header} from '@src/screens/CreateQuiz/components/ListQuestions/Header/index';
-import {Content} from '@src/screens/CreateQuiz/components/ListQuestions/Content/index';
-import {questionResponseType} from '@customTypes/quiz-types';
+import {questionResponseType, questionType} from '@customTypes/quiz-types';
+import {TabsQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/TabsQuestions/index';
+import {ListingQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/ListingQuestions/ListingQuestions';
 
 type ListQuestionsPropsType = {
+  quizId: number;
+  topics: string[];
   questions: questionResponseType[];
+  currentQuizQuestions: questionType[];
+  onPressAddQuestion: (questionId: number) => void;
 };
 
-export const ListQuestions = ({questions}: ListQuestionsPropsType) => {
-  const [activeSections, setActiveSections] = useState([]);
+export const ListQuestions = ({
+  topics,
+  questions,
+  onPressAddQuestion,
+  currentQuizQuestions,
+}: ListQuestionsPropsType) => {
+  const [filteredQuestions, setFilteredQuestions] =
+    useState<questionResponseType[]>(questions);
 
-  const setSections = useCallback((sections: never[]) => {
-    setActiveSections(sections.includes(undefined!) ? [] : sections);
-  }, []);
-
-  const renderHeader = useCallback(
-    (section: questionResponseType, index: number, isActive: boolean) => {
-      return <Header isActive={isActive} title={section.title} topic={section.topic.title} />;
+  const handlerTabs = useCallback(
+    (value: string) => {
+      if (value === 'All') {
+        setFilteredQuestions(questions);
+        return;
+      }
+      setFilteredQuestions(questions.filter(el => el.topic.title === value));
     },
-    [],
+    [questions],
   );
 
-  const renderContent = (section: questionResponseType, index: number, isActive: boolean) => {
-    return (
-      <Content
-        isActive={isActive}
-        description={section.description}
-        options={section.content.options}
-      />
-    );
-  };
+  useEffect(() => {
+    setFilteredQuestions(questions);
+  }, [questions]);
 
   return (
-    <View style={styles.container}>
-      <Accordion
-        align="bottom"
-        activeSections={activeSections}
-        sections={questions}
-        touchableComponent={TouchableOpacity}
-        renderHeader={renderHeader}
-        renderContent={renderContent}
-        duration={400}
-        onChange={setSections}
-        renderAsFlatList={true}
-      />
+    <View style={styles.wrapper}>
+      <TabsQuestions topics={topics} onPressTabs={handlerTabs} />
+      <View style={styles.container}>
+        <ListingQuestions
+          filteredQuestions={filteredQuestions}
+          onPressAddQuestion={onPressAddQuestion}
+          currentQuizQuestions={currentQuizQuestions}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
     backgroundColor: Color.GrayLight,
     paddingTop: 10,
+    paddingHorizontal: 15,
+  },
+  container: {
+    marginBottom: 80,
   },
 });
