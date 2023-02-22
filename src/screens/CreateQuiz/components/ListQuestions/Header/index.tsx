@@ -10,13 +10,14 @@ type HeaderPropsType = {
   time: DefaultTimeType;
   title: string;
   topic: string;
-  isAddedQuestion: boolean;
   onPress: () => void;
   isActive: boolean;
+  difficulty: string;
+  isAddedQuestion: boolean;
 };
 
 export const Header = (props: HeaderPropsType) => {
-  const {isActive, time, title, topic, onPress, isAddedQuestion} = props;
+  const {isActive, time, title, topic, onPress, difficulty, isAddedQuestion} = props;
   return (
     <View style={[styles.wrapper, isActive ? styles.active : styles.inactive]}>
       <View>
@@ -34,7 +35,7 @@ export const Header = (props: HeaderPropsType) => {
             color={Color.BlueLight}
             size={18}
           />
-          <Text style={styles.text}>light</Text>
+          <Text style={styles.text}>{difficulty}</Text>
         </View>
         <View style={styles.container}>
           <MaterialCommunityIcons

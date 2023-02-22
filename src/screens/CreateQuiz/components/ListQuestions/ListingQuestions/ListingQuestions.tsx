@@ -38,6 +38,7 @@ export const ListingQuestions = ({
           isActive={isActive}
           title={section.title}
           topic={section.topic.title}
+          difficulty={section.difficulty}
           isAddedQuestion={isAddedQuestion}
           onPress={() => onPressAddQuestion(questionId)}
         />
