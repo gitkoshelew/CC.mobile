@@ -1,8 +1,8 @@
 import React from 'react';
 import 'react-native';
-import App from '../App';
 import {render} from '@testing-library/react-native';
 import i18n from '../i18n';
+import AppWrapper from '../AppWrapper';
 
 // Note: test renderer must be required after react-native.
 jest.mock('@react-native-async-storage/async-storage', () =>
@@ -22,7 +22,7 @@ beforeEach(() => {
 });
 
 it('renders correctly', () => {
-  render(<App />);
+  render(<AppWrapper />);
 });
 
 jest.mock('react-native-splash-screen', () => {

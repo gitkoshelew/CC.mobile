@@ -2,7 +2,7 @@ import styled, {css} from 'styled-components/native';
 import {Color} from '@theme/colors';
 
 const BlockBox = styled.View`
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 `;
 
 const BlockDynamicMargin = styled.View<{m: string}>`
@@ -26,6 +26,11 @@ const BlockBoxMarginRight = styled.View`
   margin-right: 20px;
 `;
 
+const BoldText = styled.Text`
+  font-weight: bold;
+  font-size: 18px;
+`;
+
 const TextBox = styled.Text`
   margin-bottom: 8px;
   margin-left: 8px;
@@ -34,6 +39,8 @@ const TextBox = styled.Text`
 `;
 
 const SmallTextBox = styled.Text`
+  margin-bottom: 8px;
+  margin-left: 14px;
   font-size: 14px;
   font-family: 'Montserrat-Regular';
   color: ${Color.GrayMedium};
@@ -56,7 +63,7 @@ const Title = styled.Text`
 
 const SmallTitle = styled.Text`
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   font-size: 16px;
   font-family: 'Montserrat-Regular';
   color: ${Color.White};
@@ -120,6 +127,7 @@ export {
   TextBox,
   BlockBoxMarginLeft,
   BlockAnswerBox,
+  BoldText,
   ButtonAnswerBox,
   RightBlockBox,
   Title,

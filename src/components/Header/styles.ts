@@ -5,6 +5,12 @@ const Wrapper = styled.View`
   padding: 0 10px 100px 13px;
 `;
 
+const WrapperAuth = styled.View`
+  width: 80%;
+  margin: 0 auto;
+  padding: 0 10px 100px 13px;
+`;
+
 const UserIconContainer = styled.View`
   display: flex;
   justify-content: center;
@@ -25,4 +31,4 @@ const Title = styled.Text`
   font-weight: 600;
 `;
 
-export {UserIconContainer, Title, Wrapper};
+export {UserIconContainer, Title, Wrapper, WrapperAuth};
