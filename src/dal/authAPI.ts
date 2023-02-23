@@ -11,4 +11,7 @@ export const authAPI = {
   checkAuth() {
     return instance.post('/auth/refresh-token');
   },
+  auth() {
+    return instance.get('/auth/me');
+  },
 };

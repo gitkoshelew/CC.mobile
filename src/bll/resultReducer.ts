@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {ResultType} from '@src/screens/Testing/TestProcess';
+import {ResultType} from '@src/screens/Testing/components/TestProcess';
 
 const initialState: IState = {
   result: [],

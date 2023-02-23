@@ -1,9 +1,10 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AxiosError} from 'axios';
 import {authAPI} from '@src/dal/authAPI';
 import {setAppMessage, setIsFetching} from '@src/bll/appReducer';
-import {AuthType, LoginType, RegistrationType} from '@customTypes/authAPI-types';
+import {LoginType, RegistrationType} from '@customTypes/authAPI-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AuthTypes} from '@customTypes/auth-types';
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -86,6 +87,21 @@ export const logout = createAsyncThunk('auth/logout', (_, {dispatch, rejectWithV
     dispatch(setIsFetching(false));
   }
 });
+export const getAuth = createAsyncThunk('auth/me', async (_, {dispatch, rejectWithValue}) => {
+  try {
+    const res = await authAPI.auth();
+    dispatch(setStateAuth(res.data));
+  } catch (e) {
+    const err = e as Error | AxiosError;
+    dispatch(
+      setAppMessage({
+        text: 'You are not registered',
+        severity: 'error',
+      }),
+    );
+    return rejectWithValue(err.message);
+  }
+});
 
 export const checkAuth = createAsyncThunk(
   'auth/checkAuth',
@@ -115,18 +131,28 @@ export const checkAuth = createAsyncThunk(
   },
 );
 
+type IAuth = {
+  auth: AuthTypes;
+  isAuth: boolean;
+};
+const initialState: IAuth = {
+  auth: {} as AuthTypes,
+  isAuth: false,
+};
+
 const slice = createSlice({
   name: 'auth',
-  initialState: {
-    isAuth: false,
-  } as AuthType,
+  initialState,
   reducers: {
-    setIsAuth(state, action) {
-      state.isAuth = action.payload;
+    setStateAuth: (state, {payload}: PayloadAction<AuthTypes>) => {
+      state.auth = payload;
+    },
+    setIsAuth(state, {payload}: PayloadAction<boolean>) {
+      state.isAuth = payload;
     },
   },
 });
 
 export const authReducer = slice.reducer;
 
-export const {setIsAuth} = slice.actions;
+export const {setStateAuth, setIsAuth} = slice.actions;

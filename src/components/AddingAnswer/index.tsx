@@ -7,40 +7,46 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
 import {useCallback, useEffect, useState} from 'react';
 import {Control, Controller, useWatch} from 'react-hook-form';
-import {InputsFieldType} from '@src/screens/CreateTest/CreateQuestion';
 import {useTranslation} from 'react-i18next';
+import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
 
 type AddingAnswerPropsType = {
+  type: string;
   index: number;
   option: string;
+  control: Control<CreateQuestionFieldType>;
   correctAnswer: string[];
-  type: string;
-  control: Control<InputsFieldType>;
-  isDisabledDeleteBtn: boolean;
   onPressDelete: (index: number) => void;
-  onPressCorrectAnswer: (index: number, checked: boolean, textOption: string) => void;
   isCheckingDuplicate: boolean;
+  isDisabledDeleteBtn: boolean;
+  onPressCorrectAnswer: (index: number, checked: boolean, textOption: string) => void;
 };
 
-export const AddingAnswer = ({
-  index,
-  onPressDelete,
-  isDisabledDeleteBtn,
-  onPressCorrectAnswer,
-  isCheckingDuplicate,
-  ...props
-}: AddingAnswerPropsType) => {
+export const AddingAnswer = (props: AddingAnswerPropsType) => {
+  const {
+    type,
+    index,
+    option,
+    control,
+    onPressDelete,
+    correctAnswer,
+    isCheckingDuplicate,
+    isDisabledDeleteBtn,
+    onPressCorrectAnswer,
+  } = props;
+  const {t} = useTranslation(['validationFields']);
+  const findCorrectInput = correctAnswer.find(el => el === option);
+  const [isChecked, setIsChecked] = useState(false);
+  const [correctInput, setCorrectInput] = useState(findCorrectInput);
   const isCurrentOptionText = useWatch({
     name: `options.${index}.option`,
-    control: props.control,
+    control,
   });
-  const {t} = useTranslation(['validationFields']);
-  const [isChecked, setIsChecked] = useState(false);
-  const [inputWhichCorrect, setInputWhichCorrect] = useState(props.option);
+
   const onPressCorrectAnswerHandler = useCallback(
     (checked: boolean) => {
       setIsChecked(checked);
-      setInputWhichCorrect(isCurrentOptionText);
+      setCorrectInput(isCurrentOptionText);
       onPressCorrectAnswer(index, checked, isCurrentOptionText);
     },
     [index, isCurrentOptionText, onPressCorrectAnswer],
@@ -50,21 +56,20 @@ export const AddingAnswer = ({
   }, [index, onPressDelete]);
 
   useEffect(() => {
-    if (inputWhichCorrect !== isCurrentOptionText) {
-      onPressCorrectAnswer(index, false, inputWhichCorrect);
+    if (correctInput !== isCurrentOptionText) {
+      onPressCorrectAnswer(index, false, correctInput!);
       setIsChecked(false);
-      setInputWhichCorrect('');
+      setCorrectInput('');
     }
-  }, [index, inputWhichCorrect, isCurrentOptionText, onPressCorrectAnswer]);
+  }, [index, correctInput, isCurrentOptionText, onPressCorrectAnswer]);
 
   useEffect(() => {
-    setIsChecked(props.correctAnswer.includes(isCurrentOptionText));
-  }, [isCurrentOptionText, props.correctAnswer, props.option]);
+    setIsChecked(correctAnswer.includes(isCurrentOptionText));
+  }, [isCurrentOptionText, correctAnswer, option]);
 
-  const disabledCheckbox =
-    props.type === 'single'
-      ? (!isChecked && props.correctAnswer.length) || !isCurrentOptionText
-      : !isCurrentOptionText;
+  const isSingle = type === 'single';
+  const isSingleDisabled = (!isChecked && correctAnswer.length) || !isCurrentOptionText;
+  const isMultipleDisabled = !isCurrentOptionText;
 
   const isDisabledDeleteOption = isDisabledDeleteBtn || isChecked;
 
@@ -91,11 +96,11 @@ export const AddingAnswer = ({
           control={props.control}
         />
       </View>
-      <View style={styles.inner}>
+      <View style={styles.picker}>
         <CheckBox
           onPress={onPressCorrectAnswerHandler}
           isChecked={isChecked}
-          disabled={!!disabledCheckbox}
+          disabled={Boolean(isSingle ? isSingleDisabled : isMultipleDisabled)}
           fillColor={isCheckingDuplicate ? Color.Red : Color.GreenLight}
         />
         <TouchableOpacity

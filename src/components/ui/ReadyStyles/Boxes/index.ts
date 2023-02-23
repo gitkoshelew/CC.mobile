@@ -5,6 +5,10 @@ const BlockBox = styled.View`
   margin-bottom: 8px;
 `;
 
+const BlockDynamicMargin = styled.View<{m: string}>`
+  margin: ${props => props.m};
+`;
+
 const BlockAnswerBox = styled.View`
   width: 100%;
   flex-direction: row;
@@ -135,4 +139,5 @@ export {
   BlockBoxMarginRight,
   SmallTitle,
   ContainerDynamicWidth,
+  BlockDynamicMargin,
 };

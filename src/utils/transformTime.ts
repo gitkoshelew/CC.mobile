@@ -1,25 +1,22 @@
+export type formatTimeType = 'default' | 'onlySeconds';
+
 type transformTimeType = {
-  format: 'default' | 'onlySeconds';
-  isMinutes?: string;
-  isSeconds?: string;
+  format: formatTimeType;
+  minutes?: number;
+  seconds?: number;
   totalSeconds?: number;
 };
 
-export const transformTime = ({
-  format,
-  isMinutes,
-  isSeconds,
-  totalSeconds,
-}: transformTimeType) => {
+export const transformTime = ({format, minutes, seconds, totalSeconds}: transformTimeType) => {
   switch (format) {
     case 'onlySeconds':
-      return +isMinutes! * 60 + +isSeconds!;
+      return minutes! * 60 + seconds!;
     default: {
-      const minutes = Math.floor(totalSeconds! / 60);
-      const seconds = totalSeconds! - +minutes * 60;
+      const countMinutes = Math.floor(totalSeconds! / 60);
+      const countSeconds = totalSeconds! - countMinutes * 60;
       return {
-        minutes: minutes === 0 ? '' : String(minutes),
-        seconds: seconds === 0 ? '' : String(seconds),
+        minutes: countMinutes ? countMinutes : 0,
+        seconds: countSeconds ? countSeconds : 0,
       };
     }
   }
