@@ -3,11 +3,11 @@ import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 import Navigation from '@src/navigation/navigation';
-import {Notification} from '@src/components/ui/Notification/index';
+import {Notification} from '@src/components/ui/Notification';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useAppDispatch} from '@hooks/hooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {loginAC} from '@src/bll/authReducer';
+import {setIsAuth} from '@src/bll/authReducer';
 
 export const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -17,7 +17,7 @@ export const App = () => {
   const checkToken = useCallback(async () => {
     const value = await AsyncStorage.getItem('token');
     if (value) {
-      dispatch(loginAC(true));
+      dispatch(setIsAuth(true));
     }
     return;
   }, [dispatch]);

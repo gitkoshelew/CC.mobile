@@ -4,17 +4,19 @@ import {
   Dimensions,
   ImageBackground,
   PanResponder,
-  Platform,
   ScaledSize,
-  StyleSheet,
   View,
 } from 'react-native';
-import {Color} from '@theme/colors';
-import {Content} from '@src/components/DraggableBottomSheet/Content/index';
+import {Content} from '@src/components/DraggableBottomSheet/Content';
 import {useAppSelector} from '@hooks/hooks';
+import {getStyles} from '@src/components/DraggableBottomSheet/styles';
 
 export const {width: WINDOW_WIDTH, height: WINDOW_HEIGHT}: ScaledSize =
   Dimensions.get('window');
+
+const BOTTOM_SHEET_MIN_HEIGHT = WINDOW_HEIGHT * 0.03;
+const MAX_DOWNWARD_TRANSLATE_Y = 0;
+const DRAG_THRESHOLD = 30;
 
 export const DraggableBottomSheet = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,54 +29,7 @@ export const DraggableBottomSheet = () => {
     : isLogForm
     ? WINDOW_HEIGHT * 0.5
     : WINDOW_HEIGHT * 0.68;
-  const BOTTOM_SHEET_MIN_HEIGHT = WINDOW_HEIGHT * 0.03;
   const MAX_UPWARD_TRANSLATE_Y = BOTTOM_SHEET_MIN_HEIGHT - BOTTOM_SHEET_MAX_HEIGHT;
-  const MAX_DOWNWARD_TRANSLATE_Y = 0;
-  const DRAG_THRESHOLD = 30;
-
-  const styles = StyleSheet.create({
-    container: {
-      position: 'absolute',
-      width: '100%',
-      bottom: 50,
-      flex: 1,
-    },
-    bottomSheet: {
-      position: 'absolute',
-      width: '100%',
-      height: BOTTOM_SHEET_MAX_HEIGHT,
-      bottom: BOTTOM_SHEET_MIN_HEIGHT - BOTTOM_SHEET_MAX_HEIGHT,
-      borderTopLeftRadius: 30,
-      borderTopRightRadius: 30,
-      ...Platform.select({
-        android: {elevation: 3},
-        ios: {
-          shadowColor: Color.GrayLight,
-          shadowopacity: 1,
-          shadowRadius: 6,
-          shadowOffset: {
-            width: 2,
-            height: 2,
-          },
-        },
-      }),
-    },
-    draggableArea: {
-      width: 50,
-      height: 28,
-      alignSelf: 'center',
-      justifyContent: 'center',
-    },
-    dragHandle: {
-      width: 50,
-      height: 5,
-      backgroundColor: Color.White,
-      borderRadius: 10,
-    },
-    imageBackground: {
-      paddingHorizontal: 20,
-    },
-  });
 
   const animatedValue = useRef(new Animated.Value(0)).current;
   const lastGestureDy = useRef(0);
@@ -133,14 +88,18 @@ export const DraggableBottomSheet = () => {
   }, [isAuth]);
 
   return (
-    <View style={styles.container}>
-      <Animated.View style={[styles.bottomSheet, bottomSheetAnimation]}>
+    <View style={getStyles().container}>
+      <Animated.View
+        style={[
+          getStyles(BOTTOM_SHEET_MAX_HEIGHT, MAX_UPWARD_TRANSLATE_Y).bottomSheet,
+          bottomSheetAnimation,
+        ]}>
         <ImageBackground
-          style={styles.imageBackground}
+          style={getStyles().imageBackground}
           source={require('../../assets/images/background-second.png')}
           resizeMode="stretch">
-          <View style={styles.draggableArea} {...panResponder.panHandlers}>
-            <View style={styles.dragHandle} />
+          <View style={getStyles().draggableArea} {...panResponder.panHandlers}>
+            <View style={getStyles().dragHandle} />
           </View>
           <Content isOpen={isOpen} isLogForm={isLogForm} setIsLogForm={setIsLogForm} />
         </ImageBackground>

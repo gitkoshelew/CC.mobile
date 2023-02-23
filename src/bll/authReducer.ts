@@ -18,7 +18,7 @@ export const register = createAsyncThunk(
           severity: 'success',
         }),
       );
-      dispatch(loginAC(true));
+      dispatch(setIsAuth(true));
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(
@@ -46,7 +46,7 @@ export const login = createAsyncThunk(
           severity: 'success',
         }),
       );
-      dispatch(loginAC(true));
+      dispatch(setIsAuth(true));
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(
@@ -72,7 +72,7 @@ export const logout = createAsyncThunk('auth/logout', (_, {dispatch, rejectWithV
         severity: 'success',
       }),
     );
-    dispatch(loginAC(false));
+    dispatch(setIsAuth(false));
   } catch (e) {
     const err = e as Error | AxiosError;
     dispatch(
@@ -99,7 +99,7 @@ export const checkAuth = createAsyncThunk(
           severity: 'success',
         }),
       );
-      dispatch(loginAC(true));
+      dispatch(setIsAuth(true));
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(
@@ -121,7 +121,7 @@ const slice = createSlice({
     isAuth: false,
   } as AuthType,
   reducers: {
-    loginAC(state, action) {
+    setIsAuth(state, action) {
       state.isAuth = action.payload;
     },
   },
@@ -129,4 +129,4 @@ const slice = createSlice({
 
 export const authReducer = slice.reducer;
 
-export const {loginAC} = slice.actions;
+export const {setIsAuth} = slice.actions;
