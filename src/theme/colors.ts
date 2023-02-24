@@ -12,7 +12,7 @@ enum Color {
   GrayStrongDark = '#49454F',
   Green = '#5fbb64',
   Semitransparent = 'rgba(255, 255, 255, 0.17)',
-  Transparent = 'rgba(28,0,255,0)',
+  Transparent = 'rgba(0,0,0,0.05)',
   TransparentBlack = '#00000019',
   GreenLight = '#acda87',
   Yellow = '#ffd606',
