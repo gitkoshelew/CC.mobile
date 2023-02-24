@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AxiosError} from 'axios';
 import {authAPI} from '@src/dal/authAPI';
-import {setAppMessage, setIsFetching, setIsLogin} from '@src/bll/appReducer';
+import {setAppMessage, setIsFetching} from '@src/bll/appReducer';
 import {LoginType, RegistrationType} from '@customTypes/authAPI-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AuthTypes} from '@customTypes/auth-types';
@@ -19,6 +19,7 @@ export const register = createAsyncThunk(
           severity: 'success',
         }),
       );
+      dispatch(getAuth());
       dispatch(setIsAuth(true));
     } catch (e) {
       const err = e as Error | AxiosError;
@@ -47,6 +48,7 @@ export const login = createAsyncThunk(
           severity: 'success',
         }),
       );
+      dispatch(getAuth());
       dispatch(setIsAuth(true));
     } catch (e) {
       const err = e as Error | AxiosError;
@@ -74,8 +76,6 @@ export const logout = createAsyncThunk('auth/logout', (_, {dispatch, rejectWithV
       }),
     );
     dispatch(setIsAuth(false));
-    dispatch(setIsLogin(true));
-    dispatch(getAuth());
   } catch (e) {
     const err = e as Error | AxiosError;
     dispatch(

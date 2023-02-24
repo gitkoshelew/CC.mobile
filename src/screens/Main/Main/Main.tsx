@@ -18,7 +18,7 @@ import {getQuizzes} from '@src/bll/quizReducer';
 export const Main = () => {
   const dispatch = useAppDispatch();
   const authData = useAppSelector(state => state.authReducer.auth);
-  const isLogin = useAppSelector(state => state.app.isLogin);
+  const isLogin = useAppSelector(state => state.authReducer.isAuth);
   const allQuizzes = useAppSelector(state => state.quizReducer.quizzes);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
   const myQuizzes = allQuizzes.filter(quiz => quiz.authorId === authorId);
