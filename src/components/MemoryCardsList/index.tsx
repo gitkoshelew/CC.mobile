@@ -7,9 +7,9 @@ import LottieView from 'lottie-react-native';
 import Animated, {FadeInDown} from 'react-native-reanimated';
 import {memoryCardMoc} from '@src/Mocs/MemoryCards';
 type MemoryCardsType = {
-  isLogin: boolean;
+  isLoggedIn: boolean;
 };
-export const MemoryCardsList = ({isLogin}: MemoryCardsType) => {
+export const MemoryCardsList = ({isLoggedIn}: MemoryCardsType) => {
   const [formatList, setFormatList] = useState<'row' | 'column'>('row');
   let animatedValue = useRef<LottieView>(null);
   const onChangeTypeListPressed = () => {
@@ -26,7 +26,7 @@ export const MemoryCardsList = ({isLogin}: MemoryCardsType) => {
         <CustomText fs="24px" fw="bold">
           Memory cards
         </CustomText>
-        {isLogin && (
+        {isLoggedIn && (
           <TouchableOpacity
             style={getStyles().listFormatButton}
             onPress={onChangeTypeListPressed}>
@@ -34,7 +34,7 @@ export const MemoryCardsList = ({isLogin}: MemoryCardsType) => {
           </TouchableOpacity>
         )}
       </View>
-      {isLogin ? (
+      {isLoggedIn ? (
         <Animated.View entering={FadeInDown} style={getStyles(formatList).container}>
           {memoryCardMoc.map((card, index) => (
             <MemoryCard key={card.id} index={index} card={card} blockStructure={formatList} />

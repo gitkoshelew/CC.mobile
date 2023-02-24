@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     left: '50%',
+    backgroundColor: Color.BlueLight,
     marginLeft: -70,
     top: -25,
     shadowOffset: {

@@ -6,7 +6,7 @@ import {ISwitchSelectProps} from 'src/customTypes/SwitchSelectjrs-types';
 import {useMemo} from 'react';
 import {styles} from './styles';
 
-export const SwitchSelectors = ({onPress, type, value}: ISwitchSelectProps) => {
+export const SwitchSelectors = ({onPress, type, value, disabled}: ISwitchSelectProps) => {
   const containerData = useMemo(
     () =>
       type === 'level'
@@ -40,7 +40,9 @@ export const SwitchSelectors = ({onPress, type, value}: ISwitchSelectProps) => {
         selectedColor={Color.White}
         buttonColor={Color.BlueLight}
         borderColor={Color.Gray}
+        backgroundColor={disabled ? Color.Transparent : Color.White}
         hasPadding
+        disabled={disabled}
       />
     </View>
   );

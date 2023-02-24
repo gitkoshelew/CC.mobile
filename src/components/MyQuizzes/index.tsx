@@ -12,11 +12,11 @@ const listImages = [
 ];
 
 type MyQuizzesType = {
-  isLogin: boolean;
+  isLoggedIn: boolean;
   myQuizzes: getQuizResponseType[];
 };
 
-export const MyQuizzes = ({isLogin, myQuizzes}: MyQuizzesType) => {
+export const MyQuizzes = ({isLoggedIn, myQuizzes}: MyQuizzesType) => {
   return (
     <>
       <View style={styles.container}>
@@ -35,7 +35,7 @@ export const MyQuizzes = ({isLogin, myQuizzes}: MyQuizzesType) => {
           ))}
         </View>
       </View>
-      {isLogin ? (
+      {isLoggedIn ? (
         <ListQuizzes myQuizzes={myQuizzes} />
       ) : (
         <TextDescription>You need to login or register</TextDescription>

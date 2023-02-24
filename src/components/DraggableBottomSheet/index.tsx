@@ -7,7 +7,7 @@ import {
   ScaledSize,
   View,
 } from 'react-native';
-import {Content} from '@src/components/DraggableBottomSheet/Content';
+import {Content} from '@src/components/DraggableBottomSheet/Content/Content';
 import {useAppSelector} from '@hooks/hooks';
 import {getStyles} from '@src/components/DraggableBottomSheet/styles';
 
@@ -22,9 +22,9 @@ export const DraggableBottomSheet = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLogForm, setIsLogForm] = useState(false);
 
-  const isAuth = useAppSelector(state => state.authReducer.isAuth);
+  const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
 
-  const BOTTOM_SHEET_MAX_HEIGHT = isAuth
+  const BOTTOM_SHEET_MAX_HEIGHT = isLoggedIn
     ? WINDOW_HEIGHT * 0.26
     : isLogForm
     ? WINDOW_HEIGHT * 0.5
@@ -84,8 +84,8 @@ export const DraggableBottomSheet = () => {
   };
 
   useEffect(() => {
-    !isAuth && setIsLogForm(true);
-  }, [isAuth]);
+    !isLoggedIn && setIsLogForm(true);
+  }, [isLoggedIn]);
 
   return (
     <View style={getStyles().container}>

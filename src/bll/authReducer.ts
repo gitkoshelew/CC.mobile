@@ -19,8 +19,8 @@ export const register = createAsyncThunk(
           severity: 'success',
         }),
       );
-      dispatch(getAuth());
-      dispatch(setIsAuth(true));
+      dispatch(authMe());
+      dispatch(setIsLoggedIn(true));
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(
@@ -48,8 +48,8 @@ export const login = createAsyncThunk(
           severity: 'success',
         }),
       );
-      dispatch(getAuth());
-      dispatch(setIsAuth(true));
+      dispatch(authMe());
+      dispatch(setIsLoggedIn(true));
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(
@@ -75,7 +75,7 @@ export const logout = createAsyncThunk('auth/logout', (_, {dispatch, rejectWithV
         severity: 'success',
       }),
     );
-    dispatch(setIsAuth(false));
+    dispatch(setIsLoggedIn(false));
   } catch (e) {
     const err = e as Error | AxiosError;
     dispatch(
@@ -89,10 +89,13 @@ export const logout = createAsyncThunk('auth/logout', (_, {dispatch, rejectWithV
     dispatch(setIsFetching(false));
   }
 });
-export const getAuth = createAsyncThunk('auth/me', async (_, {dispatch, rejectWithValue}) => {
+
+export const authMe = createAsyncThunk('auth/me', async (_, {dispatch, rejectWithValue}) => {
   try {
-    const res = await authAPI.auth();
+    const res = await authAPI.authMe();
+
     dispatch(setStateAuth(res.data));
+    dispatch(setIsLoggedIn(true));
   } catch (e) {
     const err = e as Error | AxiosError;
     dispatch(
@@ -117,7 +120,7 @@ export const checkAuth = createAsyncThunk(
           severity: 'success',
         }),
       );
-      dispatch(setIsAuth(true));
+      dispatch(setIsLoggedIn(true));
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(
@@ -135,11 +138,11 @@ export const checkAuth = createAsyncThunk(
 
 type IAuth = {
   auth: AuthTypes;
-  isAuth: boolean;
+  isLoggedIn: boolean;
 };
 const initialState: IAuth = {
   auth: {} as AuthTypes,
-  isAuth: false,
+  isLoggedIn: false,
 };
 
 const slice = createSlice({
@@ -149,12 +152,12 @@ const slice = createSlice({
     setStateAuth: (state, {payload}: PayloadAction<AuthTypes>) => {
       state.auth = payload;
     },
-    setIsAuth(state, {payload}: PayloadAction<boolean>) {
-      state.isAuth = payload;
+    setIsLoggedIn(state, {payload}: PayloadAction<boolean>) {
+      state.isLoggedIn = payload;
     },
   },
 });
 
 export const authReducer = slice.reducer;
 
-export const {setStateAuth, setIsAuth} = slice.actions;
+export const {setStateAuth, setIsLoggedIn} = slice.actions;

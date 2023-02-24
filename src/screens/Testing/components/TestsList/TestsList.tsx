@@ -11,7 +11,6 @@ import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {MyTestCards} from '@src/components/MyTestCards';
 import {ScrollView} from 'react-native-gesture-handler';
 import {TestCard} from '@src/components/TestCard';
-import {getAuth} from '@src/bll/authReducer';
 import {Loader} from '@src/components/ui/Loader';
 
 const tabsData = ['All', 'Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'];
@@ -20,6 +19,7 @@ export const TestsList = () => {
   const {navigate} = useAppNavigate();
   const dispatch = useAppDispatch();
   const isFetching = useAppSelector(state => state.app.isFetching);
+  const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
   const quizzesData = useAppSelector(state => state.quizReducer.quizzes);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
   const quizzes = quizzesData.map(quiz => ({
@@ -59,10 +59,6 @@ export const TestsList = () => {
     dispatch(getQuizzes());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getAuth());
-  }, [dispatch]);
-
   return (
     <>
       {isFetching && <Loader />}
@@ -70,7 +66,11 @@ export const TestsList = () => {
         <Tabs data={tabsData} onPress={() => {}} />
         <FilterBlock>
           <View style={styles.container}>
-            <SwitchSelectors type={TypeSwitchSelect.FILTER} onPress={handlerSwitchSelectors} />
+            <SwitchSelectors
+              type={TypeSwitchSelect.FILTER}
+              onPress={handlerSwitchSelectors}
+              disabled={!isLoggedIn}
+            />
           </View>
           <Sort />
         </FilterBlock>
