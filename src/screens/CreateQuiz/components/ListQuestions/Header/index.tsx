@@ -49,18 +49,18 @@ export const Header = (props: HeaderPropsType) => {
           </Text>
         </View>
       </View>
- <TouchableOpacity>
-      {isAddedQuestion ? (
+      <TouchableOpacity>
+        {isAddedQuestion ? (
           <Ionicons name="ios-checkmark-circle-outline" size={40} color={Color.Green} />
-      ) : (
+        ) : (
           <Ionicons
             name="add-circle-outline"
             size={40}
             color={Color.BlueLight}
             onPress={onPress}
           />
-      )}
-</TouchableOpacity>
+        )}
+      </TouchableOpacity>
     </View>
   );
 };
