@@ -35,6 +35,6 @@ export type createTopicType = {
 };
 
 export type TopicType = {
-  id: string;
+  id: number;
   title: string;
 };

@@ -92,6 +92,7 @@ export const addQuestionToQuiz = createAsyncThunk(
 export const getTopics = createAsyncThunk(
   'quiz/getTopics',
   async (_, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
     try {
       const res = await topicAPI.getTopics();
       return res.data;
@@ -104,6 +105,30 @@ export const getTopics = createAsyncThunk(
         }),
       );
       return rejectWithValue(err.message);
+    } finally {
+      dispatch(setIsFetching(false));
+    }
+  },
+);
+
+export const getTopic = createAsyncThunk(
+  'quiz/getTopic',
+  async (topicId: number, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
+    try {
+      const res = await topicAPI.getTopic(topicId);
+      return res.data;
+    } catch (e) {
+      const err = e as Error | AxiosError;
+      dispatch(
+        setAppMessage({
+          text: 'Something went wrong',
+          severity: 'error',
+        }),
+      );
+      return rejectWithValue(err.message);
+    } finally {
+      dispatch(setIsFetching(false));
     }
   },
 );
@@ -111,8 +136,8 @@ export const getTopics = createAsyncThunk(
 export const createTopic = createAsyncThunk(
   'quiz/createTopic',
   async (title: string, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
     try {
-      dispatch(setIsFetching(true));
       const res = await topicAPI.createTopic({title});
       dispatch(
         setAppMessage({

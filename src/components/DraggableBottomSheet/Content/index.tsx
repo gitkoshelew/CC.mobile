@@ -1,24 +1,32 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Header} from '@src/components/Header/index';
-import {FormSignIn} from '@src/components/FormSignIn/index';
 import Animated, {useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
 import {useTranslation} from 'react-i18next';
 import {Color} from '@theme/colors';
 import {SmallButton} from '@src/components/ui/SmallButton/index';
-
-const isAuth = false;
+import {useAppDispatch, useAppSelector} from '@hooks/hooks';
+import {logout} from '@src/bll/authReducer';
+import {Form} from '@src/components/Form';
 
 export type ContentPropsType = {
   isOpen: boolean;
+  isLogForm: boolean;
+  setIsLogForm: (value: boolean) => void;
 };
 
-export const Content = ({isOpen}: ContentPropsType) => {
+export const Content = ({isOpen, isLogForm, setIsLogForm}: ContentPropsType) => {
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(state => state.authReducer.isAuth);
   const {i18n} = useTranslation();
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
   };
   const opacityValue = useSharedValue(0);
+  const logoutHandler = () => {
+    dispatch(logout());
+    setIsLogForm(true);
+  };
 
   const opacity = useAnimatedStyle(() => {
     return {
@@ -38,12 +46,12 @@ export const Content = ({isOpen}: ContentPropsType) => {
           style={styles.changeLanguageButton}>
           <Text style={styles.textLanguage}>{i18n.language.toUpperCase()}</Text>
         </TouchableOpacity>
-        <View style={styles.rowButtons}>
-          <SmallButton type="theme" onPress={() => {}} />
-          <SmallButton type="exit" onPress={() => {}} />
+        <View style={isAuth && styles.rowButtons}>
+          <SmallButton type="theme" />
+          {isAuth && <SmallButton type="exit" onPress={logoutHandler} />}
         </View>
       </View>
-      {isAuth ? <Header /> : <FormSignIn />}
+      {isAuth ? <Header /> : <Form isLogForm={isLogForm} setIsLogForm={setIsLogForm} />}
     </Animated.View>
   );
 };

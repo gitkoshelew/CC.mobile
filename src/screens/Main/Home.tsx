@@ -1,8 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers';
 import {ScreenList} from '@src/navigation/navigation';
-import {SignUp} from './SignUp';
-import {FormSignIn} from '@src/components/FormSignIn';
 import {RootHomeScreenParamsList} from '@src/customTypes/navigation-types';
 import {Main} from '@src/screens/Main/Main/Main';
 
@@ -13,8 +11,6 @@ export const Home = () => {
     <ViewFlex>
       <Navigator>
         <Screen name={ScreenList.MAIN} component={Main} options={{headerShown: false}} />
-        <Screen name={ScreenList.SIGN_IN} component={FormSignIn} />
-        <Screen name={ScreenList.SIGN_UP} component={SignUp} />
       </Navigator>
     </ViewFlex>
   );

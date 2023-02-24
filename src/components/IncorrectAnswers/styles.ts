@@ -18,6 +18,7 @@ const Wrapper = styled.View`
 
 const AnswerBox = styled.View`
   flex-grow: 1;
+  width: 40%;
   padding: 4px 0 8px 9px;
   margin-bottom: 17px;
   background: ${Color.GrayLight};

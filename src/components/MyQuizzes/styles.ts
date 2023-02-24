@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  inner: {
+  picker: {
     width: 20,
     height: 20,
     borderRadius: 5,

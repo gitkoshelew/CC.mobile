@@ -21,6 +21,7 @@ export const QuizSettingsContainer = () => {
         params: {
           numberOfQuestions: +numberOfQuestions,
           idNewQuiz: res.id,
+          topicId: restValues.topicId,
         },
       });
     } catch (e) {
