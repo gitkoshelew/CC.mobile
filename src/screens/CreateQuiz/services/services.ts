@@ -74,6 +74,12 @@ export const addQuestionToQuiz = createAsyncThunk(
         quizId,
         questionId,
       });
+      dispatch(
+        setAppMessage({
+          text: 'The question is added',
+          severity: 'success',
+        }),
+      );
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(
@@ -145,6 +151,28 @@ export const createTopic = createAsyncThunk(
           severity: 'success',
         }),
       );
+      return res.data;
+    } catch (e) {
+      const err = e as Error | AxiosError;
+      dispatch(
+        setAppMessage({
+          text: 'Something went wrong',
+          severity: 'error',
+        }),
+      );
+      return rejectWithValue(err.message);
+    } finally {
+      dispatch(setIsFetching(false));
+    }
+  },
+);
+
+export const getQuestions = createAsyncThunk(
+  'questions/getQuestions',
+  async (_, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
+    try {
+      const res = await questionsAPI.getQuestions();
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;

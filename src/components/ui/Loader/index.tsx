@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import LottieView from 'lottie-react-native';
+import {Color} from '@theme/colors';
 
 export const Loader = () => {
   return (
@@ -17,6 +18,7 @@ export const Loader = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Color.TransparentBlack,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1,

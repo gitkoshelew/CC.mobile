@@ -4,13 +4,20 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Color} from '@theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {DefaultTimeType} from '@src/utils/transformTime';
 
 type HeaderPropsType = {
-  isActive: boolean;
+  time: DefaultTimeType;
   title: string;
+  topic: string;
+  onPress: () => void;
+  isActive: boolean;
+  difficulty: string;
+  isAddedQuestion: boolean;
 };
 
-export const Header = ({isActive, title}: HeaderPropsType) => {
+export const Header = (props: HeaderPropsType) => {
+  const {isActive, time, title, topic, onPress, difficulty, isAddedQuestion} = props;
   return (
     <View style={[styles.wrapper, isActive ? styles.active : styles.inactive]}>
       <View>
@@ -19,7 +26,7 @@ export const Header = ({isActive, title}: HeaderPropsType) => {
         </BlockBox>
         <View style={styles.container}>
           <Fontisto style={styles.icon} name="hashtag" color={Color.BlueLight} size={16} />
-          <Text style={styles.text}>React</Text>
+          <Text style={styles.text}>{topic}</Text>
         </View>
         <View style={styles.container}>
           <MaterialCommunityIcons
@@ -28,7 +35,7 @@ export const Header = ({isActive, title}: HeaderPropsType) => {
             color={Color.BlueLight}
             size={18}
           />
-          <Text style={styles.text}>light</Text>
+          <Text style={styles.text}>{difficulty}</Text>
         </View>
         <View style={styles.container}>
           <MaterialCommunityIcons
@@ -37,12 +44,23 @@ export const Header = ({isActive, title}: HeaderPropsType) => {
             color={Color.BlueLight}
             size={18}
           />
-          <Text style={styles.text}>1000 sec.</Text>
+          <Text style={styles.text}>
+            {time.minutes}m. {time.seconds}s.
+          </Text>
         </View>
       </View>
-      <TouchableOpacity>
-        <Ionicons name="add-circle-outline" size={40} color={Color.BlueLight} />
-      </TouchableOpacity>
+ <TouchableOpacity>
+      {isAddedQuestion ? (
+          <Ionicons name="ios-checkmark-circle-outline" size={40} color={Color.Green} />
+      ) : (
+          <Ionicons
+            name="add-circle-outline"
+            size={40}
+            color={Color.BlueLight}
+            onPress={onPress}
+          />
+      )}
+</TouchableOpacity>
     </View>
   );
 };

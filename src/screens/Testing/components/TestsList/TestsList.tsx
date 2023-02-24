@@ -14,6 +14,8 @@ import {TestCard} from '@src/components/TestCard';
 import {getAuth} from '@src/bll/authReducer';
 import {Loader} from '@src/components/ui/Loader';
 
+const tabsData = ['All', 'Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'];
+
 export const TestsList = () => {
   const {navigate} = useAppNavigate();
   const dispatch = useAppDispatch();
@@ -61,7 +63,7 @@ export const TestsList = () => {
     <>
       {isFetching && <Loader />}
       <View>
-        <Tabs />
+        <Tabs data={tabsData} onPress={() => {}} />
         <FilterBlock>
           <View style={styles.container}>
             <SwitchSelectors type={TypeSwitchSelect.FILTER} onPress={handlerSwitchSelectors} />

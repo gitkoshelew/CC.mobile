@@ -1,7 +1,7 @@
 import {Difficulty, TypeOptions} from '@customTypes/quiz-types';
 
 export const getNewQuestion = () => ({
-  id: Math.random(),
+  id: Math.random(), // ?
   title: '',
   description: '',
   content: {

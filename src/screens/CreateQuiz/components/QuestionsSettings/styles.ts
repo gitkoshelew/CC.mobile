@@ -1,29 +1,30 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
   },
-  ViewContainer: {
+  container: {
     flex: 1,
     paddingTop: 30,
-    paddingHorizontal: 21,
     paddingBottom: 3,
   },
   inner: {
     flex: 1,
     justifyContent: 'space-around',
   },
+  questionTabsContainer: {
+    paddingHorizontal: 21,
+  },
   tabsContainer: {
     flex: 1,
   },
   tabBarStyle: {
-    borderRadius: 15,
     marginBottom: 5,
   },
   tabBarIndicatorContainerStyle: {
     marginLeft: 30,
-    width: 230,
+    width: 270,
     marginBottom: 5,
   },
   tabBarLabelStyle: {

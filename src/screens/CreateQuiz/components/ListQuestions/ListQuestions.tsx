@@ -1,73 +1,64 @@
-import {useState} from 'react';
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
-import Accordion from 'react-native-collapsible/Accordion';
+import {useCallback, useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {Color} from '@theme/colors';
-import {Header} from '@src/screens/CreateQuiz/components/ListQuestions/Header/index';
-import {Content} from '@src/screens/CreateQuiz/components/ListQuestions/Content/index';
+import {questionResponseType, questionType} from '@customTypes/quiz-types';
+import {TabsQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/TabsQuestions/index';
+import {ListingQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/ListingQuestions/ListingQuestions';
 
-type ContentSectionType = {
-  title: string;
-  description: string;
-  content: {
-    options: string[];
-    correctAnswer: string[];
-  };
+type ListQuestionsPropsType = {
+  quizId: number;
+  topics: string[];
+  questions: questionResponseType[];
+  currentQuizQuestions: questionType[];
+  onPressAddQuestion: (questionId: number) => void;
 };
 
-const FAKE_CONTENT = [...Array(5)].map(() => ({
-  title: 'Question 1',
-  description:
-    'Bacon ipsum dolor amet chuck turducken landjaeger tongue spare ribs. Picanha beef prosciutto meatball turkey shoulder shank salami cupim doner jowl pork',
-  content: {
-    options: ['answer1', 'answer2', 'answer3', 'answer4'],
-    correctAnswer: ['answer2'],
-  },
-}));
+export const ListQuestions = ({
+  topics,
+  questions,
+  onPressAddQuestion,
+  currentQuizQuestions,
+}: ListQuestionsPropsType) => {
+  const [filteredQuestions, setFilteredQuestions] =
+    useState<questionResponseType[]>(questions);
 
-export const ListQuestions = () => {
-  const [activeSections, setActiveSections] = useState([]);
+  const handlerTabs = useCallback(
+    (value: string) => {
+      if (value === 'All') {
+        setFilteredQuestions(questions);
+        return;
+      }
+      setFilteredQuestions(questions.filter(el => el.topic.title === value));
+    },
+    [questions],
+  );
 
-  const setSections = (sections: never[]) => {
-    setActiveSections(sections.includes(undefined!) ? [] : sections);
-  };
-
-  const renderHeader = (section: ContentSectionType, index: number, isActive: boolean) => {
-    return <Header isActive={isActive} title={section.title} />;
-  };
-
-  const renderContent = (section: ContentSectionType, index: number, isActive: boolean) => {
-    return (
-      <Content
-        isActive={isActive}
-        description={section.description}
-        options={section.content.options}
-      />
-    );
-  };
+  useEffect(() => {
+    setFilteredQuestions(questions);
+  }, [questions]);
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <Accordion
-          align="bottom"
-          activeSections={activeSections}
-          sections={FAKE_CONTENT}
-          touchableComponent={TouchableOpacity}
-          renderHeader={renderHeader}
-          renderContent={renderContent}
-          duration={400}
-          onChange={setSections}
-          renderAsFlatList={false}
+    <View style={styles.wrapper}>
+      <TabsQuestions topics={topics} onPressTabs={handlerTabs} />
+      <View style={styles.container}>
+        <ListingQuestions
+          filteredQuestions={filteredQuestions}
+          onPressAddQuestion={onPressAddQuestion}
+          currentQuizQuestions={currentQuizQuestions}
         />
-      </ScrollView>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
     backgroundColor: Color.GrayLight,
     paddingTop: 10,
+    paddingHorizontal: 15,
+  },
+  container: {
+    marginBottom: 80,
   },
 });

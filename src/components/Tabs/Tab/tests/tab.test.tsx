@@ -6,6 +6,7 @@ const createTestProps = {
   item: 'test title',
   index: 1,
   isActive: true,
+  onPress: onPressMock,
   setCurrentTab: onPressMock,
 } as TabPropsType;
 

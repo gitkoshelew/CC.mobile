@@ -9,6 +9,7 @@ import {CreateQuestionContainer} from '@src/screens/CreateQuiz/components/Create
 import {ListQuestionsContainer} from '@src/screens/CreateQuiz/components/ListQuestions/ListQuestionsContainer';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {ScreenList} from '@src/navigation/navigation';
+import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers/index';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
@@ -54,21 +55,23 @@ export const QuestionsSettings = ({
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={keyboardVerticalOffset}
-      style={styles.container}>
-      <View style={styles.ViewContainer}>
+      style={styles.wrapper}>
+      <View style={styles.container}>
         <CustomModal
           isModalVisible={isModalVisible}
           onPress={setIsModalVisible}
           text="Create a question to move on to the next one"
         />
-        <View style={styles.container}>
+        <ViewFlex>
           <View style={styles.inner}>
-            <QuestionsTabs
-              activeTab={currentQuestionIndex}
-              listQuestionsTabs={listQuestionsTabs}
-              amountFilledQuestion={questions.length}
-              onPressCurrentQuestion={onPressCurrentQuestionPressed}
-            />
+            <View style={styles.questionTabsContainer}>
+              <QuestionsTabs
+                activeTab={currentQuestionIndex}
+                listQuestionsTabs={listQuestionsTabs}
+                amountFilledQuestion={questions.length}
+                onPressCurrentQuestion={onPressCurrentQuestionPressed}
+              />
+            </View>
             <View style={styles.tabsContainer}>
               <Tab.Navigator
                 screenOptions={{
@@ -91,12 +94,20 @@ export const QuestionsSettings = ({
                 />
                 <Tab.Screen
                   name={ScreenList.LIST_QUESTIONS}
-                  component={ListQuestionsContainer}
+                  children={() => (
+                    <ListQuestionsContainer
+                      quizId={idNewQuiz}
+                      currentQuizQuestions={questions}
+                      changeQuestions={changeQuestions}
+                      currentQuestionIndex={currentQuestionIndex}
+                      changeCurrentQuestionIndex={setCurrentQuestionIndex}
+                    />
+                  )}
                 />
               </Tab.Navigator>
             </View>
           </View>
-        </View>
+        </ViewFlex>
       </View>
     </KeyboardAvoidingView>
   );

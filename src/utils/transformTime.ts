@@ -7,7 +7,14 @@ type transformTimeType = {
   totalSeconds?: number;
 };
 
-export const transformTime = ({format, minutes, seconds, totalSeconds}: transformTimeType) => {
+export type DefaultTimeType = {minutes: number; seconds: number};
+
+export const transformTime = ({
+  format,
+  minutes,
+  seconds,
+  totalSeconds,
+}: transformTimeType): number | DefaultTimeType => {
   switch (format) {
     case 'onlySeconds':
       return minutes! * 60 + seconds!;
