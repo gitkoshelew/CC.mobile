@@ -47,10 +47,12 @@ const SmallTextBox = styled.Text`
 `;
 
 const TextDescription = styled.Text`
+  text-align: center;
   margin-bottom: 15px;
-  font-size: 16px;
+  font-size: 20px;
   font-family: 'Montserrat-Regular';
-  color: ${Color.GrayMedium};
+  color: ${Color.GrayDark};
+  font-weight: 600;
 `;
 
 const Title = styled.Text`

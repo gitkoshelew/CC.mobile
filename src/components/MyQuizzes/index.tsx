@@ -1,8 +1,9 @@
 import React from 'react';
 import {ImageBackground, Text, View} from 'react-native';
 import {styles} from '@src/components/MyQuizzes/styles';
-import {ListQuizzes} from '@src/components/MyQuizzes/ListQuizzes/index';
-import {CustomText} from '@src/components/ui/ReadyStyles/Boxes/index';
+import {ListQuizzes} from '@src/components/MyQuizzes/ListQuizzes';
+import {CustomText, TextDescription} from '@src/components/ui/ReadyStyles/Boxes';
+import {getQuizResponseType} from '@customTypes/quizzesAPI-types';
 
 const listImages = [
   require('../../assets/images/light.jpeg'),
@@ -10,7 +11,12 @@ const listImages = [
   require('../../assets/images/hard.jpeg'),
 ];
 
-export const MyQuizzes = () => {
+type MyQuizzesType = {
+  isLogin: boolean;
+  myQuizzes: getQuizResponseType[];
+};
+
+export const MyQuizzes = ({isLogin, myQuizzes}: MyQuizzesType) => {
   return (
     <>
       <View style={styles.container}>
@@ -29,7 +35,11 @@ export const MyQuizzes = () => {
           ))}
         </View>
       </View>
-      <ListQuizzes />
+      {isLogin ? (
+        <ListQuizzes myQuizzes={myQuizzes} />
+      ) : (
+        <TextDescription>You need to login or register</TextDescription>
+      )}
     </>
   );
 };

@@ -19,6 +19,7 @@ export const register = createAsyncThunk(
           severity: 'success',
         }),
       );
+      dispatch(getAuth());
       dispatch(setIsAuth(true));
     } catch (e) {
       const err = e as Error | AxiosError;
@@ -47,6 +48,7 @@ export const login = createAsyncThunk(
           severity: 'success',
         }),
       );
+      dispatch(getAuth());
       dispatch(setIsAuth(true));
     } catch (e) {
       const err = e as Error | AxiosError;

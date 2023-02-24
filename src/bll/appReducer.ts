@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppMessageType} from '@customTypes/notificationTypes';
 
 export type AppStateT = {
+  isLogin: boolean;
   isFetching: boolean;
   messages: AppMessageType[];
 };
@@ -9,6 +10,7 @@ export type AppStateT = {
 const slice = createSlice({
   name: 'app',
   initialState: {
+    isLogin: false,
     isFetching: false,
     messages: [],
   } as AppStateT,
@@ -33,9 +35,13 @@ const slice = createSlice({
     setIsFetching(state, action: PayloadAction<boolean>) {
       state.isFetching = action.payload;
     },
+    setIsLogin(state, action: PayloadAction<boolean>) {
+      state.isLogin = action.payload;
+    },
   },
 });
 
 export const appReducer = slice.reducer;
 
-export const {removeLastMessage, hideAppMessage, setAppMessage, setIsFetching} = slice.actions;
+export const {removeLastMessage, hideAppMessage, setAppMessage, setIsFetching, setIsLogin} =
+  slice.actions;

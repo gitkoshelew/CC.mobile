@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import {Color} from '@theme/colors';
 
 const ViewContainer = styled.View`
-  padding: 30px 21px 3px 21px;
+  padding: 10px 21px 3px 21px;
 `;
 
 const ScrollViewContainer = styled.ScrollView`
