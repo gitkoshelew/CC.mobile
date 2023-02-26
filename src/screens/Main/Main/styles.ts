@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   },
   profile: {
     marginTop: 50,
-    marginBottom: 60,
+    marginBottom: 40,
   },
   containerBalls: {
     flexDirection: 'row',

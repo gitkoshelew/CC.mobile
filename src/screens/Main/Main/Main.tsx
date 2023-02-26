@@ -29,23 +29,21 @@ export const Main = () => {
           />
         </View>
         <View style={styles.profile}>
-          <View>
+          <ViewCenter>
+            <UserIconContainer>
+              <FontAwesome
+                name={isLoggedIn ? 'user' : 'user-secret'}
+                size={80}
+                style={!isLoggedIn && styles.icon}
+              />
+            </UserIconContainer>
             <ViewCenter>
-              <UserIconContainer>
-                <FontAwesome
-                  name={isLoggedIn ? 'user' : 'user-secret'}
-                  size={80}
-                  style={!isLoggedIn && styles.icon}
-                />
-              </UserIconContainer>
-              <ViewCenter>
-                <CustomText fs="22px" color={Color.Semitransparent}>
-                  {isLoggedIn && userData.name}
-                </CustomText>
-                <Title>{isLoggedIn ? userData.nickname : 'Incognito'}</Title>
-              </ViewCenter>
+              <CustomText fs="22px" color={Color.Semitransparent}>
+                {isLoggedIn && userData.name}
+              </CustomText>
+              <Title>{isLoggedIn ? userData.nickname : 'Incognito'}</Title>
             </ViewCenter>
-          </View>
+          </ViewCenter>
         </View>
         <View style={styles.containerBalls}>
           <LateralBall value={isLoggedIn ? '73%' : '0'} description="Success" />

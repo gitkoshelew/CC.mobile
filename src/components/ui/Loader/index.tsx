@@ -21,7 +21,9 @@ const styles = StyleSheet.create({
     backgroundColor: Color.TransparentBlack,
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 1,
+    width: '100%',
+    height: '100%',
+    zIndex: 100,
   },
   indicator: {
     width: 130,
