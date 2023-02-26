@@ -2,18 +2,16 @@ import {QuestionTab} from './QuestionTab/index';
 import {ScrollViewBlock, TabsBlock} from './styles';
 
 export type QuestionsTabsPropsType = {
-  onPressCurrentQuestion: (id: number) => void;
-  listQuestionsTabs: number[];
-  amountFilledQuestion: number;
   activeTab: number;
+  numberOfQuestions: number;
+  amountFilledQuestion: number;
+  onPressCurrentQuestion: (id: number) => void;
 };
 
-export const QuestionsTabs = ({
-  listQuestionsTabs,
-  amountFilledQuestion,
-  activeTab,
-  ...props
-}: QuestionsTabsPropsType) => {
+export const QuestionsTabs = (props: QuestionsTabsPropsType) => {
+  const {numberOfQuestions, amountFilledQuestion, activeTab, onPressCurrentQuestion} = props;
+  const listQuestionsTabs = [...Array(numberOfQuestions)].map((el, i) => i);
+
   return (
     <ScrollViewBlock
       horizontal
@@ -23,10 +21,10 @@ export const QuestionsTabs = ({
       <TabsBlock flexDirection={listQuestionsTabs.length > 10 ? 'column' : 'row'}>
         {listQuestionsTabs.map(id => (
           <QuestionTab
-            key={id}
             id={id}
+            key={id}
+            onPress={onPressCurrentQuestion}
             isActive={id === activeTab}
-            onPress={props.onPressCurrentQuestion}
             isFilledQuestion={amountFilledQuestion > id}
           />
         ))}

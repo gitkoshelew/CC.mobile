@@ -1,4 +1,4 @@
-import {useRef} from 'react';
+import React, {useRef} from 'react';
 import {
   CreateQuestion,
   CreateQuestionFieldType,
@@ -9,7 +9,8 @@ import {createQuestion} from '@src/screens/CreateQuiz/services/services';
 import {getQuizQuestions} from '@src/bll/quizReducer';
 import {useAppDispatch} from '@hooks/hooks';
 import {transformTimeSerializer} from '@src/screens/CreateQuiz/serializer/index';
-import {Wrapper} from '@src/screens/CreateQuiz/components/CreateQuestion/styles';
+import {BlockLayout} from '@src/screens/CreateQuiz/components/CreateQuestion/styles';
+import {ScrollView, StyleSheet} from 'react-native';
 
 export type CreateQuestionPropsType = {
   quizId: number;
@@ -17,7 +18,7 @@ export type CreateQuestionPropsType = {
   currentQuestion: questionType;
   numberOfQuestions: number;
   currentQuestionIndex: number;
-  onPressCurrentQuestionPressed: (value: number) => void;
+  changeCurrentQuestionIndex: (value: number) => void;
 };
 
 export type SaveQuestionValuesType = {
@@ -32,10 +33,10 @@ export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
     currentQuestion,
     numberOfQuestions,
     currentQuestionIndex,
-    onPressCurrentQuestionPressed,
+    changeCurrentQuestionIndex,
   } = props;
   const dispatch = useAppDispatch();
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<ScrollView>(null);
 
   const handlerSaveQuestion = async (values: SaveQuestionValuesType) => {
     const {valuesFields, correctAnswers} = values;
@@ -46,23 +47,26 @@ export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
       content: {options: changedOptions as string[], correctAnswer: correctAnswers},
       quizId,
     };
+
     await dispatch(
       createQuestion(transformTimeSerializer({newQuestion, format: 'onlySeconds'})),
     );
     const questions = await dispatch(getQuizQuestions(quizId)).unwrap();
     changeQuestions(questions.question);
+
+    changeCurrentQuestionIndex(currentQuestionIndex + 1);
+    scrollRef.current?.scrollTo({x: 0, y: 0, animated: true});
   };
 
   return (
-    <Wrapper ref={scrollRef} showsVerticalScrollIndicator={false}>
+    <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+      {currentQuestion.title && <BlockLayout style={StyleSheet.absoluteFill} />}
       <CreateQuestion
-        scrollRef={scrollRef}
         currentQuestion={currentQuestion}
         numberOfQuestions={numberOfQuestions}
         onSaveQuestion={handlerSaveQuestion}
         currentQuestionIndex={currentQuestionIndex}
-        onPressCurrentQuestionPressed={onPressCurrentQuestionPressed}
       />
-    </Wrapper>
+    </ScrollView>
   );
 };
