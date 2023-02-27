@@ -8,29 +8,31 @@ import {useTranslation} from 'react-i18next';
 import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
 
 type CreateAnswerPropsType = {
-  control: Control<CreateQuestionFieldType>;
-  fields: {id: string; option: string}[];
-  isCheckingDuplicate: boolean;
   type: string;
+  fields: {id: string; option: string}[];
+  control: Control<CreateQuestionFieldType>;
+  errors: string | undefined;
   correctAnswer: string[];
+  isCheckingDuplicate: boolean;
   addNewOptionPressed: () => void;
   deleteOptionPressed: (index: number) => void;
   checkedCorrectOption: (index: number, checked: boolean, textOption: string) => void;
 };
 
 export const CreateAnswer = ({
-  fields,
-  isCheckingDuplicate,
-  correctAnswer,
-  control,
   type,
+  fields,
+  control,
+  errors,
+  correctAnswer,
+  isCheckingDuplicate,
   addNewOptionPressed,
   deleteOptionPressed,
   checkedCorrectOption,
 }: CreateAnswerPropsType) => {
   const isDisabledDeleteBtn = fields.length <= 2;
   const {t} = useTranslation('validationFields');
-  console.log(correctAnswer);
+  const errorsMessage = isCheckingDuplicate ? t('option.CheckingForDuplication') : errors;
 
   return (
     <View>
@@ -49,7 +51,7 @@ export const CreateAnswer = ({
           isCheckingDuplicate={isCheckingDuplicate}
         />
       ))}
-      {isCheckingDuplicate && <TextError>{t('option.CheckingForDuplication')}</TextError>}
+      {errorsMessage && <TextError>{errorsMessage}</TextError>}
       <ButtonAnswerBox>
         <AddButton onPress={addNewOptionPressed} disabled={fields.length > 6} />
         <TextBox>Add answer</TextBox>
