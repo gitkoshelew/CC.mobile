@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {ListQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/ListQuestions';
-import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers/index';
+import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers';
 import {useAppDispatch} from '@hooks/hooks';
 import {
   addQuestionToQuiz,
@@ -16,7 +16,7 @@ import {
 import {TopicType} from '@customTypes/quizzesAPI-types';
 import {getQuizQuestions} from '@src/bll/quizReducer';
 
-const initialQuestion = {
+export const initialQuestion = {
   id: 1,
   title: '',
   description: '',

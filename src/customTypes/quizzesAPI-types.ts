@@ -23,6 +23,10 @@ export type getQuizResponseType = {
     password: string;
     status: null;
   };
+  topic: {
+    id: number;
+    title: string;
+  };
   question: questionTypeResponse[];
 };
 export type addQuestionToQuiz = {

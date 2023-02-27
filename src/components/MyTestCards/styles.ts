@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    fontSize: 14,
+    fontSize: 16,
     color: Color.Black,
     fontWeight: '600',
   },
@@ -43,5 +43,25 @@ export const styles = StyleSheet.create({
     right: '10%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  contentContainer: {
+    marginTop: 6,
+    justifyContent: 'space-between',
+  },
+  iconTopic: {
+    marginRight: 5,
+    marginTop: 3,
+    marginLeft: 2,
+  },
+  icon: {
+    marginRight: 5,
+    marginTop: 2,
+  },
+  text: {
+    fontFamily: 'Montserrat-Regular',
+    fontSize: 13,
+  },
+  content: {
+    flexDirection: 'row',
   },
 });
