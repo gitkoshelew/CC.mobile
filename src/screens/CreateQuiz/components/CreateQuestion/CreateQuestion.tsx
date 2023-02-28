@@ -98,14 +98,14 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
         setError('minutes', {type: ' custom', message: 'Set the time'});
         return;
       }
-      if (correctAnswers.length < 2 && values.type === 'multi') {
+      if (correctAnswers.length < 2 && values.type === TypeOptions.multi) {
         setError('options', {
           type: 'custom',
           message: 'You must choose at least 2 correct answers',
         });
         return;
       }
-      if (correctAnswers.length === 0 && values.type === 'single') {
+      if (correctAnswers.length === 0 && values.type === TypeOptions.single) {
         setError('options', {type: 'custom', message: 'You must choose  1 correct answers'});
         return;
       }
