@@ -30,7 +30,6 @@ export const CreateAnswer = ({
 }: CreateAnswerPropsType) => {
   const isDisabledDeleteBtn = fields.length <= 2;
   const {t} = useTranslation('validationFields');
-  console.log(correctAnswer);
 
   return (
     <View>
