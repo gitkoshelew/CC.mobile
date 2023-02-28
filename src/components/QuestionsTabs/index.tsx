@@ -10,7 +10,7 @@ export type QuestionsTabsPropsType = {
 
 export const QuestionsTabs = (props: QuestionsTabsPropsType) => {
   const {numberOfQuestions, amountFilledQuestion, activeTab, onPressCurrentQuestion} = props;
-  const listQuestionsTabs = [...Array(numberOfQuestions)].map((el, i) => i);
+  const listQuestionsTabs = [...Array(numberOfQuestions)].map((_, i) => i);
 
   return (
     <ScrollViewBlock
