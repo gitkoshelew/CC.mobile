@@ -1,9 +1,7 @@
-import {Tabs} from '@src/components/Tabs';
-import {Sort} from '@src/components/Sort';
 import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {StyleSheet, View} from 'react-native';
 import {FilterBlock} from './styles';
-import {useCallback, useEffect, useRef} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {deleteQuiz, getQuizQuestions, getQuizzes, setStateQuizzes} from '@src/bll/quizReducer';
@@ -12,8 +10,9 @@ import {MyTestCards} from '@src/components/MyTestCards';
 import {ScrollView} from 'react-native-gesture-handler';
 import {TestCard} from '@src/components/TestCard';
 import {Loader} from '@src/components/ui/Loader';
-
-const tabsData = ['All', 'Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'];
+import {getTopics} from '@src/screens/CreateQuiz/services/services';
+import {getQuizResponseType, TopicType} from '@customTypes/quizzesAPI-types';
+import {TabsQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/TabsQuestions';
 
 export const TestsList = () => {
   const {navigate} = useAppNavigate();
@@ -22,12 +21,16 @@ export const TestsList = () => {
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
   const quizzesData = useAppSelector(state => state.quizReducer.quizzes);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
-  const quizzes = quizzesData.map(quiz => ({
+  const [filteredQuizzes, setFilteredQuizzes] = useState<getQuizResponseType[]>(quizzesData);
+  const [topics, setTopics] = useState(['all']);
+  const quizzes = filteredQuizzes.map(quiz => ({
     id: quiz.id,
     title: quiz.title,
     authorId: quiz.authorId,
+    topic: quiz.topic.title,
+    questions: quiz.question.length,
   }));
-  const myQuizzes = [...quizzesData].filter(quiz => quiz.authorId === authorId);
+  const myQuizzes = [...filteredQuizzes].filter(quiz => quiz.authorId === authorId);
   const onDismiss = useCallback(
     (id: number) => {
       dispatch(deleteQuiz(id))
@@ -55,15 +58,38 @@ export const TestsList = () => {
     },
     [dispatch, navigate],
   );
+  const handlerTabs = useCallback(
+    (value: string) => {
+      if (value === 'All') {
+        setFilteredQuizzes(quizzesData);
+        return;
+      }
+      setFilteredQuizzes(quizzesData.filter(el => el.topic.title === value));
+    },
+    [quizzesData],
+  );
+  
   useEffect(() => {
     dispatch(getQuizzes());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAuth());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getTopics())
+      .unwrap()
+      .then(res => {
+        setTopics(['All', ...res.map((el: TopicType) => el.title)]);
+      });
   }, [dispatch]);
 
   return (
     <>
       {isFetching && <Loader />}
       <View>
-        <Tabs data={tabsData} onPress={() => {}} />
+        <TabsQuestions topics={topics} onPressTabs={handlerTabs} />
         <FilterBlock>
           <View style={styles.container}>
             <SwitchSelectors
@@ -72,12 +98,13 @@ export const TestsList = () => {
               disabled={!isLoggedIn}
             />
           </View>
-          <Sort />
         </FilterBlock>
         <ScrollView style={styles.scroll}>
           {quizzes.map(test =>
             test.authorId === authorId ? (
               <MyTestCards
+                questions={test.questions}
+                topic={test.topic}
                 key={test.id}
                 onPress={onPressStartTestingHandler}
                 title={test.title}
@@ -87,6 +114,8 @@ export const TestsList = () => {
               />
             ) : (
               <TestCard
+                questions={test.questions}
+                topic={test.topic}
                 key={test.id}
                 onPress={onPressStartTestingHandler}
                 title={test.title}

@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {BlockBox} from '@src/components/ui/ReadyStyles/Boxes/index';
+import {BlockBox} from '@src/components/ui/ReadyStyles/Boxes';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Color} from '@theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
