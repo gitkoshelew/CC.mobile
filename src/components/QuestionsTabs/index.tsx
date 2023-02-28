@@ -8,8 +8,7 @@ export type QuestionsTabsPropsType = {
   onPressCurrentQuestion: (id: number) => void;
 };
 
-export const QuestionsTabs = (props: QuestionsTabsPropsType) => {
-  const {numberOfQuestions, amountFilledQuestion, activeTab, onPressCurrentQuestion} = props;
+export const QuestionsTabs = ({numberOfQuestions, amountFilledQuestion, activeTab, onPressCurrentQuestion}: QuestionsTabsPropsType) => {
   const listQuestionsTabs = [...Array(numberOfQuestions)].map((_, i) => i);
 
   return (
