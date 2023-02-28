@@ -1,4 +1,4 @@
-import {Dimensions, Text} from 'react-native';
+import {Dimensions, Text, View} from 'react-native';
 import {styles} from './styles';
 import {AppButton} from '../ui/AppButton';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
@@ -16,9 +16,13 @@ import Animated, {
 } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Color} from '@theme/colors';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface ITestCard extends Pick<PanGestureHandlerProps, 'simultaneousHandlers'> {
   id: number;
+  topic: string;
+  questions: number;
   onPress: (id: number) => void;
   title: string;
   onDismiss?: (id: number) => void;
@@ -30,6 +34,8 @@ const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.3;
 
 export const MyTestCards = ({
   onPress,
+  questions,
+  topic,
   title,
   id,
   onDismiss,
@@ -87,8 +93,30 @@ export const MyTestCards = ({
         onGestureEvent={panGesture}
         simultaneousHandlers={simultaneousHandlers}>
         <Animated.View style={[styles.test, rStyle]}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.description}>Description</Text>
+          <View>
+            <Text style={styles.title}>{title}</Text>
+            <View style={styles.contentContainer}>
+              <View style={styles.content}>
+                <Fontisto
+                  style={styles.iconTopic}
+                  name="hashtag"
+                  color={Color.BlueLight}
+                  size={10}
+                />
+                <Text style={styles.text}>{topic}</Text>
+              </View>
+              <View style={styles.content}>
+                <MaterialCommunityIcons
+                  style={styles.icon}
+                  name="progress-question"
+                  color={Color.BlueLight}
+                  size={13}
+                />
+                <Text style={styles.text}>difficulty</Text>
+              </View>
+            </View>
+          </View>
+          <Text style={styles.description}>Questions: {questions}</Text>
           <AppButton type={TypeAppButton.PRIMARY} title="Start" onPress={() => onPress(id)} />
         </Animated.View>
       </PanGestureHandler>

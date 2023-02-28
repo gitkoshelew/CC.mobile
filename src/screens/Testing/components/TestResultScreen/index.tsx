@@ -1,5 +1,5 @@
 import {TestResult} from '@src/components/TestResult';
-import {View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import {styles} from './styles';
 import {ProgressBar} from '@src/components/ProgressBar';
 import {ViewBlockResult} from '@src/screens/Testing/components/TestProcess/styles';
@@ -30,14 +30,16 @@ export const TestResultScreen = () => {
       <ViewBlockResult style={styles.result}>
         <ProgressBar data={resultData} />
       </ViewBlockResult>
-      <View>
-        <TestResult
-          result={result}
-          onClickClose={onClickClose}
-          onClickTry={onClickTry}
-          incorrectAnswers={progressData}
-        />
-      </View>
+      <ScrollView>
+        <View style={styles.testResult}>
+          <TestResult
+            result={result}
+            onClickClose={onClickClose}
+            onClickTry={onClickTry}
+            incorrectAnswers={progressData}
+          />
+        </View>
+      </ScrollView>
     </ViewContainer>
   );
 };
