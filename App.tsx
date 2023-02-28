@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import {useCallback, useEffect} from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
