@@ -10,6 +10,7 @@ import {ListQuestionsContainer} from '@src/screens/CreateQuiz/components/ListQue
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {ScreenList} from '@src/navigation/navigation';
 import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers/index';
+import {ExitButton} from '@src/screens/CreateQuiz/components/QuestionsSettings/ExitButton/index';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
@@ -30,13 +31,12 @@ export const QuestionsSettings = ({
   changeQuestions,
   numberOfQuestions,
 }: QuestionsSettingsPropsType) => {
-  const listQuestionsTabs = [...Array(numberOfQuestions)].map((el, i) => i);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const currentQuestion = questions[currentQuestionIndex] || {...getNewQuestion(), topicId};
 
-  const onPressCurrentQuestionPressed = useCallback(
+  const handlerCurrentQuestion = useCallback(
     (index: number) => {
       if (
         (!currentQuestion.title && index > questions.length - 1) ||
@@ -57,6 +57,7 @@ export const QuestionsSettings = ({
       keyboardVerticalOffset={keyboardVerticalOffset}
       style={styles.wrapper}>
       <View style={styles.container}>
+        <ExitButton />
         <CustomModal
           isModalVisible={isModalVisible}
           onPress={setIsModalVisible}
@@ -67,9 +68,9 @@ export const QuestionsSettings = ({
             <View style={styles.questionTabsContainer}>
               <QuestionsTabs
                 activeTab={currentQuestionIndex}
-                listQuestionsTabs={listQuestionsTabs}
+                numberOfQuestions={numberOfQuestions}
                 amountFilledQuestion={questions.length}
-                onPressCurrentQuestion={onPressCurrentQuestionPressed}
+                onPressCurrentQuestion={handlerCurrentQuestion}
               />
             </View>
             <View style={styles.tabsContainer}>
@@ -88,7 +89,7 @@ export const QuestionsSettings = ({
                       currentQuestion={currentQuestion}
                       numberOfQuestions={numberOfQuestions}
                       currentQuestionIndex={currentQuestionIndex}
-                      onPressCurrentQuestionPressed={onPressCurrentQuestionPressed}
+                      changeCurrentQuestionIndex={setCurrentQuestionIndex}
                     />
                   )}
                 />

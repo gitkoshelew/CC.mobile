@@ -1,40 +1,22 @@
-import {Image, ScrollView, TouchableOpacity, View} from 'react-native';
-import {useAppDispatch, useAppSelector} from '@hooks/hooks';
-import {login, register} from '@src/bll/authReducer';
-import {Title, BlockBoxMarginRight} from '@src/components/ui/ReadyStyles/Boxes';
-import {ViewCenter, ViewFlexForTwoElements} from '@src/components/ui/ReadyStyles/Containers';
+import {Image, ScrollView, View} from 'react-native';
+import {useAppSelector} from '@hooks/hooks';
+import {CustomText, Title} from '@src/components/ui/ReadyStyles/Boxes';
+import {ViewCenter} from '@src/components/ui/ReadyStyles/Containers';
 import {UserIconContainer} from '@src/components/Header/styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {LateralBall} from '@src/components/LateralBall';
 import {CentralBall} from '@src/components/CentralBall';
 import {MyQuizzes} from '@src/components/MyQuizzes';
 import {MemoryCardsList} from '@src/components/MemoryCardsList';
-import {AppButton} from '@src/components/ui/AppButton';
-import {TypeAppButton} from '@customTypes/AppButtun-types';
 import {styles} from '@src/screens/Main/Main/styles';
-import {useEffect} from 'react';
-import {getQuizzes} from '@src/bll/quizReducer';
+import {Color} from '@theme/colors';
 
 export const Main = () => {
-  const dispatch = useAppDispatch();
-  const authData = useAppSelector(state => state.authReducer.auth);
-  const isLogin = useAppSelector(state => state.authReducer.isAuth);
+  const userData = useAppSelector(state => state.authReducer.auth);
+  const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
   const allQuizzes = useAppSelector(state => state.quizReducer.quizzes);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
   const myQuizzes = allQuizzes.filter(quiz => quiz.authorId === authorId);
-  const onPressLogin = () => {
-    dispatch(login())
-      .unwrap()
-      .then(() => {
-        dispatch(getQuizzes());
-      });
-  };
-  const onPressRegister = () => {
-    dispatch(register());
-  };
-  useEffect(() => {
-    isLogin && dispatch(getQuizzes());
-  }, [dispatch, isLogin]);
 
   return (
     <ScrollView style={styles.wrapper}>
@@ -47,47 +29,32 @@ export const Main = () => {
           />
         </View>
         <View style={styles.profile}>
-          <View>
+          <ViewCenter>
+            <UserIconContainer>
+              <FontAwesome
+                name={isLoggedIn ? 'user' : 'user-secret'}
+                size={80}
+                style={!isLoggedIn && styles.icon}
+              />
+            </UserIconContainer>
             <ViewCenter>
-              <UserIconContainer>
-                <FontAwesome
-                  name={isLogin ? 'user' : 'user-secret'}
-                  size={80}
-                  style={!isLogin && styles.icon}
-                />
-              </UserIconContainer>
-              <ViewCenter>
-                <Title>{isLogin ? authData.nickname : 'Incognito'}</Title>
-              </ViewCenter>
+              <CustomText fs="22px" color={Color.Semitransparent}>
+                {isLoggedIn && userData.name}
+              </CustomText>
+              <Title>{isLoggedIn ? userData.nickname : 'Incognito'}</Title>
             </ViewCenter>
-          </View>
+          </ViewCenter>
         </View>
         <View style={styles.containerBalls}>
-          <LateralBall value={isLogin ? '73%' : '0'} description="Success" />
-          <CentralBall value={isLogin ? myQuizzes.length : 0} description="Quizzes" />
-          <LateralBall value={isLogin ? '1' : '0'} description="Ranks" />
+          <LateralBall value={isLoggedIn ? '73%' : '0'} description="Success" />
+          <CentralBall value={isLoggedIn ? myQuizzes.length : 0} description="Quizzes" />
+          <LateralBall value={isLoggedIn ? '1' : '0'} description="Ranks" />
         </View>
       </View>
       <View style={styles.content}>
-        <MyQuizzes isLogin={isLogin} myQuizzes={myQuizzes} />
-        <MemoryCardsList isLogin={isLogin} />
+        <MyQuizzes isLoggedIn={isLoggedIn} myQuizzes={myQuizzes} />
+        <MemoryCardsList isLoggedIn={isLoggedIn} />
       </View>
-      {!isLogin && (
-        <ViewFlexForTwoElements>
-          <BlockBoxMarginRight>
-            <TouchableOpacity>
-              <AppButton title="login" type={TypeAppButton.PRIMARY} onPress={onPressLogin} />
-            </TouchableOpacity>
-          </BlockBoxMarginRight>
-          <TouchableOpacity>
-            <AppButton
-              title="registration"
-              type={TypeAppButton.PRIMARY}
-              onPress={onPressRegister}
-            />
-          </TouchableOpacity>
-        </ViewFlexForTwoElements>
-      )}
     </ScrollView>
   );
 };

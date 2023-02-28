@@ -6,6 +6,7 @@ import {getQuizResponseType} from '@customTypes/quizzesAPI-types';
 import {getQuizQuestions} from '@src/bll/quizReducer';
 import {ScreenList} from '@src/navigation/navigation';
 import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
+import {TextDescription} from '@src/components/ui/ReadyStyles/Boxes/index';
 
 export const DIFFICULTY_ARRAY = ['light', 'medium', 'hard'];
 type ListQuizzesType = {
@@ -23,7 +24,7 @@ export const ListQuizzes = ({myQuizzes}: ListQuizzesType) => {
     },
     [dispatch, navigate],
   );
-  return (
+  return myQuizzes.length ? (
     <FlatList
       style={styles.container}
       horizontal
@@ -48,5 +49,7 @@ export const ListQuizzes = ({myQuizzes}: ListQuizzesType) => {
         </TouchableOpacity>
       )}
     />
+  ) : (
+    <TextDescription>You don't have any quizzes</TextDescription>
   );
 };

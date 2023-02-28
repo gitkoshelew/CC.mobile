@@ -1,12 +1,15 @@
 import styled from 'styled-components/native';
+import {Color} from '@theme/colors';
 
-export const Wrapper = styled.ScrollView`
-  padding: 0 21px;
+export const BlockLayout = styled.View`
+  background-color: ${Color.Transparent};
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 `;
 
 export const Container = styled.View`
-  padding-top: 15px;
-  padding-bottom: 40px;
+  padding: 15px 21px 40px 21px;
 `;
 
 export const ContainerSaveButton = styled.View`

@@ -10,8 +10,8 @@ type ScreenLayoutPropsType = {
 export const ScreenLayout = ({isFetching, children}: ScreenLayoutPropsType) => {
   return (
     <View style={styles.container}>
-      {isFetching && <Loader />}
       {children}
+      {isFetching && <Loader />}
     </View>
   );
 };

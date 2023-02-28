@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import {Color} from '@theme/colors';
 
 const ViewContainer = styled.View`
-  padding: 10px 21px 3px 21px;
+  padding: 60px 21px 3px 21px;
 `;
 
 const ScrollViewContainer = styled.ScrollView`
@@ -44,7 +44,9 @@ const ViewDynamicFlex = styled.View<{
   justifyC: string;
   alignI: string;
   flexD?: string;
+  flex?: number;
 }>`
+  flex: ${props => props.flex || 'none'};
   justify-content: ${props => props.justifyC};
   align-items: ${props => props.alignI}
   flex-direction: ${props => (props.flexD ? props.flexD : 'column')};

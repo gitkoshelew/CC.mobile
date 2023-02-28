@@ -17,22 +17,23 @@ export type ContentPropsType = {
 
 export const Content = ({isOpen, isLogForm, setIsLogForm}: ContentPropsType) => {
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(state => state.authReducer.isAuth);
+  const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
   const {i18n} = useTranslation();
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
   };
   const opacityValue = useSharedValue(0);
-  const logoutHandler = () => {
-    dispatch(logout());
-    setIsLogForm(true);
-  };
 
   const opacity = useAnimatedStyle(() => {
     return {
       opacity: opacityValue.value,
     };
   });
+
+  const handlerLogout = () => {
+    dispatch(logout());
+    setIsLogForm(true);
+  };
 
   isOpen
     ? (opacityValue.value = withTiming(1, {duration: 1500}))
@@ -46,12 +47,12 @@ export const Content = ({isOpen, isLogForm, setIsLogForm}: ContentPropsType) => 
           style={styles.changeLanguageButton}>
           <Text style={styles.textLanguage}>{i18n.language.toUpperCase()}</Text>
         </TouchableOpacity>
-        <View style={isAuth && styles.rowButtons}>
+        <View style={isLoggedIn && styles.rowButtons}>
           <SmallButton type="theme" />
-          {isAuth && <SmallButton type="exit" onPress={logoutHandler} />}
+          {isLoggedIn && <SmallButton type="exit" onPress={handlerLogout} />}
         </View>
       </View>
-      {isAuth ? <Header /> : <Form isLogForm={isLogForm} setIsLogForm={setIsLogForm} />}
+      {isLoggedIn ? <Header /> : <Form isLogForm={isLogForm} setIsLogForm={setIsLogForm} />}
     </Animated.View>
   );
 };

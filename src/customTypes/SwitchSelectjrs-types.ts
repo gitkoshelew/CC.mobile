@@ -2,6 +2,7 @@ export interface ISwitchSelectProps {
   onPress?: (value: string) => void;
   value?: string | number;
   type: TypeSwitchSelect;
+  disabled?: boolean;
 }
 
 export enum TypeSwitchSelect {

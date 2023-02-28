@@ -1,4 +1,4 @@
-import {Platform, ScrollView, View} from 'react-native';
+import {Platform, View} from 'react-native';
 import {
   BlockBox,
   ContainerDynamicWidth,
@@ -16,14 +16,10 @@ import {AppButton} from '@src/components/ui/AppButton';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {useFieldArray, useForm, useWatch} from 'react-hook-form';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {useAppNavigate} from '@hooks/hooks';
 import {questionType, TypeOptions} from '@customTypes/quiz-types';
 import {transformTime} from '@src/utils/transformTime';
 import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
-import {Container, ContainerSaveButton, NextQuestionButton} from './styles';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import {Color} from '@theme/colors';
-import {ScreenList} from '@src/navigation/navigation';
+import {Container} from './styles';
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
 import {useTranslation} from 'react-i18next';
@@ -45,27 +41,18 @@ export type CreateQuestionFieldType = {
 };
 
 export type CreateQuestionPropsType = {
-  scrollRef: React.RefObject<ScrollView>;
   onSaveQuestion: (values: SaveQuestionValuesType) => void;
   currentQuestion: questionType;
   numberOfQuestions: number;
   currentQuestionIndex: number;
-  onPressCurrentQuestionPressed: (value: number) => void;
 };
 
 const numberOfLines = Platform.OS === 'ios' ? undefined : 2;
 
 export const CreateQuestion = (props: CreateQuestionPropsType) => {
-  const {
-    scrollRef,
-    onSaveQuestion,
-    currentQuestion,
-    numberOfQuestions,
-    currentQuestionIndex,
-    onPressCurrentQuestionPressed,
-  } = props;
+  const {onSaveQuestion, currentQuestion} = props;
   const dataAnswerType = [TypeOptions.single, TypeOptions.multi];
-  const resetNavigate = useAppNavigate().reset;
+
   const {t} = useTranslation(['createQuestion', 'validationFields']);
   const {
     control,
@@ -103,11 +90,6 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
       : [];
   }, [currentArrayOptions]);
   const isCheckingDuplicate = new Set(arrayOptions).size !== arrayOptions.length;
-
-  const onPressNextQuestion = useCallback(() => {
-    onPressCurrentQuestionPressed(currentQuestionIndex + 1);
-    scrollRef.current?.scrollTo({x: 0, y: 0, animated: true});
-  }, [currentQuestionIndex, onPressCurrentQuestionPressed, scrollRef]);
 
   const onPressSaveQuestion = useCallback(
     (values: CreateQuestionFieldType) => {
@@ -177,8 +159,6 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
   useEffect(() => {
     setCorrectAnswers(currentQuestion.content.correctAnswer);
   }, [currentQuestion.content.correctAnswer]);
-
-  const isQuestionsEnd = currentQuestionIndex + 1 === numberOfQuestions;
 
   return (
     <Container>
@@ -255,33 +235,13 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
         correctAnswer={correctAnswers}
       />
       <BlockBox>
-        <ViewDynamicFlex justifyC="flex-end" alignI="center" flexD="row">
-          <ContainerSaveButton>
-            <AppButton
-              title={t('saveQuestionBtn')}
-              type={TypeAppButton.PRIMARY}
-              onPress={handleSubmit(onPressSaveQuestion)}
-              disabled={isCheckingDuplicate}
-            />
-          </ContainerSaveButton>
-          {isQuestionsEnd ? (
-            <AppButton
-              title={t('exitBtn')}
-              type={TypeAppButton.PRIMARY}
-              onPress={() => {
-                resetNavigate({
-                  index: 0,
-                  routes: [{name: ScreenList.HOME}],
-                });
-              }}
-            />
-          ) : (
-            <NextQuestionButton
-              onPress={onPressNextQuestion}
-              disabled={!currentQuestion.title}>
-              <AntDesign name="rightcircle" size={36} color={Color.DarkBlue} />
-            </NextQuestionButton>
-          )}
+        <ViewDynamicFlex justifyC="center" alignI="center" flexD="row">
+          <AppButton
+            title={t('saveQuestionBtn')}
+            type={TypeAppButton.PRIMARY}
+            onPress={handleSubmit(onPressSaveQuestion)}
+            disabled={isCheckingDuplicate}
+          />
         </ViewDynamicFlex>
       </BlockBox>
       <ViewCenter />

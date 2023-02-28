@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {View} from 'react-native';
 import {SelectAndCreateTopic} from '@src/components/SelectAndCreateTopic/SelectAndCreateTopic';
 import {
   Control,
@@ -48,12 +47,10 @@ export const SelectAndCreateTopicContainer = <T extends FieldValues>({
   }, [dispatch, setValue]);
 
   return (
-    <View>
-      <SelectAndCreateTopic
-        mainControl={control}
-        topics={topics}
-        onCreateTopic={handlerCreateTopic}
-      />
-    </View>
+    <SelectAndCreateTopic
+      mainControl={control}
+      topics={topics}
+      onCreateTopic={handlerCreateTopic}
+    />
   );
 };

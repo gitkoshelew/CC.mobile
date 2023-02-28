@@ -3,8 +3,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {ViewCenter} from '../ui/ReadyStyles/Containers';
 import {Title} from '../ui/ReadyStyles/Boxes';
 import {View} from 'react-native';
+import {useAppSelector} from '@hooks/hooks';
 
 export const Header = () => {
+  const userName = useAppSelector(state => state.authReducer.auth.name);
+
   return (
     <Wrapper>
       <View>
@@ -13,7 +16,7 @@ export const Header = () => {
             <FontAwesome name={'user'} size={80} />
           </UserIconContainer>
           <ViewCenter>
-            <Title>User Name</Title>
+            <Title>{userName}</Title>
           </ViewCenter>
         </ViewCenter>
       </View>
