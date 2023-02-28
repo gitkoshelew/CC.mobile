@@ -16,7 +16,7 @@ import {
 import {TopicType} from '@customTypes/quizzesAPI-types';
 import {getQuizQuestions} from '@src/bll/quizReducer';
 
-export const initialQuestion = {
+const initialQuestion = {
   id: 1,
   title: '',
   description: '',

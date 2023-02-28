@@ -7,4 +7,7 @@ export const styles = StyleSheet.create({
       android: 0,
     }),
   },
+  testResult: {
+    paddingBottom: 30,
+  },
 });
