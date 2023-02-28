@@ -60,6 +60,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
     reset,
     setValue,
     setError,
+    clearErrors,
     formState: {errors},
   } = useForm<CreateQuestionFieldType>({
     defaultValues: {
@@ -97,6 +98,18 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
         setError('minutes', {type: ' custom', message: 'Set the time'});
         return;
       }
+      if (correctAnswers.length < 2 && values.type === TypeOptions.multi) {
+        setError('options', {
+          type: 'custom',
+          message: 'You must choose at least 2 correct answers',
+        });
+        return;
+      }
+      if (correctAnswers.length === 0 && values.type === TypeOptions.single) {
+        setError('options', {type: 'custom', message: 'You must choose  1 correct answers'});
+        return;
+      }
+
       onSaveQuestion({valuesFields: values, correctAnswers: correctAnswers});
     },
     [correctAnswers, onSaveQuestion, setError],
@@ -125,11 +138,12 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
     (index: number, checked: boolean, textOption: string) => {
       if (textOption !== '' && checked) {
         setCorrectAnswers(state => [...state, textOption]);
+        clearErrors('options');
       } else {
         setCorrectAnswers(state => state.filter(el => el !== textOption));
       }
     },
-    [],
+    [clearErrors],
   );
 
   useEffect(() => {
@@ -228,6 +242,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
         fields={fields}
         control={control}
         type={currentType}
+        errors={errors.options?.message}
         isCheckingDuplicate={isCheckingDuplicate}
         addNewOptionPressed={onPressAddNewOption}
         deleteOptionPressed={onPressDeleteOption}
