@@ -6,6 +6,7 @@ import {Color} from '@theme/colors';
 import {Control, Controller, FieldValues, Path, useForm} from 'react-hook-form';
 import {TopicType} from '@customTypes/quizzesAPI-types';
 import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
+import {useTranslation} from 'react-i18next';
 
 type SelectAndCreateTopicPropsType<T extends FieldValues> = {
   mainControl: Control<T>;
@@ -22,6 +23,7 @@ export const SelectAndCreateTopic = <T extends FieldValues>({
   onCreateTopic,
   topics,
 }: SelectAndCreateTopicPropsType<T>) => {
+  const {t} = useTranslation(['topic', 'validationFields']);
   const {control, handleSubmit, reset} = useForm<InputFieldType>();
 
   const onPressCreateTopic = useCallback(
@@ -65,7 +67,7 @@ export const SelectAndCreateTopic = <T extends FieldValues>({
             validate: {
               required: value => {
                 if (value === 0) {
-                  return 'Select or create topic';
+                  return t('Select or create topic', {ns: 'validationFields'})!;
                 }
               },
             },
@@ -77,12 +79,12 @@ export const SelectAndCreateTopic = <T extends FieldValues>({
           <TextInputHookForm
             control={control}
             name="topicName"
-            placeholder="Topic name..."
+            placeholder={t('Topic name')!}
             rules={{
-              required: 'Title is required',
+              required: `${t('topic.required', {ns: 'validationFields'})}`,
               maxLength: {
                 value: 20,
-                message: 'Title should be maximum 20 characters long',
+                message: `${t('topic.maxLength', {ns: 'validationFields'})}`,
               },
             }}
           />

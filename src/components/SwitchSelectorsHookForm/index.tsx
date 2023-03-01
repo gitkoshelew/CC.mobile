@@ -11,6 +11,7 @@ type TextInputHookFormPropsType<T extends FieldValues> = TextInputProps & {
   label?: string | null;
   rules?: Object;
   control: Control<T>;
+  onPressSwitchSelect?: (value: string, onPress: (value: string) => void) => void;
 };
 
 export const SwitchSelectorsHookForm = <T extends FieldValues>({
@@ -19,7 +20,13 @@ export const SwitchSelectorsHookForm = <T extends FieldValues>({
   type,
   rules = {},
   control,
+  onPressSwitchSelect,
 }: TextInputHookFormPropsType<T>) => {
+  const handlerSwitchSelector = (value: string, onPress: (value: string) => void) => {
+    onPress(value);
+    onPressSwitchSelect && onPressSwitchSelect(value, onPress);
+  };
+
   return (
     <BlockBox>
       {label && <TextBox>{label}</TextBox>}
@@ -28,7 +35,11 @@ export const SwitchSelectorsHookForm = <T extends FieldValues>({
         name={name}
         rules={rules}
         render={({field: {onChange, value}}) => (
-          <SwitchSelectors type={type} onPress={onChange} value={value} />
+          <SwitchSelectors
+            type={type}
+            onPress={(selector: string) => handlerSwitchSelector(selector, onChange)}
+            value={value}
+          />
         )}
       />
     </BlockBox>

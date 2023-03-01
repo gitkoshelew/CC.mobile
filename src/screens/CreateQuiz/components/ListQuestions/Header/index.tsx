@@ -5,6 +5,8 @@ import {Color} from '@theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DefaultTimeType} from '@src/utils/transformTime';
+import {useTranslation} from 'react-i18next';
+import {TransformLocalizationLanguage} from '@src/utils/TransformLocalizationLanguage';
 
 type HeaderPropsType = {
   time: DefaultTimeType;
@@ -17,7 +19,9 @@ type HeaderPropsType = {
 };
 
 export const Header = (props: HeaderPropsType) => {
+  const {t} = useTranslation('SwitchSelectors');
   const {isActive, time, title, topic, onPress, difficulty, isAddedQuestion} = props;
+
   return (
     <View style={[styles.wrapper, isActive ? styles.active : styles.inactive]}>
       <View>
@@ -35,7 +39,7 @@ export const Header = (props: HeaderPropsType) => {
             color={Color.BlueLight}
             size={18}
           />
-          <Text style={styles.text}>{difficulty}</Text>
+          <Text style={styles.text}>{t(TransformLocalizationLanguage({difficulty}))}</Text>
         </View>
         <View style={styles.container}>
           <MaterialCommunityIcons
