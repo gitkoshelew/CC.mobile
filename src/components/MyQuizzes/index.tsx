@@ -4,6 +4,7 @@ import {styles} from '@src/components/MyQuizzes/styles';
 import {ListQuizzes} from '@src/components/MyQuizzes/ListQuizzes';
 import {CustomText, TextDescription} from '@src/components/ui/ReadyStyles/Boxes';
 import {getQuizResponseType} from '@customTypes/quizzesAPI-types';
+import {useTranslation} from 'react-i18next';
 
 const listImages = [
   require('../../assets/images/light.jpeg'),
@@ -17,13 +18,14 @@ type MyQuizzesType = {
 };
 
 export const MyQuizzes = ({isLoggedIn, myQuizzes}: MyQuizzesType) => {
+  const {t} = useTranslation(['profile', 'validationFields']);
   return (
     <>
       <View style={styles.container}>
-        <CustomText fs="24px" fw="bold" m="0 80px 0 0">
-          My quizzes
+        <CustomText fs="20px" fw="bold" m="0 80px 0 0">
+          {t('My quizzes')}
         </CustomText>
-        <Text style={styles.text}>Difficulty</Text>
+        <Text style={styles.text}>{t('Difficulty')}</Text>
         <View style={styles.picker}>
           {listImages.map((el, i) => (
             <ImageBackground
@@ -38,7 +40,7 @@ export const MyQuizzes = ({isLoggedIn, myQuizzes}: MyQuizzesType) => {
       {isLoggedIn ? (
         <ListQuizzes myQuizzes={myQuizzes} />
       ) : (
-        <TextDescription>You need to login or register</TextDescription>
+        <TextDescription>{t('Need to log in', {ns: 'validationFields'})}</TextDescription>
       )}
     </>
   );
