@@ -51,7 +51,6 @@ const Navigation = () => {
                 {route.name === 'Home' && <DraggableBottomSheet />}
               </>
             ),
-            tabBarShowLabel: true,
             ...screenOptions,
           })}>
           <Tab.Screen name={ScreenList.HOME} component={Home} options={{headerShown: false}} />

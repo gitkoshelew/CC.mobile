@@ -2,17 +2,17 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppMessageType} from '@customTypes/notificationTypes';
 
 export type AppStateT = {
-  isLogin: boolean;
   isFetching: boolean;
   messages: AppMessageType[];
+  isScrollEnabled: boolean;
 };
 
 const slice = createSlice({
   name: 'app',
   initialState: {
-    isLogin: false,
-    isFetching: false,
     messages: [],
+    isFetching: false,
+    isScrollEnabled: true,
   } as AppStateT,
   reducers: {
     setAppMessage(
@@ -35,13 +35,18 @@ const slice = createSlice({
     setIsFetching(state, action: PayloadAction<boolean>) {
       state.isFetching = action.payload;
     },
-    setIsLogin(state, action: PayloadAction<boolean>) {
-      state.isLogin = action.payload;
+    setIsScrollEnabled(state, action: PayloadAction<boolean>) {
+      state.isScrollEnabled = action.payload;
     },
   },
 });
 
 export const appReducer = slice.reducer;
 
-export const {removeLastMessage, hideAppMessage, setAppMessage, setIsFetching, setIsLogin} =
-  slice.actions;
+export const {
+  removeLastMessage,
+  hideAppMessage,
+  setAppMessage,
+  setIsFetching,
+  setIsScrollEnabled,
+} = slice.actions;

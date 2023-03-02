@@ -1,10 +1,11 @@
 import {useCallback, useState} from 'react';
 import Accordion from 'react-native-collapsible/Accordion';
-import {TouchableOpacity} from 'react-native';
+import {ScrollView, TouchableOpacity} from 'react-native';
 import {questionResponseType, questionType} from '@customTypes/quiz-types';
 import {Header} from '@src/screens/CreateQuiz/components/ListQuestions/Header/index';
 import {Content} from '@src/screens/CreateQuiz/components/ListQuestions/Content/index';
 import {DefaultTimeType, transformTime} from '@src/utils/transformTime';
+import {useAppSelector} from '@hooks/hooks';
 
 type ListingQuestionsPropsType = {
   filteredQuestions: questionResponseType[];
@@ -17,6 +18,7 @@ export const ListingQuestions = ({
   onPressAddQuestion,
   currentQuizQuestions,
 }: ListingQuestionsPropsType) => {
+  const isScrollEnabled = useAppSelector(state => state.app.isScrollEnabled);
   const [activeSections, setActiveSections] = useState([]);
 
   const setSections = useCallback((sections: never[]) => {
@@ -61,16 +63,18 @@ export const ListingQuestions = ({
   );
 
   return (
-    <Accordion
-      align="bottom"
-      activeSections={activeSections}
-      sections={filteredQuestions}
-      touchableComponent={TouchableOpacity}
-      renderHeader={renderHeader}
-      renderContent={renderContent}
-      duration={400}
-      onChange={setSections}
-      renderAsFlatList={true}
-    />
+    <ScrollView scrollEnabled={isScrollEnabled}>
+      <Accordion
+        align="bottom"
+        activeSections={activeSections}
+        sections={filteredQuestions}
+        touchableComponent={TouchableOpacity}
+        renderHeader={renderHeader}
+        renderContent={renderContent}
+        duration={400}
+        onChange={setSections}
+        renderAsFlatList={false}
+      />
+    </ScrollView>
   );
 };
