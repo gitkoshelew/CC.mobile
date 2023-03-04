@@ -3,7 +3,6 @@ import {appReducer} from '../appReducer';
 import {quizReducer} from '../quizReducer';
 import {processReducer} from '@src/bll/processReducer';
 import {resultReducer} from '@src/bll/resultReducer';
-import {checkReducer} from '@src/bll/checkReducer';
 import {authReducer} from '@src/bll/authReducer';
 
 export const store = configureStore({
@@ -13,7 +12,6 @@ export const store = configureStore({
     quizReducer,
     processReducer,
     resultReducer,
-    checkReducer,
   },
 });
 

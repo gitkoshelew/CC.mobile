@@ -13,14 +13,15 @@ import {Loader} from '@src/components/ui/Loader';
 import {getTopics} from '@src/screens/CreateQuiz/services/services';
 import {getQuizResponseType, TopicType} from '@customTypes/quizzesAPI-types';
 import {TabsQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/TabsQuestions';
+import {clearStateResult} from '@src/bll/resultReducer';
 
 export const TestsList = () => {
   const {navigate} = useAppNavigate();
   const dispatch = useAppDispatch();
   const isFetching = useAppSelector(state => state.app.isFetching);
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
-  const quizzesData = useAppSelector(state => state.quizReducer.quizzes);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
+  const [quizzesData, setQuizzesData] = useState<getQuizResponseType[]>([]);
   const isScrollEnabled = useAppSelector(state => state.app.isScrollEnabled);
 
   const [filteredQuizzes, setFilteredQuizzes] = useState<getQuizResponseType[]>(quizzesData);
@@ -57,6 +58,7 @@ export const TestsList = () => {
       dispatch(getQuizQuestions(id))
         .unwrap()
         .then(() => navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_PROCESS}));
+      dispatch(clearStateResult());
     },
     [dispatch, navigate],
   );
@@ -72,8 +74,15 @@ export const TestsList = () => {
   );
 
   useEffect(() => {
-    dispatch(getQuizzes());
+    dispatch(getQuizzes())
+      .unwrap()
+      .then(res => {
+        setQuizzesData(res);
+      });
   }, [dispatch]);
+  useEffect(() => {
+    setFilteredQuizzes(quizzesData);
+  }, [quizzesData]);
 
   useEffect(() => {
     dispatch(getTopics())

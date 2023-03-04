@@ -5,6 +5,7 @@ import {CheckboxComponent} from '@src/components/MultipleCheckboxes/CheckboxComp
 export type ICheckboxComponent = {
   label: string;
   value: number;
+  isChecked: boolean;
 };
 export type IItem = {
   item: ICheckboxComponent;
