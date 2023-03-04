@@ -9,4 +9,5 @@ export enum TypeSwitchSelect {
   LEVEL = 'level',
   NUMBER = 'number',
   FILTER = 'filter',
+  TYPE_ANSWER = 'typeAnswer',
 }

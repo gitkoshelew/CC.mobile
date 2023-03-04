@@ -68,13 +68,9 @@ export const TestsList = () => {
     },
     [quizzesData],
   );
-  
-  useEffect(() => {
-    dispatch(getQuizzes());
-  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getAuth());
+    dispatch(getQuizzes());
   }, [dispatch]);
 
   useEffect(() => {
