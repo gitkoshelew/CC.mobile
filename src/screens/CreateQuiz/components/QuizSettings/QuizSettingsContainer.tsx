@@ -9,9 +9,11 @@ import {createQuiz} from '@src/screens/CreateQuiz/services/services';
 import {CustomText} from '@src/components/ui/ReadyStyles/Boxes/index';
 import {Color} from '@theme/colors';
 import {ViewDynamicFlex} from '@src/components/ui/ReadyStyles/Containers/index';
+import {useTranslation} from 'react-i18next';
 
 export const QuizSettingsContainer = () => {
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
+  const {t} = useTranslation('validationFields');
   const isFetching = useAppSelector(state => state.app.isFetching);
   const dispatch = useAppDispatch();
   const {navigate} = useAppNavigate();
@@ -40,7 +42,7 @@ export const QuizSettingsContainer = () => {
       ) : (
         <ViewDynamicFlex flex={1} justifyC="center" alignI="center">
           <CustomText fs="22px" color={Color.GrayDark}>
-            You need to login or register
+            {t('Need to log in')}
           </CustomText>
         </ViewDynamicFlex>
       )}

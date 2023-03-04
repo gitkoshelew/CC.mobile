@@ -8,8 +8,9 @@ import {
   View,
 } from 'react-native';
 import {Content} from '@src/components/DraggableBottomSheet/Content/Content';
-import {useAppSelector} from '@hooks/hooks';
+import {useAppDispatch, useAppSelector} from '@hooks/hooks';
 import {getStyles} from '@src/components/DraggableBottomSheet/styles';
+import {setIsScrollEnabled} from '@src/bll/appReducer';
 
 export const {width: WINDOW_WIDTH, height: WINDOW_HEIGHT}: ScaledSize =
   Dimensions.get('window');
@@ -19,6 +20,7 @@ const MAX_DOWNWARD_TRANSLATE_Y = 0;
 const DRAG_THRESHOLD = 30;
 
 export const DraggableBottomSheet = () => {
+  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isLogForm, setIsLogForm] = useState(false);
 
@@ -37,7 +39,11 @@ export const DraggableBottomSheet = () => {
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderGrant: () => {
+        dispatch(setIsScrollEnabled(false));
         animatedValue.setOffset(lastGestureDy.current);
+      },
+      onPanResponderEnd: () => {
+        dispatch(setIsScrollEnabled(true));
       },
       onPanResponderMove: (e, gesture) => {
         animatedValue.setValue(gesture.dy);

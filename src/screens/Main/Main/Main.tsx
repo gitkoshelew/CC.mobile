@@ -10,16 +10,19 @@ import {MyQuizzes} from '@src/components/MyQuizzes';
 import {MemoryCardsList} from '@src/components/MemoryCardsList';
 import {styles} from '@src/screens/Main/Main/styles';
 import {Color} from '@theme/colors';
+import {useTranslation} from 'react-i18next';
 
 export const Main = () => {
+  const {t} = useTranslation('profile');
   const userData = useAppSelector(state => state.authReducer.auth);
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
   const allQuizzes = useAppSelector(state => state.quizReducer.quizzes);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
+  const isScrollEnabled = useAppSelector(state => state.app.isScrollEnabled);
   const myQuizzes = allQuizzes.filter(quiz => quiz.authorId === authorId);
 
   return (
-    <ScrollView style={styles.wrapper}>
+    <ScrollView style={styles.wrapper} scrollEnabled={isScrollEnabled}>
       <View style={styles.aboutUser}>
         <View style={styles.containerProfile}>
           <Image
@@ -41,14 +44,14 @@ export const Main = () => {
               <CustomText fs="22px" color={Color.Semitransparent}>
                 {isLoggedIn && userData.name}
               </CustomText>
-              <Title>{isLoggedIn ? userData.nickname : 'Incognito'}</Title>
+              <Title>{isLoggedIn ? userData.nickname : t('Incognito')}</Title>
             </ViewCenter>
           </ViewCenter>
         </View>
         <View style={styles.containerBalls}>
-          <LateralBall value={isLoggedIn ? '73%' : '0'} description="Success" />
-          <CentralBall value={isLoggedIn ? myQuizzes.length : 0} description="Quizzes" />
-          <LateralBall value={isLoggedIn ? '1' : '0'} description="Ranks" />
+          <LateralBall value={isLoggedIn ? '73%' : '0'} description={t('Success')} />
+          <CentralBall value={isLoggedIn ? myQuizzes.length : 0} description={t('Quizzes')} />
+          <LateralBall value={isLoggedIn ? '1' : '0'} description={t('Ranks')} />
         </View>
       </View>
       <View style={styles.content}>

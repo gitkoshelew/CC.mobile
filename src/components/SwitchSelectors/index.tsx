@@ -5,15 +5,18 @@ import {View} from 'react-native';
 import {ISwitchSelectProps} from 'src/customTypes/SwitchSelectjrs-types';
 import {useMemo} from 'react';
 import {styles} from './styles';
+import {useTranslation} from 'react-i18next';
 
 export const SwitchSelectors = ({onPress, type, value, disabled}: ISwitchSelectProps) => {
+  const {t} = useTranslation('SwitchSelectors');
+
   const containerData = useMemo(
     () =>
       type === 'level'
         ? [
-            {label: 'Easy', value: 'light'},
-            {label: 'Medium', value: 'medium'},
-            {label: 'Hard', value: 'hard'},
+            {label: t('level.0'), value: 'light'},
+            {label: t('level.1'), value: 'medium'},
+            {label: t('level.2'), value: 'hard'},
           ]
         : type === 'number'
         ? [
@@ -23,11 +26,16 @@ export const SwitchSelectors = ({onPress, type, value, disabled}: ISwitchSelectP
             {label: '25', value: '25'},
             {label: '30', value: '30'},
           ]
+        : type === 'typeAnswer'
+        ? [
+            {label: t('type.0'), value: 'single'},
+            {label: t('type.1'), value: 'multi'},
+          ]
         : [
             {label: 'All', value: 'All'},
             {label: 'My', value: 'My'},
           ],
-    [type],
+    [t, type],
   );
 
   return (
