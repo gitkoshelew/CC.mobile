@@ -21,6 +21,8 @@ export const TestsList = () => {
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
   const quizzesData = useAppSelector(state => state.quizReducer.quizzes);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
+  const isScrollEnabled = useAppSelector(state => state.app.isScrollEnabled);
+
   const [filteredQuizzes, setFilteredQuizzes] = useState<getQuizResponseType[]>(quizzesData);
   const [topics, setTopics] = useState(['all']);
   const quizzes = filteredQuizzes.map(quiz => ({
@@ -95,7 +97,7 @@ export const TestsList = () => {
             />
           </View>
         </FilterBlock>
-        <ScrollView style={styles.scroll}>
+        <ScrollView style={styles.scroll} scrollEnabled={isScrollEnabled}>
           {quizzes.map(test =>
             test.authorId === authorId ? (
               <MyTestCards

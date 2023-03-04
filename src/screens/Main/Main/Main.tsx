@@ -18,10 +18,11 @@ export const Main = () => {
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
   const allQuizzes = useAppSelector(state => state.quizReducer.quizzes);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
+  const isScrollEnabled = useAppSelector(state => state.app.isScrollEnabled);
   const myQuizzes = allQuizzes.filter(quiz => quiz.authorId === authorId);
 
   return (
-    <ScrollView style={styles.wrapper}>
+    <ScrollView style={styles.wrapper} scrollEnabled={isScrollEnabled}>
       <View style={styles.aboutUser}>
         <View style={styles.containerProfile}>
           <Image
