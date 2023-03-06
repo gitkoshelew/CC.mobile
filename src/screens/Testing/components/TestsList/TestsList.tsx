@@ -26,7 +26,7 @@ export const TestsList = () => {
   const authorId = useAppSelector(state => state.authReducer.auth.id);
   const [quizzesData, setQuizzesData] = useState<getQuizResponseType[]>([]);
   const isScrollEnabled = useAppSelector(state => state.app.isScrollEnabled);
-
+  const [quizzesData, setQuizzesData] = useState<getQuizResponseType[]>([]);
   const [filteredQuizzes, setFilteredQuizzes] = useState<getQuizResponseType[]>(quizzesData);
   const [topics, setTopics] = useState(['all']);
   const quizzes = filteredQuizzes.map(quiz => ({
@@ -83,6 +83,9 @@ export const TestsList = () => {
         setQuizzesData(res);
       });
   }, [dispatch]);
+  useEffect(() => {
+    setFilteredQuizzes(quizzesData);
+  }, [quizzesData]);
 
   useEffect(() => {
     setFilteredQuizzes(quizzesData);
