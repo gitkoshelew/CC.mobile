@@ -9,7 +9,7 @@ export const BlockLayout = styled.View`
 `;
 
 export const Container = styled.View`
-  padding: 15px 21px 40px 21px;
+  padding: 15px 21px 70px 21px;
   background-color: ${props => props.theme.layout};
 `;
 

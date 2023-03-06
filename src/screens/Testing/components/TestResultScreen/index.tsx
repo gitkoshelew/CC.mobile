@@ -13,8 +13,8 @@ export const TestResultScreen = () => {
   const resultData = useAppSelector(state => state.resultReducer.result);
   const incorrectData = resultData.filter(e => e.questionStatus === 'error');
   const correctData = resultData.filter(e => e.questionStatus === 'right');
-  const progressData: IncorrectAnswer[] = incorrectData.map(e => ({
-    number: e.id,
+  const progressData: IncorrectAnswer[] = incorrectData.map((e, i) => ({
+    number: i + 1,
     answer: e.answer,
   }));
   const result = (100 / resultData.length) * correctData.length;

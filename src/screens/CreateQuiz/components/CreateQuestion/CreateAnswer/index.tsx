@@ -31,12 +31,14 @@ export const CreateAnswer = ({
   checkedCorrectOption,
 }: CreateAnswerPropsType) => {
   const isDisabledDeleteBtn = fields.length <= 2;
-  const {t} = useTranslation('validationFields');
-  const errorsMessage = isCheckingDuplicate ? t('option.CheckingForDuplication') : errors;
+  const {t} = useTranslation(['createQuestion', 'validationFields']);
+  const errorsMessage = isCheckingDuplicate
+    ? t('option.CheckingForDuplication', {ns: 'validationFields'})
+    : errors;
 
   return (
     <View>
-      <TextBox>Answer choice</TextBox>
+      <TextBox>{t('Answer choice')}</TextBox>
       {fields.map((item, index) => (
         <AddingAnswer
           key={item.id}
@@ -54,7 +56,7 @@ export const CreateAnswer = ({
       {errorsMessage && <TextError>{errorsMessage}</TextError>}
       <ButtonAnswerBox>
         <AddButton onPress={addNewOptionPressed} disabled={fields.length > 6} />
-        <TextBox>Add answer</TextBox>
+        <TextBox>{t('Add answer')}</TextBox>
       </ButtonAnswerBox>
     </View>
   );

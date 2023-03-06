@@ -1,21 +1,53 @@
 {
   "createQuiz": {
-    "title": "Заголовок",
-    "description": "Описание",
-    "topic": "Тема",
-    "numberOfQuestions": "Количество вопросов",
-    "questionSettings": "Создать вопросы"
+    "Test title": "Заголовок",
+    "Description": "Описание",
+    "Select or create topic": "Выберите или создайте топик",
+    "Number of questions": "Количество вопросов",
+    "Question settings": "Создать вопросы"
   },
   "createQuestion": {
-    "title": "Заголовок",
-    "description": "Описание",
-    "difficulty": "Сложность",
-    "answerType": "Тип ответа",
-    "timer": "Таймер",
-    "answerChoice": "Варианты ответов",
-    "addAnswerBtn": "Добавить ответ",
-    "saveQuestionBtn": "Сохранить вопрос",
-    "exitBtn": "Выход"
+    "Title question": "Заголовок",
+    "Description": "Описание",
+    "Difficulty": "Сложность",
+    "Select or create topic": "Выберите или создайте топик",
+    "Answer type": "Тип ответа",
+    "Timer": "Таймер",
+    "Answer choice": "Варианты ответов",
+    "Add answer": "Добавить ответ",
+    "Save question": "Сохранить вопрос",
+    "First create a question" : "Сначала создайте вопрос",
+    "validationFields" : {
+      "Choose at least 2 correct answers" : "Выберите минимум 2 правильных ответа",
+      "Choose 1 correct answer" : "Выберите 1 правильный ответ"
+    }
+
+  },
+  "profile" : {
+    "Ranks" : "Ранг",
+    "Success" : "Успех",
+    "Quizzes" : "Тестов",
+    "Incognito": "Инкогнито",
+    "My quizzes" : "Му тесты",
+    "Difficulty" : "Сложность",
+    "Memory cards" : "Карточки для запоминания"
+  },
+  "topic" : {
+    "Topic name" : "Название темы"
+  },
+  "SwitchSelectors" : {
+    "level" : [ "Легко", "Нормально", "Сложно"],
+    "type" : [ "один", "много"]
+  },
+  "AppSelect" : {
+    "default value" : "Выберите параметр",
+    "type" : [ "один", "много"]
+  },
+  "labelsNavigation" : {
+    "questionsSettings" :{
+      "Create question" : "Создать вопрос",
+      "List questions" : "Список вопросов"
+    }
   },
   "validationFields": {
     "title": {
@@ -28,9 +60,18 @@
       "maxLength": "Описание должно содержать не более 50 символов"
     },
     "option": {
-      "required": "option is required",
-      "minLength": "Option should be maximum 50 characters long",
+      "required": "Описание обязательно",
+      "minLength": "Заголовок должен содержать не более 50 символов",
       "CheckingForDuplication": "У вас 2 одинаковых ответа"
-    }
+    },
+    "timer": {
+      "Set the time" : "Установите таймер"
+    },
+    "topic" : {
+      "required": "Тема обязательна",
+      "maxLength": "Тема должен содержать не более 20 символов",
+      "Select or create topic" : "Выберите или создайте тему"
+    },
+    "Need to log in" : "Вам нужно войти или зарегестрироваться"
   }
 }

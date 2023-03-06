@@ -12,6 +12,7 @@ import {ScreenList} from '@src/navigation/navigation';
 import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers/index';
 import {ExitButton} from '@src/screens/CreateQuiz/components/QuestionsSettings/ExitButton/index';
 import {ThemeContext} from 'styled-components/native';
+import {useTranslation} from 'react-i18next';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
@@ -32,6 +33,7 @@ export const QuestionsSettings = ({
   changeQuestions,
   numberOfQuestions,
 }: QuestionsSettingsPropsType) => {
+  const {t} = useTranslation(['createQuestion', 'labelsNavigation']);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const theme = useContext(ThemeContext);
@@ -62,7 +64,7 @@ export const QuestionsSettings = ({
         <CustomModal
           isModalVisible={isModalVisible}
           onPress={setIsModalVisible}
-          text="Create a question to move on to the next one"
+          text={t('First create a question')}
         />
         <ViewFlex>
           <View style={styles().inner}>
@@ -83,6 +85,11 @@ export const QuestionsSettings = ({
                 }}>
                 <Tab.Screen
                   name={ScreenList.CREATE_QUESTION}
+                  options={{
+                    tabBarLabel: t('questionsSettings.Create question', {
+                      ns: 'labelsNavigation',
+                    })!,
+                  }}
                   children={() => (
                     <CreateQuestionContainer
                       quizId={idNewQuiz}
@@ -96,6 +103,11 @@ export const QuestionsSettings = ({
                 />
                 <Tab.Screen
                   name={ScreenList.LIST_QUESTIONS}
+                  options={{
+                    tabBarLabel: t('questionsSettings.List questions', {
+                      ns: 'labelsNavigation',
+                    })!,
+                  }}
                   children={() => (
                     <ListQuestionsContainer
                       quizId={idNewQuiz}

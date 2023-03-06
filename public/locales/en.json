@@ -1,21 +1,52 @@
 {
   "createQuiz": {
-    "title": "Test title",
-    "description": "Description",
-    "topic": "Topic",
-    "numberOfQuestions": "Number of questions",
-    "questionSettings": "Create questions"
+    "Test title": "Test title",
+    "Description": "Description",
+    "Select or create topic" : "Select or create topic",
+    "Number of questions": "Number of questions",
+    "Question settings": "Create questions"
   },
   "createQuestion": {
-    "title" : "Title",
-    "description" : "Description",
-    "difficulty" : "Difficulty",
-    "answerType" : "Answer type",
-    "timer" : "Timer",
-    "answerChoice" : "Answer choice",
-    "addAnswerBtn" : "Add answer",
-    "saveQuestionBtn" : "Save question",
-    "exitBtn" : "Exit"
+    "Title question" : "Title question",
+    "Description" : "Description",
+    "Difficulty" : "Difficulty",
+    "Select or create topic": "Select or create your topic",
+    "Answer type" : "Answer type",
+    "Timer" : "Timer",
+    "Answer choice" : "Answer choice",
+    "Add answer" : "Add answer",
+    "Save question" : "Save question",
+    "First create a question" : "Create a question to move on to the next one",
+    "validationFields" : {
+      "Choose at least 2 correct answers" : "Choose at least 2 correct answers",
+      "Choose 1 correct answer" : "Choose 1 correct answer"
+    }
+  },
+  "profile" : {
+    "Ranks" : "Ranks",
+    "Quizzes" : "Quizzes",
+    "Success" : "Success",
+    "Incognito": "Incognito",
+    "My quizzes" : "Me quizzes",
+    "Difficulty" : "Difficulty",
+    "Memory cards" : "Memory cards"
+  },
+  "topic" : {
+   "Topic name" : "Topic name"
+  },
+  "SwitchSelectors" : {
+    "level" : [ "Easy", "Medium", "Hard"],
+    "type" : [ "single", "multi"]
+  },
+  "AppSelect" : {
+    "default value" : "Select an option",
+    "answer type" : [ "single", "multi"]
+  },
+  "labelsNavigation" : {
+    "questionsSettings" :{
+      "Create question" : "Create question",
+      "List questions" : "List questions"
+    }
   },
   "validationFields": {
     "title": {
@@ -31,6 +62,15 @@
       "required": "option is required",
       "minLength": "Option should be maximum 50 characters long",
       "CheckingForDuplication" : "You have 2 identical answers"
-    }
+    },
+    "timer": {
+      "Set the time" : "Set the time"
+    },
+    "topic" : {
+      "required": "Topic is required",
+      "maxLength": "Topic should be maximum 20 characters long",
+      "Select or create topic" : "Select or create topic"
+    },
+    "Need to log in" : "You need to login or register"
   }
 }

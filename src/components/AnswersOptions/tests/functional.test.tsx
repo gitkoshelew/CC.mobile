@@ -6,8 +6,14 @@ import store from '@src/bll/store/store';
 const onPressMock = jest.fn();
 export const AnswersOptionsProps = {
   onPress: onPressMock,
+  onPressCheck: onPressMock,
   data: ['one', 'two', 'three'],
   answerType: 'single',
+  dataOptions: [
+    {label: 'one', value: 0, isChecked: false},
+    {label: 'two', value: 1, isChecked: false},
+    {label: 'three', value: 2, isChecked: false},
+  ],
 };
 
 test('Should be displayed elements', () => {

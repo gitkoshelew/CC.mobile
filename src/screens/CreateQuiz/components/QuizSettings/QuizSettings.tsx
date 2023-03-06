@@ -50,7 +50,7 @@ export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
     <ViewContainer>
       <TextInputWithLabel
         name="title"
-        label={t('title')}
+        label={t('Test title')}
         control={control}
         rules={{
           required: `${t('title.required', {ns: 'validationFields'})}`,
@@ -66,7 +66,7 @@ export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
       />
       <TextInputWithLabel
         name="description"
-        label={t('description')}
+        label={t('Description')}
         control={control}
         rules={{
           required: `${t('description.required', {ns: 'validationFields'})}`,
@@ -81,7 +81,7 @@ export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
         height={Platform.OS === 'ios' ? '100px' : undefined}
       />
       <BlockBox>
-        <TextBox>Select or create your topic</TextBox>
+        <TextBox>{t('Select or create topic')}</TextBox>
         <SelectAndCreateTopicContainer
           control={control}
           setValue={setValue}
@@ -95,7 +95,7 @@ export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
       )}
       <BlockBox>
         <SwitchSelectorsHookForm
-          label={t('numberOfQuestions')}
+          label={t('Number of questions')}
           name="numberOfQuestions"
           control={control}
           type={TypeSwitchSelect.NUMBER}
@@ -103,7 +103,7 @@ export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
       </BlockBox>
       <ViewCenter>
         <AppButton
-          title={t('questionSettings')}
+          title={t('Question settings')}
           type={TypeAppButton.PRIMARY}
           onPress={handleSubmit(handleQuestionsSettings)}
           disabled={!disabledQuestionsSettings}

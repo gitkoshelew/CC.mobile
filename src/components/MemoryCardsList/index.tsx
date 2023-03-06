@@ -5,6 +5,7 @@ import {getStyles} from '@src/components/MemoryCardsList/styles';
 import {MemoryCard} from '@src/components/MemoryCardsList/MemoryCard';
 import LottieView from 'lottie-react-native';
 import {memoryCardMoc} from '@src/Mocs/MemoryCards';
+import {useTranslation} from 'react-i18next';
 import {useAppSelector} from '@hooks/hooks';
 
 type MemoryCardsType = {
@@ -17,6 +18,7 @@ const AnimateLocationBlocks = [
 ];
 
 export const MemoryCardsList = ({isLoggedIn}: MemoryCardsType) => {
+  const {t} = useTranslation(['profile', 'validationFields']);
   const currentTheme = useAppSelector(state => state.app.currentTheme);
   const [formatList, setFormatList] = useState<'row' | 'column'>('row');
   let animatedValue = useRef<LottieView>(null);
@@ -27,8 +29,8 @@ export const MemoryCardsList = ({isLoggedIn}: MemoryCardsType) => {
   return (
     <View style={getStyles().wrapper}>
       <View style={getStyles().headerContainer}>
-        <CustomText fs="24px" fw="bold">
-          Memory cards
+        <CustomText fs="20px" fw="bold">
+          {t('Memory cards')}
         </CustomText>
         {isLoggedIn && (
           <TouchableOpacity
@@ -53,7 +55,7 @@ export const MemoryCardsList = ({isLoggedIn}: MemoryCardsType) => {
         </View>
       ) : (
         <View style={getStyles().description}>
-          <TextDescription>You need to login or register</TextDescription>
+          <TextDescription>{t('Need to log in', {ns: 'validationFields'})}</TextDescription>
         </View>
       )}
     </View>

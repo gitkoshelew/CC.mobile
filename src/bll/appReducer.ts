@@ -4,18 +4,18 @@ import {AppMessageType} from '@customTypes/notificationTypes';
 export type ThemeType = 'light' | 'dark';
 
 export type AppStateT = {
-  isLogin: boolean;
   isFetching: boolean;
   messages: AppMessageType[];
+  isScrollEnabled: boolean;
   currentTheme: ThemeType;
 };
 
 const slice = createSlice({
   name: 'app',
   initialState: {
-    isLogin: false,
-    isFetching: false,
     messages: [],
+    isFetching: false,
+    isScrollEnabled: true,
     currentTheme: 'light',
   } as AppStateT,
   reducers: {
@@ -39,8 +39,8 @@ const slice = createSlice({
     setIsFetching(state, action: PayloadAction<boolean>) {
       state.isFetching = action.payload;
     },
-    setIsLogin(state, action: PayloadAction<boolean>) {
-      state.isLogin = action.payload;
+    setIsScrollEnabled(state, action: PayloadAction<boolean>) {
+      state.isScrollEnabled = action.payload;
     },
     setCurrentTheme(state, action: PayloadAction<ThemeType>) {
       state.currentTheme = action.payload;
@@ -55,5 +55,6 @@ export const {
   hideAppMessage,
   setAppMessage,
   setIsFetching,
+  setIsScrollEnabled,
   setCurrentTheme,
 } = slice.actions;

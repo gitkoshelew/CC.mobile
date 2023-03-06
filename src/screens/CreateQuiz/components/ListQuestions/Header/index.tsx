@@ -8,6 +8,8 @@ import {DefaultTimeType} from '@src/utils/transformTime';
 import {DefaultTheme} from 'styled-components';
 import {useContext} from 'react';
 import {ThemeContext} from 'styled-components/native';
+import {useTranslation} from 'react-i18next';
+import {TransformLocalizationLanguage} from '@src/utils/TransformLocalizationLanguage';
 
 type HeaderPropsType = {
   time: DefaultTimeType;
@@ -20,6 +22,7 @@ type HeaderPropsType = {
 };
 
 export const Header = (props: HeaderPropsType) => {
+  const {t} = useTranslation('SwitchSelectors');
   const {isActive, time, title, topic, onPress, difficulty, isAddedQuestion} = props;
   const theme = useContext(ThemeContext);
 
@@ -44,7 +47,9 @@ export const Header = (props: HeaderPropsType) => {
             color={Color.BlueLight}
             size={18}
           />
-          <Text style={styles(theme).text}>{difficulty}</Text>
+          <Text style={styles(theme).text}>
+            {t(TransformLocalizationLanguage({difficulty}))}
+          </Text>
         </View>
         <View style={styles().container}>
           <MaterialCommunityIcons

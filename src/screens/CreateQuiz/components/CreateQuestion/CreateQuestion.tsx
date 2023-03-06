@@ -24,7 +24,6 @@ import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
 import {useTranslation} from 'react-i18next';
 import {SwitchSelectorsHookForm} from '@src/components/SwitchSelectorsHookForm/index';
-import {AppSelectHookForm} from '@src/components/AppSelectHookForm/index';
 import {SaveQuestionValuesType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestionContainer';
 import {TimePicker} from '@src/components/TimePicker/index';
 import {SelectAndCreateTopicContainer} from '@src/components/SelectAndCreateTopic/SelectAndCreateTopicContainer';
@@ -50,10 +49,9 @@ export type CreateQuestionPropsType = {
 const numberOfLines = Platform.OS === 'ios' ? undefined : 2;
 
 export const CreateQuestion = (props: CreateQuestionPropsType) => {
+  const {t} = useTranslation(['createQuestion', 'AppSelect', 'validationFields']);
   const {onSaveQuestion, currentQuestion} = props;
-  const dataAnswerType = [TypeOptions.single, TypeOptions.multi];
 
-  const {t} = useTranslation(['createQuestion', 'validationFields']);
   const {
     control,
     handleSubmit,
@@ -95,27 +93,33 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
   const onPressSaveQuestion = useCallback(
     (values: CreateQuestionFieldType) => {
       if (values.minutes + values.seconds === 0) {
-        setError('minutes', {type: ' custom', message: 'Set the time'});
+        setError('minutes', {
+          type: ' custom',
+          message: t('timer.Set the time', {ns: 'validationFields'})!,
+        });
         return;
       }
       if (correctAnswers.length < 2 && values.type === TypeOptions.multi) {
         setError('options', {
           type: 'custom',
-          message: 'You must choose at least 2 correct answers',
+          message: t('validationFields.Choose at least 2 correct answers')!,
         });
         return;
       }
       if (correctAnswers.length === 0 && values.type === TypeOptions.single) {
-        setError('options', {type: 'custom', message: 'You must choose  1 correct answers'});
+        setError('options', {
+          type: 'custom',
+          message: t('validationFields.Choose 1 correct answer')!,
+        });
         return;
       }
 
       onSaveQuestion({valuesFields: values, correctAnswers: correctAnswers});
     },
-    [correctAnswers, onSaveQuestion, setError],
+    [correctAnswers, onSaveQuestion, setError, t],
   );
 
-  const handlerAppSelectHookForm = useCallback(
+  const handlerSwitchSelectHookForm = useCallback(
     (value: string, onPress: (value: string) => void) => {
       setCorrectAnswers([]);
       onPress(value);
@@ -176,7 +180,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
 
   return (
     <Container>
-      <TextBox>{t('title')}</TextBox>
+      <TextBox>{t('Title question')}</TextBox>
       <BlockBox>
         <TextInputHookForm
           name="title"
@@ -190,7 +194,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
           }}
         />
       </BlockBox>
-      <TextBox>{t('description')}</TextBox>
+      <TextBox>{t('Description')}</TextBox>
       <BlockBox>
         <TextInputHookForm
           name="description"
@@ -208,33 +212,31 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
         />
       </BlockBox>
       <SwitchSelectorsHookForm
-        label={t('difficulty')}
+        label={t('Difficulty')}
         name="difficulty"
         type={TypeSwitchSelect.LEVEL}
         control={control}
       />
       <BlockBox>
-        <TextBox>Select or create your topic</TextBox>
+        <TextBox>{t('Select or create topic')}</TextBox>
         <SelectAndCreateTopicContainer control={control} setValue={setValue} />
       </BlockBox>
       <ViewFlexForTwoElements>
         <BlockDynamicMargin m="0 10px 0 0">
           <BlockDynamicMargin m="0 0 15px 0">
-            <TextBox>{t('answerType')}</TextBox>
+            <TextBox>{t('Answer type')}</TextBox>
           </BlockDynamicMargin>
           <ContainerDynamicWidth width="117px">
-            <AppSelectHookForm
+            <SwitchSelectorsHookForm
               name="type"
-              size="m"
-              type="primary"
+              type={TypeSwitchSelect.TYPE_ANSWER}
               control={control}
-              data={dataAnswerType}
-              onAppSelect={handlerAppSelectHookForm}
+              onPressSwitchSelect={handlerSwitchSelectHookForm}
             />
           </ContainerDynamicWidth>
         </BlockDynamicMargin>
         <ViewDynamicFlex alignI="center" justifyC="center">
-          <CustomText fs="16px">{t('timer')}</CustomText>
+          <CustomText fs="16px">{t('Timer')}</CustomText>
           <TimePicker control={control} errors={errors.minutes?.message} />
         </ViewDynamicFlex>
       </ViewFlexForTwoElements>
@@ -252,7 +254,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
       <BlockBox>
         <ViewDynamicFlex justifyC="center" alignI="center" flexD="row">
           <AppButton
-            title={t('saveQuestionBtn')}
+            title={t('Save question')}
             type={TypeAppButton.PRIMARY}
             onPress={handleSubmit(onPressSaveQuestion)}
             disabled={isCheckingDuplicate}
