@@ -90,7 +90,9 @@ exports[`Should render testCard list 1`] = `
                 "fontSize": 13,
               }
             }
-          />
+          >
+            JS
+          </Text>
         </View>
         <View
           style={
@@ -146,6 +148,7 @@ exports[`Should render testCard list 1`] = `
       }
     >
       Questions: 
+      1
     </Text>
     <View
       style={
@@ -180,15 +183,11 @@ exports[`Should render testCard list 1`] = `
       >
         <Text
           style={
-            [
-              {
-                "fontFamily": "Montserrat-Regular",
-                "fontSize": 14,
-              },
-              {
-                "color": "#FFFFFF",
-              },
-            ]
+            {
+              "color": "#FFFFFF",
+              "fontFamily": "Montserrat-Regular",
+              "fontSize": 14,
+            }
           }
         >
           Start

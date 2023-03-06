@@ -1,9 +1,9 @@
 import {StyleSheet, ViewStyle} from 'react-native';
 import {Color} from '@theme/colors';
 import {LIST_ITEM_HEIGHT} from '@src/components/MyTestCards/index';
-import {DefaultThemeType} from 'styled-components';
+import {DefaultTheme} from 'styled-components';
 
-export const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
+export const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   container: {
     width: '100%',
     alignItems: 'center',

@@ -3,7 +3,7 @@ import {Control, Controller} from 'react-hook-form';
 import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
 import {TextError} from '@src/components/ui/ReadyStyles/TextError';
 import {PickerItem} from '@src/components/TimePicker/PickerItem/index';
-import {DefaultThemeType} from 'styled-components';
+import {DefaultTheme} from 'styled-components';
 import {useContext} from 'react';
 import {ThemeContext} from 'styled-components/native';
 
@@ -44,7 +44,7 @@ export const TimePicker = ({control, errors}: TimePickerPropsType) => {
   );
 };
 
-const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
+const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   wrapper: {
     overflow: 'hidden',
     alignItems: 'center',

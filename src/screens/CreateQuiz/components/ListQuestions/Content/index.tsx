@@ -7,7 +7,7 @@ import {
 import {StyleSheet, Text, View, ViewStyle} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {Color} from '@theme/colors';
-import {DefaultThemeType} from 'styled-components';
+import {DefaultTheme} from 'styled-components';
 import {ThemeContext} from 'styled-components/native';
 
 type ContentPropsType = {
@@ -42,7 +42,7 @@ export const Content = ({isActive, options, description}: ContentPropsType) => {
   );
 };
 
-const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
+const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   container: {
     width: '100%',
     flexDirection: 'row',

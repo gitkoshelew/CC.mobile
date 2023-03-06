@@ -2,7 +2,6 @@ import {fireEvent, render, screen} from '@testing-library/react-native';
 import {AnswersOptions} from '@src/components/AnswersOptions';
 import {Provider} from 'react-redux';
 import store from '@src/bll/store/store';
-import React from 'react';
 
 const onPressMock = jest.fn();
 export const AnswersOptionsProps = {

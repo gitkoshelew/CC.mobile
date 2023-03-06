@@ -56,6 +56,8 @@ export const DARK_THEME = {
   appButtonSecondary: Color.BlueLight,
 };
 
+type BaseThemeType = typeof BASE_THEME;
+
 declare module 'styled-components' {
-  export type DefaultThemeType = typeof BASE_THEME;
+  export interface DefaultTheme extends BaseThemeType {}
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import {StyleSheet} from 'react-native';
-import {DefaultThemeType} from 'styled-components';
+import {DefaultTheme} from 'styled-components';
 
 export const AnswerRadioContainer = styled.View`
   flex-direction: row;
@@ -17,7 +17,7 @@ export const ViewMarginRight = styled.View`
   margin-right: 18px;
 `;
 
-export const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
+export const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   textRadio: {
     color: theme?.textMainColor,
     fontSize: 16,

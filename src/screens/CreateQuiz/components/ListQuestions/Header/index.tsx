@@ -5,7 +5,7 @@ import {Color} from '@theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DefaultTimeType} from '@src/utils/transformTime';
-import {DefaultThemeType} from 'styled-components';
+import {DefaultTheme} from 'styled-components';
 import {useContext} from 'react';
 import {ThemeContext} from 'styled-components/native';
 
@@ -74,7 +74,7 @@ export const Header = (props: HeaderPropsType) => {
   );
 };
 
-const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
+const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   wrapper: {
     flexDirection: 'row',
     marginVertical: 5,

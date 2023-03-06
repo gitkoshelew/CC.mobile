@@ -13,7 +13,7 @@ import {Loader} from '@src/components/ui/Loader';
 import {getTopics} from '@src/screens/CreateQuiz/services/services';
 import {getQuizResponseType, TopicType} from '@customTypes/quizzesAPI-types';
 import {TabsQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/TabsQuestions';
-import {DefaultThemeType} from 'styled-components';
+import {DefaultTheme} from 'styled-components';
 import {ThemeContext} from 'styled-components/native';
 
 export const TestsList = () => {
@@ -128,7 +128,7 @@ export const TestsList = () => {
   );
 };
 
-const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
+const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   wrapper: {
     backgroundColor: theme?.layout,
     height: '100%',

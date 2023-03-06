@@ -1,7 +1,7 @@
 import {StyleSheet, ViewStyle} from 'react-native';
-import {DefaultThemeType} from 'styled-components';
+import {DefaultTheme} from 'styled-components';
 
-export const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
+export const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   picker: {
     flex: 1,
     alignItems: 'center',

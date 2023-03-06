@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {questionResponseType, questionType} from '@customTypes/quiz-types';
 import {TabsQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/TabsQuestions/index';
 import {ListingQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/ListingQuestions/ListingQuestions';
-import {DefaultThemeType} from 'styled-components';
+import {DefaultTheme} from 'styled-components';
 import {ThemeContext} from 'styled-components/native';
 
 type ListQuestionsPropsType = {
@@ -53,7 +53,7 @@ export const ListQuestions = ({
   );
 };
 
-const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
+const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   wrapper: {
     flex: 1,
     backgroundColor: theme?.layout,
