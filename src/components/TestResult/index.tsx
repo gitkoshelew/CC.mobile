@@ -6,6 +6,7 @@ import {SmallButton} from '@src/components/ui/SmallButton';
 import {CircularResultBar} from '@src/components/CircularResultBar';
 import {BlockBoxMarginLeft, SmallTitleBlack} from '../ui/ReadyStyles/Boxes';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
+import {useTranslation} from 'react-i18next';
 
 type ITestResult = {
   onClickTry: () => void;
@@ -20,6 +21,7 @@ export const TestResult = ({
   incorrectAnswers,
   result,
 }: ITestResult) => {
+  const {t} = useTranslation('testResult');
   return (
     <Container>
       <ButtonBox>
@@ -28,23 +30,31 @@ export const TestResult = ({
         <SmallButton type="delete" onPress={() => {}} />
       </ButtonBox>
       <ViewCenter>
-        <SmallTitleBlack>Your result</SmallTitleBlack>
+        <SmallTitleBlack>{t('Your result')}</SmallTitleBlack>
         <CircularResultBar result={result} />
         <Group>
           <Box>
-            <StyledText>Question</StyledText>
+            <StyledText>{t('Question')}</StyledText>
           </Box>
-          <StyledText>Incorrect answer</StyledText>
+          <StyledText>{t('Incorrect answer')}</StyledText>
         </Group>
       </ViewCenter>
 
       <IncorrectAnswers data={incorrectAnswers} />
       <ViewFlexCenter>
         <BlockBoxMarginLeft>
-          <AppButton title="Try again" type={TypeAppButton.PRIMARY} onPress={onClickTry} />
+          <AppButton
+            title={t('Try again')}
+            type={TypeAppButton.PRIMARY}
+            onPress={onClickTry}
+          />
         </BlockBoxMarginLeft>
         <BlockBoxMarginLeft>
-          <AppButton title="Close" type={TypeAppButton.SECONDARY} onPress={onClickClose} />
+          <AppButton
+            title={t('Close')}
+            type={TypeAppButton.SECONDARY}
+            onPress={onClickClose}
+          />
         </BlockBoxMarginLeft>
       </ViewFlexCenter>
     </Container>

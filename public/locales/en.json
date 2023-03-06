@@ -72,5 +72,12 @@
       "Select or create topic" : "Select or create topic"
     },
     "Need to log in" : "You need to login or register"
+  },
+  "testResult" : {
+    "Your result": "Your result",
+    "Question": "Question",
+    "Incorrect answer": "Incorrect answer",
+    "Close": "Close",
+    "Try again": "Try again"
   }
 }

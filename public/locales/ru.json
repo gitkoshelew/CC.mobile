@@ -73,5 +73,12 @@
       "Select or create topic" : "Выберите или создайте тему"
     },
     "Need to log in" : "Вам нужно войти или зарегестрироваться"
+  },
+  "testResult" : {
+    "Your result": "Ваш результат",
+    "Question": "Вопрос",
+    "Incorrect answer": "Неправильный ответ",
+    "Close": "Закрыть",
+    "Try again": "Пройти ещё раз"
   }
 }

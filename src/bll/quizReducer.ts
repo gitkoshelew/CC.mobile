@@ -13,6 +13,7 @@ export const getQuizzes = createAsyncThunk(
       const res = await quizzesAPI.getQuiz();
       dispatch(setIsFetching(false));
       dispatch(setStateQuizzes(res.data));
+      return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
       return rejectWithValue(err.message);
