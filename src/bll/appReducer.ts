@@ -1,10 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppMessageType} from '@customTypes/notificationTypes';
 
+export type ThemeType = 'light' | 'dark';
+
 export type AppStateT = {
   isLogin: boolean;
   isFetching: boolean;
   messages: AppMessageType[];
+  currentTheme: ThemeType;
 };
 
 const slice = createSlice({
@@ -13,6 +16,7 @@ const slice = createSlice({
     isLogin: false,
     isFetching: false,
     messages: [],
+    currentTheme: 'light',
   } as AppStateT,
   reducers: {
     setAppMessage(
@@ -38,10 +42,18 @@ const slice = createSlice({
     setIsLogin(state, action: PayloadAction<boolean>) {
       state.isLogin = action.payload;
     },
+    setCurrentTheme(state, action: PayloadAction<ThemeType>) {
+      state.currentTheme = action.payload;
+    },
   },
 });
 
 export const appReducer = slice.reducer;
 
-export const {removeLastMessage, hideAppMessage, setAppMessage, setIsFetching, setIsLogin} =
-  slice.actions;
+export const {
+  removeLastMessage,
+  hideAppMessage,
+  setAppMessage,
+  setIsFetching,
+  setCurrentTheme,
+} = slice.actions;

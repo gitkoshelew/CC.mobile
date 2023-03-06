@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Loader} from '@src/components/ui/Loader/index';
+import {ThemeContext} from 'styled-components/native';
+import {DefaultThemeType} from 'styled-components';
 
 type ScreenLayoutPropsType = {
   isFetching: boolean;
@@ -8,16 +10,19 @@ type ScreenLayoutPropsType = {
 };
 
 export const ScreenLayout = ({isFetching, children}: ScreenLayoutPropsType) => {
+  const theme = useContext(ThemeContext);
+
   return (
-    <View style={styles.container}>
+    <View style={styles(theme).container}>
       {children}
       {isFetching && <Loader />}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
   container: {
     flex: 1,
+    backgroundColor: theme?.layout,
   },
-});
+}));

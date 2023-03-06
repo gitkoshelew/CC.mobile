@@ -1,17 +1,18 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
 import {Color} from '@theme/colors';
 import {LIST_ITEM_HEIGHT} from '@src/components/MyTestCards/index';
+import {DefaultThemeType} from 'styled-components';
 
-export const styles = StyleSheet.create({
+export const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
   container: {
     width: '100%',
     alignItems: 'center',
-  },
+  } as ViewStyle,
   test: {
     width: '90%',
     flexDirection: 'row',
+    backgroundColor: theme?.block,
     paddingHorizontal: 15,
-    backgroundColor: Color.White,
     borderRightColor: Color.BlueLight,
     borderRightWidth: 5,
     height: 71,
@@ -25,17 +26,17 @@ export const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     elevation: 5,
-  },
+  } as ViewStyle,
   title: {
     fontSize: 16,
-    color: Color.Black,
+    color: theme?.textMainColor,
     fontWeight: '600',
-  },
+  } as ViewStyle,
   description: {
     fontSize: 14,
-    color: Color.Black,
+    color: theme?.textMainColor,
     fontWeight: '500',
-  },
+  } as ViewStyle,
   iconContainer: {
     width: 70,
     height: LIST_ITEM_HEIGHT,
@@ -43,11 +44,11 @@ export const styles = StyleSheet.create({
     right: '10%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  } as ViewStyle,
   contentContainer: {
     marginTop: 6,
     justifyContent: 'space-between',
-  },
+  } as ViewStyle,
   iconTopic: {
     marginRight: 5,
     marginTop: 3,
@@ -60,8 +61,9 @@ export const styles = StyleSheet.create({
   text: {
     fontFamily: 'Montserrat-Regular',
     fontSize: 13,
+    color: theme?.textMainColor,
   },
   content: {
     flexDirection: 'row',
-  },
-});
+  } as ViewStyle,
+}));

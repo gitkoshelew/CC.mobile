@@ -2,10 +2,13 @@ import {styles} from './styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SelectDropdown from 'react-native-select-dropdown';
 import {ISelectProps} from 'src/customTypes/AppSelect-types';
-import {useMemo} from 'react';
+import {useContext, useMemo} from 'react';
 import {Color} from '@theme/colors';
+import {ThemeContext} from 'styled-components/native';
 
 export const AppSelect = ({size, type, data, onSelect, value, ...props}: ISelectProps) => {
+  const theme = useContext(ThemeContext);
+
   const containerButtonStyle = useMemo(
     () => ({
       backgroundColor: type === 'primary' ? Color.DarkBlue : Color.White,
@@ -17,19 +20,19 @@ export const AppSelect = ({size, type, data, onSelect, value, ...props}: ISelect
   );
   const containerButtonTextStyle = useMemo(
     () => ({
-      ...styles.selectSortText,
+      ...styles(theme).selectSortText,
       color: type === 'primary' ? Color.White : Color.Black,
       fontSize: size === 'm' ? 16 : 14,
     }),
 
-    [type, size],
+    [theme, type, size],
   );
   const rowTextStyle = useMemo(
     () => ({
-      ...styles.selectText,
+      ...styles(theme).selectText,
       fontSize: size === 'm' ? 16 : 14,
     }),
-    [size],
+    [size, theme],
   );
   const rowStyle = useMemo(
     () => ({
@@ -39,7 +42,7 @@ export const AppSelect = ({size, type, data, onSelect, value, ...props}: ISelect
   );
   const selectAwesomeStyle = useMemo(
     () => ({
-      ...styles.selectAwesome,
+      ...styles().selectAwesome,
       color: type === 'primary' ? Color.Gray : Color.Black,
     }),
     [type],
@@ -63,10 +66,10 @@ export const AppSelect = ({size, type, data, onSelect, value, ...props}: ISelect
         />
       )}
       dropdownIconPosition={'right'}
-      dropdownStyle={styles.selectContainer}
+      dropdownStyle={styles(theme).selectContainer}
       rowStyle={rowStyle}
       rowTextStyle={rowTextStyle}
-      selectedRowStyle={styles.selectRow}
+      selectedRowStyle={styles(theme).selectRow}
     />
   );
 };

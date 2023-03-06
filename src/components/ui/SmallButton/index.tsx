@@ -6,7 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useMemo} from 'react';
 
-export const SmallButton = ({type, onPress, ...props}: IButtonProps) => {
+export const SmallButton = ({type, onPress, color, ...props}: IButtonProps) => {
   const containerStyles = useMemo(
     () => ({
       backgroundColor: type === 'theme' || 'exit' ? Color.Semitransparent : Color.GrayLight,
@@ -24,7 +24,7 @@ export const SmallButton = ({type, onPress, ...props}: IButtonProps) => {
         {type === 'delete' && (
           <MaterialIcons name={'delete'} size={27} color={Color.GrayMedium} />
         )}
-        {type === 'theme' && <Ionicons name={'moon'} size={27} color={Color.White} />}
+        {type === 'theme' && <Ionicons name={'moon'} size={27} color={color} />}
         {type === 'exit' && (
           <MaterialCommunityIcons name={'location-exit'} size={27} color={Color.White} />
         )}

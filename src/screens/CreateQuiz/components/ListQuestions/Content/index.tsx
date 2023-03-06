@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   BlockBox,
   BlockDynamicMargin,
   CustomText,
 } from '@src/components/ui/ReadyStyles/Boxes/index';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ViewStyle} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {Color} from '@theme/colors';
+import {DefaultThemeType} from 'styled-components';
+import {ThemeContext} from 'styled-components/native';
 
 type ContentPropsType = {
   isActive: boolean;
@@ -15,10 +17,12 @@ type ContentPropsType = {
 };
 
 export const Content = ({isActive, options, description}: ContentPropsType) => {
+  const theme = useContext(ThemeContext);
+
   return (
-    <View style={[styles.content, isActive ? styles.active : styles.inactive]}>
+    <View style={[styles().content, isActive ? styles(theme).active : styles(theme).inactive]}>
       <BlockBox>
-        <Text style={styles.title}>Description:</Text>
+        <Text style={styles(theme).title}>Description:</Text>
         <CustomText fs="13px">{description}</CustomText>
       </BlockBox>
       <CustomText fs="15px" m="0 0 7px 0" fw="500">
@@ -26,9 +30,9 @@ export const Content = ({isActive, options, description}: ContentPropsType) => {
       </CustomText>
       <View>
         {options.map((el, i) => (
-          <View key={i} style={styles.container}>
+          <View key={i} style={styles().container}>
             <BlockDynamicMargin m="0 5px 0 0 ">
-              <Entypo name="controller-record" color={Color.DarkBlue} size={8} />
+              <Entypo name="controller-record" color={theme.layout} size={8} />
             </BlockDynamicMargin>
             <CustomText fs="13px">{el}</CustomText>
           </View>
@@ -38,7 +42,7 @@ export const Content = ({isActive, options, description}: ContentPropsType) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
   container: {
     width: '100%',
     flexDirection: 'row',
@@ -51,7 +55,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: Color.GrayMedium,
     borderWidth: 1,
-  },
+  } as ViewStyle,
   content: {
     padding: 20,
     borderRadius: 15,
@@ -70,11 +74,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '500',
     marginBottom: 5,
-  },
+    color: theme?.textMainColor,
+  } as ViewStyle,
   active: {
-    backgroundColor: Color.White,
+    backgroundColor: theme?.block,
   },
   inactive: {
-    backgroundColor: Color.White,
+    backgroundColor: theme?.block,
   },
-});
+}));

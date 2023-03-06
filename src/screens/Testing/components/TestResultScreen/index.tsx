@@ -3,8 +3,7 @@ import {ScrollView, View} from 'react-native';
 import {styles} from './styles';
 import {ProgressBar} from '@src/components/ProgressBar';
 import {ViewBlockResult} from '@src/screens/Testing/components/TestProcess/styles';
-import React from 'react';
-import {ViewContainer} from '@src/components/ui/ReadyStyles/Containers';
+import {ColorContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {IncorrectAnswer} from '@src/components/IncorrectAnswers';
@@ -26,7 +25,7 @@ export const TestResultScreen = () => {
     navigate(ScreenList.HOME, {screen: ScreenList.MAIN});
   };
   return (
-    <ViewContainer>
+    <ColorContainer>
       <ViewBlockResult style={styles.result}>
         <ProgressBar data={resultData} />
       </ViewBlockResult>
@@ -40,6 +39,6 @@ export const TestResultScreen = () => {
           />
         </View>
       </ScrollView>
-    </ViewContainer>
+    </ColorContainer>
   );
 };

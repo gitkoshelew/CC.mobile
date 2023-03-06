@@ -1,11 +1,11 @@
-import {StyleSheet} from 'react-native';
-import {Color} from '@theme/colors';
+import {StyleSheet, ViewStyle} from 'react-native';
+import {DefaultThemeType} from 'styled-components';
 
-export const styles = StyleSheet.create({
+export const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
   container: {
     width: 120,
     height: 120,
-    backgroundColor: Color.White,
+    backgroundColor: theme?.lateralBalls,
     borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',
@@ -15,15 +15,17 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     elevation: 6,
-  },
+  } as ViewStyle,
   value: {
+    color: theme?.textMainColor,
     fontSize: 28,
     fontWeight: 'bold',
-  },
+  } as ViewStyle,
   description: {
+    color: theme?.textMainColor,
     fontFamily: 'Montserrat-Regular',
     fontWeight: 'bold',
     backgroundColor: 'transparent',
     fontSize: 18,
-  },
-});
+  } as ViewStyle,
+}));

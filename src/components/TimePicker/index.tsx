@@ -1,8 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ViewStyle} from 'react-native';
 import {Control, Controller} from 'react-hook-form';
 import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
 import {TextError} from '@src/components/ui/ReadyStyles/TextError';
 import {PickerItem} from '@src/components/TimePicker/PickerItem/index';
+import {DefaultThemeType} from 'styled-components';
+import {useContext} from 'react';
+import {ThemeContext} from 'styled-components/native';
 
 type TimePickerPropsType = {
   control: Control<CreateQuestionFieldType>;
@@ -10,11 +13,13 @@ type TimePickerPropsType = {
 };
 
 export const TimePicker = ({control, errors}: TimePickerPropsType) => {
+  const theme = useContext(ThemeContext);
+
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.container}>
-        <View style={styles.inner}>
-          <Text style={styles.text}>Min.</Text>
+    <View style={styles().wrapper}>
+      <View style={styles().container}>
+        <View style={styles().inner}>
+          <Text style={styles(theme).text}>Min.</Text>
           <Controller
             control={control}
             name="minutes"
@@ -23,8 +28,8 @@ export const TimePicker = ({control, errors}: TimePickerPropsType) => {
             )}
           />
         </View>
-        <View style={styles.inner}>
-          <Text style={styles.text}>Sec.</Text>
+        <View style={styles().inner}>
+          <Text style={styles(theme).text}>Sec.</Text>
           <Controller
             control={control}
             name="seconds"
@@ -39,24 +44,26 @@ export const TimePicker = ({control, errors}: TimePickerPropsType) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
   wrapper: {
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
     width: 180,
-  },
+  } as ViewStyle,
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  } as ViewStyle,
   inner: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  } as ViewStyle,
   text: {
+    marginBottom: 3,
     fontFamily: 'Montserrat-Regular',
-  },
-});
+    color: theme?.textMainColor,
+  } as ViewStyle,
+}));

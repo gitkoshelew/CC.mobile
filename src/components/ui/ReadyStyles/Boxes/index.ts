@@ -32,10 +32,12 @@ const BoldText = styled.Text`
 `;
 
 const TextBox = styled.Text`
+  color: ${props => props.theme.textMainColor};
   margin-bottom: 8px;
   margin-left: 8px;
   font-size: 16px;
   font-family: 'Montserrat-Regular';
+  font-weight: 600;
 `;
 
 const SmallTextBox = styled.Text`
@@ -75,13 +77,13 @@ const SmallTitleBlack = styled.Text`
   margin-bottom: 10px;
   font-size: 16px;
   font-family: 'Montserrat-Bold';
-  color: ${Color.Black};
+  color: ${props => props.theme.textMainColor};
 `;
 
 const SmallTextBlack = styled.Text`
   font-size: 14px;
   font-family: 'Montserrat-Medium';
-  color: ${Color.Black};
+  color: ${props => props.theme.textMainColor};
 `;
 
 const SmallBox = styled.View`
@@ -114,7 +116,7 @@ export const CustomText = styled.Text<{
   m?: string;
 }>`
   font-size: ${props => props.fs};
-  color: ${props => Color.Black && props.color};
+  color: ${props => props.theme?.textMainColor ?? props.color};
   font-weight: ${props => (props.fw ? props.fw : 'normal')};
   font-family: 'Montserrat-Regular';
   ${props =>

@@ -1,9 +1,10 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
+import {DefaultThemeType} from 'styled-components';
 
-export const styles = StyleSheet.create({
+export const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
   wrapper: {
     flex: 1,
-  },
+  } as ViewStyle,
   container: {
     flex: 1,
     paddingTop: 30,
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
   inner: {
     flex: 1,
     justifyContent: 'space-around',
-  },
+  } as ViewStyle,
   questionTabsContainer: {
     paddingHorizontal: 21,
   },
@@ -21,6 +22,7 @@ export const styles = StyleSheet.create({
   },
   tabBarStyle: {
     marginBottom: 5,
+    backgroundColor: theme?.layout,
   },
   tabBarIndicatorContainerStyle: {
     marginLeft: 30,
@@ -28,6 +30,7 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   tabBarLabelStyle: {
+    color: theme?.textMainColor,
     fontFamily: 'Montserrat-Regular',
   },
-});
+}));

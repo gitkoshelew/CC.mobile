@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useContext, useRef} from 'react';
 import {
   CreateQuestion,
   CreateQuestionFieldType,
@@ -11,6 +11,7 @@ import {useAppDispatch} from '@hooks/hooks';
 import {transformTimeSerializer} from '@src/screens/CreateQuiz/serializer/index';
 import {BlockLayout} from '@src/screens/CreateQuiz/components/CreateQuestion/styles';
 import {ScrollView, StyleSheet} from 'react-native';
+import {ThemeContext} from 'styled-components/native';
 
 export type CreateQuestionPropsType = {
   quizId: number;
@@ -36,6 +37,7 @@ export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
     changeCurrentQuestionIndex,
   } = props;
   const dispatch = useAppDispatch();
+  const theme = useContext(ThemeContext);
   const scrollRef = useRef<ScrollView>(null);
 
   const handlerSaveQuestion = async (values: SaveQuestionValuesType) => {
@@ -59,7 +61,10 @@ export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
   };
 
   return (
-    <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      ref={scrollRef}
+      showsVerticalScrollIndicator={false}
+      style={{backgroundColor: theme.layout}}>
       {currentQuestion.title && <BlockLayout style={StyleSheet.absoluteFill} />}
       <CreateQuestion
         currentQuestion={currentQuestion}

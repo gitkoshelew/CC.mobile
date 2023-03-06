@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {Timer} from '@src/components/Timer';
-import {ViewContainer, ViewFlexRight} from '@src/components/ui/ReadyStyles/Containers';
+import {ColorContainer, ViewFlexRight} from '@src/components/ui/ReadyStyles/Containers';
 import {TimerBox, TextBox, ButtonsBox} from './styles';
 import {MainTestingContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {AnswersOptions} from '@src/components/AnswersOptions';
@@ -118,7 +118,7 @@ export const TestProcess = () => {
     dispatch(clearStateResult());
   }, [dispatch]);
   return (
-    <ViewContainer>
+    <ColorContainer>
       <TimerBox>
         <Timer allTimeInSeconds={currentTest[0].timer} onClick={onPressNextAnswer} />
       </TimerBox>
@@ -146,6 +146,6 @@ export const TestProcess = () => {
           <AppButton title="Next" type={TypeAppButton.PRIMARY} onPress={onPressNextAnswer} />
         </ButtonsBox>
       </MainTestingContainer>
-    </ViewContainer>
+    </ColorContainer>
   );
 };

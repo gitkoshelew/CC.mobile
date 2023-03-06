@@ -5,8 +5,11 @@ import {View} from 'react-native';
 import {ISwitchSelectProps} from 'src/customTypes/SwitchSelectjrs-types';
 import {useMemo} from 'react';
 import {styles} from './styles';
+import {useAppSelector} from '@hooks/hooks';
 
 export const SwitchSelectors = ({onPress, type, value, disabled}: ISwitchSelectProps) => {
+  const currentTheme = useAppSelector(state => state.app.currentTheme);
+
   const containerData = useMemo(
     () =>
       type === 'level'
@@ -30,6 +33,14 @@ export const SwitchSelectors = ({onPress, type, value, disabled}: ISwitchSelectP
     [type],
   );
 
+  const backgroundColor = disabled
+    ? Color.Transparent
+    : currentTheme === 'light'
+    ? Color.White
+    : Color.VioletBlue;
+  const borderColor = currentTheme === 'light' ? Color.Gray : Color.DarkPurpleBlue;
+  const textColor = currentTheme === 'light' ? Color.Black : Color.White;
+
   return (
     <View style={styles.selectBox}>
       <SwitchSelector
@@ -39,8 +50,9 @@ export const SwitchSelectors = ({onPress, type, value, disabled}: ISwitchSelectP
         onPress={onPress}
         selectedColor={Color.White}
         buttonColor={Color.BlueLight}
-        borderColor={Color.Gray}
-        backgroundColor={disabled ? Color.Transparent : Color.White}
+        textColor={textColor}
+        borderColor={borderColor}
+        backgroundColor={backgroundColor}
         hasPadding
         disabled={disabled}
       />

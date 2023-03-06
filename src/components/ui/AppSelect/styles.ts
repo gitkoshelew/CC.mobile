@@ -1,24 +1,24 @@
-import {StyleSheet} from 'react-native';
-import {Color} from '@theme/colors';
+import {StyleSheet, ViewStyle} from 'react-native';
+import {DefaultThemeType} from 'styled-components';
 
-export const styles = StyleSheet.create({
+export const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
   selectSortText: {
     fontWeight: '500',
     textAlign: 'left',
-  },
+  } as ViewStyle,
   selectText: {
     fontSize: 14,
-    color: Color.Black,
+    color: theme?.textMainColor,
     fontWeight: '400',
-  },
+  } as ViewStyle,
   selectRow: {
-    backgroundColor: Color.Gray,
+    backgroundColor: theme?.appSelectActive,
   },
   selectContainer: {
-    backgroundColor: Color.White,
+    backgroundColor: theme?.appSelect,
     borderRadius: 10,
   },
   selectAwesome: {
     opacity: 0.4,
   },
-});
+}));

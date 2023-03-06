@@ -1,8 +1,10 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
+import {DefaultThemeType} from 'styled-components';
 
-export const styles = StyleSheet.create({
+export const styles = StyleSheet.create((theme?: DefaultThemeType) => ({
   wrapper: {
     flex: 1,
+    backgroundColor: theme?.layout,
   },
   aboutUser: {
     flex: 1,
@@ -10,7 +12,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 80,
     paddingHorizontal: 20,
-  },
+  } as ViewStyle,
   containerProfile: {
     position: 'absolute',
     top: -180,
@@ -18,7 +20,7 @@ export const styles = StyleSheet.create({
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  } as ViewStyle,
   backgroundImage: {
     borderBottomLeftRadius: 130,
     borderBottomRightRadius: 130,
@@ -34,7 +36,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-  },
+  } as ViewStyle,
   content: {
     flex: 1,
     paddingLeft: 20,
@@ -44,4 +46,4 @@ export const styles = StyleSheet.create({
     marginLeft: 3,
     marginTop: 4,
   },
-});
+}));

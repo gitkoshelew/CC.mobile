@@ -1,25 +1,18 @@
 import styled from 'styled-components/native';
-import {Color} from '@theme/colors';
+
+const ColorContainer = styled.View`
+  flex: 1;
+  padding: 40px 21px 3px 21px;
+  background-color: ${props => props.theme.layout};
+`;
 
 const ViewContainer = styled.View`
   padding: 60px 21px 3px 21px;
 `;
 
-const ScrollViewContainer = styled.ScrollView`
-  padding: 30px 21px;
-`;
-
 const ViewFlexRight = styled.View`
   justify-content: center;
   align-items: flex-end;
-`;
-
-const ViewRightBottom = styled.View`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: flex-end;
-  align-items: center;
 `;
 
 const ViewCenter = styled.View`
@@ -60,21 +53,20 @@ const ViewFlexForTwoElements = styled.View`
 const MainTestingContainer = styled.View`
   width: 341px;
   padding: 11px 21px 33px;
-  border: 1px solid ${Color.White};
+  border: 1px solid ${props => props.theme.border};
   border-radius: 20px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
-  background-color: ${Color.White};
+  background-color: ${props => props.theme.block};
 `;
 
 export {
+  ColorContainer,
   ViewContainer,
   ViewCenter,
   ViewFlex,
   ViewFlexForTwoElements,
-  ScrollViewContainer,
   MainTestingContainer,
   ViewFlexRight,
   ViewFlexCenter,
-  ViewRightBottom,
   ViewDynamicFlex,
 };
