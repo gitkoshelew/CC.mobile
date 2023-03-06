@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 15,
     overflow: 'hidden',
-    marginBottom: 7,
+    marginBottom: 15,
   },
 });
