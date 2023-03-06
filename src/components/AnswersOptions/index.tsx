@@ -1,9 +1,11 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import {useContext} from 'react';
+import {View} from 'react-native';
 import RadioForm, {RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import {AnswerRadioContainer, styles, ViewMarginRight} from './styles';
 import {Color} from '@theme/colors';
 import {MultipleCheckboxes} from '@src/components/MultipleCheckboxes/MultipleCheckboxes';
+import {CustomText} from '@src/components/ui/ReadyStyles/Boxes/index';
+import {ThemeContext} from 'styled-components/native';
 
 type AnswersOptionsPropsType = {
   onPress: (label: string, value: number) => void;
@@ -27,6 +29,8 @@ export const AnswersOptions = ({
   selected,
   answerType,
 }: AnswersOptionsPropsType) => {
+  const theme = useContext(ThemeContext);
+
   const onPressRadio = (value: number) => {
     let answer: string = data[value];
     onPress(answer, value);
@@ -61,12 +65,12 @@ export const AnswersOptions = ({
                 index={i}
                 labelHorizontal={false}
                 onPress={onPressRadio}
-                labelStyle={styles.textRadio}
+                labelStyle={styles(theme).textRadio}
               />
             ) : (
-              <Text key={i} style={styles.textRadio}>
+              <CustomText key={i} fs="16px">
                 {obj.label}
-              </Text>
+              </CustomText>
             )}
           </AnswerRadioContainer>
         ))}

@@ -1,7 +1,7 @@
 import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {StyleSheet, View} from 'react-native';
 import {FilterBlock} from './styles';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {deleteQuiz, getQuizQuestions, getQuizzes, setStateQuizzes} from '@src/bll/quizReducer';
@@ -14,10 +14,13 @@ import {getTopics} from '@src/screens/CreateQuiz/services/services';
 import {getQuizResponseType, TopicType} from '@customTypes/quizzesAPI-types';
 import {TabsQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/TabsQuestions';
 import {clearStateResult} from '@src/bll/resultReducer';
+import {DefaultTheme} from 'styled-components';
+import {ThemeContext} from 'styled-components/native';
 
 export const TestsList = () => {
   const {navigate} = useAppNavigate();
   const dispatch = useAppDispatch();
+  const theme = useContext(ThemeContext);
   const isFetching = useAppSelector(state => state.app.isFetching);
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
@@ -80,6 +83,7 @@ export const TestsList = () => {
         setQuizzesData(res);
       });
   }, [dispatch]);
+
   useEffect(() => {
     setFilteredQuizzes(quizzesData);
   }, [quizzesData]);
@@ -95,10 +99,10 @@ export const TestsList = () => {
   return (
     <>
       {isFetching && <Loader />}
-      <View>
+      <View style={styles(theme).wrapper}>
         <TabsQuestions topics={topics} onPressTabs={handlerTabs} />
         <FilterBlock>
-          <View style={styles.container}>
+          <View style={styles().container}>
             <SwitchSelectors
               type={TypeSwitchSelect.FILTER}
               onPress={handlerSwitchSelectors}
@@ -106,7 +110,7 @@ export const TestsList = () => {
             />
           </View>
         </FilterBlock>
-        <ScrollView style={styles.scroll} scrollEnabled={isScrollEnabled}>
+        <ScrollView style={styles().scroll} scrollEnabled={isScrollEnabled}>
           {quizzes.map(test =>
             test.authorId === authorId ? (
               <MyTestCards
@@ -136,11 +140,16 @@ export const TestsList = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme?: DefaultTheme) => ({
+  wrapper: {
+    backgroundColor: theme?.layout,
+    height: '100%',
+    paddingBottom: 40,
+  },
   container: {
     width: 100,
   },
   scroll: {
     height: '75%',
   },
-});
+}));

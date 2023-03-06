@@ -1,10 +1,13 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, ViewStyle} from 'react-native';
 import {BlockBox} from '@src/components/ui/ReadyStyles/Boxes';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Color} from '@theme/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DefaultTimeType} from '@src/utils/transformTime';
+import {DefaultTheme} from 'styled-components';
+import {useContext} from 'react';
+import {ThemeContext} from 'styled-components/native';
 import {useTranslation} from 'react-i18next';
 import {TransformLocalizationLanguage} from '@src/utils/TransformLocalizationLanguage';
 
@@ -21,34 +24,41 @@ type HeaderPropsType = {
 export const Header = (props: HeaderPropsType) => {
   const {t} = useTranslation('SwitchSelectors');
   const {isActive, time, title, topic, onPress, difficulty, isAddedQuestion} = props;
+  const theme = useContext(ThemeContext);
 
   return (
-    <View style={[styles.wrapper, isActive ? styles.active : styles.inactive]}>
+    <View
+      style={[
+        styles(theme).wrapper,
+        isActive ? styles(theme).active : styles(theme).inactive,
+      ]}>
       <View>
         <BlockBox>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles(theme).title}>{title}</Text>
         </BlockBox>
-        <View style={styles.container}>
-          <Fontisto style={styles.icon} name="hashtag" color={Color.BlueLight} size={16} />
-          <Text style={styles.text}>{topic}</Text>
+        <View style={styles().container}>
+          <Fontisto style={styles().icon} name="hashtag" color={Color.BlueLight} size={16} />
+          <Text style={styles(theme).text}>{topic}</Text>
         </View>
-        <View style={styles.container}>
+        <View style={styles().container}>
           <MaterialCommunityIcons
-            style={styles.icon}
+            style={styles().icon}
             name="progress-question"
             color={Color.BlueLight}
             size={18}
           />
-          <Text style={styles.text}>{t(TransformLocalizationLanguage({difficulty}))}</Text>
+          <Text style={styles(theme).text}>
+            {t(TransformLocalizationLanguage({difficulty}))}
+          </Text>
         </View>
-        <View style={styles.container}>
+        <View style={styles().container}>
           <MaterialCommunityIcons
-            style={styles.icon}
+            style={styles().icon}
             name="timelapse"
             color={Color.BlueLight}
             size={18}
           />
-          <Text style={styles.text}>
+          <Text style={styles(theme).text}>
             {time.minutes}m. {time.seconds}s.
           </Text>
         </View>
@@ -69,14 +79,14 @@ export const Header = (props: HeaderPropsType) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   wrapper: {
     flexDirection: 'row',
     marginVertical: 5,
     marginHorizontal: 5,
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: Color.White,
+    backgroundColor: theme?.block,
     borderRadius: 15,
     padding: 10,
     shadowOffset: {
@@ -85,14 +95,14 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     elevation: 6,
-  },
+  } as ViewStyle,
   container: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
     marginBottom: 7,
-  },
+  } as ViewStyle,
   icon: {
     marginRight: 10,
   },
@@ -100,15 +110,17 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Regular',
     fontSize: 16,
     fontWeight: '500',
-  },
+    color: theme?.textMainColor,
+  } as ViewStyle,
   text: {
     fontFamily: 'Montserrat-Regular',
     fontSize: 14,
-  },
+    color: theme?.textMainColor,
+  } as ViewStyle,
   active: {
-    backgroundColor: Color.White,
+    backgroundColor: theme?.block,
   },
   inactive: {
-    backgroundColor: Color.White,
+    backgroundColor: theme?.block,
   },
-});
+}));

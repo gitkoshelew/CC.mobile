@@ -1,10 +1,10 @@
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Text} from 'react-native';
+import {ColorContainer} from '@src/components/ui/ReadyStyles/Containers/index';
+import {CustomText} from '@src/components/ui/ReadyStyles/Boxes/index';
 
 export const CardsList = () => {
   return (
-    <SafeAreaView>
-      <Text>Memory Cards</Text>
-    </SafeAreaView>
+    <ColorContainer>
+      <CustomText fs="16px">Memory Cards</CustomText>
+    </ColorContainer>
   );
 };

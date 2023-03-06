@@ -1,4 +1,4 @@
-import React from 'react';
+import {useCallback} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Header} from '@src/components/Header/index';
 import Animated, {useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
@@ -8,6 +8,7 @@ import {SmallButton} from '@src/components/ui/SmallButton/index';
 import {useAppDispatch, useAppSelector} from '@hooks/hooks';
 import {logout} from '@src/bll/authReducer';
 import {Form} from '@src/components/Form';
+import {changeTheme} from '@src/screens/Main/services/services';
 
 export type ContentPropsType = {
   isOpen: boolean;
@@ -18,6 +19,7 @@ export type ContentPropsType = {
 export const Content = ({isOpen, isLogForm, setIsLogForm}: ContentPropsType) => {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
+  const currentTheme = useAppSelector(state => state.app.currentTheme);
   const {i18n} = useTranslation();
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
@@ -30,10 +32,14 @@ export const Content = ({isOpen, isLogForm, setIsLogForm}: ContentPropsType) => 
     };
   });
 
-  const handlerLogout = () => {
+  const handlerChangeMode = useCallback(() => {
+    dispatch(changeTheme(currentTheme === 'light' ? 'dark' : 'light'));
+  }, [currentTheme, dispatch]);
+
+  const handlerLogout = useCallback(() => {
     dispatch(logout());
     setIsLogForm(true);
-  };
+  }, [dispatch, setIsLogForm]);
 
   isOpen
     ? (opacityValue.value = withTiming(1, {duration: 1500}))
@@ -48,7 +54,11 @@ export const Content = ({isOpen, isLogForm, setIsLogForm}: ContentPropsType) => 
           <Text style={styles.textLanguage}>{i18n.language.toUpperCase()}</Text>
         </TouchableOpacity>
         <View style={isLoggedIn && styles.rowButtons}>
-          <SmallButton type="theme" />
+          <SmallButton
+            type="theme"
+            onPress={handlerChangeMode}
+            color={currentTheme === 'light' ? Color.White : Color.DarkBlue}
+          />
           {isLoggedIn && <SmallButton type="exit" onPress={handlerLogout} />}
         </View>
       </View>

@@ -4,7 +4,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import {TabButton} from './TabButton/TabButton';
 import {Tests} from '@src/screens/Testing/index';
-import {Home} from '@src/screens/Main/Home';
+import {Home} from '@src/screens/Main/index';
 import {StyleSheet, View} from 'react-native';
 import {DraggableBottomSheet} from '@src/components/DraggableBottomSheet';
 import {Cards} from '@src/screens/Cards/index';
@@ -64,7 +64,11 @@ const Navigation = () => {
             component={Tests}
             options={{headerShown: false}}
           />
-          <Tab.Screen name={ScreenList.CARDS} component={Cards} />
+          <Tab.Screen
+            name={ScreenList.CARDS}
+            component={Cards}
+            options={{headerShown: false}}
+          />
         </Tab.Navigator>
       </View>
     </View>

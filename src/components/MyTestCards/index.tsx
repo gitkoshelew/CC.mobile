@@ -18,6 +18,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {Color} from '@theme/colors';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useContext} from 'react';
+import {ThemeContext} from 'styled-components/native';
 
 interface ITestCard extends Pick<PanGestureHandlerProps, 'simultaneousHandlers'> {
   id: number;
@@ -41,6 +43,7 @@ export const MyTestCards = ({
   onDismiss,
   simultaneousHandlers,
 }: ITestCard) => {
+  const theme = useContext(ThemeContext);
   const translateX = useSharedValue(0);
   const itemHeight = useSharedValue(LIST_ITEM_HEIGHT);
   const marginVertical = useSharedValue(10);
@@ -85,38 +88,38 @@ export const MyTestCards = ({
   });
 
   return (
-    <Animated.View style={[styles.container, rTaskContainerStyle]}>
-      <Animated.View style={[styles.iconContainer, rIconContainerStyle]}>
+    <Animated.View style={[styles().container, rTaskContainerStyle]}>
+      <Animated.View style={[styles().iconContainer, rIconContainerStyle]}>
         <Icon name="trash" size={40} color={Color.Red} />
       </Animated.View>
       <PanGestureHandler
         onGestureEvent={panGesture}
         simultaneousHandlers={simultaneousHandlers}>
-        <Animated.View style={[styles.test, rStyle]}>
+        <Animated.View style={[styles(theme).test, rStyle]}>
           <View>
-            <Text style={styles.title}>{title}</Text>
-            <View style={styles.contentContainer}>
-              <View style={styles.content}>
+            <Text style={styles(theme).title}>{title}</Text>
+            <View style={styles().contentContainer}>
+              <View style={styles().content}>
                 <Fontisto
-                  style={styles.iconTopic}
+                  style={styles().iconTopic}
                   name="hashtag"
                   color={Color.BlueLight}
                   size={10}
                 />
-                <Text style={styles.text}>{topic}</Text>
+                <Text style={styles(theme).text}>{topic}</Text>
               </View>
-              <View style={styles.content}>
+              <View style={styles().content}>
                 <MaterialCommunityIcons
-                  style={styles.icon}
+                  style={styles().icon}
                   name="progress-question"
                   color={Color.BlueLight}
                   size={13}
                 />
-                <Text style={styles.text}>difficulty</Text>
+                <Text style={styles(theme).text}>difficulty</Text>
               </View>
             </View>
           </View>
-          <Text style={styles.description}>Questions: {questions}</Text>
+          <Text style={styles(theme).description}>Questions: {questions}</Text>
           <AppButton type={TypeAppButton.PRIMARY} title="Start" onPress={() => onPress(id)} />
         </Animated.View>
       </PanGestureHandler>

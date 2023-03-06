@@ -2,6 +2,8 @@ enum Color {
   DarkBlue = '#2D3E6B',
   Blue = '#4287f5',
   BlueLight = '#6B9DE9',
+  VioletBlue = '#334679',
+  DarkPurpleBlue = '#566488',
   Black = '#000000',
   White = '#FFFFFF',
   Red = '#E96B6B',
@@ -23,3 +25,39 @@ enum Color {
   LightSeagreen = '#20b2aa',
 }
 export {Color};
+
+export const BASE_THEME = {
+  layout: Color.GrayLight,
+  box: Color.GrayLight,
+  block: Color.White,
+  border: Color.Gray,
+  questionTab: Color.Gray,
+  activeQuestionTab: Color.White,
+  textMainColor: Color.Black,
+  textColor: Color.GrayDark,
+  lateralBalls: Color.White,
+  appSelect: Color.White,
+  appSelectActive: Color.Gray,
+  appButtonSecondary: Color.GrayLight,
+};
+
+export const DARK_THEME = {
+  layout: '#212C3F',
+  box: '#4D6793',
+  block: Color.VioletBlue,
+  border: Color.DarkPurpleBlue,
+  questionTab: Color.VioletBlue,
+  activeQuestionTab: Color.DarkPurpleBlue,
+  textMainColor: Color.White,
+  textColor: Color.GrayDark,
+  lateralBalls: '#4D6793',
+  appSelect: Color.VioletBlue,
+  appSelectActive: '#4D6793',
+  appButtonSecondary: Color.BlueLight,
+};
+
+type BaseThemeType = typeof BASE_THEME;
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends BaseThemeType {}
+}

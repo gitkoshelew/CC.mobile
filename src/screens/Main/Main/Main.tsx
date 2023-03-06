@@ -10,6 +10,8 @@ import {MyQuizzes} from '@src/components/MyQuizzes';
 import {MemoryCardsList} from '@src/components/MemoryCardsList';
 import {styles} from '@src/screens/Main/Main/styles';
 import {Color} from '@theme/colors';
+import {useContext} from 'react';
+import {ThemeContext} from 'styled-components/native';
 import {useTranslation} from 'react-i18next';
 
 export const Main = () => {
@@ -20,24 +22,25 @@ export const Main = () => {
   const authorId = useAppSelector(state => state.authReducer.auth.id);
   const isScrollEnabled = useAppSelector(state => state.app.isScrollEnabled);
   const myQuizzes = allQuizzes.filter(quiz => quiz.authorId === authorId);
+  const theme = useContext(ThemeContext);
 
   return (
-    <ScrollView style={styles.wrapper} scrollEnabled={isScrollEnabled}>
-      <View style={styles.aboutUser}>
-        <View style={styles.containerProfile}>
+    <ScrollView style={styles(theme).wrapper} scrollEnabled={isScrollEnabled}>
+      <View style={styles().aboutUser}>
+        <View style={styles().containerProfile}>
           <Image
-            style={styles.backgroundImage}
+            style={styles().backgroundImage}
             source={require('../../../assets/images/background-second.png')}
             resizeMode="stretch"
           />
         </View>
-        <View style={styles.profile}>
+        <View style={styles().profile}>
           <ViewCenter>
             <UserIconContainer>
               <FontAwesome
                 name={isLoggedIn ? 'user' : 'user-secret'}
                 size={80}
-                style={!isLoggedIn && styles.icon}
+                style={!isLoggedIn && styles().icon}
               />
             </UserIconContainer>
             <ViewCenter>
@@ -48,13 +51,13 @@ export const Main = () => {
             </ViewCenter>
           </ViewCenter>
         </View>
-        <View style={styles.containerBalls}>
+        <View style={styles().containerBalls}>
           <LateralBall value={isLoggedIn ? '73%' : '0'} description={t('Success')} />
           <CentralBall value={isLoggedIn ? myQuizzes.length : 0} description={t('Quizzes')} />
           <LateralBall value={isLoggedIn ? '1' : '0'} description={t('Ranks')} />
         </View>
       </View>
-      <View style={styles.content}>
+      <View style={styles().content}>
         <MyQuizzes isLoggedIn={isLoggedIn} myQuizzes={myQuizzes} />
         <MemoryCardsList isLoggedIn={isLoggedIn} />
       </View>

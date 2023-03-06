@@ -1,10 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppMessageType} from '@customTypes/notificationTypes';
 
+export type ThemeType = 'light' | 'dark';
+
 export type AppStateT = {
   isFetching: boolean;
   messages: AppMessageType[];
   isScrollEnabled: boolean;
+  currentTheme: ThemeType;
 };
 
 const slice = createSlice({
@@ -13,6 +16,7 @@ const slice = createSlice({
     messages: [],
     isFetching: false,
     isScrollEnabled: true,
+    currentTheme: 'light',
   } as AppStateT,
   reducers: {
     setAppMessage(
@@ -38,6 +42,9 @@ const slice = createSlice({
     setIsScrollEnabled(state, action: PayloadAction<boolean>) {
       state.isScrollEnabled = action.payload;
     },
+    setCurrentTheme(state, action: PayloadAction<ThemeType>) {
+      state.currentTheme = action.payload;
+    },
   },
 });
 
@@ -49,4 +56,5 @@ export const {
   setAppMessage,
   setIsFetching,
   setIsScrollEnabled,
+  setCurrentTheme,
 } = slice.actions;

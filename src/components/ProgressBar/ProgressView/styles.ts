@@ -13,7 +13,7 @@ const statusColor = {
 export const ViewCheck = styled.View<ViewBoxPropsType>`
   align-items: center;
   justify-content: center;
-  border: 2px solid ${Color.Gray};
+  border: 2px solid ${props => props.theme.border};
   border-radius: 50px;
   width: 15px;
   height: 15px;

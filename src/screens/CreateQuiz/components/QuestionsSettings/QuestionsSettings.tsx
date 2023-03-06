@@ -1,6 +1,6 @@
 import {QuestionsTabs} from '@src/components/QuestionsTabs';
 import {KeyboardAvoidingView, Platform, View} from 'react-native';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import {styles} from './styles';
 import {questionType} from '@customTypes/quiz-types';
 import {CustomModal} from '@src/components/ui/Modal/index';
@@ -11,6 +11,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import {ScreenList} from '@src/navigation/navigation';
 import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers/index';
 import {ExitButton} from '@src/screens/CreateQuiz/components/QuestionsSettings/ExitButton/index';
+import {ThemeContext} from 'styled-components/native';
 import {useTranslation} from 'react-i18next';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
@@ -35,7 +36,7 @@ export const QuestionsSettings = ({
   const {t} = useTranslation(['createQuestion', 'labelsNavigation']);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const theme = useContext(ThemeContext);
   const currentQuestion = questions[currentQuestionIndex] || {...getNewQuestion(), topicId};
 
   const handlerCurrentQuestion = useCallback(
@@ -57,8 +58,8 @@ export const QuestionsSettings = ({
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={keyboardVerticalOffset}
-      style={styles.wrapper}>
-      <View style={styles.container}>
+      style={styles().wrapper}>
+      <View style={styles().container}>
         <ExitButton />
         <CustomModal
           isModalVisible={isModalVisible}
@@ -66,8 +67,8 @@ export const QuestionsSettings = ({
           text={t('First create a question')}
         />
         <ViewFlex>
-          <View style={styles.inner}>
-            <View style={styles.questionTabsContainer}>
+          <View style={styles().inner}>
+            <View style={styles().questionTabsContainer}>
               <QuestionsTabs
                 activeTab={currentQuestionIndex}
                 numberOfQuestions={numberOfQuestions}
@@ -75,12 +76,12 @@ export const QuestionsSettings = ({
                 onPressCurrentQuestion={handlerCurrentQuestion}
               />
             </View>
-            <View style={styles.tabsContainer}>
+            <View style={styles().tabsContainer}>
               <Tab.Navigator
                 screenOptions={{
-                  tabBarStyle: styles.tabBarStyle,
-                  tabBarIndicatorContainerStyle: styles.tabBarIndicatorContainerStyle,
-                  tabBarLabelStyle: styles.tabBarLabelStyle,
+                  tabBarStyle: styles(theme).tabBarStyle,
+                  tabBarIndicatorContainerStyle: styles().tabBarIndicatorContainerStyle,
+                  tabBarLabelStyle: styles(theme).tabBarLabelStyle,
                 }}>
                 <Tab.Screen
                   name={ScreenList.CREATE_QUESTION}

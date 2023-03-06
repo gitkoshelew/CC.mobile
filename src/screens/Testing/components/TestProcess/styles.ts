@@ -5,6 +5,7 @@ const TimerBox = styled.View`
 `;
 
 const TextBox = styled.Text<{fontWeight?: boolean}>`
+  color: ${props => props.theme.textMainColor};
   margin-bottom: 19px;
   text-align: center;
   font-size: 16px;
@@ -12,6 +13,7 @@ const TextBox = styled.Text<{fontWeight?: boolean}>`
 `;
 
 const CountQuestionBox = styled.Text`
+  color: ${props => props.theme.textMainColor};
   font-size: 14px;
   font-family: 'Montserrat-Regular';
 `;

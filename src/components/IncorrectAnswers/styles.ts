@@ -1,13 +1,13 @@
-import {Color} from '@theme/colors';
 import styled from 'styled-components/native';
 
 const NumberBox = styled.View`
   width: 30%;
-  padding: 4px 0 8px 7px;
+  padding-left: 10px;
   margin-right: 11px;
   margin-bottom: 17px;
-  background: ${Color.GrayLight};
+  background: ${props => props.theme.box};
   border-radius: 10px;
+  justify-content: center;
 `;
 
 const Wrapper = styled.View`
@@ -19,9 +19,9 @@ const Wrapper = styled.View`
 const AnswerBox = styled.View`
   flex-grow: 1;
   width: 40%;
-  padding: 4px 0 8px 9px;
+  padding: 5px 10px;
   margin-bottom: 17px;
-  background: ${Color.GrayLight};
+  background: ${props => props.theme.box};
   border-radius: 10px;
 `;
 

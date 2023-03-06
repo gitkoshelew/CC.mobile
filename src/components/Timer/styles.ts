@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import {Color} from '@theme/colors';
 
 const Container = styled.View`
   display: flex;
@@ -9,7 +8,7 @@ const Container = styled.View`
 
 const StyledText = styled.Text`
   font-size: 30px;
-  color: ${Color.Black};
+  color: ${props => props.theme.textMainColor};
   font-family: 'Montserrat-Regular';
 `;
 

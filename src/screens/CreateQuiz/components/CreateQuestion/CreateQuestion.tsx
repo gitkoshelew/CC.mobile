@@ -1,4 +1,4 @@
-import {Platform, View} from 'react-native';
+import {Platform} from 'react-native';
 import {
   BlockBox,
   ContainerDynamicWidth,
@@ -222,8 +222,8 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
         <SelectAndCreateTopicContainer control={control} setValue={setValue} />
       </BlockBox>
       <ViewFlexForTwoElements>
-        <View>
-          <BlockDynamicMargin m="0 30px 15px 0">
+        <BlockDynamicMargin m="0 10px 0 0">
+          <BlockDynamicMargin m="0 0 15px 0">
             <TextBox>{t('Answer type')}</TextBox>
           </BlockDynamicMargin>
           <ContainerDynamicWidth width="117px">
@@ -234,7 +234,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
               onPressSwitchSelect={handlerSwitchSelectHookForm}
             />
           </ContainerDynamicWidth>
-        </View>
+        </BlockDynamicMargin>
         <ViewDynamicFlex alignI="center" justifyC="center">
           <CustomText fs="16px">{t('Timer')}</CustomText>
           <TimePicker control={control} errors={errors.minutes?.message} />

@@ -1,9 +1,10 @@
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useContext, useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Color} from '@theme/colors';
 import {questionResponseType, questionType} from '@customTypes/quiz-types';
 import {TabsQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/TabsQuestions/index';
 import {ListingQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/ListingQuestions/ListingQuestions';
+import {DefaultTheme} from 'styled-components';
+import {ThemeContext} from 'styled-components/native';
 
 type ListQuestionsPropsType = {
   quizId: number;
@@ -19,6 +20,7 @@ export const ListQuestions = ({
   onPressAddQuestion,
   currentQuizQuestions,
 }: ListQuestionsPropsType) => {
+  const theme = useContext(ThemeContext);
   const [filteredQuestions, setFilteredQuestions] =
     useState<questionResponseType[]>(questions);
 
@@ -38,9 +40,9 @@ export const ListQuestions = ({
   }, [questions]);
 
   return (
-    <View style={styles.wrapper}>
+    <View style={styles(theme).wrapper}>
       <TabsQuestions topics={topics} onPressTabs={handlerTabs} />
-      <View style={styles.container}>
+      <View style={styles().container}>
         <ListingQuestions
           filteredQuestions={filteredQuestions}
           onPressAddQuestion={onPressAddQuestion}
@@ -51,14 +53,14 @@ export const ListQuestions = ({
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   wrapper: {
     flex: 1,
-    backgroundColor: Color.GrayLight,
+    backgroundColor: theme?.layout,
     paddingTop: 10,
     paddingHorizontal: 15,
   },
   container: {
     marginBottom: 80,
   },
-});
+}));

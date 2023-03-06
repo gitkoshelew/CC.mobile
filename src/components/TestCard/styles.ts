@@ -1,16 +1,16 @@
-import {StyleSheet} from 'react-native';
-import {Color} from '@theme/colors';
+import {StyleSheet, ViewStyle} from 'react-native';
+import {DefaultTheme} from 'styled-components';
 
-export const styles = StyleSheet.create({
+export const styles = StyleSheet.create((theme?: DefaultTheme) => ({
   container: {
     width: '100%',
     alignItems: 'center',
-  },
+  } as ViewStyle,
   test: {
     width: '90%',
     flexDirection: 'row',
     paddingHorizontal: 15,
-    backgroundColor: Color.White,
+    backgroundColor: theme?.block,
     height: 71,
     marginVertical: 10,
     justifyContent: 'space-between',
@@ -23,21 +23,21 @@ export const styles = StyleSheet.create({
     },
     shadowRadius: 10,
     elevation: 5,
-  },
+  } as ViewStyle,
   title: {
     fontSize: 16,
-    color: Color.Black,
+    color: theme?.textMainColor,
     fontWeight: '600',
-  },
+  } as ViewStyle,
   description: {
     fontSize: 14,
-    color: Color.Black,
+    color: theme?.textMainColor,
     fontWeight: '500',
-  },
+  } as ViewStyle,
   contentContainer: {
     marginTop: 6,
     justifyContent: 'space-between',
-  },
+  } as ViewStyle,
   iconTopic: {
     marginRight: 5,
     marginTop: 3,
@@ -48,10 +48,11 @@ export const styles = StyleSheet.create({
     marginTop: 2,
   },
   text: {
+    color: theme?.textMainColor,
     fontFamily: 'Montserrat-Regular',
     fontSize: 13,
   },
   content: {
     flexDirection: 'row',
-  },
-});
+  } as ViewStyle,
+}));

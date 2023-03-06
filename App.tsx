@@ -6,13 +6,17 @@ import SplashScreen from 'react-native-splash-screen';
 import Navigation from '@src/navigation/navigation';
 import {Notification} from '@src/components/ui/Notification';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {useAppDispatch} from '@hooks/hooks';
+import {useAppDispatch, useAppSelector} from '@hooks/hooks';
 import {authMe} from '@src/bll/authReducer';
+import {BASE_THEME, DARK_THEME} from '@theme/colors';
+import {ThemeContext} from 'styled-components/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {setCurrentTheme, ThemeType} from '@src/bll/appReducer';
 
 export const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
   const dispatch = useAppDispatch();
+  const isDarkMode = useColorScheme() === 'dark';
+  const currentTheme = useAppSelector(state => state.app.currentTheme);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -26,14 +30,24 @@ export const App = () => {
     dispatch(authMe());
   }, [dispatch]);
 
+  useEffect(() => {
+    AsyncStorage.getItem('theme').then(theme => {
+      if (theme) {
+        dispatch(setCurrentTheme(theme as ThemeType));
+      }
+    });
+  }, [dispatch]);
+
   return (
-    <NavigationContainer>
-      <Navigation />
-      <Notification />
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-    </NavigationContainer>
+    <ThemeContext.Provider value={currentTheme === 'dark' ? DARK_THEME : BASE_THEME}>
+      <NavigationContainer>
+        <Navigation />
+        <Notification />
+        <StatusBar
+          barStyle={currentTheme ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
+      </NavigationContainer>
+    </ThemeContext.Provider>
   );
 };
