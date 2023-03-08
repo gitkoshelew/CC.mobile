@@ -24,7 +24,6 @@ export const TestsList = () => {
   const isFetching = useAppSelector(state => state.app.isFetching);
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
   const authorId = useAppSelector(state => state.authReducer.auth.id);
-  const [quizzesData, setQuizzesData] = useState<getQuizResponseType[]>([]);
   const isScrollEnabled = useAppSelector(state => state.app.isScrollEnabled);
   const [quizzesData, setQuizzesData] = useState<getQuizResponseType[]>([]);
   const [filteredQuizzes, setFilteredQuizzes] = useState<getQuizResponseType[]>(quizzesData);
@@ -83,10 +82,6 @@ export const TestsList = () => {
         setQuizzesData(res);
       });
   }, [dispatch]);
-  useEffect(() => {
-    setFilteredQuizzes(quizzesData);
-  }, [quizzesData]);
-
   useEffect(() => {
     setFilteredQuizzes(quizzesData);
   }, [quizzesData]);
