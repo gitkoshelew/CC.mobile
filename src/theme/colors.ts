@@ -1,8 +1,10 @@
 enum Color {
+  StrongDarkBlue = '#212C3F',
   DarkBlue = '#2D3E6B',
   Blue = '#4287f5',
   BlueLight = '#6B9DE9',
   VioletBlue = '#334679',
+  VioletBluePurple = '#4D6793',
   DarkPurpleBlue = '#566488',
   Black = '#000000',
   White = '#FFFFFF',
@@ -42,17 +44,17 @@ export const BASE_THEME = {
 };
 
 export const DARK_THEME = {
-  layout: '#212C3F',
-  box: '#4D6793',
+  layout: Color.StrongDarkBlue,
+  box: Color.VioletBluePurple,
   block: Color.VioletBlue,
   border: Color.DarkPurpleBlue,
   questionTab: Color.VioletBlue,
   activeQuestionTab: Color.DarkPurpleBlue,
   textMainColor: Color.White,
   textColor: Color.GrayDark,
-  lateralBalls: '#4D6793',
+  lateralBalls: Color.VioletBluePurple,
   appSelect: Color.VioletBlue,
-  appSelectActive: '#4D6793',
+  appSelectActive: Color.VioletBluePurple,
   appButtonSecondary: Color.BlueLight,
 };
 

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* CCMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CCMobileTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-CCMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-CCMobile.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		346B71AFECCA432B8FA3D713 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7199D380BAF45F892FD9A0E /* Montserrat-Regular.ttf */; };
@@ -18,6 +17,7 @@
 		69A143FC294F90C400686610 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69A143FB294F90C400686610 /* Images.xcassets */; };
 		69AB3F7B2949B81F00CAB64D /* react-native-splash-screen in Resources */ = {isa = PBXBuildFile; fileRef = 69AB3F7A2949B81F00CAB64D /* react-native-splash-screen */; };
 		7699B88040F8A987B510C191 /* libPods-CCMobile-CCMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-CCMobile-CCMobileTests.a */; };
+		7C77D5203E1A314674EAF81A /* libPods-CCMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-CCMobile.a */; };
 		CA9683F2E0C64F8DA855307C /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF5C80F13D8947E6B5A50FFA /* Montserrat-Medium.ttf */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +28,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = CCMobile;
+		};
+		693459A529B7785F00CCE429 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 693459A129B7785F00CCE429 /* RNCookieManagerIOS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1BD725DA1CF77A8B005DBD79;
+			remoteInfo = RNCookieManagerIOS;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -45,13 +52,14 @@
 		5709B34CF0A7D63546082F79 /* Pods-CCMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCMobile.release.xcconfig"; path = "Target Support Files/Pods-CCMobile/Pods-CCMobile.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-CCMobile-CCMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCMobile-CCMobileTests.debug.xcconfig"; path = "Target Support Files/Pods-CCMobile-CCMobileTests/Pods-CCMobile-CCMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-CCMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CCMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		693459A129B7785F00CCE429 /* RNCookieManagerIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCookieManagerIOS.xcodeproj; path = "../node_modules/react-native-cookies/ios/RNCookieManagerIOS.xcodeproj"; sourceTree = "<group>"; };
 		6934C452297008E3006D992D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		69635D2D2949C3BF00A5092F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		69635D312949C4CC00A5092F /* launch-screen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launch-screen@3x.png"; path = "CCMobile/launchScreen.xcassets/launch-screen.imageset/launch-screen@3x.png"; sourceTree = "<group>"; };
 		69A143FB294F90C400686610 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		69AB3F7A2949B81F00CAB64D /* react-native-splash-screen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-splash-screen"; path = "../node_modules/react-native-splash-screen"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-CCMobile-CCMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCMobile-CCMobileTests.release.xcconfig"; path = "Target Support Files/Pods-CCMobile-CCMobileTests/Pods-CCMobile-CCMobileTests.release.xcconfig"; sourceTree = "<group>"; };
-		BF5C80F13D8947E6B5A50FFA /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		BF5C80F13D8947E6B5A50FFA /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		E7199D380BAF45F892FD9A0E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -69,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-CCMobile.a in Frameworks */,
+				7C77D5203E1A314674EAF81A /* libPods-CCMobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,9 +125,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		693459A229B7785F00CCE429 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				693459A629B7785F00CCE429 /* libRNCookieManagerIOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				693459A129B7785F00CCE429 /* RNCookieManagerIOS.xcodeproj */,
 				69AB3F7A2949B81F00CAB64D /* react-native-splash-screen */,
 			);
 			name = Libraries;
@@ -245,6 +262,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 693459A229B7785F00CCE429 /* Products */;
+					ProjectRef = 693459A129B7785F00CCE429 /* RNCookieManagerIOS.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* CCMobile */,
@@ -252,6 +275,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		693459A629B7785F00CCE429 /* libRNCookieManagerIOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNCookieManagerIOS.a;
+			remoteRef = 693459A529B7785F00CCE429 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -604,7 +637,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -676,7 +709,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
