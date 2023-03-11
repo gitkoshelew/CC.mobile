@@ -8,8 +8,8 @@ export const authAPI = {
   registration(data: RegistrationType) {
     return instance.post('/auth/registration', data);
   },
-  checkAuth() {
-    return instance.post('/auth/refresh-token');
+  checkAuth(data: string) {
+    return instance.post('/auth/refresh-token', {}, {headers: {Cookie: data}});
   },
   authMe() {
     return instance.get('/auth/me');
