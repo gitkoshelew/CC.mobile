@@ -1,7 +1,7 @@
 import {SwitchSelectors} from '@src/components/SwitchSelectors';
 import {StyleSheet, View} from 'react-native';
 import {FilterBlock} from './styles';
-import {useCallback, useContext, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {deleteQuiz, getQuizQuestions, getQuizzes, setStateQuizzes} from '@src/bll/quizReducer';
@@ -16,10 +16,13 @@ import {TabsQuestions} from '@src/screens/CreateQuiz/components/ListQuestions/Ta
 import {clearStateResult} from '@src/bll/resultReducer';
 import {DefaultTheme} from 'styled-components';
 import {ThemeContext} from 'styled-components/native';
+import {CustomModal} from '@src/components/ui/Modal';
+import {useTranslation} from 'react-i18next';
 
 export const TestsList = () => {
   const {navigate} = useAppNavigate();
   const dispatch = useAppDispatch();
+  const {t} = useTranslation('testList');
   const theme = useContext(ThemeContext);
   const isFetching = useAppSelector(state => state.app.isFetching);
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
@@ -28,6 +31,7 @@ export const TestsList = () => {
   const [quizzesData, setQuizzesData] = useState<getQuizResponseType[]>([]);
   const [filteredQuizzes, setFilteredQuizzes] = useState<getQuizResponseType[]>(quizzesData);
   const [topics, setTopics] = useState(['all']);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const quizzes = filteredQuizzes.map(quiz => ({
     id: quiz.id,
     title: quiz.title,
@@ -56,10 +60,16 @@ export const TestsList = () => {
   };
 
   const onPressStartTestingHandler = useCallback(
-    (id: number) => {
+    (id: number, questions: number) => {
       dispatch(getQuizQuestions(id))
         .unwrap()
-        .then(() => navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_PROCESS}));
+        .then(() => {
+          if (questions === 0) {
+            setIsModalVisible(true);
+          } else {
+            navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_PROCESS});
+          }
+        });
       dispatch(clearStateResult());
     },
     [dispatch, navigate],
@@ -98,6 +108,11 @@ export const TestsList = () => {
     <>
       {isFetching && <Loader />}
       <View style={styles(theme).wrapper}>
+        <CustomModal
+          isModalVisible={isModalVisible}
+          onPress={setIsModalVisible}
+          text={t('The quiz contains no questions')}
+        />
         <TabsQuestions topics={topics} onPressTabs={handlerTabs} />
         <FilterBlock>
           <View style={styles().container}>

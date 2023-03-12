@@ -12,7 +12,7 @@ type ITestCard = {
   id: number;
   questions: number;
   topic: string;
-  onPress: (id: number) => void;
+  onPress: (id: number, questions: number) => void;
   title: string;
 };
 
@@ -46,7 +46,11 @@ export const TestCard = ({onPress, title, id, topic, questions}: ITestCard) => {
           </View>
         </View>
         <Text style={styles(theme).description}>Questions: {questions}</Text>
-        <AppButton type={TypeAppButton.PRIMARY} title="Start" onPress={() => onPress(id)} />
+        <AppButton
+          type={TypeAppButton.PRIMARY}
+          title="Start"
+          onPress={() => onPress(id, questions)}
+        />
       </View>
     </View>
   );

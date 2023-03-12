@@ -25,7 +25,6 @@ export const TestProcess = () => {
   const {navigate} = useAppNavigate();
   const dispatch = useAppDispatch();
   const resultData = useAppSelector(state => state.resultReducer.result);
-  //const checkedData = useAppSelector(state => state.checkReducer.options);
   const quizIdData = useAppSelector(state => state.processReducer.quiz);
   const [numAnswer, setNumAnswer] = useState<number>(1);
   const [singleAnswer, setSingleAnswer] = useState<string[]>([]);
