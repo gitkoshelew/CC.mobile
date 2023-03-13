@@ -67,7 +67,7 @@ export const SelectAndCreateTopic = <T extends FieldValues>({
             validate: {
               required: value => {
                 if (value === 0) {
-                  return t('Select or create topic', {ns: 'validationFields'})!;
+                  return t('topic.Select or create topic', {ns: 'validationFields'})!;
                 }
               },
             },
