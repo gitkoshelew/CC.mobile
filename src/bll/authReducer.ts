@@ -5,6 +5,7 @@ import {setAppMessage, setIsFetching} from '@src/bll/appReducer';
 import {LoginType, RegistrationType} from '@customTypes/authAPI-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AuthTypes} from '@customTypes/auth-types';
+import {setAccessToken} from '@src/dal/instance';
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -41,15 +42,17 @@ export const login = createAsyncThunk(
   async (data: LoginType, {dispatch, rejectWithValue}) => {
     dispatch(setIsFetching(true));
     try {
-      await authAPI.login(data);
+      const response = await authAPI.login(data);
+      await setAccessToken(response.data.accessToken);
+      await AsyncStorage.setItem('refreshToken', response.headers['set-cookie']![0]);
+
+      await dispatch(authMe());
       dispatch(
         setAppMessage({
           text: 'Sign in is successful',
           severity: 'success',
         }),
       );
-      dispatch(authMe());
-      dispatch(setIsLoggedIn(true));
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(
@@ -65,35 +68,40 @@ export const login = createAsyncThunk(
   },
 );
 
-export const logout = createAsyncThunk('auth/logout', (_, {dispatch, rejectWithValue}) => {
-  dispatch(setIsFetching(true));
-  try {
-    AsyncStorage.removeItem('token');
-    dispatch(
-      setAppMessage({
-        text: 'Sign out is successful',
-        severity: 'success',
-      }),
-    );
-    dispatch(setIsLoggedIn(false));
-  } catch (e) {
-    const err = e as Error | AxiosError;
-    dispatch(
-      setAppMessage({
-        text: 'Something went wrong',
-        severity: 'error',
-      }),
-    );
-    return rejectWithValue(err.message);
-  } finally {
-    dispatch(setIsFetching(false));
-  }
-});
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async (_, {dispatch, rejectWithValue}) => {
+    dispatch(setIsFetching(true));
+    try {
+      await AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('refreshToken');
+      dispatch(
+        setAppMessage({
+          text: 'Sign out is successful',
+          severity: 'success',
+        }),
+      );
+      dispatch(setIsLoggedIn(false));
+    } catch (e) {
+      const err = e as Error | AxiosError;
+      dispatch(
+        setAppMessage({
+          text: 'Something went wrong',
+          severity: 'error',
+        }),
+      );
+      return rejectWithValue(err.message);
+    } finally {
+      dispatch(setIsFetching(false));
+    }
+  },
+);
 
 export const authMe = createAsyncThunk('auth/me', async (_, {dispatch, rejectWithValue}) => {
+  dispatch(setIsFetching(true));
+
   try {
     const res = await authAPI.authMe();
-
     dispatch(setStateAuth(res.data));
     dispatch(setIsLoggedIn(true));
   } catch (e) {
@@ -105,36 +113,10 @@ export const authMe = createAsyncThunk('auth/me', async (_, {dispatch, rejectWit
       }),
     );
     return rejectWithValue(err.message);
+  } finally {
+    dispatch(setIsFetching(false));
   }
 });
-
-export const checkAuth = createAsyncThunk(
-  'auth/checkAuth',
-  async (_, {dispatch, rejectWithValue}) => {
-    dispatch(setIsFetching(true));
-    try {
-      await authAPI.checkAuth();
-      dispatch(
-        setAppMessage({
-          text: 'Token is save',
-          severity: 'success',
-        }),
-      );
-      dispatch(setIsLoggedIn(true));
-    } catch (e) {
-      const err = e as Error | AxiosError;
-      dispatch(
-        setAppMessage({
-          text: 'Something went wrong',
-          severity: 'error',
-        }),
-      );
-      return rejectWithValue(err.message);
-    } finally {
-      dispatch(setIsFetching(false));
-    }
-  },
-);
 
 type IAuth = {
   auth: AuthTypes;

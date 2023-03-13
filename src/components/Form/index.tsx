@@ -7,13 +7,9 @@ export type FormType = {
 };
 
 export const Form = ({isLogForm, setIsLogForm}: FormType) => {
-  return (
-    <>
-      {isLogForm ? (
-        <FormSignIn setIsLogForm={setIsLogForm} />
-      ) : (
-        <FormSignUp setIsLogForm={setIsLogForm} />
-      )}
-    </>
+  return isLogForm ? (
+    <FormSignIn setIsLogForm={setIsLogForm} />
+  ) : (
+    <FormSignUp setIsLogForm={setIsLogForm} />
   );
 };

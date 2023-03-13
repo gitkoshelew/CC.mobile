@@ -7,7 +7,7 @@ import Navigation from '@src/navigation/navigation';
 import {Notification} from '@src/components/ui/Notification';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useAppDispatch, useAppSelector} from '@hooks/hooks';
-import {authMe} from '@src/bll/authReducer';
+import {authMe, setIsLoggedIn} from '@src/bll/authReducer';
 import {BASE_THEME, DARK_THEME} from '@theme/colors';
 import {ThemeContext} from 'styled-components/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,7 +17,6 @@ export const App = () => {
   const dispatch = useAppDispatch();
   const isDarkMode = useColorScheme() === 'dark';
   const currentTheme = useAppSelector(state => state.app.currentTheme);
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -27,7 +26,13 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(authMe());
+    AsyncStorage.getItem('token').then(token => {
+      if (token) {
+        dispatch(authMe());
+      } else {
+        dispatch(setIsLoggedIn(false));
+      }
+    });
   }, [dispatch]);
 
   useEffect(() => {
