@@ -79,5 +79,8 @@
     "Incorrect answer": "Incorrect answer",
     "Close": "Close",
     "Try again": "Try again"
+  },
+  "testList": {
+    "The quiz contains no questions": "The quiz contains no questions"
   }
 }
