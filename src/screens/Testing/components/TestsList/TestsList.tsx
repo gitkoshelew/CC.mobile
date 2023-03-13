@@ -7,7 +7,7 @@ import {ScreenList} from '@src/navigation/navigation';
 import {deleteQuiz, getQuizQuestions, getQuizzes, setStateQuizzes} from '@src/bll/quizReducer';
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {MyTestCards} from '@src/components/MyTestCards';
-import {ScrollView} from 'react-native-gesture-handler';
+import {GestureHandlerRootView, ScrollView} from 'react-native-gesture-handler';
 import {TestCard} from '@src/components/TestCard';
 import {Loader} from '@src/components/ui/Loader';
 import {getTopics} from '@src/screens/CreateQuiz/services/services';
@@ -105,7 +105,7 @@ export const TestsList = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <GestureHandlerRootView>
       {isFetching && <Loader />}
       <View style={styles(theme).wrapper}>
         <CustomModal
@@ -149,7 +149,7 @@ export const TestsList = () => {
           )}
         </ScrollView>
       </View>
-    </>
+    </GestureHandlerRootView>
   );
 };
 
