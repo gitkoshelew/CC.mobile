@@ -21,16 +21,22 @@
       "Choose at least 2 correct answers" : "Выберите минимум 2 правильных ответа",
       "Choose 1 correct answer" : "Выберите 1 правильный ответ"
     }
-
   },
   "profile" : {
     "Ranks" : "Ранг",
     "Success" : "Успех",
     "Quizzes" : "Тестов",
     "Incognito": "Инкогнито",
-    "My quizzes" : "Му тесты",
+    "My quizzes" : "Мои тесты",
     "Difficulty" : "Сложность",
     "Memory cards" : "Карточки для запоминания"
+  },
+  "testResult" : {
+    "Your result": "Ваш результат",
+    "Question": "Вопрос",
+    "Incorrect answer": "Неправильный ответ",
+    "Close": "Закрыть",
+    "Try again": "Пройти ещё раз"
   },
   "topic" : {
     "Topic name" : "Название темы"
@@ -73,12 +79,5 @@
       "Select or create topic" : "Выберите или создайте тему"
     },
     "Need to log in" : "Вам нужно войти или зарегестрироваться"
-  },
-  "testResult" : {
-    "Your result": "Ваш результат",
-    "Question": "Вопрос",
-    "Incorrect answer": "Неправильный ответ",
-    "Close": "Закрыть",
-    "Try again": "Пройти ещё раз"
   }
 }
