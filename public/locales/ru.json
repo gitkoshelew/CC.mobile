@@ -38,6 +38,9 @@
     "Close": "Закрыть",
     "Try again": "Пройти ещё раз"
   },
+  "testList": {
+    "The quiz contains no questions": "Викторина не содержит вопросов"
+  },
   "topic" : {
     "Topic name" : "Название темы"
   },

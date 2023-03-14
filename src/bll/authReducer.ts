@@ -76,13 +76,13 @@ export const logout = createAsyncThunk(
       await AsyncStorage.removeItem('token');
       await AsyncStorage.removeItem('refreshToken');
       dispatch(setStateAuth({} as AuthTypes));
+      dispatch(setIsLoggedIn(false));
       dispatch(
         setAppMessage({
           text: 'Sign out is successful',
           severity: 'success',
         }),
       );
-      dispatch(setIsLoggedIn(false));
     } catch (e) {
       const err = e as Error | AxiosError;
       dispatch(

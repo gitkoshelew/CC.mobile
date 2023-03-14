@@ -25,7 +25,7 @@ interface ITestCard extends Pick<PanGestureHandlerProps, 'simultaneousHandlers'>
   id: number;
   topic: string;
   questions: number;
-  onPress: (id: number) => void;
+  onPress: (id: number, questions: number) => void;
   title: string;
   onDismiss?: (id: number) => void;
 }
@@ -120,7 +120,11 @@ export const MyTestCards = ({
             </View>
           </View>
           <Text style={styles(theme).description}>Questions: {questions}</Text>
-          <AppButton type={TypeAppButton.PRIMARY} title="Start" onPress={() => onPress(id)} />
+          <AppButton
+            type={TypeAppButton.PRIMARY}
+            title="Start"
+            onPress={() => onPress(id, questions)}
+          />
         </Animated.View>
       </PanGestureHandler>
     </Animated.View>
