@@ -7,33 +7,9 @@ import {
   getQuestions,
   getTopics,
 } from '@src/screens/CreateQuiz/services/services';
-import {
-  Difficulty,
-  questionResponseType,
-  questionType,
-  TypeOptions,
-} from '@customTypes/quiz-types';
+import {questionResponseType, questionType} from '@customTypes/quiz-types';
 import {TopicType} from '@customTypes/quizzesAPI-types';
 import {getQuizQuestions} from '@src/bll/quizReducer';
-
-const initialQuestion = {
-  id: 1,
-  title: '',
-  description: '',
-  content: {
-    options: ['', ''],
-    correctAnswer: [],
-  },
-  difficulty: Difficulty.Easy,
-  timer: 0,
-  type: TypeOptions.single,
-  topicId: 0,
-  topic: {
-    id: 0,
-    title: '',
-  },
-  moderationId: null,
-};
 
 type ListQuestionsContainerPropsType = {
   quizId: number;
@@ -53,7 +29,7 @@ export const ListQuestionsContainer = memo(
   }: ListQuestionsContainerPropsType) => {
     const dispatch = useAppDispatch();
     const [topics, setTopics] = useState(['all']);
-    const [questions, setQuestions] = useState<questionResponseType[]>([initialQuestion]);
+    const [questions, setQuestions] = useState<questionResponseType[]>([]);
 
     const handleAddQuestion = async (questionId: number) => {
       await dispatch(addQuestionToQuiz({quizId, questionId}));

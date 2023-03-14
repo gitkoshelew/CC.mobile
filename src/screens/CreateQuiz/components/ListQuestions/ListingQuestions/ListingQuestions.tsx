@@ -28,7 +28,10 @@ export const ListingQuestions = ({
   const renderHeader = useCallback(
     (section: questionResponseType, index: number, isActive: boolean) => {
       const questionId = section.id;
-      const isAddedQuestion = !!currentQuizQuestions.find(el => el.id === section.id);
+      const isNotEmptyFirstQuestion = !!currentQuizQuestions[0].title;
+      const isAddedQuestion =
+        isNotEmptyFirstQuestion && !!currentQuizQuestions.find(el => el.id === section.id);
+
       const time = transformTime({
         format: 'default',
         totalSeconds: section.timer,

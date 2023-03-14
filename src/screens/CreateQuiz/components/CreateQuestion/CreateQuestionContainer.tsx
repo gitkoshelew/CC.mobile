@@ -1,4 +1,4 @@
-import {useContext, useRef} from 'react';
+import {memo, useContext, useRef} from 'react';
 import {
   CreateQuestion,
   CreateQuestionFieldType,
@@ -28,7 +28,7 @@ export type CreateQuestionValuesType = CreateQuestionFieldType & {
 
 export type SaveQuestionValuesType = Omit<CreateQuestionValuesType, 'quizId'>;
 
-export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
+export const CreateQuestionContainer = memo((props: CreateQuestionPropsType) => {
   const {
     quizId,
     changeQuestions,
@@ -60,4 +60,4 @@ export const CreateQuestionContainer = (props: CreateQuestionPropsType) => {
       <CreateQuestion currentQuestion={currentQuestion} onSaveQuestion={handlerSaveQuestion} />
     </ScrollView>
   );
-};
+});
