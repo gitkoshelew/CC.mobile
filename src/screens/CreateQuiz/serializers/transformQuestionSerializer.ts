@@ -1,10 +1,16 @@
 import {DefaultTimeType, transformTime} from '@src/utils/transformTime';
 import {questionType} from '@customTypes/quiz-types';
 import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
+import {OmitObjectProperties} from '@src/utils/omitObjectProperties';
 
 export const transformQuestionSerializer = (currentQuestion: questionType) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/naming-convention
-  const {timer, id: _, Quiz_Question: __, moderationId: ___, ...rest} = currentQuestion;
+  const {timer, ...rest} = OmitObjectProperties(
+    currentQuestion,
+    'id',
+    'Quiz_Question',
+    'moderationId',
+  ) as questionType;
+
   const newTime = transformTime({
     format: 'default',
     totalSeconds: timer,

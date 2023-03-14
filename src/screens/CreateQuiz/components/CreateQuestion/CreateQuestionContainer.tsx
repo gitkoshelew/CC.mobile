@@ -9,7 +9,7 @@ import {getQuizQuestions} from '@src/bll/quizReducer';
 import {useAppDispatch, useAppSelector} from '@hooks/hooks';
 import {transformTimeSerializer} from '@src/screens/CreateQuiz/serializers/transformTimeSerializer';
 import {BlockLayout} from '@src/screens/CreateQuiz/components/CreateQuestion/styles';
-import {Omit, ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import {ThemeContext} from 'styled-components/native';
 import {CurrentQuestionType} from '@src/screens/CreateQuiz/utils/getNewQuestion';
 

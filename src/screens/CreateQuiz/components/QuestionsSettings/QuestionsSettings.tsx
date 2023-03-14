@@ -91,7 +91,7 @@ export const QuestionsSettings = ({
                   tabBarIndicatorContainerStyle: styles().tabBarIndicatorContainerStyle,
                   tabBarLabelStyle: styles(theme).tabBarLabelStyle,
                   lazy: true,
-                  lazyPlaceholder: () => <LazyLoadingLayout theme={theme} />,
+                  lazyPlaceholder: () => LazyLoadingLayout(theme),
                 }}>
                 <Tab.Screen
                   name={ScreenList.CREATE_QUESTION}

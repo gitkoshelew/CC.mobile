@@ -1,11 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import {DefaultTheme} from 'styled-components';
 
-type LazyLoadingLayoutPropsType = {
-  theme?: DefaultTheme;
-};
-
-export const LazyLoadingLayout = ({theme: DefaultTheme}) => {
+export const LazyLoadingLayout = (theme: DefaultTheme) => {
   return <View style={styles(theme).wrapper} />;
 };
 
