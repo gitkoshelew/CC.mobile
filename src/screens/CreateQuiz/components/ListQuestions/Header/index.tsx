@@ -9,7 +9,7 @@ import {DefaultTheme} from 'styled-components';
 import {useContext} from 'react';
 import {ThemeContext} from 'styled-components/native';
 import {useTranslation} from 'react-i18next';
-import {TransformLocalizationLanguage} from '@src/utils/TransformLocalizationLanguage';
+import {transformLocalizationLanguage} from '@src/utils/transformLocalizationLanguage';
 
 type HeaderPropsType = {
   time: DefaultTimeType;
@@ -48,7 +48,7 @@ export const Header = (props: HeaderPropsType) => {
             size={18}
           />
           <Text style={styles(theme).text}>
-            {t(TransformLocalizationLanguage({difficulty}))}
+            {t(transformLocalizationLanguage({difficulty}))}
           </Text>
         </View>
         <View style={styles().container}>

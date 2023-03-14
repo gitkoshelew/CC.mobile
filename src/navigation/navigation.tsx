@@ -9,6 +9,7 @@ import {StyleSheet, View} from 'react-native';
 import {DraggableBottomSheet} from '@src/components/DraggableBottomSheet';
 import {Cards} from '@src/screens/Cards/index';
 import {CreateTest} from '@src/screens/CreateQuiz/index';
+import {useAppSelector} from '@hooks/hooks';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,6 +32,7 @@ export enum ScreenList {
 }
 
 const Navigation = () => {
+  const isFetching = useAppSelector(state => state.app.isFetching);
   const screenOptions = {
     unmountOnBlur: false,
     tabBarStyle: {
@@ -47,7 +49,7 @@ const Navigation = () => {
           screenOptions={({route}) => ({
             tabBarButton: (props: BottomTabBarButtonProps) => (
               <>
-                <TabButton {...props} name={route.name} size={30} />
+                <TabButton {...props} name={route.name} size={30} disabled={isFetching} />
                 {route.name === 'Home' && <DraggableBottomSheet />}
               </>
             ),

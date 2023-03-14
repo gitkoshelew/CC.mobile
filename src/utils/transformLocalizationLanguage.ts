@@ -2,7 +2,7 @@ type TransformLocalizationLanguagePropsType = {
   difficulty: string;
 };
 
-export function TransformLocalizationLanguage({
+export function transformLocalizationLanguage({
   difficulty,
 }: TransformLocalizationLanguagePropsType) {
   switch (difficulty) {

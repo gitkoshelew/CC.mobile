@@ -75,6 +75,7 @@ export const logout = createAsyncThunk(
     try {
       await AsyncStorage.removeItem('token');
       await AsyncStorage.removeItem('refreshToken');
+      dispatch(setStateAuth({} as AuthTypes));
       dispatch(
         setAppMessage({
           text: 'Sign out is successful',

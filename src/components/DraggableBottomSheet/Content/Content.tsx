@@ -21,8 +21,8 @@ export const Content = ({isOpen, isLogForm, setIsLogForm}: ContentPropsType) => 
   const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
   const currentTheme = useAppSelector(state => state.app.currentTheme);
   const {i18n} = useTranslation();
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
+  const changeLanguage = async (language: string) => {
+    await i18n.changeLanguage(language);
   };
   const opacityValue = useSharedValue(0);
 
@@ -36,8 +36,8 @@ export const Content = ({isOpen, isLogForm, setIsLogForm}: ContentPropsType) => 
     dispatch(changeTheme(currentTheme === 'light' ? 'dark' : 'light'));
   }, [currentTheme, dispatch]);
 
-  const handlerLogout = useCallback(() => {
-    dispatch(logout());
+  const handlerLogout = useCallback(async () => {
+    await dispatch(logout());
     setIsLogForm(true);
   }, [dispatch, setIsLogForm]);
 

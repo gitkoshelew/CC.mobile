@@ -44,10 +44,11 @@ export const deleteQuiz = createAsyncThunk(
     dispatch(setIsFetching(true));
     try {
       await quizzesAPI.deleteQuiz(id);
-      dispatch(setIsFetching(false));
     } catch (e) {
       const err = e as Error | AxiosError;
       return rejectWithValue(err.message);
+    } finally {
+      dispatch(setIsFetching(false));
     }
   },
 );
