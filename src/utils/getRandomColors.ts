@@ -10,7 +10,7 @@ const initialColors = [
   Color.BlueLight,
 ];
 
-export const randomColors = () => {
+export const getRandomColors = () => {
   return initialColors
     .map(value => ({value, sort: Math.random()}))
     .sort((a, b) => a.sort - b.sort)

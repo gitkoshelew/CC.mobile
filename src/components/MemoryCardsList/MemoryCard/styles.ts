@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {randomColors} from '@src/utils/getRandomColors';
+import {getRandomColors} from '@src/utils/getRandomColors';
 
 type stylesPropsType = {
   blockStructure?: 'row' | 'column';
@@ -14,7 +14,7 @@ export const styles = ({blockStructure, index}: stylesPropsType) =>
     container: {
       width: blockStructure === 'row' ? 170 : '100%',
       height: 110,
-      backgroundColor: randomColors()[index!],
+      backgroundColor: getRandomColors()[index!],
       padding: 5,
       margin: 3,
       justifyContent: 'space-around',

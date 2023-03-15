@@ -1,29 +1,53 @@
-import React, {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {ScreenLayout} from '@src/layout/ScreenLayout/index';
 import {QuestionsSettings} from '@src/screens/CreateQuiz/components/QuestionsSettings/QuestionsSettings';
-import {useAppDispatch, useAppSelector} from '@hooks/hooks';
+import {useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootCreateQuizParamsList} from '@customTypes/navigation-types';
-import {questionType} from '@customTypes/quiz-types';
-import {getNewQuestion} from '@src/screens/CreateQuiz/utils/getNewQuestion';
-import {getQuizQuestions} from '@src/bll/quizReducer';
+import {Difficulty, questionType, TypeOptions} from '@customTypes/quiz-types';
+import {useFocusEffect} from '@react-navigation/native';
+
+export const initialQuestion = {
+  id: 1,
+  title: '',
+  description: '',
+  content: {
+    options: ['', ''],
+    correctAnswer: [],
+  },
+  difficulty: Difficulty.Easy,
+  timer: 0,
+  type: TypeOptions.single,
+  topicId: 0,
+  moderationId: null,
+};
 
 export const QuestionsSettingsContainer = ({
   route,
 }: NativeStackScreenProps<RootCreateQuizParamsList, ScreenList.QUESTIONS_SET>) => {
   const {numberOfQuestions, idNewQuiz, topicId} = route.params;
-  const dispatch = useAppDispatch();
+  const navigate = useAppNavigate();
   const isFetching = useAppSelector(state => state.app.isFetching);
-  const [questions, setQuestions] = useState<questionType[]>([{...getNewQuestion(), topicId}]);
+  const isLoggedIn = useAppSelector(state => state.authReducer.isLoggedIn);
+  const [questions, setQuestions] = useState<questionType[]>([{...initialQuestion, topicId}]);
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        navigate.goBack();
+      };
+    }, [navigate]),
+  );
 
   useEffect(() => {
-    dispatch(getQuizQuestions(idNewQuiz))
-      .unwrap()
-      .then(res => {
-        res.question.length && setQuestions(res.question);
+    if (!isLoggedIn) {
+      navigate.reset({
+        index: 0,
+        routes: [{name: ScreenList.HOME}],
       });
-  }, [dispatch, idNewQuiz]);
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <ScreenLayout isFetching={isFetching}>

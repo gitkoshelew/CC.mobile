@@ -39,11 +39,11 @@ export type questionType = {
   type: TypeOptions;
   topicId: number;
   moderationId: null;
-  // Quiz_Question: {
-  //   id: 1;
-  //   quizId: 25;
-  //   questionId: 2;
-  // }; // need explain
+  Quiz_Question?: {
+    id: number;
+    quizId: number;
+    questionId: number;
+  };
 };
 
 export type questionResponseType = {

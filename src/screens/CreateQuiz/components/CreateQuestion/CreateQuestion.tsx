@@ -15,10 +15,8 @@ import {CreateAnswer} from './CreateAnswer/index';
 import {AppButton} from '@src/components/ui/AppButton';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {useFieldArray, useForm, useWatch} from 'react-hook-form';
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {questionType, TypeOptions} from '@customTypes/quiz-types';
-import {transformTime} from '@src/utils/transformTime';
-import {optionsType, transformFormatOptions} from '@src/utils/transformFormatOptions';
+import {useCallback, useEffect, useMemo, useState} from 'react';
+import {TypeOptions} from '@customTypes/quiz-types';
 import {Container} from './styles';
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
@@ -27,6 +25,7 @@ import {SwitchSelectorsHookForm} from '@src/components/SwitchSelectorsHookForm/i
 import {SaveQuestionValuesType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestionContainer';
 import {TimePicker} from '@src/components/TimePicker/index';
 import {SelectAndCreateTopicContainer} from '@src/components/SelectAndCreateTopic/SelectAndCreateTopicContainer';
+import {CurrentQuestionType} from '@src/screens/CreateQuiz/utils/getNewQuestion';
 
 export type CreateQuestionFieldType = {
   title: string;
@@ -41,16 +40,14 @@ export type CreateQuestionFieldType = {
 
 export type CreateQuestionPropsType = {
   onSaveQuestion: (values: SaveQuestionValuesType) => void;
-  currentQuestion: questionType;
-  numberOfQuestions: number;
-  currentQuestionIndex: number;
+  currentQuestion: CurrentQuestionType;
 };
 
 const numberOfLines = Platform.OS === 'ios' ? undefined : 2;
 
 export const CreateQuestion = (props: CreateQuestionPropsType) => {
-  const {t} = useTranslation(['createQuestion', 'AppSelect', 'validationFields']);
   const {onSaveQuestion, currentQuestion} = props;
+  const {t} = useTranslation(['createQuestion', 'AppSelect', 'validationFields']);
 
   const {
     control,
@@ -60,19 +57,10 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
     setError,
     clearErrors,
     formState: {errors},
-  } = useForm<CreateQuestionFieldType>({
-    defaultValues: {
-      title: currentQuestion.title,
-      description: currentQuestion.description,
-      difficulty: currentQuestion.difficulty,
-      type: currentQuestion.type,
-      topicId: currentQuestion.topicId,
-    },
-  });
+  } = useForm<CreateQuestionFieldType>();
+
   const {fields, append, remove} = useFieldArray({name: 'options', control});
-  const [correctAnswers, setCorrectAnswers] = useState<string[]>(
-    currentQuestion.content.correctAnswer,
-  );
+  const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
 
   const currentArrayOptions = useWatch({
     control,
@@ -114,17 +102,9 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
         return;
       }
 
-      onSaveQuestion({valuesFields: values, correctAnswers: correctAnswers});
+      onSaveQuestion({...values, correctAnswers});
     },
     [correctAnswers, onSaveQuestion, setError, t],
-  );
-
-  const handlerSwitchSelectHookForm = useCallback(
-    (value: string, onPress: (value: string) => void) => {
-      setCorrectAnswers([]);
-      onPress(value);
-    },
-    [],
   );
 
   const onPressAddNewOption = useCallback(() => {
@@ -152,31 +132,14 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
 
   useEffect(() => {
     reset({
-      title: currentQuestion.title,
-      description: currentQuestion.description,
-      options: transformFormatOptions(currentQuestion.content.options) as optionsType,
-      ...(transformTime({
-        format: 'default',
-        totalSeconds: currentQuestion.timer,
-      }) as object),
-      difficulty: currentQuestion.difficulty,
-      type: currentQuestion.type,
-      topicId: currentQuestion.topicId,
+      options: currentQuestion.content.options,
+      ...currentQuestion,
     });
-  }, [
-    currentQuestion.content.options,
-    currentQuestion.description,
-    currentQuestion.difficulty,
-    currentQuestion.timer,
-    currentQuestion.title,
-    currentQuestion.topicId,
-    currentQuestion.type,
-    reset,
-  ]);
+  }, [currentQuestion, reset]);
 
   useEffect(() => {
     setCorrectAnswers(currentQuestion.content.correctAnswer);
-  }, [currentQuestion.content.correctAnswer]);
+  }, [currentQuestion.content.correctAnswer, currentType]);
 
   return (
     <Container>
@@ -231,7 +194,6 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
               name="type"
               type={TypeSwitchSelect.TYPE_ANSWER}
               control={control}
-              onPressSwitchSelect={handlerSwitchSelectHookForm}
             />
           </ContainerDynamicWidth>
         </BlockDynamicMargin>

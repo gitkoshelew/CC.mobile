@@ -14,17 +14,17 @@ import {Color} from '@theme/colors';
 export type TabButtonPropsType = BottomTabBarButtonProps & {
   name: string;
   size?: number;
+  disabled?: boolean;
 };
 
 export const TabButton = (props: TabButtonPropsType) => {
-  const {name, onPress, accessibilityState, size} = props;
+  const {name, onPress, accessibilityState, size, disabled} = props;
   const focused = accessibilityState?.selected;
   const rotation = useSharedValue(0);
 
   const onPressHandler = (e: GestureResponderEvent) => {
-    if (onPress) {
-      onPress(e);
-    }
+    onPress && onPress(e);
+
     rotation.value = withSequence(
       withTiming(-10, {duration: 50}),
       withRepeat(withTiming(5, {duration: 100}), 6, true),
@@ -44,7 +44,7 @@ export const TabButton = (props: TabButtonPropsType) => {
   return (
     <View style={styleWithSheet.ViewCenter}>
       <Animated.View style={[animatedStyle]}>
-        <ButtonCenter onPress={onPressHandler}>
+        <ButtonCenter onPress={onPressHandler} disabled={disabled}>
           {getIcon(name, activeColor, size)}
         </ButtonCenter>
       </Animated.View>

@@ -20,16 +20,14 @@ export const FormButtons = ({
   buttonTitle,
 }: FormButtonType) => {
   return (
-    <>
-      <ViewDynamicFlex justifyC="center" alignI="center">
-        <Container>
-          <LoginButton onPress={() => onSubmit()} title={buttonTitle} type="primary" />
-        </Container>
-        <TouchableOpacity onPress={() => setIsLogForm(value)}>
-          <Text style={styles.text}>{title}</Text>
-        </TouchableOpacity>
-      </ViewDynamicFlex>
-    </>
+    <ViewDynamicFlex justifyC="center" alignI="center">
+      <Container>
+        <LoginButton onPress={() => onSubmit()} title={buttonTitle} type="primary" />
+      </Container>
+      <TouchableOpacity onPress={() => setIsLogForm(value)}>
+        <Text style={styles.text}>{title}</Text>
+      </TouchableOpacity>
+    </ViewDynamicFlex>
   );
 };
 

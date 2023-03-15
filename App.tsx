@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import {useEffect} from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
+import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 import Navigation from '@src/navigation/navigation';
@@ -15,10 +15,10 @@ import {setCurrentTheme, ThemeType} from '@src/bll/appReducer';
 
 export const App = () => {
   const dispatch = useAppDispatch();
-  const isDarkMode = useColorScheme() === 'dark';
   const currentTheme = useAppSelector(state => state.app.currentTheme);
+  const isDarkTheme = currentTheme === 'dark';
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkTheme ? Colors.darker : Colors.lighter,
   };
 
   useEffect(() => {
@@ -44,12 +44,12 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <ThemeContext.Provider value={currentTheme === 'dark' ? DARK_THEME : BASE_THEME}>
+    <ThemeContext.Provider value={isDarkTheme ? DARK_THEME : BASE_THEME}>
       <NavigationContainer>
         <Navigation />
         <Notification />
         <StatusBar
-          barStyle={currentTheme ? 'light-content' : 'dark-content'}
+          barStyle={isDarkTheme ? 'light-content' : 'dark-content'}
           backgroundColor={backgroundStyle.backgroundColor}
         />
       </NavigationContainer>

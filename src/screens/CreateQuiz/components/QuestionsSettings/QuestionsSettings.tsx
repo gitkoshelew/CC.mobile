@@ -1,6 +1,6 @@
 import {QuestionsTabs} from '@src/components/QuestionsTabs';
 import {KeyboardAvoidingView, Platform, View} from 'react-native';
-import React, {useCallback, useContext, useState} from 'react';
+import {useCallback, useContext, useState} from 'react';
 import {styles} from './styles';
 import {questionType} from '@customTypes/quiz-types';
 import {CustomModal} from '@src/components/ui/Modal/index';
@@ -13,6 +13,8 @@ import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers/index';
 import {ExitButton} from '@src/screens/CreateQuiz/components/QuestionsSettings/ExitButton/index';
 import {ThemeContext} from 'styled-components/native';
 import {useTranslation} from 'react-i18next';
+import {transformQuestionSerializer} from '@src/screens/CreateQuiz/serializers/transformQuestionSerializer';
+import {LazyLoadingLayout} from '@src/layout/LazyLoadingLayout/index';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
@@ -37,7 +39,13 @@ export const QuestionsSettings = ({
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const theme = useContext(ThemeContext);
-  const currentQuestion = questions[currentQuestionIndex] || {...getNewQuestion(), topicId};
+
+  const currentQuestion = questions[currentQuestionIndex]
+    ? transformQuestionSerializer(questions[currentQuestionIndex])
+    : {
+        ...getNewQuestion,
+        topicId,
+      };
 
   const handlerCurrentQuestion = useCallback(
     (index: number) => {
@@ -82,6 +90,8 @@ export const QuestionsSettings = ({
                   tabBarStyle: styles(theme).tabBarStyle,
                   tabBarIndicatorContainerStyle: styles().tabBarIndicatorContainerStyle,
                   tabBarLabelStyle: styles(theme).tabBarLabelStyle,
+                  lazy: true,
+                  lazyPlaceholder: () => LazyLoadingLayout(theme),
                 }}>
                 <Tab.Screen
                   name={ScreenList.CREATE_QUESTION}
@@ -95,7 +105,6 @@ export const QuestionsSettings = ({
                       quizId={idNewQuiz}
                       changeQuestions={changeQuestions}
                       currentQuestion={currentQuestion}
-                      numberOfQuestions={numberOfQuestions}
                       currentQuestionIndex={currentQuestionIndex}
                       changeCurrentQuestionIndex={setCurrentQuestionIndex}
                     />

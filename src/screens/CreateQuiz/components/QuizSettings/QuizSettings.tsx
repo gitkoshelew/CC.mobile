@@ -10,6 +10,8 @@ import {TextInputWithLabel} from '@src/components/TextInputWithLabel/index';
 import {SwitchSelectorsHookForm} from '@src/components/SwitchSelectorsHookForm/index';
 import {SelectAndCreateTopicContainer} from '@src/components/SelectAndCreateTopic/SelectAndCreateTopicContainer';
 import {TextError} from '@src/components/ui/ReadyStyles/TextError';
+import {useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 
 export type CreateQuizFieldType = {
   title: string;
@@ -32,6 +34,7 @@ export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
     handleSubmit,
     setValue,
     clearErrors,
+    reset,
     formState: {errors},
   } = useForm<CreateQuizFieldType>({
     defaultValues: {
@@ -45,6 +48,12 @@ export const QuizSettings = ({onQuestionsSettings}: QuizSettingsPropsType) => {
   };
 
   const disabledQuestionsSettings = Object.keys(errors).length === 0;
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => reset();
+    }, [reset]),
+  );
 
   return (
     <ViewContainer>
