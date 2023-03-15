@@ -2,13 +2,13 @@ import {TestResult} from '@src/components/TestResult';
 import {ScrollView, View} from 'react-native';
 import {styles} from './styles';
 import {ProgressBar} from '@src/components/ProgressBar';
-import {ViewBlockResult} from '@src/screens/Testing/components/TestProcess/styles';
+import {ViewBlockResult} from '@src/screens/PassingQuiz/components/QuizProcess/styles';
 import {ColorContainer} from '@src/components/ui/ReadyStyles/Containers';
 import {useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
 import {IncorrectAnswer} from '@src/components/IncorrectAnswers';
 
-export const TestResultScreen = () => {
+export const QuizResultScreen = () => {
   const {navigate} = useAppNavigate();
   const resultData = useAppSelector(state => state.resultReducer.result);
   const incorrectData = resultData.filter(e => e.questionStatus === 'error');

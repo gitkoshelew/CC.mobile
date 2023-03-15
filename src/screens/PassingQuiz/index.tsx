@@ -3,16 +3,16 @@ import {ViewFlex} from '@src/components/ui/ReadyStyles/Containers';
 import {ScreenList} from '@src/navigation/navigation';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootTestingParamsList} from 'src/customTypes/navigation-types';
-import {TestResultScreen} from '@src/screens/Testing/components/TestResultScreen';
-import {TestsList} from '@src/screens/Testing/components/TestsList/TestsList';
-import {TestProcess} from '@src/screens/Testing/components/TestProcess';
+import {QuizResultScreen} from '@src/screens/PassingQuiz/components/QuizResultScreen';
+import {QuizList} from '@src/screens/PassingQuiz/components/QuizList';
+import {QuizProcess} from '@src/screens/PassingQuiz/components/QuizProcess';
 import {ThemeContext} from 'styled-components/native';
 import {Color} from '@theme/colors';
 import {styles} from '@src/components/ui/ReadyStyles/navigatorStyle';
 
 const Stack = createNativeStackNavigator<RootTestingParamsList>();
 
-export const Tests = () => {
+export const Quizzes = () => {
   const theme = useContext(ThemeContext);
 
   return (
@@ -23,12 +23,12 @@ export const Tests = () => {
           headerStyle: styles(theme).headerStyle,
           headerTitleStyle: styles(theme).headerTitleStyle,
         }}>
-        <Stack.Screen name={ScreenList.QUIZZES_LIST} component={TestsList} />
-        <Stack.Screen name={ScreenList.QUIZ_PROCESS} component={TestProcess} />
+        <Stack.Screen name={ScreenList.QUIZZES_LIST} component={QuizList} />
+        <Stack.Screen name={ScreenList.QUIZ_PROCESS} component={QuizProcess} />
         <Stack.Screen
           options={{headerShown: false}}
           name={ScreenList.QUIZ_RESULT}
-          component={TestResultScreen}
+          component={QuizResultScreen}
         />
       </Stack.Navigator>
     </ViewFlex>
