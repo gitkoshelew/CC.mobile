@@ -1,11 +1,12 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {CreateQuizType} from '@customTypes/quizzesAPI-types';
-import {setAppMessage, setIsFetching} from '@src/bll/appReducer';
+import {setIsFetching} from '@src/bll/appReducer';
 import {quizzesAPI} from '@src/dal/quizzesAPI';
 import {addQuestionToQuizParamType, newQuestionInQuizType} from '@customTypes/quiz-types';
 import {questionsAPI} from '@src/dal/questionsAPI';
 import {topicAPI} from '@src/dal/topicAPI';
 import {AxiosError} from 'axios';
+import {requestMessageHandler} from '@src/utils/requestMessageHandler';
 
 export const createQuiz = createAsyncThunk(
   'quiz/createQuiz',
@@ -13,21 +14,11 @@ export const createQuiz = createAsyncThunk(
     dispatch(setIsFetching(true));
     try {
       const res = await quizzesAPI.createQuiz(param);
-      dispatch(
-        setAppMessage({
-          text: 'The test was created successfully',
-          severity: 'success',
-        }),
-      );
+      requestMessageHandler(dispatch, 'success', 'The test was created successfully');
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
-      dispatch(
-        setAppMessage({
-          text: 'Something went wrong',
-          severity: 'error',
-        }),
-      );
+      requestMessageHandler(dispatch, 'error', 'Something went wrong');
       return rejectWithValue(err.message);
     } finally {
       dispatch(setIsFetching(false));
@@ -43,21 +34,11 @@ export const createQuestion = createAsyncThunk(
     try {
       const createdQuestion = await questionsAPI.createQuestion(newQuestion);
       await dispatch(addQuestionToQuiz({quizId, questionId: createdQuestion.data.id}));
-      dispatch(
-        setAppMessage({
-          text: 'The question is created',
-          severity: 'success',
-        }),
-      );
+      requestMessageHandler(dispatch, 'success', 'The question is created');
       return createdQuestion.data;
     } catch (e) {
       const err = e as Error | AxiosError;
-      dispatch(
-        setAppMessage({
-          text: 'The question has not been created',
-          severity: 'error',
-        }),
-      );
+      requestMessageHandler(dispatch, 'error', 'The question has not been created');
       return rejectWithValue(err.message);
     } finally {
       dispatch(setIsFetching(false));
@@ -74,20 +55,10 @@ export const addQuestionToQuiz = createAsyncThunk(
         quizId,
         questionId,
       });
-      dispatch(
-        setAppMessage({
-          text: 'The question is added',
-          severity: 'success',
-        }),
-      );
+      requestMessageHandler(dispatch, 'success', 'The question is added');
     } catch (e) {
       const err = e as Error | AxiosError;
-      dispatch(
-        setAppMessage({
-          text: 'The question was not added to the test',
-          severity: 'error',
-        }),
-      );
+      requestMessageHandler(dispatch, 'error', 'The question was not added to the test');
       return rejectWithValue(err.message);
     } finally {
       dispatch(setIsFetching(false));
@@ -104,12 +75,7 @@ export const getTopics = createAsyncThunk(
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
-      dispatch(
-        setAppMessage({
-          text: 'Something went wrong',
-          severity: 'error',
-        }),
-      );
+      requestMessageHandler(dispatch, 'error', 'Something went wrong');
       return rejectWithValue(err.message);
     } finally {
       dispatch(setIsFetching(false));
@@ -126,12 +92,7 @@ export const getTopic = createAsyncThunk(
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
-      dispatch(
-        setAppMessage({
-          text: 'Something went wrong',
-          severity: 'error',
-        }),
-      );
+      requestMessageHandler(dispatch, 'error', 'Something went wrong');
       return rejectWithValue(err.message);
     } finally {
       dispatch(setIsFetching(false));
@@ -145,21 +106,11 @@ export const createTopic = createAsyncThunk(
     dispatch(setIsFetching(true));
     try {
       const res = await topicAPI.createTopic({title});
-      dispatch(
-        setAppMessage({
-          text: 'Theme is created',
-          severity: 'success',
-        }),
-      );
+      requestMessageHandler(dispatch, 'success', 'Theme is created');
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
-      dispatch(
-        setAppMessage({
-          text: 'Something went wrong',
-          severity: 'error',
-        }),
-      );
+      requestMessageHandler(dispatch, 'error', 'Something went wrong');
       return rejectWithValue(err.message);
     } finally {
       dispatch(setIsFetching(false));
@@ -176,12 +127,7 @@ export const getQuestions = createAsyncThunk(
       return res.data;
     } catch (e) {
       const err = e as Error | AxiosError;
-      dispatch(
-        setAppMessage({
-          text: 'Something went wrong',
-          severity: 'error',
-        }),
-      );
+      requestMessageHandler(dispatch, 'error', 'Something went wrong');
       return rejectWithValue(err.message);
     } finally {
       dispatch(setIsFetching(false));
