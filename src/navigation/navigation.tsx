@@ -3,12 +3,12 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {TabButton} from './TabButton/TabButton';
-import {Tests} from '@src/screens/Testing/index';
-import {Home} from '@src/screens/Main/index';
+import {Quizzes} from '@src/screens/PassingQuiz';
+import {Home} from '@src/screens/Main';
 import {StyleSheet, View} from 'react-native';
 import {DraggableBottomSheet} from '@src/components/DraggableBottomSheet';
-import {Cards} from '@src/screens/Cards/index';
-import {CreateTest} from '@src/screens/CreateQuiz/index';
+import {Cards} from '@src/screens/Cards';
+import {CreateTest} from '@src/screens/CreateQuiz';
 import {useAppSelector} from '@hooks/hooks';
 
 const Tab = createBottomTabNavigator();
@@ -63,7 +63,7 @@ const Navigation = () => {
           />
           <Tab.Screen
             name={ScreenList.QUIZZES}
-            component={Tests}
+            component={Quizzes}
             options={{headerShown: false}}
           />
           <Tab.Screen

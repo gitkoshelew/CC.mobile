@@ -21,7 +21,7 @@ export type ResultType = {
   answer: string;
 };
 
-export const TestProcess = () => {
+export const QuizProcess = () => {
   const {navigate} = useAppNavigate();
   const dispatch = useAppDispatch();
   const resultData = useAppSelector(state => state.resultReducer.result);

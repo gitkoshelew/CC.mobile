@@ -19,7 +19,7 @@ import {ThemeContext} from 'styled-components/native';
 import {CustomModal} from '@src/components/ui/Modal';
 import {useTranslation} from 'react-i18next';
 
-export const TestsList = () => {
+export const QuizList = () => {
   const {navigate} = useAppNavigate();
   const dispatch = useAppDispatch();
   const {t} = useTranslation('testList');
@@ -58,7 +58,6 @@ export const TestsList = () => {
       dispatch(getQuizzes());
     }
   };
-
   const onPressStartTestingHandler = useCallback(
     (id: number, questions: number) => {
       dispatch(getQuizQuestions(id))
@@ -92,6 +91,7 @@ export const TestsList = () => {
         setQuizzesData(res);
       });
   }, [dispatch]);
+
   useEffect(() => {
     setFilteredQuizzes(quizzesData);
   }, [quizzesData]);
