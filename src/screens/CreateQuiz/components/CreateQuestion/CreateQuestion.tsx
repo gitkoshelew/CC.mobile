@@ -15,7 +15,7 @@ import {CreateAnswer} from './CreateAnswer/index';
 import {AppButton} from '@src/components/ui/AppButton';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {useFieldArray, useForm, useWatch} from 'react-hook-form';
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import {TypeOptions} from '@customTypes/quiz-types';
 import {Container} from './styles';
 import {TypeSwitchSelect} from '@customTypes/SwitchSelectjrs-types';
@@ -45,7 +45,7 @@ export type CreateQuestionPropsType = {
 
 const numberOfLines = Platform.OS === 'ios' ? undefined : 2;
 
-export const CreateQuestion = (props: CreateQuestionPropsType) => {
+export const CreateQuestion = memo((props: CreateQuestionPropsType) => {
   const {onSaveQuestion, currentQuestion} = props;
   const {t} = useTranslation(['createQuestion', 'AppSelect', 'validationFields']);
 
@@ -129,7 +129,6 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
     },
     [clearErrors],
   );
-
   useEffect(() => {
     reset({
       options: currentQuestion.content.options,
@@ -139,7 +138,7 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
 
   useEffect(() => {
     setCorrectAnswers(currentQuestion.content.correctAnswer);
-  }, [currentQuestion.content.correctAnswer, currentType]);
+  }, [currentQuestion.content.correctAnswer]);
 
   return (
     <Container>
@@ -226,4 +225,4 @@ export const CreateQuestion = (props: CreateQuestionPropsType) => {
       <ViewCenter />
     </Container>
   );
-};
+});
