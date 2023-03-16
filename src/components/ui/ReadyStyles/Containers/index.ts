@@ -18,7 +18,7 @@ const ViewFlexRight = styled.View`
 const ViewCenter = styled.View`
   align-items: center;
   justify-content: center;
-  padding-top: 20px;
+  padding-top: 10px;
 `;
 
 const ViewFlexCenter = styled.View`

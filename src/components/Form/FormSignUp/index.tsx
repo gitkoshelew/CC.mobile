@@ -10,9 +10,12 @@ import {useAppDispatch} from '@hooks/hooks';
 import {register} from '@src/bll/authReducer';
 import {FormType} from '@src/components/Form';
 import {FormButtons} from '@src/components/Form/FormButtons';
+import {useTranslation} from 'react-i18next';
 
 export const FormSignUp = ({setIsLogForm}: FormType) => {
   const dispatch = useAppDispatch();
+  const {t} = useTranslation('loginForm');
+
   const {
     control,
     formState: {errors},
@@ -36,18 +39,18 @@ export const FormSignUp = ({setIsLogForm}: FormType) => {
       <View>
         <ViewCenter>
           <SmallTitle>
-            Please <BoldText>Sign Up</BoldText> to continue
+            {t('Please')} <BoldText>{t('Sign Up')}</BoldText> {t('to continue')}
           </SmallTitle>
         </ViewCenter>
         <BlockBox>
-          <SmallTextBox>Name</SmallTextBox>
+          <SmallTextBox>{t('Name')}</SmallTextBox>
           <Controller
             control={control}
             rules={{
-              required: 'Name is required',
+              required: t('validationFields.name.required')!,
               minLength: {
                 value: 3,
-                message: 'Minimum 3 characters',
+                message: t('validationFields.name.message')!,
               },
             }}
             render={({field: {onChange, onBlur, value}}) => (
@@ -55,7 +58,7 @@ export const FormSignUp = ({setIsLogForm}: FormType) => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                placeholder="Enter name"
+                placeholder={t('Enter name')!}
               />
             )}
             name={'name'}
@@ -63,14 +66,14 @@ export const FormSignUp = ({setIsLogForm}: FormType) => {
           {errors.name && <TextError>{errors.name.message || 'Error!'}</TextError>}
         </BlockBox>
         <BlockBox>
-          <SmallTextBox>Nickname</SmallTextBox>
+          <SmallTextBox>{t('Nickname')}</SmallTextBox>
           <Controller
             control={control}
             rules={{
-              required: 'Nickname is required',
+              required: t('validationFields.nickname.required')!,
               minLength: {
                 value: 3,
-                message: 'Minimum 3 characters',
+                message: t('validationFields.nickname.message')!,
               },
             }}
             render={({field: {onChange, onBlur, value}}) => (
@@ -78,7 +81,7 @@ export const FormSignUp = ({setIsLogForm}: FormType) => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                placeholder="Enter nickname"
+                placeholder={t('Enter nickname')!}
               />
             )}
             name={'nickname'}
@@ -90,10 +93,10 @@ export const FormSignUp = ({setIsLogForm}: FormType) => {
           <Controller
             control={control}
             rules={{
-              required: 'Email is required',
+              required: t('validationFields.email.required')!,
               pattern: {
                 value: /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/,
-                message: 'Invalid email',
+                message: t('validationFields.email.message')!,
               },
             }}
             render={({field: {onChange, onBlur, value}}) => (
@@ -103,7 +106,7 @@ export const FormSignUp = ({setIsLogForm}: FormType) => {
                 value={value}
                 autoCapitalize="none"
                 autoCorrect={false}
-                placeholder="Enter email"
+                placeholder={t('Enter email')!}
               />
             )}
             name={'email'}
@@ -115,10 +118,10 @@ export const FormSignUp = ({setIsLogForm}: FormType) => {
           <Controller
             control={control}
             rules={{
-              required: 'Password is required',
+              required: t('validationFields.password.required')!,
               minLength: {
                 value: 8,
-                message: 'Minimum 8 characters',
+                message: t('validationFields.password.message')!,
               },
             }}
             render={({field: {onChange, onBlur, value}}) => (
@@ -126,7 +129,7 @@ export const FormSignUp = ({setIsLogForm}: FormType) => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                placeholder="Enter password"
+                placeholder={t('Enter password')!}
                 secureTextEntry={true}
               />
             )}
@@ -135,8 +138,8 @@ export const FormSignUp = ({setIsLogForm}: FormType) => {
           {errors.password && <TextError>{errors.password.message || 'Error!'}</TextError>}
         </BlockBox>
         <FormButtons
-          title="Sign in"
-          buttonTitle="Sign up"
+          titleWithoutBackground={t('button.Sing In')!}
+          titleWithBackground={t('button.Sing Up')!}
           setIsLogForm={setIsLogForm}
           value={true}
           onSubmit={handleSubmit(onSubmit)}
