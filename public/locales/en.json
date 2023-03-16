@@ -41,6 +41,42 @@
   "testList": {
     "The quiz contains no questions": "The quiz contains no questions"
   },
+  "loginForm" : {
+    "Please" : "Please",
+    "Sing In": "Sign In",
+    "Sign Up": "Sign Up",
+    "to continue" : "to continue",
+    "Name" : "Name",
+    "Nickname"  : "Nickname",
+    "Email" : "Email",
+    "Password" : "Password",
+    "Enter email" : "Enter email",
+    "Enter password" : "Enter password",
+    "Enter name" : "Enter name",
+    "Enter nickname" : "Enter nickname",
+    "validationFields" : {
+      "email" : {
+        "required": "Email is required",
+        "message": "Invalid email"
+      },
+      "password" : {
+        "required" : "Password is required",
+        "message" : "Minimum 8 characters"
+      },
+      "name" : {
+        "required" : "Name is required",
+        "message" : "Minimum 3 characters"
+      },
+      "nickname" : {
+        "required" : "Nickname is required",
+        "message" : "Nickname 3 characters"
+      }
+    },
+    "button" : {
+      "Sing In" : "Sing In",
+      "Sing Up" : "Sing Up"
+    }
+  },
   "topic" : {
    "Topic name" : "Topic name"
   },

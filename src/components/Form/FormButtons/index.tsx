@@ -8,24 +8,24 @@ type FormButtonType = {
   onSubmit: () => Promise<void>;
   setIsLogForm: (value: boolean) => void;
   value: boolean;
-  title: string;
-  buttonTitle: string;
+  titleWithoutBackground: string;
+  titleWithBackground: string;
 };
 
 export const FormButtons = ({
   onSubmit,
   setIsLogForm,
   value,
-  title,
-  buttonTitle,
+  titleWithoutBackground,
+  titleWithBackground,
 }: FormButtonType) => {
   return (
     <ViewDynamicFlex justifyC="center" alignI="center">
       <Container>
-        <LoginButton onPress={() => onSubmit()} title={buttonTitle} type="primary" />
+        <LoginButton onPress={() => onSubmit()} title={titleWithBackground} type="primary" />
       </Container>
       <TouchableOpacity onPress={() => setIsLogForm(value)}>
-        <Text style={styles.text}>{title}</Text>
+        <Text style={styles.text}>{titleWithoutBackground}</Text>
       </TouchableOpacity>
     </ViewDynamicFlex>
   );

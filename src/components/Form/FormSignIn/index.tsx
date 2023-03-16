@@ -10,9 +10,11 @@ import {useAppDispatch} from '@hooks/hooks';
 import {login} from '@src/bll/authReducer';
 import {FormType} from '@src/components/Form';
 import {FormButtons} from '@src/components/Form/FormButtons';
+import {useTranslation} from 'react-i18next';
 
 export const FormSignIn = ({setIsLogForm}: FormType) => {
   const dispatch = useAppDispatch();
+  const {t} = useTranslation('loginForm');
 
   const {
     control,
@@ -35,18 +37,18 @@ export const FormSignIn = ({setIsLogForm}: FormType) => {
       <View>
         <ViewCenter>
           <SmallTitle>
-            Please <BoldText>Sign In</BoldText> to continue
+            {t('Please')} <BoldText>{t('Sign In')}</BoldText> {t('to continue')}
           </SmallTitle>
         </ViewCenter>
         <BlockBox>
-          <SmallTextBox>Email</SmallTextBox>
+          <SmallTextBox>{t('Email')}</SmallTextBox>
           <Controller
             control={control}
             rules={{
-              required: 'Email is required',
+              required: t('validationFields.email.required')!,
               pattern: {
                 value: /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/,
-                message: 'Invalid email',
+                message: t('validationFields.email.message')!,
               },
             }}
             render={({field: {onChange, onBlur, value}}) => (
@@ -56,7 +58,7 @@ export const FormSignIn = ({setIsLogForm}: FormType) => {
                 value={value}
                 autoCapitalize="none"
                 autoCorrect={false}
-                placeholder="Enter email"
+                placeholder={t('Enter email')!}
               />
             )}
             name={'email'}
@@ -64,14 +66,14 @@ export const FormSignIn = ({setIsLogForm}: FormType) => {
           {errors.email && <TextError>{errors.email.message || 'Error!'}</TextError>}
         </BlockBox>
         <BlockBox>
-          <SmallTextBox>Password</SmallTextBox>
+          <SmallTextBox>{t('Password')}</SmallTextBox>
           <Controller
             control={control}
             rules={{
-              required: 'Password is required',
+              required: t('validationFields.password.required')!,
               minLength: {
                 value: 8,
-                message: 'Minimum 8 characters',
+                message: t('validationFields.password.message')!,
               },
             }}
             render={({field: {onChange, onBlur, value}}) => (
@@ -79,7 +81,7 @@ export const FormSignIn = ({setIsLogForm}: FormType) => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                placeholder="Enter password"
+                placeholder={t('Enter password')!}
                 secureTextEntry={true}
               />
             )}
@@ -88,8 +90,8 @@ export const FormSignIn = ({setIsLogForm}: FormType) => {
           {errors.password && <TextError>{errors.password.message || 'Error!'}</TextError>}
         </BlockBox>
         <FormButtons
-          title="Sign up"
-          buttonTitle="Sign in"
+          titleWithoutBackground={t('button.Sing Up')}
+          titleWithBackground={t('button.Sing In')}
           setIsLogForm={setIsLogForm}
           value={false}
           onSubmit={handleSubmit(onSubmit)}
