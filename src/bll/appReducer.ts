@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppMessageType} from '@customTypes/notificationTypes';
 
 export type ThemeType = 'light' | 'dark';
+export type SeverityType = 'error' | 'success';
 
 export type AppStateT = {
   isFetching: boolean;
@@ -19,10 +20,7 @@ const slice = createSlice({
     currentTheme: 'light',
   } as AppStateT,
   reducers: {
-    setAppMessage(
-      state,
-      action: PayloadAction<{text: string; severity: 'error' | 'success'}>,
-    ) {
+    setAppMessage(state, action: PayloadAction<{text: string; severity: SeverityType}>) {
       const newMessage: AppMessageType = {
         id: Math.random(),
         severity: action.payload.severity,
