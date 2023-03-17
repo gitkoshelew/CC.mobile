@@ -1,11 +1,11 @@
 import React, {useCallback} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {AppSelect} from '@src/components/ui/AppSelect/index';
+import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {AppSelect} from '@src/components/ui/AppSelect';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
 import {Control, Controller, FieldValues, Path, useForm} from 'react-hook-form';
 import {TopicType} from '@customTypes/quizzesAPI-types';
-import {TextInputHookForm} from '@src/components/TextInputHookForm/index';
+import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {useTranslation} from 'react-i18next';
 
 type SelectAndCreateTopicPropsType<T extends FieldValues> = {
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
+    height: Platform.OS === 'ios' ? '100%' : '81%',
     marginRight: 10,
   },
   button: {

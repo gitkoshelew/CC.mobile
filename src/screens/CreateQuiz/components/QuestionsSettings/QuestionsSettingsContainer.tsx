@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from 'react';
-import {ScreenLayout} from '@src/layout/ScreenLayout/index';
+import {ScreenLayout} from '@src/layout/ScreenLayout';
 import {QuestionsSettings} from '@src/screens/CreateQuiz/components/QuestionsSettings/QuestionsSettings';
 import {useAppNavigate, useAppSelector} from '@hooks/hooks';
 import {ScreenList} from '@src/navigation/navigation';
