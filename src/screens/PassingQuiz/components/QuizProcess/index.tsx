@@ -140,7 +140,11 @@ export const QuizProcess = () => {
   return (
     <ColorContainer>
       <TimerBox>
-        <Timer allTimeInSeconds={currentTest[0].timer} onClick={onPressNextAnswer} />
+        <Timer
+          key={currentTest[0].id}
+          allTimeInSeconds={currentTest[0].timer}
+          onClick={onPressNextAnswer}
+        />
       </TimerBox>
       <ViewBlock>
         <ProgressBar data={data} />
