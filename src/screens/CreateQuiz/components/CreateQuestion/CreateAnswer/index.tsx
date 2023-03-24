@@ -1,11 +1,13 @@
 import {View} from 'react-native';
-import {ButtonAnswerBox, TextBox} from '@src/components/ui/ReadyStyles/Boxes';
+import {ButtonAnswerBox, CustomText, TextBox} from '@src/components/ui/ReadyStyles/Boxes';
 import {AddingAnswer} from '@src/components/AddingAnswer';
-import {AddButton} from '@src/components/ui/AddButton';
 import {Control} from 'react-hook-form';
 import {TextError} from '@src/components/ui/ReadyStyles/TextError';
 import {useTranslation} from 'react-i18next';
 import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
+import {RoundButtonWrapper} from '@customTypes/RoundButtonWrapper';
+import {Color} from '@theme/colors';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 type CreateAnswerPropsType = {
   type: string;
@@ -54,9 +56,12 @@ export const CreateAnswer = ({
         />
       ))}
       {errorsMessage && <TextError>{errorsMessage}</TextError>}
+
       <ButtonAnswerBox>
-        <AddButton onPress={addNewOptionPressed} disabled={fields.length > 6} />
-        <TextBox>{t('Add answer')}</TextBox>
+        <RoundButtonWrapper onPress={addNewOptionPressed} disabled={fields.length > 6}>
+          <Ionicons name="add-circle" color={Color.GrayMedium} size={40} />
+        </RoundButtonWrapper>
+        <CustomText fs="16px">{t('Add answer')}</CustomText>
       </ButtonAnswerBox>
     </View>
   );

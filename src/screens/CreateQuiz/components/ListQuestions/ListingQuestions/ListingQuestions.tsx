@@ -8,12 +8,14 @@ import {DefaultTimeType, transformTime} from '@src/utils/transformTime';
 import {useAppSelector} from '@hooks/hooks';
 
 type ListingQuestionsPropsType = {
+  numberOfQuestions: number;
   filteredQuestions: questionResponseType[];
   onPressAddQuestion: (questionId: number) => void;
   currentQuizQuestions: questionType[];
 };
 
 export const ListingQuestions = ({
+  numberOfQuestions,
   filteredQuestions,
   onPressAddQuestion,
   currentQuizQuestions,
@@ -31,6 +33,7 @@ export const ListingQuestions = ({
       const isNotEmptyFirstQuestion = !!currentQuizQuestions[0].title;
       const isAddedQuestion =
         isNotEmptyFirstQuestion && !!currentQuizQuestions.find(el => el.id === section.id);
+      const isAddQuestionDisabled = numberOfQuestions === currentQuizQuestions.length;
 
       const time = transformTime({
         format: 'default',
@@ -45,11 +48,12 @@ export const ListingQuestions = ({
           topic={section.topic.title}
           difficulty={section.difficulty}
           isAddedQuestion={isAddedQuestion}
+          isAddQuestionDisabled={isAddQuestionDisabled}
           onPress={() => onPressAddQuestion(questionId)}
         />
       );
     },
-    [currentQuizQuestions, onPressAddQuestion],
+    [currentQuizQuestions, numberOfQuestions, onPressAddQuestion],
   );
 
   const renderContent = useCallback(
