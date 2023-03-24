@@ -17,13 +17,15 @@ export type CreateQuestionPropsType = {
   quizId: number;
   changeQuestions: (value: questionType[]) => void;
   currentQuestion: CurrentQuestionType;
+  numberOfQuestions: number;
   currentQuestionIndex: number;
+  currentCountQuestions: number;
   changeCurrentQuestionIndex: (value: number) => void;
 };
 
 export type CreateQuestionValuesType = CreateQuestionFieldType & {
-  correctAnswers: string[];
   quizId: number;
+  correctAnswers: string[];
 };
 
 export type SaveQuestionValuesType = Omit<CreateQuestionValuesType, 'quizId'>;
@@ -33,13 +35,16 @@ export const CreateQuestionContainer = memo((props: CreateQuestionPropsType) => 
     quizId,
     changeQuestions,
     currentQuestion,
+    numberOfQuestions,
     currentQuestionIndex,
+    currentCountQuestions,
     changeCurrentQuestionIndex,
   } = props;
   const dispatch = useAppDispatch();
   const isScrollEnabled = useAppSelector(state => state.app.isScrollEnabled);
   const theme = useContext(ThemeContext);
   const scrollRef = useRef<ScrollView>(null);
+  const isAllQuestionsFilledIn = numberOfQuestions === currentCountQuestions;
 
   const handlerSaveQuestion = async (values: SaveQuestionValuesType) => {
     await dispatch(createQuestion(transformTimeSerializer({...values, quizId})));
@@ -56,7 +61,9 @@ export const CreateQuestionContainer = memo((props: CreateQuestionPropsType) => 
       showsVerticalScrollIndicator={false}
       scrollEnabled={isScrollEnabled}
       style={{backgroundColor: theme.layout}}>
-      {currentQuestion.title && <BlockLayout style={StyleSheet.absoluteFill} />}
+      {(currentQuestion.title || isAllQuestionsFilledIn) && (
+        <BlockLayout style={StyleSheet.absoluteFill} />
+      )}
       <CreateQuestion currentQuestion={currentQuestion} onSaveQuestion={handlerSaveQuestion} />
     </ScrollView>
   );

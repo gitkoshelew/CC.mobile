@@ -14,6 +14,7 @@ import {getQuizQuestions} from '@src/bll/quizReducer';
 type ListQuestionsContainerPropsType = {
   quizId: number;
   changeQuestions: (value: questionType[]) => void;
+  numberOfQuestions: number;
   currentQuestionIndex: number;
   currentQuizQuestions: questionType[];
   changeCurrentQuestionIndex: (value: number) => void;
@@ -23,6 +24,7 @@ export const ListQuestionsContainer = memo(
   ({
     quizId,
     changeQuestions,
+    numberOfQuestions,
     currentQuestionIndex,
     currentQuizQuestions,
     changeCurrentQuestionIndex,
@@ -60,6 +62,7 @@ export const ListQuestionsContainer = memo(
           topics={topics}
           quizId={quizId}
           questions={questions}
+          numberOfQuestions={numberOfQuestions}
           currentQuizQuestions={currentQuizQuestions}
           onPressAddQuestion={handleAddQuestion}
         />

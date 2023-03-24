@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View, ViewStyle} from 'react-native';
+import {StyleSheet, Text, View, ViewStyle} from 'react-native';
 import {BlockBox} from '@src/components/ui/ReadyStyles/Boxes';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Color} from '@theme/colors';
@@ -10,6 +10,7 @@ import {useContext} from 'react';
 import {ThemeContext} from 'styled-components/native';
 import {useTranslation} from 'react-i18next';
 import {transformLocalizationLanguage} from '@src/utils/transformLocalizationLanguage';
+import {RoundButtonWrapper} from '@customTypes/RoundButtonWrapper';
 
 type HeaderPropsType = {
   time: DefaultTimeType;
@@ -19,12 +20,20 @@ type HeaderPropsType = {
   isActive: boolean;
   difficulty: string;
   isAddedQuestion: boolean;
+  isAddQuestionDisabled: boolean;
 };
 
 export const Header = (props: HeaderPropsType) => {
   const {t} = useTranslation('SwitchSelectors');
   const {isActive, time, title, topic, onPress, difficulty, isAddedQuestion} = props;
   const theme = useContext(ThemeContext);
+
+  const handlerAddQuestion = () => {
+    if (isAddedQuestion) {
+      return;
+    }
+    onPress();
+  };
 
   return (
     <View
@@ -63,18 +72,13 @@ export const Header = (props: HeaderPropsType) => {
           </Text>
         </View>
       </View>
-      <TouchableOpacity>
+      <RoundButtonWrapper onPress={handlerAddQuestion} disabled={props.isAddQuestionDisabled}>
         {isAddedQuestion ? (
           <Ionicons name="ios-checkmark-circle-outline" size={40} color={Color.Green} />
         ) : (
-          <Ionicons
-            name="add-circle-outline"
-            size={40}
-            color={Color.BlueLight}
-            onPress={onPress}
-          />
+          <Ionicons name="add-circle-outline" size={40} color={Color.BlueLight} />
         )}
-      </TouchableOpacity>
+      </RoundButtonWrapper>
     </View>
   );
 };
