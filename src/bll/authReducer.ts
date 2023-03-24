@@ -72,13 +72,13 @@ export const logout = createAsyncThunk(
 
 export const authMe = createAsyncThunk('auth/me', async (_, {dispatch, rejectWithValue}) => {
   dispatch(setIsFetching(true));
-
   try {
     const res = await authAPI.authMe();
     dispatch(setStateAuth(res.data));
     dispatch(setIsLoggedIn(true));
   } catch (e) {
     const err = e as Error | AxiosError;
+    dispatch(setIsLoggedIn(false));
     requestMessageHandler(dispatch, 'error', 'You are not registered');
     return rejectWithValue(err.message);
   } finally {
