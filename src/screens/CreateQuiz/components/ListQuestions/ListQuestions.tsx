@@ -10,6 +10,7 @@ type ListQuestionsPropsType = {
   quizId: number;
   topics: string[];
   questions: questionResponseType[];
+  numberOfQuestions: number;
   currentQuizQuestions: questionType[];
   onPressAddQuestion: (questionId: number) => void;
 };
@@ -17,6 +18,7 @@ type ListQuestionsPropsType = {
 export const ListQuestions = ({
   topics,
   questions,
+  numberOfQuestions,
   onPressAddQuestion,
   currentQuizQuestions,
 }: ListQuestionsPropsType) => {
@@ -46,6 +48,7 @@ export const ListQuestions = ({
         <ListingQuestions
           filteredQuestions={filteredQuestions}
           onPressAddQuestion={onPressAddQuestion}
+          numberOfQuestions={numberOfQuestions}
           currentQuizQuestions={currentQuizQuestions}
         />
       </View>

@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {AppSelect} from '@src/components/ui/AppSelect';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Color} from '@theme/colors';
@@ -7,6 +7,7 @@ import {Control, Controller, FieldValues, Path, useForm} from 'react-hook-form';
 import {TopicType} from '@customTypes/quizzesAPI-types';
 import {TextInputHookForm} from '@src/components/TextInputHookForm';
 import {useTranslation} from 'react-i18next';
+import {RoundButtonWrapper} from '@customTypes/RoundButtonWrapper';
 
 type SelectAndCreateTopicPropsType<T extends FieldValues> = {
   mainControl: Control<T>;
@@ -90,9 +91,9 @@ export const SelectAndCreateTopic = <T extends FieldValues>({
           />
         </View>
         <View style={styles.button}>
-          <TouchableOpacity onPress={handleSubmit(onPressCreateTopic)}>
+          <RoundButtonWrapper onPress={handleSubmit(onPressCreateTopic)}>
             <AntDesign name="pluscircleo" size={30} color={Color.BlueLight} />
-          </TouchableOpacity>
+          </RoundButtonWrapper>
         </View>
       </View>
     </View>

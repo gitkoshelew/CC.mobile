@@ -1,4 +1,4 @@
-import {TouchableOpacity, View} from 'react-native';
+import {View} from 'react-native';
 import {styles} from './styles';
 import {BlockAnswerBox} from '../ui/ReadyStyles/Boxes';
 import {CustomTextInput} from '../ui/CustomTextInput';
@@ -9,6 +9,7 @@ import {useCallback, useEffect, useState} from 'react';
 import {Control, Controller, useWatch} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
 import {CreateQuestionFieldType} from '@src/screens/CreateQuiz/components/CreateQuestion/CreateQuestion';
+import {RoundButtonWrapper} from '@customTypes/RoundButtonWrapper';
 
 type AddingAnswerPropsType = {
   type: string;
@@ -103,12 +104,9 @@ export const AddingAnswer = (props: AddingAnswerPropsType) => {
           disabled={Boolean(isSingle ? isSingleDisabled : isMultipleDisabled)}
           fillColor={isCheckingDuplicate ? Color.Red : Color.GreenLight}
         />
-        <TouchableOpacity
-          style={isDisabledDeleteOption && styles.disabled}
-          onPress={onPressDeletePressed}
-          disabled={isDisabledDeleteOption}>
+        <RoundButtonWrapper onPress={onPressDeletePressed} disabled={isDisabledDeleteOption}>
           <AntDesign name="minuscircleo" size={30} color={Color.Red} />
-        </TouchableOpacity>
+        </RoundButtonWrapper>
       </View>
     </BlockAnswerBox>
   );
