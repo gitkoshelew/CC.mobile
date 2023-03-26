@@ -15,7 +15,9 @@ export type RootCreateQuizParamsList = {
 export type RootTestingParamsList = {
   [ScreenList.QUIZZES_LIST]: undefined;
   [ScreenList.QUIZ_PROCESS]: undefined;
-  [ScreenList.QUIZ_RESULT]: undefined;
+  [ScreenList.QUIZ_RESULT]: {
+    quizId: number;
+  };
 };
 
 export type RootHomeScreenParamsList = {

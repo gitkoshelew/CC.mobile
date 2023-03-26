@@ -14,6 +14,7 @@ import {setStateResult} from '@src/bll/resultReducer';
 import {getCheckedAnswers} from '@src/utils/getCheckedAnswers';
 import {progressResult} from '@src/utils/progressResult';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
+import {useFocusEffect} from '@react-navigation/native';
 
 export type ResultType = {
   id: number;
@@ -22,7 +23,7 @@ export type ResultType = {
 };
 
 export const QuizProcess = () => {
-  const {navigate} = useAppNavigate();
+  const navigation = useAppNavigate();
   const dispatch = useAppDispatch();
   const resultData = useAppSelector(state => state.resultReducer.result);
   const quizIdData = useAppSelector(state => state.processReducer.quiz);
@@ -85,7 +86,10 @@ export const QuizProcess = () => {
       numAnswer === quizIdData.question.length &&
       resultData.length < quizIdData.question.length
     ) {
-      navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_RESULT});
+      navigation.navigate(ScreenList.QUIZZES, {
+        screen: ScreenList.QUIZ_RESULT,
+        params: {quizId: quizIdData.id},
+      });
       setNextResult(progressResult({type, answer, correctAnswer}));
       setSingleAnswer([]);
     }
@@ -108,7 +112,10 @@ export const QuizProcess = () => {
       } else if (currentTest[0].type === 'multi') {
       }
     } else if (numAnswer === quizIdData.question.length) {
-      navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_RESULT});
+      navigation.navigate(ScreenList.QUIZZES, {
+        screen: ScreenList.QUIZ_RESULT,
+        params: {quizId: quizIdData.id},
+      });
       setSingleAnswer([]);
     }
     setSkipResult();
@@ -134,9 +141,23 @@ export const QuizProcess = () => {
   const answerType = currentTest[0].type;
   const question = currentTest[0].title;
   const titleQuiz = quizIdData.title;
+
+  const resetStates = () => {
+    setNumAnswer(1);
+    setIsActiveRadio(undefined);
+    setSingleAnswer([]);
+  };
+
   useEffect(() => {
     setStateCheck(dataOptions);
   }, [dataOptions, dispatch]);
+
+  useFocusEffect(
+    useCallback(() => {
+      return resetStates();
+    }, []),
+  );
+
   return (
     <ColorContainer>
       <TimerBox>

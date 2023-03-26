@@ -4,9 +4,14 @@ import {Box, ButtonBox, Container, Group, StyledText} from './styles';
 import {AppButton} from '@src/components/ui/AppButton';
 import {SmallButton} from '@src/components/ui/SmallButton';
 import {CircularResultBar} from '@src/components/CircularResultBar';
-import {BlockBoxMarginLeft, SmallTitleBlack} from '../ui/ReadyStyles/Boxes';
+import {
+  BlockBoxMarginLeft,
+  BlockDynamicMargin,
+  SmallTitleBlack,
+} from '../ui/ReadyStyles/Boxes';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
 import {useTranslation} from 'react-i18next';
+import {SmallButtonType} from '@customTypes/SmallButton-types';
 
 type ITestResult = {
   onClickTry: () => void;
@@ -15,6 +20,8 @@ type ITestResult = {
   result: number;
 };
 
+const controlButtons: SmallButtonType[] = ['check', 'edit', 'delete'];
+
 export const TestResult = ({
   onClickTry,
   onClickClose,
@@ -22,12 +29,15 @@ export const TestResult = ({
   result,
 }: ITestResult) => {
   const {t} = useTranslation('testResult');
+
   return (
     <Container>
       <ButtonBox>
-        <SmallButton type="check" onPress={() => {}} />
-        <SmallButton type="edit" onPress={() => {}} />
-        <SmallButton type="delete" onPress={() => {}} />
+        {controlButtons.map(el => (
+          <BlockDynamicMargin m="0 15px 0 0">
+            <SmallButton type={el} onPress={() => {}} />
+          </BlockDynamicMargin>
+        ))}
       </ButtonBox>
       <ViewCenter>
         <SmallTitleBlack>{t('Your result')}</SmallTitleBlack>
