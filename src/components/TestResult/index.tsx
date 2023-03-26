@@ -33,8 +33,8 @@ export const TestResult = ({
   return (
     <Container>
       <ButtonBox>
-        {controlButtons.map(el => (
-          <BlockDynamicMargin m="0 15px 0 0">
+        {controlButtons.map((el, index) => (
+          <BlockDynamicMargin m="0 15px 0 0" key={index}>
             <SmallButton type={el} onPress={() => {}} />
           </BlockDynamicMargin>
         ))}

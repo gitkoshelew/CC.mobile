@@ -4,7 +4,6 @@ import {ScreenList} from '@src/navigation/navigation';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootTestingParamsList} from 'src/customTypes/navigation-types';
 import {QuizResultScreen} from '@src/screens/PassingQuiz/components/QuizResultScreen';
-import {QuizList} from '@src/screens/PassingQuiz/components/QuizList';
 import {QuizProcess} from '@src/screens/PassingQuiz/components/QuizProcess';
 import {ThemeContext} from 'styled-components/native';
 import {Color} from '@theme/colors';
@@ -12,6 +11,7 @@ import {styles} from '@src/components/ui/ReadyStyles/navigatorStyle';
 import {getQuizQuestions} from '@src/bll/quizReducer';
 import {clearStateResult} from '@src/bll/resultReducer';
 import {useAppDispatch, useAppNavigate} from '@hooks/hooks';
+import {QuizListContainer} from '@src/screens/PassingQuiz/components/QuizList/QuizListContainer';
 
 const Stack = createNativeStackNavigator<RootTestingParamsList>();
 
@@ -23,17 +23,14 @@ export const Quizzes = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handlerStartTesting = useCallback(
-    (id: number) => {
-      dispatch(getQuizQuestions(id))
-        .unwrap()
-        .then(res => {
-          if (!res.question.length) {
-            setIsModalVisible(true);
-            return;
-          }
-          navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_PROCESS});
-        });
+    async (id: number) => {
+      const response = await dispatch(getQuizQuestions(id)).unwrap();
+      if (!response.question.length) {
+        setIsModalVisible(true);
+        return;
+      }
       dispatch(clearStateResult());
+      navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_PROCESS});
     },
     [dispatch, navigate],
   );
@@ -49,7 +46,7 @@ export const Quizzes = () => {
         <Stack.Screen
           name={ScreenList.QUIZZES_LIST}
           children={() => (
-            <QuizList
+            <QuizListContainer
               onPressStartTesting={handlerStartTesting}
               setIsModalVisible={setIsModalVisible}
               isModalVisible={isModalVisible}

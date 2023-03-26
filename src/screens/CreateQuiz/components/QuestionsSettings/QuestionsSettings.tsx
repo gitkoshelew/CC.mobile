@@ -130,8 +130,6 @@ export const QuestionsSettings = memo(
                         currentQuizQuestions={questions}
                         changeQuestions={changeQuestions}
                         numberOfQuestions={numberOfQuestions}
-                        currentQuestionIndex={currentQuestionIndex}
-                        changeCurrentQuestionIndex={setCurrentQuestionIndex}
                       />
                     )}
                   />

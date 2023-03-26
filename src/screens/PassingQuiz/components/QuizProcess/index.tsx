@@ -32,6 +32,10 @@ export const QuizProcess = () => {
   const [isActiveRadio, setIsActiveRadio] = useState<number | undefined>(undefined);
 
   const currentTest = [...quizIdData.question].filter((e, index) => index + 1 === numAnswer);
+  const answerType = currentTest[0].type;
+  const question = currentTest[0].title;
+  const titleQuiz = quizIdData.title;
+
   const onPressRadioHandler = useCallback((label: string, value: number) => {
     setSingleAnswer([label]);
     setIsActiveRadio(value);
@@ -121,12 +125,14 @@ export const QuizProcess = () => {
     setSkipResult();
     setStateCheck([]);
   };
+
   const progressData: ProgressType[] = [...Array(quizIdData.question.length)].map(
     (_, index) => ({
       id: index + 1,
       questionStatus: 'default',
     }),
   );
+
   const data: ProgressType[] = progressData.map(e =>
     numAnswer >= e.id
       ? {
@@ -138,9 +144,6 @@ export const QuizProcess = () => {
           questionStatus: 'default',
         },
   );
-  const answerType = currentTest[0].type;
-  const question = currentTest[0].title;
-  const titleQuiz = quizIdData.title;
 
   const resetStates = () => {
     setNumAnswer(1);
