@@ -15,9 +15,7 @@ type ListQuestionsContainerPropsType = {
   quizId: number;
   changeQuestions: (value: questionType[]) => void;
   numberOfQuestions: number;
-  currentQuestionIndex: number;
   currentQuizQuestions: questionType[];
-  changeCurrentQuestionIndex: (value: number) => void;
 };
 
 export const ListQuestionsContainer = memo(
@@ -25,9 +23,7 @@ export const ListQuestionsContainer = memo(
     quizId,
     changeQuestions,
     numberOfQuestions,
-    currentQuestionIndex,
     currentQuizQuestions,
-    changeCurrentQuestionIndex,
   }: ListQuestionsContainerPropsType) => {
     const dispatch = useAppDispatch();
     const [topics, setTopics] = useState(['all']);
@@ -37,7 +33,6 @@ export const ListQuestionsContainer = memo(
       await dispatch(addQuestionToQuiz({quizId, questionId}));
       const updatedQuestions = await dispatch(getQuizQuestions(quizId)).unwrap();
       changeQuestions(updatedQuestions.question);
-      changeCurrentQuestionIndex(currentQuestionIndex + 1);
     };
 
     useEffect(() => {
