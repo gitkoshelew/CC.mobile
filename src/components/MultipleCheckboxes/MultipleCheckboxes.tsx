@@ -1,6 +1,6 @@
 import React from 'react';
-import {View} from 'react-native';
-import {CheckboxComponent} from '@src/components/MultipleCheckboxes/CheckboxComponent/CheckboxComponent';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import {Color} from '@theme/colors';
 
 export type ICheckboxComponent = {
   label: string;
@@ -12,10 +12,18 @@ export type IItem = {
   onPress: (label: string, value: number, isChecked: boolean) => void;
 };
 
-export const MultipleCheckboxes = ({item, onPress}: IItem) => {
+export const MultipleCheckboxes = ({item: {value, label, isChecked}, onPress}: IItem) => {
+  const handleToggleState = () => {
+    onPress(label, value, !isChecked);
+  };
   return (
-    <View>
-      <CheckboxComponent item={{...item}} onPress={onPress} />
-    </View>
+    <BouncyCheckbox
+      disableBuiltInState
+      fillColor={Color.BlueLight}
+      size={30}
+      isChecked={isChecked}
+      key={value}
+      onPress={() => handleToggleState()}
+    />
   );
 };

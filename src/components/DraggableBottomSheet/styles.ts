@@ -6,7 +6,7 @@ export const getStyles = (maxHeight?: number, maxUpward?: number) =>
     container: {
       position: 'absolute',
       width: '100%',
-      bottom: 50,
+      bottom: 40,
       flex: 1,
     },
     bottomSheet: {

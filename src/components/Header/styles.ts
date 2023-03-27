@@ -8,7 +8,7 @@ const Wrapper = styled.View`
 const WrapperAuth = styled.View`
   width: 80%;
   margin: 0 auto;
-  padding: 0 10px 100px 13px;
+  padding: 0 10px 120px 13px;
 `;
 
 const UserIconContainer = styled.View`

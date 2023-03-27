@@ -41,6 +41,42 @@
   "testList": {
     "The quiz contains no questions": "Викторина не содержит вопросов"
   },
+  "loginForm" : {
+    "Please" : "Пожалуйста",
+    "Sign In": "войдите",
+    "Sign Up": "зарегистрируйтесь",
+    "to continue" : "для продолжения",
+    "Name" : "Имя",
+    "Nickname"  : "Псевдоним",
+    "Email" : "Электронная почта",
+    "Password" : "Пароль",
+    "Enter email" : "Введите почту",
+    "Enter password" : "Введите пароль",
+    "Enter name" : "Введите имя",
+    "Enter nickname" : "Введите псевдоним",
+    "validationFields" : {
+      "email" : {
+        "required": "Почта обязательна",
+        "message": "Неверный адрес электронной почты"
+      },
+      "password" : {
+        "required" : "Пароль обязателен",
+        "message" : "Минимум 8 символов"
+      },
+      "name" : {
+        "required" : "Имя обязателно",
+        "message" : "Минимум 3 символа"
+      },
+      "nickname" : {
+        "required" : "Псевдоним обязателен",
+        "message" : "Минимум 3 символа"
+      }
+    },
+    "button" : {
+      "Sing In" : "Вход",
+      "Sing Up" : "Регистрация"
+    }
+  },
   "topic" : {
     "Topic name" : "Название темы"
   },

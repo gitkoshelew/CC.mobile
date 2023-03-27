@@ -14,6 +14,7 @@ import {setStateResult} from '@src/bll/resultReducer';
 import {getCheckedAnswers} from '@src/utils/getCheckedAnswers';
 import {progressResult} from '@src/utils/progressResult';
 import {TypeAppButton} from '@customTypes/AppButtun-types';
+import {useFocusEffect} from '@react-navigation/native';
 
 export type ResultType = {
   id: number;
@@ -21,8 +22,8 @@ export type ResultType = {
   answer: string;
 };
 
-export const TestProcess = () => {
-  const {navigate} = useAppNavigate();
+export const QuizProcess = () => {
+  const navigation = useAppNavigate();
   const dispatch = useAppDispatch();
   const resultData = useAppSelector(state => state.resultReducer.result);
   const quizIdData = useAppSelector(state => state.processReducer.quiz);
@@ -31,6 +32,10 @@ export const TestProcess = () => {
   const [isActiveRadio, setIsActiveRadio] = useState<number | undefined>(undefined);
 
   const currentTest = [...quizIdData.question].filter((e, index) => index + 1 === numAnswer);
+  const answerType = currentTest[0].type;
+  const question = currentTest[0].title;
+  const titleQuiz = quizIdData.title;
+
   const onPressRadioHandler = useCallback((label: string, value: number) => {
     setSingleAnswer([label]);
     setIsActiveRadio(value);
@@ -85,7 +90,10 @@ export const TestProcess = () => {
       numAnswer === quizIdData.question.length &&
       resultData.length < quizIdData.question.length
     ) {
-      navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_RESULT});
+      navigation.navigate(ScreenList.QUIZZES, {
+        screen: ScreenList.QUIZ_RESULT,
+        params: {quizId: quizIdData.id},
+      });
       setNextResult(progressResult({type, answer, correctAnswer}));
       setSingleAnswer([]);
     }
@@ -108,18 +116,23 @@ export const TestProcess = () => {
       } else if (currentTest[0].type === 'multi') {
       }
     } else if (numAnswer === quizIdData.question.length) {
-      navigate(ScreenList.QUIZZES, {screen: ScreenList.QUIZ_RESULT});
+      navigation.navigate(ScreenList.QUIZZES, {
+        screen: ScreenList.QUIZ_RESULT,
+        params: {quizId: quizIdData.id},
+      });
       setSingleAnswer([]);
     }
     setSkipResult();
     setStateCheck([]);
   };
+
   const progressData: ProgressType[] = [...Array(quizIdData.question.length)].map(
     (_, index) => ({
       id: index + 1,
       questionStatus: 'default',
     }),
   );
+
   const data: ProgressType[] = progressData.map(e =>
     numAnswer >= e.id
       ? {
@@ -131,16 +144,31 @@ export const TestProcess = () => {
           questionStatus: 'default',
         },
   );
-  const answerType = currentTest[0].type;
-  const question = currentTest[0].title;
-  const titleQuiz = quizIdData.title;
+
+  const resetStates = () => {
+    setNumAnswer(1);
+    setIsActiveRadio(undefined);
+    setSingleAnswer([]);
+  };
+
   useEffect(() => {
     setStateCheck(dataOptions);
   }, [dataOptions, dispatch]);
+
+  useFocusEffect(
+    useCallback(() => {
+      return resetStates();
+    }, []),
+  );
+
   return (
     <ColorContainer>
       <TimerBox>
-        <Timer allTimeInSeconds={currentTest[0].timer} onClick={onPressNextAnswer} />
+        <Timer
+          key={currentTest[0].id}
+          allTimeInSeconds={currentTest[0].timer}
+          onClick={onPressNextAnswer}
+        />
       </TimerBox>
       <ViewBlock>
         <ProgressBar data={data} />

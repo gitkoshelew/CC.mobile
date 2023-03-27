@@ -1,8 +1,8 @@
-import CircularProgress from 'react-native-circular-progress-indicator';
+import CircularProgress, {ProgressRef} from 'react-native-circular-progress-indicator';
 import {Color} from '@theme/colors';
 import {StyleSheet} from 'react-native';
 import {ViewCenter} from '../ui/ReadyStyles/Containers';
-import {useContext} from 'react';
+import {useContext, useRef} from 'react';
 import {ThemeContext} from 'styled-components/native';
 
 interface IProps {
@@ -11,11 +11,13 @@ interface IProps {
 
 export const CircularResultBar = ({result}: IProps) => {
   const theme = useContext(ThemeContext);
+  const ref = useRef<ProgressRef>(null);
 
   return (
     <ViewCenter>
       <CircularProgress
-        value={result}
+        ref={ref}
+        value={result || 0}
         radius={83}
         progressValueStyle={styles.progressValueStyle}
         valueSuffix={'%'}
@@ -24,6 +26,9 @@ export const CircularResultBar = ({result}: IProps) => {
         activeStrokeColor={Color.BlueLight}
         inActiveStrokeWidth={26}
         inActiveStrokeColor={theme.box}
+        onAnimationComplete={() => {
+          ref.current?.pause();
+        }}
       />
     </ViewCenter>
   );

@@ -8,15 +8,11 @@ export const progressResult = ({type, answer, correctAnswer}: IPogressResult) =>
     case 'single': {
       if (answer.join().toLowerCase() === correctAnswer.join().toLowerCase()) {
         return 'right';
-      } else if (
-        answer.length > 0 &&
-        answer.join().toLowerCase() !== correctAnswer.join().toLowerCase()
-      ) {
-        return 'error';
-      } else if (answer.length === 0) {
+      }
+      if (answer.length === 0) {
         return 'default';
       }
-      break;
+      return 'error';
     }
     case 'multi': {
       if (
@@ -24,18 +20,13 @@ export const progressResult = ({type, answer, correctAnswer}: IPogressResult) =>
         [...correctAnswer].sort().join('').toLowerCase()
       ) {
         return 'right';
-      } else if (
-        answer.length > 0 &&
-        answer.sort().join('').toLowerCase() !==
-          [...correctAnswer].sort().join('').toLowerCase()
-      ) {
-        return 'error';
-      } else if (answer.length === 0) {
+      }
+      if (answer.length === 0) {
         return 'default';
       }
-      break;
+      return 'error';
     }
     default:
-      return 'active';
+      return 'default';
   }
 };

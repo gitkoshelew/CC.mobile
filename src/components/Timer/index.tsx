@@ -52,12 +52,10 @@ export const Timer = ({allTimeInSeconds, onClick}: IProps) => {
   }, [allTimeInSeconds, handleReset, handleStart, handleStop]);
 
   return (
-    <>
-      <Container>
-        <StyledText>{minutes}</StyledText>
-        <StyledText> : </StyledText>
-        <StyledText>{seconds}</StyledText>
-      </Container>
-    </>
+    <Container>
+      <StyledText>{minutes}</StyledText>
+      <StyledText> : </StyledText>
+      <StyledText>{seconds}</StyledText>
+    </Container>
   );
 };
