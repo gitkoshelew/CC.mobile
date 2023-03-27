@@ -1,0 +1,122 @@
+{
+  "createQuiz": {
+    "Test title": "Заголовок",
+    "Description": "Описание",
+    "Select or create topic": "Выберите или создайте топик",
+    "Number of questions": "Количество вопросов",
+    "Question settings": "Создать вопросы"
+  },
+  "createQuestion": {
+    "Title question": "Заголовок",
+    "Description": "Описание",
+    "Difficulty": "Сложность",
+    "Select or create topic": "Выберите или создайте топик",
+    "Answer type": "Тип ответа",
+    "Timer": "Таймер",
+    "Answer choice": "Варианты ответов",
+    "Add answer": "Добавить ответ",
+    "Save question": "Сохранить вопрос",
+    "First create a question" : "Сначала создайте вопрос",
+    "validationFields" : {
+      "Choose at least 2 correct answers" : "Выберите минимум 2 правильных ответа",
+      "Choose 1 correct answer" : "Выберите 1 правильный ответ"
+    }
+  },
+  "profile" : {
+    "Ranks" : "Ранг",
+    "Success" : "Успех",
+    "Quizzes" : "Тестов",
+    "Incognito": "Инкогнито",
+    "My quizzes" : "Мои тесты",
+    "Difficulty" : "Сложность",
+    "Memory cards" : "Карточки для запоминания"
+  },
+  "testResult" : {
+    "Your result": "Ваш результат",
+    "Question": "Вопрос",
+    "Incorrect answer": "Неправильный ответ",
+    "Close": "Закрыть",
+    "Try again": "Пройти ещё раз"
+  },
+  "testList": {
+    "The quiz contains no questions": "Викторина не содержит вопросов"
+  },
+  "loginForm" : {
+    "Please" : "Пожалуйста",
+    "Sign In": "войдите",
+    "Sign Up": "зарегистрируйтесь",
+    "to continue" : "для продолжения",
+    "Name" : "Имя",
+    "Nickname"  : "Псевдоним",
+    "Email" : "Электронная почта",
+    "Password" : "Пароль",
+    "Enter email" : "Введите почту",
+    "Enter password" : "Введите пароль",
+    "Enter name" : "Введите имя",
+    "Enter nickname" : "Введите псевдоним",
+    "validationFields" : {
+      "email" : {
+        "required": "Почта обязательна",
+        "message": "Неверный адрес электронной почты"
+      },
+      "password" : {
+        "required" : "Пароль обязателен",
+        "message" : "Минимум 8 символов"
+      },
+      "name" : {
+        "required" : "Имя обязателно",
+        "message" : "Минимум 3 символа"
+      },
+      "nickname" : {
+        "required" : "Псевдоним обязателен",
+        "message" : "Минимум 3 символа"
+      }
+    },
+    "button" : {
+      "Sing In" : "Вход",
+      "Sing Up" : "Регистрация"
+    }
+  },
+  "topic" : {
+    "Topic name" : "Название темы"
+  },
+  "SwitchSelectors" : {
+    "level" : [ "Легко", "Нормально", "Сложно"],
+    "type" : [ "один", "много"]
+  },
+  "AppSelect" : {
+    "default value" : "Выберите параметр",
+    "type" : [ "один", "много"]
+  },
+  "labelsNavigation" : {
+    "questionsSettings" :{
+      "Create question" : "Создать вопрос",
+      "List questions" : "Список вопросов"
+    }
+  },
+  "validationFields": {
+    "title": {
+      "required": "Заголовок обязателен",
+      "minLength": "Заголовок должен содержать не менее 3 символов",
+      "maxLength": "Заголовок должен содержать не более 20 символов"
+    },
+    "description": {
+      "required": "Описание обязательно",
+      "maxLength": "Описание должно содержать не более 50 символов"
+    },
+    "option": {
+      "required": "Описание обязательно",
+      "minLength": "Заголовок должен содержать не более 50 символов",
+      "CheckingForDuplication": "У вас 2 одинаковых ответа"
+    },
+    "timer": {
+      "Set the time" : "Установите таймер"
+    },
+    "topic" : {
+      "required": "Тема обязательна",
+      "maxLength": "Тема должен содержать не более 20 символов",
+      "Select or create topic" : "Выберите или создайте тему"
+    },
+    "Need to log in" : "Вам нужно войти или зарегестрироваться"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "createQuiz": {
+    "Test title": "Test title",
+    "Description": "Description",
+    "Select or create topic" : "Select or create topic",
+    "Number of questions": "Number of questions",
+    "Question settings": "Create questions"
+  },
+  "createQuestion": {
+    "Title question" : "Title question",
+    "Description" : "Description",
+    "Difficulty" : "Difficulty",
+    "Select or create topic": "Select or create your topic",
+    "Answer type" : "Answer type",
+    "Timer" : "Timer",
+    "Answer choice" : "Answer choice",
+    "Add answer" : "Add answer",
+    "Save question" : "Save question",
+    "First create a question" : "Create a question to move on to the next one",
+    "validationFields" : {
+      "Choose at least 2 correct answers" : "Choose at least 2 correct answers",
+      "Choose 1 correct answer" : "Choose 1 correct answer"
+    }
+  },
+  "profile" : {
+    "Ranks" : "Ranks",
+    "Quizzes" : "Quizzes",
+    "Success" : "Success",
+    "Incognito": "Incognito",
+    "My quizzes" : "My quizzes",
+    "Difficulty" : "Difficulty",
+    "Memory cards" : "Memory cards"
+  },
+  "testResult" : {
+    "Your result": "Your result",
+    "Question": "Question",
+    "Incorrect answer": "Incorrect answer",
+    "Close": "Close",
+    "Try again": "Try again"
+  },
+  "testList": {
+    "The quiz contains no questions": "The quiz contains no questions"
+  },
+  "loginForm" : {
+    "Please" : "Please",
+    "Sing In": "Sign In",
+    "Sign Up": "Sign Up",
+    "to continue" : "to continue",
+    "Name" : "Name",
+    "Nickname"  : "Nickname",
+    "Email" : "Email",
+    "Password" : "Password",
+    "Enter email" : "Enter email",
+    "Enter password" : "Enter password",
+    "Enter name" : "Enter name",
+    "Enter nickname" : "Enter nickname",
+    "validationFields" : {
+      "email" : {
+        "required": "Email is required",
+        "message": "Invalid email"
+      },
+      "password" : {
+        "required" : "Password is required",
+        "message" : "Minimum 8 characters"
+      },
+      "name" : {
+        "required" : "Name is required",
+        "message" : "Minimum 3 characters"
+      },
+      "nickname" : {
+        "required" : "Nickname is required",
+        "message" : "Nickname 3 characters"
+      }
+    },
+    "button" : {
+      "Sing In" : "Sing In",
+      "Sing Up" : "Sing Up"
+    }
+  },
+  "topic" : {
+   "Topic name" : "Topic name"
+  },
+  "SwitchSelectors" : {
+    "level" : [ "Easy", "Medium", "Hard"],
+    "type" : [ "single", "multi"]
+  },
+  "AppSelect" : {
+    "default value" : "Select an option",
+    "answer type" : [ "single", "multi"]
+  },
+  "labelsNavigation" : {
+    "questionsSettings" :{
+      "Create question" : "Create question",
+      "List questions" : "List questions"
+    }
+  },
+  "validationFields": {
+    "title": {
+      "required": "Title is required",
+      "minLength": "Title should be minimum 3 characters long",
+      "maxLength": "Title should be maximum 50 characters long"
+    },
+    "description": {
+      "required": "Description is required",
+      "maxLength": "Description should be maximum 50 characters long"
+    },
+    "option": {
+      "required": "option is required",
+      "minLength": "Option should be maximum 50 characters long",
+      "CheckingForDuplication" : "You have 2 identical answers"
+    },
+    "timer": {
+      "Set the time" : "Set the time"
+    },
+    "topic" : {
+      "required": "Topic is required",
+      "maxLength": "Topic should be maximum 20 characters long",
+      "Select or create topic" : "Select or create topic"
+    },
+    "Need to log in" : "You need to login or register"
+  }
+}
